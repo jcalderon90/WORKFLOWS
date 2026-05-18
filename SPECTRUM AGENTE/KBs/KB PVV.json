@@ -13,7 +13,7 @@
         "categoria": "proyecto",
         "tags": ["resumen", "general", "spectrum", "zona15", "torre", "apartamentos", "parque vista verde"],
         "pregunta": "¿Qué es Parque Vista Verde?",
-        "respuesta": "Parque Vista Verde es un proyecto residencial desarrollado por Spectrum, ubicado en Zona 15 de la Ciudad de Guatemala (Colonia Independencia). Con 378 apartamentos distribuidos en 18 niveles, ofrece modelos de 1, 2 y 3 habitaciones, incluyendo unidades especiales de nivel 1 con jardín privado o terraza. Cuenta con 2 lobbys de ingreso, 6 elevadores, 8 sótanos de estacionamiento, 32 parqueos de visita y más de 10 amenidades. Fecha estimada de entrega: Junio 2028. Sitio web: https://parquevistaverde.com.gt/"
+        "respuesta": "Parque Vista Verde es un proyecto residencial desarrollado por Spectrum, ubicado en Zona 15 de la Ciudad de Guatemala (Colonia Independencia). Con 378 apartamentos distribuidos en 18 niveles, ofrece modelos de 1, 2 y 3 habitaciones, incluyendo unidades especiales de nivel 1 con jardín privado o terraza. Cuenta con 2 lobbys de ingreso, 6 elevadores, 8 sótanos de estacionamiento, 32 parqueos de visita y más de 10 amenidades. Fecha estimada de entrega: Octubre 2026. Sitio web: https://parquevistaverde.com.gt/"
     },
     {
         "id": "pvv_ubicacion_direccion",
@@ -147,9 +147,9 @@
         "id": "pvv_fecha_entrega",
         "proyecto": "PVV",
         "categoria": "proyecto",
-        "tags": ["entrega", "cuando", "fecha", "listo", "mudarse", "construccion", "junio 2028"],
+        "tags": ["entrega", "cuando", "fecha", "listo", "mudarse", "construccion", "octubre 2026"],
         "pregunta": "¿Cuándo es la fecha de entrega de Parque Vista Verde?",
-        "respuesta": "La fecha estimada de entrega de Parque Vista Verde es Junio 2028."
+        "respuesta": "La fecha estimada de entrega de Parque Vista Verde es Octubre 2026."
     },
     {
         "id": "pvv_amenidades_lista",
@@ -246,5 +246,23 @@
         "tags": ["contacto", "telefono", "whatsapp", "web", "asesor", "comunicacion", "agendar cita"],
         "pregunta": "¿Cómo puedo contactar a Parque Vista Verde o agendar una cita?",
         "respuesta": "Para reservar tu apartamento, agendar una cita o resolver cualquier duda, visita https://parquevistaverde.com.gt/ o contacta directamente a un asesor comercial de Spectrum."
+    },
+    {
+        "id": "pvv_apartamento_modelo",
+        "proyecto": "PVV",
+        "categoria": "contacto",
+        "tags": [
+            "apartamento modelo",
+            "showroom",
+            "sala de ventas",
+            "centro de experiencia",
+            "donde ver",
+            "visitar",
+            "oakland mall",
+            "como llegar sala ventas",
+            "direccion sala ventas"
+        ],
+        "pregunta": "¿Dónde puedo ver el apartamento modelo de Parque Vista Verde? ¿Tienen showroom o sala de ventas?",
+        "respuesta": "Contamos con un apartamento modelo en nuestro Centro de Experiencia, ubicado en Oakland Mall, Nivel 2, Ciudad de Guatemala. 📍\nSerá un gusto recibirte y brindarte una asesoría personalizada para que conozcas cada detalle del proyecto. ¡Estamos para servirte!"
     }
 ]
