@@ -1,5 +1,5 @@
 # 🏢 SPECTRUM VIVIENDA: Agente Unificado — Estado del Proyecto
-> Última actualización: 2026-05-14 (Producción Final — Fix WhatsApp Project Enforcement + Ruteo de Datos)
+> Última actualización: 2026-05-19 (Robustez de Expresiones + Mejora Detección Out-of-Context)
 
 ## 🎯 Objetivo General
 Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquestador central (*Sof-IA*) delega tareas a sub-workflows especializados (Tools), con persistencia centralizada en MongoDB y sincronización diferida al CRM Dynamics 365 vía SOAP.
@@ -23,7 +23,7 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 ## 📦 Módulos (Workflows)
 
 ### 1. 🧠 Orquestador Central — `AGENT PRINCIPAL.json`
-**Estado: ✅ Activo — Auditoría de integridad aplicada** | Última mod: 2026-05-13
+**Estado: ✅ Activo — Robustez de Expresiones + Mejora Inteligencia de Context** | Última mod: 2026-05-19
 
 - ✅ **Completado**: Sincronización paramétrica con servidor (expresiones =URL y variables de input).
 - ✅ **Completado**: Búsqueda de usuarios segmentada por `manychat_id` + `page_id`.
@@ -39,6 +39,8 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ✅ **Completado**: **Fix Integridad Notificaciones:** Corregido bug de correo faltante en alerta de precios y robustez añadida mediante lógica de coalesce (Parse vs DB) en todos los disparadores de alertas.
 - ✅ **Completado**: **Bloqueo de Autodetección en WhatsApp (Final):** Se refactorizaron los nodos `DATA to CREATE` y `DATA to UPDATE` para ignorar la campaña detectada por texto si el canal es WhatsApp. Esto garantiza que el lead sea calificado manualmente por el bot antes de ser asignado a un proyecto.
 - ✅ **Completado**: **Resolución de Error de Ruteo n8n:** Solucionado el error `"No path back to referenced node"` en la rama de creación de usuarios, asegurando que las referencias de nodos en expresiones JSON sean accesibles desde cualquier camino de ejecución.
+- ✅ **Completado (2026-05-19)**: **Normalización de Sintaxis Segura:** Actualizada toda la expresión de nodos `.item.json` → `.first().json`. Esto mejora la robustez cuando hay múltiples items en la salida de un nodo. Afecta a: `RESPOND TO MANYCHAT`, `Parameter Type`, `User Data`, `If NO WHATSAPP`, `Proyecto`, `Lenguaje & Asesoria`.
+- ✅ **Completado (2026-05-19)**: **Mejora Detector `es_fuera_de_contexto`:** Reescrito completamente el atributo en el extractor `Lenguaje & Asesoria`. Ahora es mucho más específico: solo marca mensajes como "fuera de contexto" si son solicitudes EXPLÍCITAS y ESPECÍFICAS de temas completamente ajenos al sector inmobiliario. Nunca marca saludos, mensajes cortos, confirmaciones simples o temas ambiguos/relacionados con vivienda. Esto reduce falsos positivos y mejora la tasa de aceptación de mensajes legítimos.
 
 ### 2. 👤 Captador de Leads — `Lead Collector.json`
 **Estado: ✅ Activo** | Última mod: 2026-05-13
@@ -53,10 +55,11 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ✅ **Completado**: Inclusión de todos los proyectos activos (PVV, PMAR, PPO, PPOL, PSB).
 
 ### 4. 🔔 Notificaciones y Citas — `Notifications Master.json` & `RSVP.json`
-**Estado: ✅ Activo y Auditado al 100%** | Última mod: 2026-05-13
+**Estado: ✅ Activo y Auditado al 100%** | Última mod: 2026-05-19
 
 - ✅ **Completado**: Agregado `aduarte@spectrum.com.gt` (Andy Duarte) como destinatario CC en los 4 tipos de alerta: Nuevo Lead, Interés en Precios, Nueva Cita y Escalación.
 - ✅ **Completado**: **Template premium de citas:** `Payload Cita` actualizado con diseño profesional (header oscuro SPECTRUM VIVIENDA, tablas de datos del lead y detalles de cita) — paridad con el template de `RSVP.json`.
+- ✅ **Completado (2026-05-19)**: **Reformateo de RSVP.json:** Aplicado estándar de indentación de 2 espacios, reorganización visual de nodos y IDs para mejorar legibilidad y mantenibilidad futura.
 
 ### 5. 🎞️ Envío de Media — `Send Media.json`
 **Estado: ✅ Activo y Auditado al 100%** | Última mod: 2026-05-13
@@ -100,9 +103,9 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 
 ---
 
-## 🚀 Punto Actual del Proyecto
+## 🚀 Punto Actual del Proyecto (2026-05-19)
 
- Tras las optimizaciones recientes y el fix de integridad del 14 de mayo, el sistema presenta el siguiente estatus técnico:
+ Tras las optimizaciones recientes y los fixes de robustez del 19 de mayo, el sistema presenta el siguiente estatus técnico:
 - **Infraestructura Multitenant:** 100% Funcional. Enrutamiento dinámico por canal activado.
 - **WhatsApp Project Enforcement:** Se eliminó la herencia automática de proyecto por texto inicial en WhatsApp. Ahora el sistema deja el campo `proyecto` nulo para forzar al Orquestador a disparar el menú interactivo, mejorando la calidad de la atribución final.
 - **Fix Correo Lead:** Todas las notificaciones (`nuevo_lead`, `cita`, `escalacion`, `interes_precios`) ahora incluyen validación de correo lead con fallback robusto.
@@ -123,6 +126,8 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - **Fix bug Instagram/Messenger:** Corregidos dos puntos — `manychat_settings` con `proyecto` por `page_id` + system prompt de Sof-IA con condición de canal para la Regla de Oro. Bot ya no pregunta "¿cuál proyecto?" en IG/Messenger.
 - **Verificación tareas P1:** Confirmado en código que resúmenes Sync_CRM (Presupuesto, Dormitorios, Requisitos, Resumen, Dudas) y `_UTMCampaing` están completamente implementados.
 - **Templates prellenados por fuente:** CSV de URLs entregado por Dayrin. Verificado que `Extraer CAMPAIGN DATA` detecta correctamente los 6 tipos de fuente × 5 proyectos. Parte técnica completa.
+- **Robustez de Expresiones (2026-05-19):** Normalización de sintaxis segura en `AGENT PRINCIPAL.json`. Todos los nodos que usaban `.item.json` ahora usan `.first().json` para mayor robustez con múltiples items.
+- **Mejora Detector Out-of-Context (2026-05-19):** Completamente reescrito el atributo `es_fuera_de_contexto` en el extractor `Lenguaje & Asesoria`. Ahora diferencia claramente entre solicitudes EXPLÍCITAS y ESPECÍFICAS de temas ajenos al sector vs. saludos, confirmaciones y mensajes ambiguos. Reduce falsos positivos y mejora precisión.
 
 ---
 

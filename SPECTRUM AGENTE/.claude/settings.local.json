@@ -121,7 +121,8 @@
       "Bash(python3 *)",
       "Read(//Users/jorgecalderon/.claude/**)",
       "Read(//Users/jorgecalderon/.config/claude/**)",
-      "PowerShell($content = Get-Content -Path \"E:\\\\1TRABAJO\\\\PROGRAMMING\\\\Proyectos\\\\n8n-workflows\\\\SPECTRUM AGENTE\\\\Agente Unificado\\\\AGENT PRINCIPAL.json\" -Raw -Encoding UTF8; try { $null = $content | ConvertFrom-Json; Write-Host \"JSON válido - caracteres: $\\($content.Length\\)\" } catch { Write-Host \"ERROR: $_\" })"
+      "PowerShell($content = Get-Content -Path \"E:\\\\1TRABAJO\\\\PROGRAMMING\\\\Proyectos\\\\n8n-workflows\\\\SPECTRUM AGENTE\\\\Agente Unificado\\\\AGENT PRINCIPAL.json\" -Raw -Encoding UTF8; try { $null = $content | ConvertFrom-Json; Write-Host \"JSON válido - caracteres: $\\($content.Length\\)\" } catch { Write-Host \"ERROR: $_\" })",
+      "Bash(claude mcp *)"
     ]
   }
 }
