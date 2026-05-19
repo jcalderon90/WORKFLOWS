@@ -225,5 +225,22 @@
     ],
     "pregunta": "¿Dónde puedo ver el apartamento modelo de Polanco? ¿Tienen showroom o sala de ventas?",
     "respuesta": "Contamos con un apartamento modelo en nuestro Centro de Experiencia, ubicado en Oakland Mall, Nivel 2, Ciudad de Guatemala. 📍\nSerá un gusto recibirte y brindarte una asesoría personalizada para que conozcas cada detalle del proyecto. ¡Estamos para servirte!"
+  },
+  {
+    "id": "pl_entrega_proyecto",
+    "proyecto": "PPOL",
+    "categoria": "proyecto",
+    "tags": [
+      "entrega",
+      "fecha",
+      "construccion",
+      "cuando",
+      "mudarse",
+      "2027",
+      "2028",
+      "fecha de entrega"
+    ],
+    "pregunta": "¿Cuándo entregan los apartamentos de Polanco?",
+    "respuesta": "Polanco se encuentra en construcción y comercialización. La fecha estimada de entrega es 2027/2028. Para la fecha más actualizada y el avance actual de obra, consulta directamente con tu asesor comercial."
   }
 ]
