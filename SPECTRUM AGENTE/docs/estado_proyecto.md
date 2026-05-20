@@ -1,5 +1,5 @@
 # 🏢 SPECTRUM VIVIENDA: Agente Unificado — Estado del Proyecto
-> Última actualización: 2026-05-19 (Robustez de Expresiones + Mejora Detección Out-of-Context)
+> Última actualización: 2026-05-20 (Fix consulta_pendiente + Fix RSVP por proyecto)
 
 ## 🎯 Objetivo General
 Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquestador central (*Sof-IA*) delega tareas a sub-workflows especializados (Tools), con persistencia centralizada en MongoDB y sincronización diferida al CRM Dynamics 365 vía SOAP.
@@ -41,6 +41,9 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ✅ **Completado**: **Resolución de Error de Ruteo n8n:** Solucionado el error `"No path back to referenced node"` en la rama de creación de usuarios, asegurando que las referencias de nodos en expresiones JSON sean accesibles desde cualquier camino de ejecución.
 - ✅ **Completado (2026-05-19)**: **Normalización de Sintaxis Segura:** Actualizada toda la expresión de nodos `.item.json` → `.first().json`. Esto mejora la robustez cuando hay múltiples items en la salida de un nodo. Afecta a: `RESPOND TO MANYCHAT`, `Parameter Type`, `User Data`, `If NO WHATSAPP`, `Proyecto`, `Lenguaje & Asesoria`.
 - ✅ **Completado (2026-05-19)**: **Mejora Detector `es_fuera_de_contexto`:** Reescrito completamente el atributo en el extractor `Lenguaje & Asesoria`. Ahora es mucho más específico: solo marca mensajes como "fuera de contexto" si son solicitudes EXPLÍCITAS y ESPECÍFICAS de temas completamente ajenos al sector inmobiliario. Nunca marca saludos, mensajes cortos, confirmaciones simples o temas ambiguos/relacionados con vivienda. Esto reduce falsos positivos y mejora la tasa de aceptación de mensajes legítimos.
+- ✅ **Completado (2026-05-20)**: **Fix `consulta_pendiente` no se guardaba en MongoDB:** Nodo `Prepare Update` usaba `$json.consulta_pendiente_guardar` pero `$json` en ese punto del flujo solo contenía `{ value: boolean }` del nodo `Hay Cambios?`. Corregido a `$('Parse response').item.json.consulta_pendiente_guardar`. Con esto, cuando el usuario da sus datos después de hacer una consulta, el bot retoma y responde la pregunta original correctamente.
+- ✅ **Completado (2026-05-20)**: **Visibilidad de `consulta_pendiente` en LLM:** Agregada línea explícita `Consulta pendiente del lead` al user message del nodo `PRINCIPAL` para mayor prominencia en el contexto del LLM.
+- ⏳ **Pendiente**: **Leads de follow-up WhatsApp sin proyecto definido:** Cuando un lead responde a un follow-up de un proyecto específico desde WhatsApp, `CONTEXT 1` no lee `custom_fields.proyecto_interes` del webhook (solo usa extracción por texto del mensaje). Si el mensaje no menciona el proyecto, el bot queda sin contexto de proyecto. Fix identificado: leer `custom_fields.proyecto_interes` como fallback en `CONTEXT 1` para WhatsApp.
 
 ### 2. 👤 Captador de Leads — `Lead Collector.json`
 **Estado: ✅ Activo** | Última mod: 2026-05-13
@@ -55,11 +58,15 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ✅ **Completado**: Inclusión de todos los proyectos activos (PVV, PMAR, PPO, PPOL, PSB).
 
 ### 4. 🔔 Notificaciones y Citas — `Notifications Master.json` & `RSVP.json`
-**Estado: ✅ Activo y Auditado al 100%** | Última mod: 2026-05-19
+**Estado: ✅ Activo** | Última mod: 2026-05-20
 
 - ✅ **Completado**: Agregado `aduarte@spectrum.com.gt` (Andy Duarte) como destinatario CC en los 4 tipos de alerta: Nuevo Lead, Interés en Precios, Nueva Cita y Escalación.
 - ✅ **Completado**: **Template premium de citas:** `Payload Cita` actualizado con diseño profesional (header oscuro SPECTRUM VIVIENDA, tablas de datos del lead y detalles de cita) — paridad con el template de `RSVP.json`.
 - ✅ **Completado (2026-05-19)**: **Reformateo de RSVP.json:** Aplicado estándar de indentación de 2 espacios, reorganización visual de nodos y IDs para mejorar legibilidad y mantenibilidad futura.
+- ✅ **Completado (2026-05-20)**: **Fix `Find Appointment` por proyecto:** Query de búsqueda ahora filtra por `manychat_id` + `proyecto`. Antes solo filtraba por `manychat_id`, lo que causaba que un usuario con citas en múltiples proyectos sobreescribiera la cita anterior.
+- ⏳ **Pendiente**: Limpiar campos `metodo_contacto_pref` y `estado_civil` de nodos `Insert/Update Appointment Data` — el agente nunca los recolecta, siempre llegan `null`.
+- ⏳ **Pendiente**: `sendTo` dinámico — los correos de notificación de citas están hardcodeados en el nodo `CONTEXT`. Mover a `manychat_settings` en MongoDB.
+- ⏳ **Pendiente**: Limpiar `chat_histories_rsvp` tras `cita_confirmada: true` para evitar que el agente arranque con contexto de citas anteriores al reagendar.
 
 ### 5. 🎞️ Envío de Media — `Send Media.json`
 **Estado: ✅ Activo y Auditado al 100%** | Última mod: 2026-05-13
@@ -103,7 +110,7 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 
 ---
 
-## 🚀 Punto Actual del Proyecto (2026-05-19)
+## 🚀 Punto Actual del Proyecto (2026-05-20)
 
  Tras las optimizaciones recientes y los fixes de robustez del 19 de mayo, el sistema presenta el siguiente estatus técnico:
 - **Infraestructura Multitenant:** 100% Funcional. Enrutamiento dinámico por canal activado.
@@ -128,6 +135,8 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - **Templates prellenados por fuente:** CSV de URLs entregado por Dayrin. Verificado que `Extraer CAMPAIGN DATA` detecta correctamente los 6 tipos de fuente × 5 proyectos. Parte técnica completa.
 - **Robustez de Expresiones (2026-05-19):** Normalización de sintaxis segura en `AGENT PRINCIPAL.json`. Todos los nodos que usaban `.item.json` ahora usan `.first().json` para mayor robustez con múltiples items.
 - **Mejora Detector Out-of-Context (2026-05-19):** Completamente reescrito el atributo `es_fuera_de_contexto` en el extractor `Lenguaje & Asesoria`. Ahora diferencia claramente entre solicitudes EXPLÍCITAS y ESPECÍFICAS de temas ajenos al sector vs. saludos, confirmaciones y mensajes ambiguos. Reduce falsos positivos y mejora precisión.
+- **Fix consulta_pendiente (2026-05-20):** Resuelto bug crítico donde el bot recolectaba datos del lead pero no respondía la pregunta original. Causa raíz: `$json` en `Prepare Update` perdía el contexto de `Parse response` al pasar por el nodo `Hay Cambios?`. Corregido con referencia explícita al nodo.
+- **Fix RSVP por proyecto (2026-05-20):** `Find Appointment` ahora filtra por `manychat_id` + `proyecto`. Evita sobreescritura de citas entre proyectos distintos para el mismo usuario.
 
 ---
 
