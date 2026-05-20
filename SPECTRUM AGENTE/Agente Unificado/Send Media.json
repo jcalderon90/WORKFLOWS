@@ -7,10 +7,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -240,
-        0
+        -160,
+        240
       ],
-      "id": "a4953767-6691-4a1d-a1e8-22c5183383af",
+      "id": "2c0c65d7-a912-4996-85f7-bf633fc82225",
       "name": "Map Media Resources"
     },
     {
@@ -41,10 +41,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        0,
-        0
+        64,
+        240
       ],
-      "id": "if-media-disponible-001",
+      "id": "7f79d2b4-5e0e-4055-8512-7b110c960b9c",
       "name": "IF Media Disponible"
     },
     {
@@ -72,10 +72,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        240,
-        -120
+        288,
+        144
       ],
-      "id": "5b4a895d-c69f-4d85-ae0b-9a89807e3030",
+      "id": "f0c1fafc-b6c3-416a-affa-cf0ac9a14710",
       "name": "Send API ManyChat"
     },
     {
@@ -95,10 +95,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        480,
-        -120
+        512,
+        144
       ],
-      "id": "1ccd2c84-4ba5-42f6-a885-5f43752a0b83",
+      "id": "d0a526ad-b86b-4361-84a7-db2ffc726bf7",
       "name": "Response To Agent"
     },
     {
@@ -118,10 +118,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        240,
-        120
+        288,
+        336
       ],
-      "id": "no-media-response-node-001",
+      "id": "9731d96c-f1b1-4b11-a1b1-0a41ed874fd0",
       "name": "No Media Response"
     },
     {
@@ -149,10 +149,10 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        -480,
-        0
+        -384,
+        240
       ],
-      "id": "0d1c59f1-2ba6-4d49-80cb-4ebf8ad6d415",
+      "id": "10bd6d11-5b80-4eda-8f43-60efd831daa8",
       "name": "START"
     }
   ],

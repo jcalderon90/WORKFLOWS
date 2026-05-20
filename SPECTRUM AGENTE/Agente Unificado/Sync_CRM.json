@@ -14,10 +14,10 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        1328,
-        624
+        6448,
+        -312
       ],
-      "id": "46be3337-aa07-48e3-bf62-c156d8cf6ab8",
+      "id": "64749bdc-68ee-41fe-a4f6-c910e95752d3",
       "name": "Schedule Trigger"
     },
     {
@@ -27,10 +27,10 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        2000,
-        624
+        7120,
+        -312
       ],
-      "id": "4e22ae0d-34c4-4294-961a-da1ee927fdf2",
+      "id": "ba38c423-1384-4fda-b85f-aa86a0c4cbcb",
       "name": "Loop Over Users"
     },
     {
@@ -62,10 +62,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3792,
-        448
+        8912,
+        -480
       ],
-      "id": "1296a600-ae0d-442b-ba73-2285bde93f4f",
+      "id": "17c96966-2cc7-4640-9dec-ac75d0660c42",
       "name": "Messages",
       "executeOnce": false
     },
@@ -76,39 +76,11 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        3344,
-        432
+        8464,
+        -496
       ],
-      "id": "084c3289-f54c-4b74-aec4-5fb609bac28f",
+      "id": "5d089cd7-fcd7-45c8-bea3-9ca2dcfd8e79",
       "name": "Merge"
-    },
-    {
-      "parameters": {
-        "model": {
-          "__rl": true,
-          "value": "gpt-4o-mini",
-          "mode": "list",
-          "cachedResultName": "gpt-4o-mini"
-        },
-        "responsesApiEnabled": false,
-        "options": {
-          "temperature": 0.3
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.3,
-      "position": [
-        4096,
-        672
-      ],
-      "id": "8311047a-dd17-440d-9527-7a4a91a7c302",
-      "name": "OpenAI Chat Model",
-      "credentials": {
-        "openAiApi": {
-          "id": "mwtQQFLfYjj6JZcg",
-          "name": "Spectrum - Parque Verde"
-        }
-      }
     },
     {
       "parameters": {
@@ -119,10 +91,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        2448,
-        400
+        7568,
+        -532
       ],
-      "id": "54edd89f-ce49-429c-b63c-40eae75164a8",
+      "id": "a1429bdf-c699-4f75-a553-9d14a85ad54a",
       "name": "Find Appointment",
       "alwaysOutputData": true,
       "credentials": {
@@ -149,10 +121,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        2672,
-        400
+        7792,
+        -532
       ],
-      "id": "1e9bda8f-ec9e-42a8-9aba-061611c8542a",
+      "id": "9ecb1009-856c-442f-a91b-87fe547979b0",
       "name": "Manychat User ID"
     },
     {
@@ -162,10 +134,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1552,
-        624
+        6672,
+        -312
       ],
-      "id": "8774a149-ec47-48a8-864f-687e4fe736d6",
+      "id": "0382d8fb-b48e-48a7-9a46-d01bbf983257",
       "name": "Time-15min"
     },
     {
@@ -205,10 +177,10 @@
       "type": "@n8n/n8n-nodes-langchain.informationExtractor",
       "typeVersion": 1.2,
       "position": [
-        4016,
-        448
+        9136,
+        -480
       ],
-      "id": "6939e57a-adb2-4d63-8db2-1fa4f6301336",
+      "id": "c8fee508-b9e7-4646-9d46-cc4f068956e1",
       "name": "Information Extractor"
     },
     {
@@ -240,10 +212,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        4368,
-        448
+        9488,
+        -480
       ],
-      "id": "521acc8d-7d9e-41e1-8506-9f04ed44af87",
+      "id": "db1add2f-29aa-400c-8739-e23c16bbe5cb",
       "name": "EXTRACTOR RESPONSE"
     },
     {
@@ -272,10 +244,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        5040,
-        448
+        10160,
+        -480
       ],
-      "id": "4953f8ad-2286-4460-b77d-7191edd80aaf",
+      "id": "c269a525-b405-453c-baf0-837058d2b709",
       "name": "GENERAR LEAD CONTACT"
     },
     {
@@ -285,10 +257,10 @@
       "type": "n8n-nodes-base.xml",
       "typeVersion": 1,
       "position": [
-        5264,
-        448
+        10384,
+        -480
       ],
-      "id": "c16d0b30-2179-4347-b69f-56f6bfb22749",
+      "id": "09710986-ca4f-40b6-8ffa-81003fe38093",
       "name": "XML BODY"
     },
     {
@@ -298,7 +270,7 @@
             {
               "id": "29bc8a2a-9b6e-4b09-ae6d-30b74ab45b94",
               "name": "body",
-      "value": "=<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n<soap:Body>\n<CreacionClientePotencialBot xmlns=\"http://tempuri.org/\">\n<_OrigenCliente>{{ $('Loop Over Users').item.json.CRM_Data?._OrigenCliente || 100000001 }}</_OrigenCliente>\n<_Proyecto>{{ $('Loop Over Users').item.json.proyecto }}</_Proyecto>\n<_Nombre>{{ $('Loop Over Users').item.json.primer_nombre || $('Loop Over Users').item.json.nombre?.split(' ')[0] || 'Cliente' }}</_Nombre>\n<_Apellido>{{ $('Loop Over Users').item.json.apellidos || $('Loop Over Users').item.json.nombre?.split(' ').slice(1).join(' ') || 'N/A' }}</_Apellido>\n<_TelefonoMovil>{{ $('Loop Over Users').item.json.telefono || \"\" }}</_TelefonoMovil>\n<_CorreEletronico>{{ $('Loop Over Users').item.json.correo || \"\" }}</_CorreEletronico>\n{{ $('Loop Over Users').item.json.correo_secundario ? '<_CorreoSecundario>' + $('Loop Over Users').item.json.correo_secundario + '</_CorreoSecundario>' : '' }}\n<_UTMSource>{{ $('Loop Over Users').item.json.utm_source_crm || 100000004 }}</_UTMSource>\n<_UTMCampaing>{{ ({\"Web\":\"Cliente atendido desde chatbot a través de web\",\"City Core\":\"Cliente atendido desde chatbot a través de anuncios\",\"Social Media\":\"Cliente atendido desde chatbot a través de redes sociales\",\"Fan Page\":\"Cliente atendido desde chatbot a través de fan page\",\"Mail\":\"Cliente atendido desde chatbot a través de email\",\"Banco\":\"Cliente atendido desde chatbot a través de banco\"})[$('Loop Over Users').item.json.atribucion_tag] || \"Cliente atendido desde chatbot a través de web\" }}</_UTMCampaing>\n<_MetodocontactoPref>{{ \n  ($('Find Appointment').item.json?.contacto_pref == \"correo\" ? 2 : \n   $('Find Appointment').item.json?.contacto_pref == \"llamada\" ? 3 : \n   $('Find Appointment').item.json?.contacto_pref == \"whatsapp\" ? 4 : \n   $('Find Appointment').item.json?.contacto_pref == \"cualquier_forma\" ? 5 : \n   Number($('Loop Over Users').item.json.CRM_Data?._MetodocontactoPref || 5)) \n}}</_MetodocontactoPref>\n<_Comentarios>{{ $('Loop Over Users').item.json.atribucion_contacto || \"Chatbot\" }}</_Comentarios>\n{{ \n  ($('Find Appointment').item.json?.habitaciones == \"1\" ? '<_NumeroHabitaciones>100000000</_NumeroHabitaciones>' : \n   $('Find Appointment').item.json?.habitaciones == \"2\" ? '<_NumeroHabitaciones>100000001</_NumeroHabitaciones>' : \n   $('Find Appointment').item.json?.habitaciones == \"3\" ? '<_NumeroHabitaciones>100000002</_NumeroHabitaciones>' : \n   ($('Loop Over Users').item.json.CRM_Data?._NumeroHabitaciones ? '<_NumeroHabitaciones>' + $('Loop Over Users').item.json.CRM_Data._NumeroHabitaciones + '</_NumeroHabitaciones>' : '')) \n}}\n{{ \n  ($('Find Appointment').item.json?.estado_civil == \"soltero\" ? '<_EstadoCivil>100000000</_EstadoCivil>' : \n   $('Find Appointment').item.json?.estado_civil == \"casado\" ? '<_EstadoCivil>100000001</_EstadoCivil>' : \n   $('Find Appointment').item.json?.estado_civil == \"divorciado\" ? '<_EstadoCivil>100000002</_EstadoCivil>' : \n   $('Find Appointment').item.json?.estado_civil == \"union_libre\" ? '<_EstadoCivil>100000003</_EstadoCivil>' : \n   ($('Loop Over Users').item.json.CRM_Data?._EstadoCivil ? '<_EstadoCivil>' + $('Loop Over Users').item.json.CRM_Data._EstadoCivil + '</_EstadoCivil>' : '')) \n}}\n{{ \n  ($('Find Appointment').item.json?.intencion == \"I\" ? '<_MotivoInteres>100000001</_MotivoInteres>' : \n   $('Find Appointment').item.json?.intencion == \"V\" ? '<_MotivoInteres>100000003</_MotivoInteres>' : \n   ($('Loop Over Users').item.json.CRM_Data?._MotivoInteres ? '<_MotivoInteres>' + $('Loop Over Users').item.json.CRM_Data._MotivoInteres + '</_MotivoInteres>' : '')) \n}}\n{{ \n  $('Find Appointment').item.json?.fecha_hora ? '<_FechaCita>' + new Date($('Find Appointment').item.json.fecha_hora).toISOString() + '</_FechaCita>' : \n  ($('Loop Over Users').item.json.CRM_Data?._FechaCita ? '<_FechaCita>' + $('Loop Over Users').item.json.CRM_Data._FechaCita + '</_FechaCita>' : '') \n}}\n{{ \n  ($('Find Appointment').item.json?.tipo == \"cita_presencial\" ? '<_TipoCita>100000000</_TipoCita>' : \n   ['cita_virtual', 'llamada'].includes($('Find Appointment').item.json?.tipo) ? '<_TipoCita>100000001</_TipoCita>' : \n   ($('Loop Over Users').item.json.CRM_Data?._TipoCita ? '<_TipoCita>' + $('Loop Over Users').item.json.CRM_Data._TipoCita + '</_TipoCita>' : '')) \n}}\n<_ResumenConversacion>{{ \n  'PRESUPUESTO: ' + ($json.conversation_ressume?.Presupuesto || 'No mencionado') + '\\n' + \n  'DORMITORIOS: ' + ($json.conversation_ressume?.Dormitorios || 'No mencionado') + '\\n' + \n  'REQUISITOS: ' + ($json.conversation_ressume?.Requisitos || 'Ninguno') + '\\n\\n' + \n  'RESUMEN:\\n' + ($json.conversation_ressume?.Resumen || '') \n}}</_ResumenConversacion>\n<_DudasCliente>{{ $json.conversation_ressume?.Dudas || \"\" }}</_DudasCliente>\n</CreacionClientePotencialBot>\n</soap:Body>\n</soap:Envelope>",
+              "value": "=<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n<soap:Body>\n<CreacionClientePotencialBot xmlns=\"http://tempuri.org/\">\n<_OrigenCliente>{{ $('Loop Over Users').item.json.CRM_Data?._OrigenCliente || 100000001 }}</_OrigenCliente>\n<_Proyecto>{{ $('Loop Over Users').item.json.proyecto }}</_Proyecto>\n<_Nombre>{{ $('Loop Over Users').item.json.primer_nombre || $('Loop Over Users').item.json.nombre?.split(' ')[0] || 'Cliente' }}</_Nombre>\n<_Apellido>{{ $('Loop Over Users').item.json.apellidos || $('Loop Over Users').item.json.nombre?.split(' ').slice(1).join(' ') || 'N/A' }}</_Apellido>\n<_TelefonoMovil>{{ $('Loop Over Users').item.json.telefono || \"\" }}</_TelefonoMovil>\n<_CorreEletronico>{{ $('Loop Over Users').item.json.correo || \"\" }}</_CorreEletronico>\n{{ $('Loop Over Users').item.json.correo_secundario ? '<_CorreoSecundario>' + $('Loop Over Users').item.json.correo_secundario + '</_CorreoSecundario>' : '' }}\n<_UTMSource>{{ $('Loop Over Users').item.json.utm_source_crm || 100000004 }}</_UTMSource>\n<_UTMCampaing>{{ ({\"Web\":\"Cliente atendido desde chatbot a través de web\",\"City Core\":\"Cliente atendido desde chatbot a través de anuncios\",\"Social Media\":\"Cliente atendido desde chatbot a través de redes sociales\",\"Fan Page\":\"Cliente atendido desde chatbot a través de fan page\",\"Mail\":\"Cliente atendido desde chatbot a través de email\",\"Banco\":\"Cliente atendido desde chatbot a través de banco\"})[$('Loop Over Users').item.json.atribucion_tag] || \"Cliente atendido desde chatbot a través de web\" }}</_UTMCampaing>\n<_MetodocontactoPref>{{ \n  ($('Find Appointment').item.json?.contacto_pref == \"correo\" ? 2 : \n   $('Find Appointment').item.json?.contacto_pref == \"llamada\" ? 3 : \n   $('Find Appointment').item.json?.contacto_pref == \"whatsapp\" ? 4 : \n   $('Find Appointment').item.json?.contacto_pref == \"cualquier_forma\" ? 5 : \n   Number($('Loop Over Users').item.json.CRM_Data?._MetodocontactoPref || 5)) \n}}</_MetodocontactoPref>\n<_Comentarios>{{ $('Loop Over Users').item.json.atribucion_contacto || \"Chatbot\" }}</_Comentarios>\n{{ \n  ($('Find Appointment').item.json?.habitaciones == \"1\" ? '<_NumeroHabitaciones>100000000</_NumeroHabitaciones>' : \n   $('Find Appointment').item.json?.habitaciones == \"2\" ? '<_NumeroHabitaciones>100000001</_NumeroHabitaciones>' : \n   $('Find Appointment').item.json?.habitaciones == \"3\" ? '<_NumeroHabitaciones>100000002</_NumeroHabitaciones>' : \n   ($('Loop Over Users').item.json.CRM_Data?._NumeroHabitaciones ? '<_NumeroHabitaciones>' + $('Loop Over Users').item.json.CRM_Data._NumeroHabitaciones + '</_NumeroHabitaciones>' : '')) \n}}\n{{ \n  ($('Find Appointment').item.json?.estado_civil == \"soltero\" ? '<_EstadoCivil>100000000</_EstadoCivil>' : \n   $('Find Appointment').item.json?.estado_civil == \"casado\" ? '<_EstadoCivil>100000001</_EstadoCivil>' : \n   $('Find Appointment').item.json?.estado_civil == \"divorciado\" ? '<_EstadoCivil>100000002</_EstadoCivil>' : \n   $('Find Appointment').item.json?.estado_civil == \"union_libre\" ? '<_EstadoCivil>100000003</_EstadoCivil>' : \n   ($('Loop Over Users').item.json.CRM_Data?._EstadoCivil ? '<_EstadoCivil>' + $('Loop Over Users').item.json.CRM_Data._EstadoCivil + '</_EstadoCivil>' : '')) \n}}\n{{ \n  ($('Find Appointment').item.json?.intencion == \"I\" ? '<_MotivoInteres>100000001</_MotivoInteres>' : \n   $('Find Appointment').item.json?.intencion == \"V\" ? '<_MotivoInteres>100000003</_MotivoInteres>' : \n   ($('Loop Over Users').item.json.CRM_Data?._MotivoInteres ? '<_MotivoInteres>' + $('Loop Over Users').item.json.CRM_Data._MotivoInteres + '</_MotivoInteres>' : '')) \n}}\n{{ \n  $('Find Appointment').item.json?.fecha_hora ? '<_FechaCita>' + new Date($('Find Appointment').item.json.fecha_hora).toISOString() + '</_FechaCita>' : \n  ($('Loop Over Users').item.json.CRM_Data?._FechaCita ? '<_FechaCita>' + $('Loop Over Users').item.json.CRM_Data._FechaCita + '</_FechaCita>' : '') \n}}\n{{ \n  ($('Find Appointment').item.json?.tipo == \"cita_presencial\" ? '<_TipoCita>100000000</_TipoCita>' : \n   ['cita_virtual', 'llamada'].includes($('Find Appointment').item.json?.tipo) ? '<_TipoCita>100000001</_TipoCita>' : \n   ($('Loop Over Users').item.json.CRM_Data?._TipoCita ? '<_TipoCita>' + $('Loop Over Users').item.json.CRM_Data._TipoCita + '</_TipoCita>' : '')) \n}}\n<_ResumenConversacion>{{ \n  'PRESUPUESTO: ' + ($json.conversation_ressume?.Presupuesto || 'No mencionado') + '\\n' + \n  'DORMITORIOS: ' + ($json.conversation_ressume?.Dormitorios || 'No mencionado') + '\\n' + \n  'REQUISITOS: ' + ($json.conversation_ressume?.Requisitos || 'Ninguno') + '\\n\\n' + \n  'RESUMEN:\\n' + ($json.conversation_ressume?.Resumen || '') \n}}</_ResumenConversacion>\n<_DudasCliente>{{ $json.conversation_ressume?.Dudas || \"\" }}</_DudasCliente>\n</CreacionClientePotencialBot>\n</soap:Body>\n</soap:Envelope>",
               "type": "string"
             }
           ]
@@ -308,10 +280,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        4592,
-        448
+        9712,
+        -480
       ],
-      "id": "156b589a-38a9-4790-8eca-33918a49f76c",
+      "id": "b3944011-7c7e-4a95-9ba3-1f3e511b972e",
       "name": "Body"
     },
     {
@@ -322,10 +294,10 @@
       "type": "n8n-nodes-base.xml",
       "typeVersion": 1,
       "position": [
-        4816,
-        448
+        9936,
+        -480
       ],
-      "id": "baa7b96e-7e10-4885-abca-9a69583ba175",
+      "id": "3f6295eb-aada-401b-99ea-07cc89617a36",
       "name": "PARSE BODY"
     },
     {
@@ -333,10 +305,10 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        7184,
-        624
+        12304,
+        -312
       ],
-      "id": "5f34e6ac-0ef0-4a0a-a31a-3d5fdda05a82",
+      "id": "571815e1-a2d2-4e8c-b073-9f88ef0e1c19",
       "name": "No Operation, do nothing"
     },
     {
@@ -348,10 +320,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        1776,
-        624
+        6896,
+        -312
       ],
-      "id": "fadfdf15-4f6b-40fc-b3d9-44087a95aa95",
+      "id": "796486d2-ec3f-4234-a139-125a939d0caa",
       "name": "Find Users to Sync",
       "alwaysOutputData": false,
       "credentials": {
@@ -370,10 +342,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        2896,
-        256
+        8016,
+        -672
       ],
-      "id": "94d995b1-b324-441a-9cee-991cce04179c",
+      "id": "19bf0f18-7142-4da5-a0a2-b36d8f958c18",
       "name": "Chat Lead",
       "alwaysOutputData": true,
       "credentials": {
@@ -392,10 +364,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        2896,
-        448
+        8016,
+        -480
       ],
-      "id": "2696ac00-f836-4b5c-b76d-6d95edbea06c",
+      "id": "655915d7-489a-453d-aec6-11598c5c55e0",
       "name": "Chat RSVP",
       "alwaysOutputData": true,
       "credentials": {
@@ -414,10 +386,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        2896,
-        640
+        8016,
+        -288
       ],
-      "id": "587eecf5-1316-42a2-a118-f83d50599bac",
+      "id": "3ff6a65b-a366-4310-94b0-2e25e926876d",
       "name": "Chat",
       "alwaysOutputData": true,
       "credentials": {
@@ -436,10 +408,10 @@
       "type": "n8n-nodes-base.aggregate",
       "typeVersion": 1,
       "position": [
-        3568,
-        448
+        8688,
+        -480
       ],
-      "id": "070cf003-d564-4d51-8e03-0007b7464e65",
+      "id": "4aedf0be-0f11-42df-9506-80167c3f468f",
       "name": "Aggregate"
     },
     {
@@ -459,10 +431,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3120,
-        256
+        8240,
+        -672
       ],
-      "id": "1cf35879-a77b-4d7d-918d-b1707a3c09de",
+      "id": "c962a493-2487-45c4-b0df-6c4fcbcdac0e",
       "name": "LEAD"
     },
     {
@@ -482,10 +454,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3120,
-        448
+        8240,
+        -480
       ],
-      "id": "418603de-19c2-4189-a37e-166de07a0632",
+      "id": "072fd5f6-2469-472e-bb5c-1598eeab2721",
       "name": "RSVP"
     },
     {
@@ -505,10 +477,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3120,
-        640
+        8240,
+        -288
       ],
-      "id": "9e197825-3a22-410f-9b02-026247eeb7dd",
+      "id": "d42098c2-d862-47b4-98da-7bb6e9f97938",
       "name": "PRINCIPAL"
     },
     {
@@ -563,39 +535,11 @@
       "type": "@n8n/n8n-nodes-langchain.informationExtractor",
       "typeVersion": 1.2,
       "position": [
-        6384,
-        448
+        11504,
+        -480
       ],
-      "id": "283136e0-d97f-45f2-ade8-ac60611aeefb",
+      "id": "b57ab57b-aaae-468d-bf2d-6008e0ca9a80",
       "name": "Quality Auditor"
-    },
-    {
-      "parameters": {
-        "model": {
-          "__rl": true,
-          "value": "gpt-4o-mini",
-          "mode": "list",
-          "cachedResultName": "gpt-4o-mini"
-        },
-        "responsesApiEnabled": false,
-        "options": {
-          "temperature": 0.1
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.3,
-      "position": [
-        6464,
-        672
-      ],
-      "id": "a5b166f3-173a-4a07-b833-b376a03f1297",
-      "name": "OpenAI Quality Model",
-      "credentials": {
-        "openAiApi": {
-          "id": "mwtQQFLfYjj6JZcg",
-          "name": "Spectrum - Parque Verde"
-        }
-      }
     },
     {
       "parameters": {
@@ -604,10 +548,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        6736,
-        448
+        11856,
+        -480
       ],
-      "id": "b63d3584-2c41-4754-9749-0b6e457c97e6",
+      "id": "dc9ad8ec-1a97-48b3-9886-971d04daed0f",
       "name": "Build Quality Log"
     },
     {
@@ -622,10 +566,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        6960,
-        448
+        12080,
+        -480
       ],
-      "id": "910fca21-328e-45c6-ba53-d9e1baed5611",
+      "id": "423f0cf6-503f-4c63-95f5-aa5d08a35bf6",
       "name": "Insert quality_logs",
       "credentials": {
         "mongoDb": {
@@ -645,10 +589,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        6160,
-        448
+        11280,
+        -480
       ],
-      "id": "c97b7511-deb5-4074-8b2f-c95e5de70eaa",
+      "id": "609e255c-2563-4c1c-869a-567b61e62d3e",
       "name": "Update Conversation Analysis",
       "credentials": {
         "mongoDb": {
@@ -666,10 +610,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        5936,
-        448
+        11056,
+        -480
       ],
-      "id": "e06da6e3-cc9e-4408-b97b-d1f3d4f1d602",
+      "id": "5877e410-5f23-4b5e-b422-51568daced82",
       "name": "DATA to UPDATE"
     },
     {
@@ -681,10 +625,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        2224,
-        400
+        7344,
+        -532
       ],
-      "id": "4b6f6f38-8359-4b47-9a5b-ec8b0b569687",
+      "id": "3d9defdd-5f43-494d-9c50-624a5f04057b",
       "name": "Find User Credentials",
       "alwaysOutputData": true,
       "credentials": {
@@ -719,10 +663,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        5712,
-        448
+        10832,
+        -480
       ],
-      "id": "f7587206-c2eb-4b14-8b79-c16c532a98d6",
+      "id": "b2de3829-cba5-4ce6-a354-07c230887a40",
       "name": "UPDATE - Proyecto Interes Manychat"
     },
     {
@@ -742,11 +686,55 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        5488,
-        448
+        10608,
+        -480
       ],
-      "id": "a4434c8b-8774-4429-a16b-3cebd233fb6b",
+      "id": "d141e03a-99f6-496b-b069-2ebedf0551e0",
       "name": "Campos Usuario"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-4o-mini",
+        "options": {
+          "temperature": 0.3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        9208,
+        -256
+      ],
+      "id": "cbb74258-2bc5-4c0d-9570-4ecae89813de",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "fl0nmLLeTH299pzW",
+          "name": "Spectrum  Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-4o-mini",
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        11576,
+        -256
+      ],
+      "id": "b265dbc3-d534-4550-ad0d-5f11716a9294",
+      "name": "OpenRouter Chat Model1",
+      "credentials": {
+        "openRouterApi": {
+          "id": "fl0nmLLeTH299pzW",
+          "name": "Spectrum  Bot"
+        }
+      }
     }
   ],
   "connections": {
@@ -790,17 +778,6 @@
           {
             "node": "Aggregate",
             "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenAI Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Information Extractor",
-            "type": "ai_languageModel",
             "index": 0
           }
         ]
@@ -1025,17 +1002,6 @@
         ]
       ]
     },
-    "OpenAI Quality Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Quality Auditor",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Build Quality Log": {
       "main": [
         [
@@ -1112,10 +1078,34 @@
           }
         ]
       ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Quality Auditor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "pinData": {},
   "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp",
     "templateCredsSetupCompleted": true,
     "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"
   }

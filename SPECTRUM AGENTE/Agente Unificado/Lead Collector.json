@@ -55,10 +55,10 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        -4272,
-        1248
+        496,
+        432
       ],
-      "id": "1f2b51cb-741a-4c1f-ab0d-dcb9d1028b85",
+      "id": "41d339f6-a3bf-4de0-ad1b-21a2a252cd97",
       "name": "START"
     },
     {
@@ -150,10 +150,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -4048,
-        1248
+        720,
+        432
       ],
-      "id": "6fafc23f-ccdb-49a7-b7ff-517cc1a0c910",
+      "id": "cb6627d8-a9a1-406f-9856-fa92665f66da",
       "name": "SET CONTEXT"
     },
     {
@@ -167,39 +167,11 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        -3824,
-        1248
+        944,
+        432
       ],
-      "id": "7aec5093-d7f8-41b2-91f4-6ce6982ce762",
+      "id": "18bd3bec-e7e6-407b-8d81-db72e6d34532",
       "name": "Lead Agent"
-    },
-    {
-      "parameters": {
-        "model": {
-          "__rl": true,
-          "value": "gpt-4.1-mini",
-          "mode": "list",
-          "cachedResultName": "gpt-4.1-mini"
-        },
-        "responsesApiEnabled": false,
-        "options": {
-          "temperature": 0.1
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.3,
-      "position": [
-        -3824,
-        1472
-      ],
-      "id": "5622b04d-a44c-4db7-8ba9-01712146cd80",
-      "name": "OpenAI Chat Model",
-      "credentials": {
-        "openAiApi": {
-          "id": "mwtQQFLfYjj6JZcg",
-          "name": "Spectrum - Parque Verde"
-        }
-      }
     },
     {
       "parameters": {
@@ -212,10 +184,10 @@
       "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
       "typeVersion": 1,
       "position": [
-        -3696,
-        1472
+        1088,
+        656
       ],
-      "id": "a6339ab2-88d0-4e55-aede-2726d65d3152",
+      "id": "3c391ab3-45c1-4c3e-bfce-37a826119db3",
       "name": "MongoDB Chat Memory",
       "credentials": {
         "mongoDb": {
@@ -231,10 +203,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -3472,
-        1248
+        1296,
+        432
       ],
-      "id": "b89059ce-4690-475d-803b-0f17e406f460",
+      "id": "811b3811-e1df-4657-b21c-d01a64973a79",
       "name": "Parse Response"
     },
     {
@@ -263,10 +235,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -2352,
-        1152
+        2416,
+        352
       ],
-      "id": "78e96111-da1b-4797-a674-631aaca53c77",
+      "id": "865de055-f5fb-4a36-8f34-8ece471f4e18",
       "name": "GENERAR LEAD CONTACT"
     },
     {
@@ -327,10 +299,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -3024,
-        1248
+        1744,
+        432
       ],
-      "id": "9a392841-5b88-4e88-8b3b-63786a1f30da",
+      "id": "bb229985-d65f-4cce-9569-ab92f5ee6f07",
       "name": "IF DATA COMPLETED"
     },
     {
@@ -386,10 +358,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -3248,
-        1248
+        1520,
+        432
       ],
-      "id": "7de1a548-7a3f-4ad5-bea8-cbae081812d0",
+      "id": "e5c45de3-bdc0-4438-9b18-c39eef4de037",
       "name": "LEAD DATA"
     },
     {
@@ -397,10 +369,10 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        -1904,
-        1344
+        2864,
+        528
       ],
-      "id": "a4786140-246a-4d59-9d63-0b0269798066",
+      "id": "6b28f702-91b0-4ee2-94e4-6cfbcdf85173",
       "name": "No Operation, do nothing"
     },
     {
@@ -420,10 +392,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1680,
-        1248
+        3312,
+        432
       ],
-      "id": "dd3340cd-3661-49d1-b443-63ecbb565ec3",
+      "id": "ebe76099-5c7a-4e21-886e-683b9b4cc182",
       "name": "RESPONSE"
     },
     {
@@ -434,10 +406,10 @@
       "type": "n8n-nodes-base.xml",
       "typeVersion": 1,
       "position": [
-        -2576,
-        1152
+        2192,
+        352
       ],
-      "id": "2800eaeb-32cd-47d7-8896-633a46a2e039",
+      "id": "130f3d30-3b36-4c60-ad3f-f630c2cec515",
       "name": "PARSE BODY"
     },
     {
@@ -457,10 +429,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2800,
-        1152
+        1968,
+        352
       ],
-      "id": "0f4f93d3-ad39-4292-9b55-9b1fd6162ca5",
+      "id": "1a51b800-0e79-4232-962e-e2004c08ff37",
       "name": "Body"
     },
     {
@@ -490,10 +462,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -2240,
-        1152
+        2640,
+        352
       ],
-      "id": "if-crm-ok-lead-001",
+      "id": "269f3e7d-b4de-464c-87b7-a046163e1264",
       "name": "IF CRM OK"
     },
     {
@@ -507,10 +479,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        -1904,
-        1152
+        3088,
+        304
       ],
-      "id": "200b4cf3-edf4-4cfe-95b0-0f9defd497a5",
+      "id": "1a0e990c-0058-4c68-98e5-4729b84cc70d",
       "name": "Update User",
       "credentials": {
         "mongoDb": {
@@ -578,11 +550,32 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2128,
-        1152
+        2864,
+        304
       ],
-      "id": "506136ca-f17e-41e9-880b-3fac8af5bf9e",
+      "id": "034f4c9f-73fd-4134-801d-6e7677f26035",
       "name": "CRM Data"
+    },
+    {
+      "parameters": {
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        912,
+        640
+      ],
+      "id": "7a7c6fed-02bb-4e0f-b1b5-fd3366d3d8cf",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "fl0nmLLeTH299pzW",
+          "name": "Spectrum  Bot"
+        }
+      }
     }
   ],
   "connections": {
@@ -619,17 +612,6 @@
         ]
       ]
     },
-    "OpenAI Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Lead Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "MongoDB Chat Memory": {
       "ai_memory": [
         [
@@ -657,24 +639,6 @@
         [
           {
             "node": "IF CRM OK",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "IF CRM OK": {
-      "main": [
-        [
-          {
-            "node": "CRM Data",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "No Operation, do nothing",
             "type": "main",
             "index": 0
           }
@@ -743,6 +707,24 @@
         ]
       ]
     },
+    "IF CRM OK": {
+      "main": [
+        [
+          {
+            "node": "CRM Data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Update User": {
       "main": [
         [
@@ -764,10 +746,23 @@
           }
         ]
       ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Lead Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "pinData": {},
   "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp",
     "templateCredsSetupCompleted": true,
     "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"
   }
