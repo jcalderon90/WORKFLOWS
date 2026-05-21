@@ -297,7 +297,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "tipo_alerta": "cita",
-            "datos": "={{ \n  {\n    \"proyecto\": $('CONTEXT').item.json.proyecto_nombre,\n    \"nombre_lead\": $('CONTEXT').item.json.nombre,\n    \"telefono_lead\": $('CONTEXT').item.json.telefono,\n    \"correo_lead\": $('CONTEXT').item.json.correo,\n    \"fecha_cita\": $('HTML').item.json.fecha,\n    \"modalidad\": $('HTML').item.json.modalidad\n  }\n}}"
+            "datos": "={{ \n  {\n    \"proyecto\": $('CONTEXT').item.json.proyecto_nombre || 'No identificado',\n    \"nombre_lead\": $('CONTEXT').item.json.nombre || 'No registrado',\n    \"telefono_lead\": $('CONTEXT').item.json.telefono || 'No registrado',\n    \"correo_lead\": $('CONTEXT').item.json.correo || 'No registrado',\n    \"fecha_cita\": $('HTML').item.json.fecha || 'Por confirmar',\n    \"modalidad\": $('HTML').item.json.modalidad || 'Presencial'\n  }\n}}"
           },
           "matchingColumns": [],
           "schema": [
