@@ -303,7 +303,7 @@
             {
               "id": "e7c18ee2-ce70-40e2-9dfd-637ec3a5f5e8",
               "name": "proyecto",
-              "value": "={{\n  $('PARSE BODY').first().json.current_body.custom_fields.canal_ingreso.toLowerCase() !== 'whatsapp'\n    ? ($('Get Account Credentials').first().json.proyecto || '')\n    : ($('Proyecto').isExecuted ? $json.output.proyecto : '')\n}}",
+              "value": "={{\n  $('PARSE BODY').first().json.current_body.custom_fields.canal_ingreso.toLowerCase() !== 'whatsapp'\n    ? ($('Get Account Credentials').first().json.proyecto || '')\n    : (\n        $('PARSE BODY').first().json.current_body.custom_fields.proyecto_interes ||\n        ($('Proyecto').isExecuted ? $json.output.proyecto : '')\n      )\n}}",
               "type": "string"
             },
             {

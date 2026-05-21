@@ -1,5 +1,5 @@
 # 🏢 SPECTRUM VIVIENDA: Agente Unificado — Estado del Proyecto
-> Última actualización: 2026-05-20 (Fix consulta_pendiente + Fix RSVP por proyecto)
+> Última actualización: 2026-05-20 (Fix consulta_pendiente + Fix RSVP por proyecto + Fix proyecto_interes fase 2 WhatsApp)
 
 ## 🎯 Objetivo General
 Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquestador central (*Sof-IA*) delega tareas a sub-workflows especializados (Tools), con persistencia centralizada en MongoDB y sincronización diferida al CRM Dynamics 365 vía SOAP.
@@ -43,7 +43,7 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ✅ **Completado (2026-05-19)**: **Mejora Detector `es_fuera_de_contexto`:** Reescrito completamente el atributo en el extractor `Lenguaje & Asesoria`. Ahora es mucho más específico: solo marca mensajes como "fuera de contexto" si son solicitudes EXPLÍCITAS y ESPECÍFICAS de temas completamente ajenos al sector inmobiliario. Nunca marca saludos, mensajes cortos, confirmaciones simples o temas ambiguos/relacionados con vivienda. Esto reduce falsos positivos y mejora la tasa de aceptación de mensajes legítimos.
 - ✅ **Completado (2026-05-20)**: **Fix `consulta_pendiente` no se guardaba en MongoDB:** Nodo `Prepare Update` usaba `$json.consulta_pendiente_guardar` pero `$json` en ese punto del flujo solo contenía `{ value: boolean }` del nodo `Hay Cambios?`. Corregido a `$('Parse response').item.json.consulta_pendiente_guardar`. Con esto, cuando el usuario da sus datos después de hacer una consulta, el bot retoma y responde la pregunta original correctamente.
 - ✅ **Completado (2026-05-20)**: **Visibilidad de `consulta_pendiente` en LLM:** Agregada línea explícita `Consulta pendiente del lead` al user message del nodo `PRINCIPAL` para mayor prominencia en el contexto del LLM.
-- ⏳ **Pendiente**: **Leads de follow-up WhatsApp sin proyecto definido:** Cuando un lead responde a un follow-up de un proyecto específico desde WhatsApp, `CONTEXT 1` no lee `custom_fields.proyecto_interes` del webhook (solo usa extracción por texto del mensaje). Si el mensaje no menciona el proyecto, el bot queda sin contexto de proyecto. Fix identificado: leer `custom_fields.proyecto_interes` como fallback en `CONTEXT 1` para WhatsApp.
+- ✅ **Completado (2026-05-20)**: **Fix `proyecto_interes` fase 2 WhatsApp:** Leads de WhatsApp que ya traen `custom_fields.proyecto_interes` definido (fase 2 — campañas con proyecto pre-asignado) ahora son detectados correctamente en `CONTEXT 1`. La expresión del campo `proyecto` en el branch de WhatsApp ahora lee primero `$('PARSE BODY').first().json.current_body.custom_fields.proyecto_interes` antes de intentar extraer el proyecto del mensaje. Resultado: la REGLA DE ORO no se dispara para estos leads, el bot no pregunta "¿en cuál proyecto estás interesado?" y entra directamente al flujo de atención con proyecto activo.
 
 ### 2. 👤 Captador de Leads — `Lead Collector.json`
 **Estado: ✅ Activo** | Última mod: 2026-05-13
@@ -137,6 +137,7 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - **Mejora Detector Out-of-Context (2026-05-19):** Completamente reescrito el atributo `es_fuera_de_contexto` en el extractor `Lenguaje & Asesoria`. Ahora diferencia claramente entre solicitudes EXPLÍCITAS y ESPECÍFICAS de temas ajenos al sector vs. saludos, confirmaciones y mensajes ambiguos. Reduce falsos positivos y mejora precisión.
 - **Fix consulta_pendiente (2026-05-20):** Resuelto bug crítico donde el bot recolectaba datos del lead pero no respondía la pregunta original. Causa raíz: `$json` en `Prepare Update` perdía el contexto de `Parse response` al pasar por el nodo `Hay Cambios?`. Corregido con referencia explícita al nodo.
 - **Fix RSVP por proyecto (2026-05-20):** `Find Appointment` ahora filtra por `manychat_id` + `proyecto`. Evita sobreescritura de citas entre proyectos distintos para el mismo usuario.
+- **Fix `proyecto_interes` fase 2 WhatsApp (2026-05-20):** Leads de WhatsApp con `proyecto_interes` ya definido en ManyChat (fase 2) ahora entran directamente al flujo con proyecto activo. El nodo `CONTEXT 1` lee `custom_fields.proyecto_interes` como primera prioridad en el branch de WhatsApp antes de intentar extraer el proyecto del mensaje. La REGLA DE ORO ya no se dispara para estos leads. Auditoría completa confirma que todos los flujos downstream (Lead Collector, KB SEARCH, RSVP, Sync_CRM) funcionan correctamente con este valor pre-seteado.
 
 ---
 
