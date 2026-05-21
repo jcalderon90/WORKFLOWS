@@ -1,338 +1,603 @@
 [
-    {
-        "id": "ppo_medidas_balcon",
-        "proyecto": "PPO",
-        "categoria": "modelos",
-        "tags": ["balcón", "balcon", "medidas", "tamaño", "dimensiones", "cuanto mide", "grande"],
-        "pregunta": "¿Qué medidas tiene el balcón?",
-        "respuesta": "🏡 Todos nuestros modelos cuentan con balcón, pensado para brindarte un espacio adicional de confort y conexión con el exterior.\n\n📐 Las medidas exactas pueden variar según el modelo y se te comparten con total detalle durante la visita, donde además podrás apreciarlo directamente.\n\n📅 Si te parece bien, puedo ayudarte a agendar una visita presencial o virtual con un asesor, para que revises este y otros atributos del apartamento 🤝✨"
-    },
-    {
-        "id": "pp_resumen_general",
-        "proyecto": "PPO",
-        "categoria": "proyecto",
-        "tags": ["resumen", "general", "spectrum", "zona17", "torre", "apartamentos"],
-        "pregunta": "¿Qué es Parque Portales?",
-        "respuesta": "Parque Portales es un proyecto residencial vertical desarrollado por Spectrum, ubicado en Zona 17, Ciudad de Guatemala. Cuenta con 1 torre de 24 niveles habitacionales, 599 apartamentos en total y 5 sótanos. El terreno tiene 5,909.77 m2. Está en construcción con fecha de entrega en diciembre de 2026. Sitio web: parqueportales.com.gt. Teléfono: 4769-5952."
-    },
-    {
-        "id": "pp_ubicacion_direccion",
-        "proyecto": "PPO",
-        "categoria": "ubicacion",
-        "tags": ["ubicacion", "direccion", "zona17", "zona portales", "como llegar"],
-        "pregunta": "¿Dónde está ubicado Parque Portales? ¿Cuál es la dirección?",
-        "respuesta": "Parque Portales está ubicado en Diagonal 3 (Avenida del Ferrocarril) 4-70, Interior 1, Zona 17, Ciudad de Guatemala. Referencia adicional: 3era Avenida 15-02, Zona 17. Se encuentra en la Zona Portales. Ver ubicación en Waze: https://www.waze.com/live-map/directions/centro-comercial-portales-c.c.-portales-zona-17,-guatemala?utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location&to=place.w.176619666.1766327737.584661"
-    },
-    {
-        "id": "pp_ubicacion_accesos",
-        "proyecto": "PPO",
-        "categoria": "ubicacion",
-        "tags": ["accesos", "rutas", "carretera atlantico", "calzada la paz", "puente belice", "zona18"],
-        "pregunta": "¿Cómo se llega a Parque Portales? ¿Qué accesos tiene?",
-        "respuesta": "Parque Portales tiene acceso directo a Carretera al Atlántico (CA-9), conexión con Calzada La Paz, cercanía a Puente Belice y acceso a Ciudad Zona 18. Adicionalmente, por donde está la ruta del tren pasará Puente Belice 2, lo que mejorará aún más la conectividad de la zona."
-    },
-    {
-        "id": "pp_ubicacion_puntos_interes",
-        "proyecto": "PPO",
-        "categoria": "ubicacion",
-        "tags": ["puntos de interes", "walmart", "metronorte", "centro comercial portales", "umg", "blue medical"],
-        "pregunta": "¿Qué hay cerca de Parque Portales?",
-        "respuesta": "Cerca de Parque Portales se encuentran: Walmart (Carretera al Atlántico), Metronorte, Centro Comercial Portales, Universidad Mariano Gálvez (UMG), Blue Medical, Colonia Montano, centros educativos, restaurantes y supermercados."
-    },
-    {
-        "id": "pp_ubicacion_vistas",
-        "proyecto": "PPO",
-        "categoria": "ubicacion",
-        "tags": ["vistas", "volcanes", "zona18", "puente belice", "calzada la paz"],
-        "pregunta": "¿Qué vistas tiene el edificio de Parque Portales?",
-        "respuesta": "Las vistas desde el edificio son: sur → Calzada La Paz y volcanes; norte → Ciudad Zona 18; este → Centro Comercial Portales, bosque y Zona 17; oeste → Ciudad Puente Belice."
-    },
-    {
-        "id": "pp_desarrollador_spectrum",
-        "proyecto": "PPO",
-        "categoria": "desarrollador",
-        "tags": ["spectrum", "desarrollador", "trayectoria", "proyectos", "confianza"],
-        "pregunta": "¿Quién desarrolla Parque Portales? ¿Qué experiencia tiene Spectrum?",
-        "respuesta": "Spectrum es el desarrollador de Parque Portales. Tiene una amplia trayectoria con 16 proyectos en Guatemala distribuidos en 3 líneas: Línea Parque (11 proyectos: Parque 7, 10, 11, 14, 15, San Ángel, Mateo, Mariscal, San Jorge, Vista Verde y Portales), Línea Reserva (3 proyectos: Oakland, Diez, 5ta Avenida) y Línea Parque Boutique (2 proyectos: Polanco y Sotobosque)."
-    },
-    {
-        "id": "pp_desarrollador_avales",
-        "proyecto": "PPO",
-        "categoria": "desarrollador",
-        "tags": ["aval", "fha", "garantia", "bancos", "confianza", "inspeccion"],
-        "pregunta": "¿Parque Portales tiene avales o garantías? ¿Es un proyecto seguro?",
-        "respuesta": "Sí. Parque Portales está avalado por el FHA (Instituto de Fomento de Hipotecas Aseguradas), que realiza inspecciones durante el proceso constructivo para asegurar Obra Civil, Instalaciones y Acabados. Cumple con normativas del Gobierno de Guatemala, cuenta con el aval de las principales entidades bancarias del país, incluye certificado de garantía para las unidades y tiene proceso de atención post-entrega."
-    },
-    {
-        "id": "pp_programa_conviviendo",
-        "proyecto": "PPO",
-        "categoria": "desarrollador",
-        "tags": ["conviviendo", "comunidad", "valor propiedad", "areas comunes"],
-        "pregunta": "¿Qué es Conviviendo by Spectrum?",
-        "respuesta": "Conviviendo by Spectrum es un programa de gestión social que impulsa comunidades organizadas, funcionales y sostenibles. Fortalece la convivencia y el buen uso de áreas comunes, mejora la estabilidad operativa del proyecto y contribuye a que el valor de la propiedad crezca con el tiempo."
-    },
-    {
-        "id": "pp_programa_sostenible",
-        "proyecto": "PPO",
-        "categoria": "desarrollador",
-        "tags": ["sostenible", "medio ambiente", "energia", "agua", "green building"],
-        "pregunta": "¿Parque Portales tiene algún programa de sostenibilidad?",
-        "respuesta": "Sí. Spectrum Sostenible es un programa de gestión responsable de desechos con el objetivo de implementar eficiencia en energía y agua, bienestar ambiental, naturaleza nativa y comunidad mejor conectada. Cuenta con apoyo técnico de Guatemala Green Building Council."
-    },
-    {
-        "id": "pp_modelo_s40",
-        "proyecto": "PPO",
-        "categoria": "modelos",
-        "tags": ["s40", "40m2", "2 habitaciones", "modelo", "precio", "parqueo"],
-        "pregunta": "¿Cómo es el modelo S40? ¿Qué incluye?",
-        "respuesta": "El modelo S40 tiene 40 m2. Incluye 2 dormitorios (1 principal + 1 secundario), 2 baños completos, cocina, sala-comedor, área de lavado y balcón. Viene con 1 parqueo de carro y 1 parqueo de moto. Vista hacia Centro Comercial Portales, bosque y Zona 17 (orientación este). Disponible también en nivel 24. Ideal para parejas o personas solteras."
-    },
-    {
-        "id": "pp_modelo_s52",
-        "proyecto": "PPO",
-        "categoria": "modelos",
-        "tags": ["s52", "52m2", "2 habitaciones", "modelo", "parqueo"],
-        "pregunta": "¿Cómo es el modelo S52? ¿Qué incluye?",
-        "respuesta": "El modelo S52 tiene 52 m2. Incluye 2 dormitorios (1 principal + 1 secundario), 2 baños completos, cocina, sala-comedor, área de lavado y balcón. Viene con 1 parqueo de carro y 1 parqueo de moto. Vista hacia el interior del edificio. Disponible también en nivel 24."
-    },
-    {
-        "id": "pp_modelo_s70",
-        "proyecto": "PPO",
-        "categoria": "modelos",
-        "tags": ["s70", "70m2", "3 habitaciones", "estudio", "walk-in closet", "modelo", "2 parqueos"],
-        "pregunta": "¿Cómo es el modelo S70? ¿Qué incluye?",
-        "respuesta": "El modelo S70 tiene 70 m2. Incluye 3 dormitorios (1 principal con walk-in closet + 2 secundarios), estudio, 2 baños completos, cocina, sala-comedor, área de lavado y balcón. Viene con 2 parqueos de carro. Vistas hacia Ciudad Zona 18 (norte) y Ciudad Puente Belice (oeste). Ideal para familias."
-    },
-    {
-        "id": "pp_modelo_s80",
-        "proyecto": "PPO",
-        "categoria": "modelos",
-        "tags": ["s80", "80m2", "3 habitaciones", "estudio", "walk-in closet", "modelo", "2 parqueos", "mas grande"],
-        "pregunta": "¿Cómo es el modelo S80? ¿Qué incluye?",
-        "respuesta": "El modelo S80 es el más amplio con 80 m2. Incluye 3 dormitorios (1 principal con walk-in closet + 2 secundarios), estudio, 2 baños completos, cocina, sala-comedor, área de lavado y balcón. Viene con 2 parqueos de carro. Vista hacia Calzada La Paz y volcanes (sur). Ideal para familias grandes."
-    },
-    {
-        "id": "pp_modelos_comparacion",
-        "proyecto": "PPO",
-        "categoria": "modelos",
-        "tags": ["comparacion", "modelos", "resumen", "diferencias", "cual elegir"],
-        "pregunta": "¿Cuáles son los modelos disponibles en Parque Portales y sus diferencias?",
-        "respuesta": "Parque Portales tiene 4 modelos: S40 (40 m2, 2 dorm, 2 baños, 1 carro + 1 moto), S52 (52 m2, 2 dorm, 2 baños, 1 carro + 1 moto), S70 (70 m2, 3 dorm + estudio, 2 baños, 2 carros), S80 (80 m2, 3 dorm + estudio, 2 baños, 2 carros). Todos incluyen balcón, cocina, sala-comedor y área de lavado."
-    },
-    {
-        "id": "pp_precio_general",
-        "proyecto": "PPO",
-        "categoria": "precios",
-        "tags": ["precio", "costo", "cuanto cuesta", "valor", "quetzales"],
-        "pregunta": "¿Cuánto cuesta un apartamento en Parque Portales?",
-        "respuesta": "Los precios en Parque Portales van desde Q695,000 hasta Q1,293,000 con IVA incluido, dependiendo del modelo y metraje. El modelo más accesible es el S40 (40 m2) y el más amplio el S80 (80 m2). Para conocer el precio exacto de una unidad específica, contactar al asesor al 4769-5952."
-    },
-    {
-        "id": "pp_precio_reserva",
-        "proyecto": "PPO",
-        "categoria": "precios",
-        "tags": ["reserva", "costo reserva", "apartar", "bloquear", "4000"],
-        "pregunta": "¿Cuánto cuesta reservar un apartamento?",
-        "respuesta": "El costo de reserva es Q4,000. Este monto bloquea la unidad elegida para que no pueda ser ofrecida a otro cliente. Para que sea válida debe estar debidamente firmada por el cliente. La reserva puede hacerse en parqueportales.com.gt o llamando al 4769-5952."
-    },
-    {
-        "id": "pp_financiamiento_general",
-        "proyecto": "PPO",
-        "categoria": "precios",
-        "tags": ["financiamiento", "credito", "banco", "hipoteca", "enganche", "mensualidad"],
-        "pregunta": "¿Con qué bancos se puede financiar un apartamento en Parque Portales?",
-        "respuesta": "Parque Portales tiene respaldo de las principales instituciones financieras de Guatemala: FHA (desde 5% de enganche), BAC Credomatic, GyT Continental, CHN (Crédito Hipotecario Nacional), Banrural y Banco Industrial (estos últimos cinco desde 10% de enganche). El ingreso familiar mínimo requerido es Q10,000."
-    },
-    {
-        "id": "pp_financiamiento_fha",
-        "proyecto": "PPO",
-        "categoria": "precios",
-        "tags": ["fha", "enganche 5%", "primera vivienda", "gobierno", "hipoteca asegurada"],
-        "pregunta": "¿Parque Portales tiene aval FHA? ¿Qué ventaja tiene el FHA?",
-        "respuesta": "Sí, Parque Portales cuenta con aval FHA (Instituto de Fomento de Hipotecas Aseguradas). La principal ventaja es que permite enganches desde el 5%, siendo la opción más accesible para familias. El FHA también realiza inspecciones durante la construcción como garantía adicional de calidad."
-    },
-    {
-        "id": "pp_financiamiento_enganche",
-        "proyecto": "PPO",
-        "categoria": "precios",
-        "tags": ["enganche", "inicial", "porcentaje", "cuanto dar de entrada"],
-        "pregunta": "¿Cuánto es el enganche mínimo para comprar en Parque Portales?",
-        "respuesta": "El enganche mínimo es desde el 5% con financiamiento FHA, o desde el 10% con crédito directo a través de BAC, GyT, CHN, Banrural o Banco Industrial. El ingreso familiar mínimo requerido es Q10,000."
-    },
-    {
-        "id": "pp_proceso_compra_pasos",
-        "proyecto": "PPO",
-        "categoria": "proceso_compra",
-        "tags": ["proceso compra", "pasos", "como comprar", "steps", "compraventa"],
-        "pregunta": "¿Cuál es el proceso para comprar un apartamento en Parque Portales?",
-        "respuesta": "El proceso tiene 5 pasos: 1) Reserva (Q4,000 para bloquear la unidad), 2) Acuerdo de Compraventa (documento que establece condiciones de venta), 3) Formulario de Autorización de Referencias (investigación en InforNet, EQUIFAX, TransUnion, WORLDCHECKONE), 4) Promesa de Compraventa (contrato legal con notario), 5) Escritura Pública de Compraventa (transferencia final de propiedad)."
-    },
-    {
-        "id": "pp_proceso_reserva_como",
-        "proyecto": "PPO",
-        "categoria": "proceso_compra",
-        "tags": ["como reservar", "reserva", "apartar unidad", "proceso reserva"],
-        "pregunta": "¿Cómo puedo realizar una reserva?",
-        "respuesta": "La reserva puede realizarse de dos formas: a través del portal web oficial parqueportales.com.gt, o directamente con un asesor comercial llamando al 4769-5952. El costo es Q4,000 y el formulario debe estar debidamente llenado y firmado por el cliente."
-    },
-    {
-        "id": "pp_proceso_legal_factura",
-        "proyecto": "PPO",
-        "categoria": "proceso_compra",
-        "tags": ["factura", "escritura", "nombre", "legal", "registro propiedad"],
-        "pregunta": "¿Puedo poner el apartamento a nombre de otra persona diferente a la factura?",
-        "respuesta": "No. La factura y las escrituras de compraventa deben estar a nombre de la misma persona. Es un requisito al presentar el testimonio de la escritura pública ante el Registro General de la Propiedad."
-    },
-    {
-        "id": "pp_proceso_legal_ceder",
-        "proyecto": "PPO",
-        "categoria": "proceso_compra",
-        "tags": ["ceder derechos", "vender antes", "transferir", "terceros"],
-        "pregunta": "¿Puedo vender o ceder los derechos de mi apartamento antes de escriturar?",
-        "respuesta": "No. La promesa de compraventa establece claramente que el comprador no puede ceder los derechos a terceras personas antes de escriturar. La misma parte compradora debe formalizar la escritura pública."
-    },
-    {
-        "id": "pp_parqueos_distribucion",
-        "proyecto": "PPO",
-        "categoria": "parqueos",
-        "tags": ["parqueos", "estacionamiento", "carro", "moto", "visitas", "tandem"],
-        "pregunta": "¿Cuántos parqueos tiene Parque Portales?",
-        "respuesta": "El proyecto tiene un total de 1,172 parqueos distribuidos así: 62 de visita, 17 para capacidades especiales, 155 para motos, 199 single y 894 tándem. Los modelos S40 y S52 incluyen 1 parqueo de carro y 1 de moto. Los modelos S70 y S80 incluyen 2 parqueos de carro."
-    },
-    {
-        "id": "pp_amenidades_lista",
-        "proyecto": "PPO",
-        "categoria": "amenidades",
-        "tags": ["amenidades", "que tiene", "servicios", "comodidades", "lista"],
-        "pregunta": "¿Qué amenidades tiene Parque Portales?",
-        "respuesta": "Parque Portales cuenta con: Punto Central (lobby), Estudio Urbano (coworking), Piscina, Zona Infantil (interior), Juegos para niños (exterior), Sala Social, Espacio de Cine, Zona Familiar, Zona Activa (gimnasio), Cocina Abierta, Zona Café, Salones Sociales, Parrillas (nivel 24) y Terraza Mirador (nivel 24). También es pet friendly."
-    },
-    {
-        "id": "pp_amenidades_nivel1",
-        "proyecto": "PPO",
-        "categoria": "amenidades",
-        "tags": ["nivel 1", "planta baja", "lobby", "coworking", "estudio urbano"],
-        "pregunta": "¿Qué amenidades hay en el nivel 1 de Parque Portales?",
-        "respuesta": "En el Nivel 01 (planta baja) se encuentran: Punto Central (área de bienvenida con diseño elegante, primer contacto al ingresar) y Estudio Urbano (espacio de coworking y trabajo profesional para desarrollo de proyectos y conexión con profesionales)."
-    },
-    {
-        "id": "pp_amenidades_nivel3",
-        "proyecto": "PPO",
-        "categoria": "amenidades",
-        "tags": ["nivel 3", "piscina", "gimnasio", "cine", "salon social", "zona familiar", "infantil"],
-        "pregunta": "¿Qué amenidades hay en el nivel 3 de Parque Portales?",
-        "respuesta": "El Nivel 03 tiene las principales amenidades sociales y recreativas: Piscina (al aire libre con área de descanso), Zona Infantil (interior con juguetes interactivos), Juegos para niños (exterior con toboganes y columpios), Sala Social (con TV y billar), Espacio de Cine, Zona Familiar (lounge con sofás y juegos de mesa), Zona Activa (gimnasio), Cocina Abierta, Zona Café y Salones Sociales. Algunos apartamentos de este nivel tienen terraza privada adicional."
-    },
-    {
-        "id": "pp_amenidades_nivel24",
-        "proyecto": "PPO",
-        "categoria": "amenidades",
-        "tags": ["nivel 24", "terraza", "parrillas", "bbq", "mirador", "vistas panoramicas", "ultimo piso"],
-        "pregunta": "¿Qué amenidades hay en el nivel 24 (último piso) de Parque Portales?",
-        "respuesta": "En el Nivel 24 (último piso) se encuentran: Parrillas (área de BBQ al aire libre para reuniones y parrilladas) y Terraza Mirador (terraza con vistas panorámicas, ideal para disfrutar atardeceres y desconectarse)."
-    },
-    {
-        "id": "pp_amenidades_pet_friendly",
-        "proyecto": "PPO",
-        "categoria": "amenidades",
-        "tags": ["pet friendly", "mascotas", "perros", "gatos", "animales"],
-        "pregunta": "¿Parque Portales es pet friendly?",
-        "respuesta": "Sí, Parque Portales es pet friendly. El proyecto cuenta con Pet Park como amenidad para mascotas."
-    },
-    {
-        "id": "pp_seguridad",
-        "proyecto": "PPO",
-        "categoria": "amenidades",
-        "tags": ["seguridad", "vigilancia", "camaras", "accesos", "24/7"],
-        "pregunta": "¿Qué seguridad tiene Parque Portales?",
-        "respuesta": "Parque Portales cuenta con seguridad privada 24/7, accesos controlados de entrada y salida, y cámaras de seguridad en áreas comunes."
-    },
-    {
-        "id": "pp_infraestructura",
-        "proyecto": "PPO",
-        "categoria": "amenidades",
-        "tags": ["elevadores", "gradas", "planta tratamiento", "pozo", "infraestructura"],
-        "pregunta": "¿Qué infraestructura tiene el edificio?",
-        "respuesta": "Parque Portales cuenta con 6 elevadores, 2 juegos de gradas de emergencia, planta de tratamiento de aguas y pozo propio, lo que garantiza continuidad de servicios básicos."
-    },
-    {
-        "id": "pp_mantenimiento_que_es",
-        "proyecto": "PPO",
-        "categoria": "mantenimiento",
-        "tags": ["cuota mantenimiento", "que incluye", "mensualidad", "areas comunes"],
-        "pregunta": "¿Qué es la cuota de mantenimiento y qué cubre?",
-        "respuesta": "La cuota de mantenimiento es un pago mensual para preservar las áreas comunes del edificio. Cubre: energía eléctrica, extracción de basura, agua, teléfono, internet (Tele Entry), fumigación, mantenimiento de planta de tratamiento, extintores, elevadores, limpieza de vidrios, amenidades, pintura, señalización, cerco eléctrico, luminarias, cámaras, sistema de bombeo, piscina, decoración de temporada, asambleas, portal web, seguros (fianzas, incendio, responsabilidad civil) y personal completo (administración, recepción, seguridad, mantenimiento, jardinería, limpieza, monitoreo, auditoría)."
-    },
-    {
-        "id": "pp_mantenimiento_pago",
-        "proyecto": "PPO",
-        "categoria": "mantenimiento",
-        "tags": ["donde pagar", "pago mantenimiento", "servipagos", "portal web"],
-        "pregunta": "¿Dónde puedo pagar la cuota de mantenimiento?",
-        "respuesta": "La cuota de mantenimiento puede pagarse en el portal web parqueportales.com.gt o en SerVipagos."
-    },
-    {
-        "id": "pp_fecha_entrega",
-        "proyecto": "PPO",
-        "categoria": "proyecto",
-        "tags": ["entrega", "cuando", "fecha", "listo", "mudarse"],
-        "pregunta": "¿Cuándo es la fecha de entrega de Parque Portales?",
-        "respuesta": "La fecha estimada de entrega de Parque Portales es diciembre de 2026. Actualmente el proyecto está en construcción: la obra gris ya está terminada y se encuentran en la fase de acabados."
-    },
-    {
-        "id": "pp_estado_construccion",
-        "proyecto": "PPO",
-        "categoria": "proyecto",
-        "tags": ["estado", "construccion", "avance", "obra gris", "acabados"],
-        "pregunta": "¿En qué estado de construcción está Parque Portales?",
-        "respuesta": "Parque Portales está en construcción. La obra gris ya está terminada y actualmente se trabaja en los acabados. Se publican avances de obra periódicamente. La fecha estimada de entrega es diciembre de 2026."
-    },
-    {
-        "id": "pp_torres_niveles",
-        "proyecto": "PPO",
-        "categoria": "proyecto",
-        "tags": ["torres", "cuantas torres", "niveles", "pisos", "altura"],
-        "pregunta": "¿Cuántas torres tiene Parque Portales? ¿Cuántos niveles?",
-        "respuesta": "Parque Portales es un proyecto de una sola torre con 24 niveles habitacionales, 5 sótanos y 2 niveles sobre nivel de calle. En total tiene 599 apartamentos, con 28 unidades por planta típica (niveles 5 al 22)."
-    },
-    {
-        "id": "pp_paso_peatonal",
-        "proyecto": "PPO",
-        "categoria": "ubicacion",
-        "tags": ["paso peatonal", "zona portales", "centro comercial", "conexion peatonal"],
-        "pregunta": "¿Va a haber paso peatonal del proyecto hacia Zona Portales?",
-        "respuesta": "Esta información debe confirmarse con el equipo comercial de Spectrum. Para consultas específicas sobre conectividad peatonal, contactar al 4769-5952 o visitar parqueportales.com.gt."
-    },
-    {
-        "id": "pp_contacto",
-        "proyecto": "PPO",
-        "categoria": "contacto",
-        "tags": ["contacto", "telefono", "whatsapp", "web", "asesor", "comunicacion"],
-        "pregunta": "¿Cómo puedo contactar a Parque Portales o agendar una cita?",
-        "respuesta": "Puedes contactar a Parque Portales por: Teléfono/WhatsApp: 4769-5952, Portal web: parqueportales.com.gt. Para reservar, agendar una cita o resolver cualquier duda, un asesor comercial te atenderá. Ubicación en Waze: https://www.waze.com/live-map/directions/centro-comercial-portales-c.c.-portales-zona-17,-guatemala?utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location&to=place.w.176619666.1766327737.584661"
-    },
-    {
-        "id": "pp_inversion_o_vivienda",
-        "proyecto": "PPO",
-        "categoria": "perfil_cliente",
-        "tags": ["inversion", "vivienda", "para vivir", "para rentar", "primera vivienda"],
-        "pregunta": "¿Parque Portales es para vivir o para inversión?",
-        "respuesta": "Parque Portales es ideal tanto para vivir como para inversión. Está orientado a jóvenes adultos y profesionales. Importante: el proyecto no participa en el programa de Primera Vivienda ni es Vivienda Social. El uso como Airbnb no está permitido según la constitución del proyecto."
-    },
-    {
-        "id": "pp_competencia_diferenciadores",
-        "proyecto": "PPO",
-        "categoria": "proyecto",
-        "tags": ["diferenciadores", "ventajas", "por que elegir", "competencia", "valor agregado"],
-        "pregunta": "¿Por qué elegir Parque Portales sobre otros proyectos?",
-        "respuesta": "Parque Portales destaca por: ubicación estratégica en Zona 17 (cerca del sector sin el tráfico de Zona 18), amenidades superiores (piscina, cine, gimnasio, coworking, pet park, parrillas, terraza mirador), muy buenos acabados, respaldo corporativo de Spectrum (16 proyectos de trayectoria), aval FHA, 6 elevadores, planta de tratamiento y pozo propio. Proyectos de referencia en la zona: Lares, Irimani, Unnido."
-    },
-    {
-        "id": "pp_sala_ventas",
-        "proyecto": "PPO",
-        "categoria": "ubicacion",
-        "tags": ["sala de ventas", "donde comprar", "visitar", "ubicacion ventas", "centro comercial portales", "nivel 3"],
-        "pregunta": "¿Dónde está la sala de ventas de Parque Portales?",
-        "respuesta": "La sala de ventas está en C.C. Portales, Nivel 3, Km. 4.5 Carretera al Atlántico 3-20, Zona 17, Guatemala. Video de cómo llegar: https://www.instagram.com/reel/DV3mNJSDfHk/?igsh=MTFzYnJ2dmo2OHZ0OA=="
-    }
+  {
+    "id": "ppo_medidas_balcon",
+    "proyecto": "PPO",
+    "categoria": "modelos",
+    "tags": [
+      "balcón",
+      "balcon",
+      "medidas",
+      "tamaño",
+      "dimensiones",
+      "cuanto mide",
+      "grande"
+    ],
+    "pregunta": "¿Qué medidas tiene el balcón?",
+    "respuesta": "🏡 Todos nuestros modelos cuentan con balcón, pensado para brindarte un espacio adicional de confort y conexión con el exterior.\n\n📐 Las medidas exactas pueden variar según el modelo y se te comparten con total detalle durante la visita, donde además podrás apreciarlo directamente.\n\n📅 Si te parece bien, puedo ayudarte a agendar una visita presencial o virtual con un asesor, para que revises este y otros atributos del apartamento 🤝✨"
+  },
+  {
+    "id": "pp_resumen_general",
+    "proyecto": "PPO",
+    "categoria": "proyecto",
+    "tags": [
+      "resumen",
+      "general",
+      "spectrum",
+      "zona17",
+      "torre",
+      "apartamentos"
+    ],
+    "pregunta": "¿Qué es Parque Portales?",
+    "respuesta": "Parque Portales es un proyecto residencial vertical desarrollado por Spectrum, ubicado en Zona 17, Ciudad de Guatemala. Cuenta con 1 torre de 24 niveles habitacionales, 599 apartamentos en total y 5 sótanos. El terreno tiene 5,909.77 m2. Está en construcción con fecha de entrega en diciembre de 2026.\n\n⭐ ENTREGA ESTE AÑO — La obra gris está terminada y el proyecto se encuentra en fase de acabados. Ideal para quienes buscan mudarse pronto."
+  },
+  {
+    "id": "pp_ubicacion_direccion",
+    "proyecto": "PPO",
+    "categoria": "ubicacion",
+    "tags": [
+      "ubicacion",
+      "direccion",
+      "zona17",
+      "zona portales",
+      "como llegar"
+    ],
+    "pregunta": "¿Dónde está ubicado Parque Portales? ¿Cuál es la dirección?",
+    "respuesta": "Parque Portales está ubicado en Diagonal 3 (Avenida del Ferrocarril) 4-70, Interior 1, Zona 17, Ciudad de Guatemala. Referencia adicional: 3era Avenida 15-02, Zona 17. Se encuentra en la Zona Portales. Ver ubicación en Waze: https://www.waze.com/live-map/directions/centro-comercial-portales-c.c.-portales-zona-17,-guatemala?utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location&to=place.w.176619666.1766327737.584661"
+  },
+  {
+    "id": "pp_ubicacion_accesos",
+    "proyecto": "PPO",
+    "categoria": "ubicacion",
+    "tags": [
+      "accesos",
+      "rutas",
+      "carretera atlantico",
+      "calzada la paz",
+      "puente belice",
+      "zona18"
+    ],
+    "pregunta": "¿Cómo se llega a Parque Portales? ¿Qué accesos tiene?",
+    "respuesta": "Parque Portales tiene acceso directo a Carretera al Atlántico (CA-9), conexión con Calzada La Paz, cercanía a Puente Belice y acceso a Ciudad Zona 18. Adicionalmente, por donde está la ruta del tren pasará Puente Belice 2, lo que mejorará aún más la conectividad de la zona."
+  },
+  {
+    "id": "pp_ubicacion_puntos_interes",
+    "proyecto": "PPO",
+    "categoria": "ubicacion",
+    "tags": [
+      "puntos de interes",
+      "walmart",
+      "metronorte",
+      "centro comercial portales",
+      "umg",
+      "blue medical"
+    ],
+    "pregunta": "¿Qué hay cerca de Parque Portales?",
+    "respuesta": "Cerca de Parque Portales se encuentran: Walmart (Carretera al Atlántico), Metronorte, Centro Comercial Portales, Universidad Mariano Gálvez (UMG), Blue Medical, Colonia Montano, centros educativos, restaurantes y supermercados."
+  },
+  {
+    "id": "pp_ubicacion_vistas",
+    "proyecto": "PPO",
+    "categoria": "ubicacion",
+    "tags": [
+      "vistas",
+      "volcanes",
+      "zona18",
+      "puente belice",
+      "calzada la paz"
+    ],
+    "pregunta": "¿Qué vistas tiene el edificio de Parque Portales?",
+    "respuesta": "Las vistas desde el edificio son: sur → Calzada La Paz y volcanes; norte → Ciudad Zona 18; este → Centro Comercial Portales, bosque y Zona 17; oeste → Ciudad Puente Belice."
+  },
+  {
+    "id": "pp_desarrollador_spectrum",
+    "proyecto": "PPO",
+    "categoria": "desarrollador",
+    "tags": [
+      "spectrum",
+      "desarrollador",
+      "trayectoria",
+      "proyectos",
+      "confianza"
+    ],
+    "pregunta": "¿Quién desarrolla Parque Portales? ¿Qué experiencia tiene Spectrum?",
+    "respuesta": "Spectrum es el desarrollador de Parque Portales. Tiene una amplia trayectoria con 16 proyectos en Guatemala distribuidos en 3 líneas: Línea Parque (11 proyectos: Parque 7, 10, 11, 14, 15, San Ángel, Mateo, Mariscal, San Jorge, Vista Verde y Portales), Línea Reserva (3 proyectos: Oakland, Diez, 5ta Avenida) y Línea Parque Boutique (2 proyectos: Polanco y Sotobosque)."
+  },
+  {
+    "id": "pp_desarrollador_avales",
+    "proyecto": "PPO",
+    "categoria": "desarrollador",
+    "tags": [
+      "aval",
+      "fha",
+      "garantia",
+      "bancos",
+      "confianza",
+      "inspeccion"
+    ],
+    "pregunta": "¿Parque Portales tiene avales o garantías? ¿Es un proyecto seguro?",
+    "respuesta": "Sí. Parque Portales está avalado por el FHA (Instituto de Fomento de Hipotecas Aseguradas), que realiza inspecciones durante el proceso constructivo para asegurar Obra Civil, Instalaciones y Acabados. Cumple con normativas del Gobierno de Guatemala, cuenta con el aval de las principales entidades bancarias del país, incluye certificado de garantía para las unidades y tiene proceso de atención post-entrega."
+  },
+  {
+    "id": "pp_programa_conviviendo",
+    "proyecto": "PPO",
+    "categoria": "desarrollador",
+    "tags": [
+      "conviviendo",
+      "comunidad",
+      "valor propiedad",
+      "areas comunes"
+    ],
+    "pregunta": "¿Qué es Conviviendo by Spectrum?",
+    "respuesta": "Conviviendo by Spectrum es un programa de gestión social que impulsa comunidades organizadas, funcionales y sostenibles. Fortalece la convivencia y el buen uso de áreas comunes, mejora la estabilidad operativa del proyecto y contribuye a que el valor de la propiedad crezca con el tiempo."
+  },
+  {
+    "id": "pp_programa_sostenible",
+    "proyecto": "PPO",
+    "categoria": "desarrollador",
+    "tags": [
+      "sostenible",
+      "medio ambiente",
+      "energia",
+      "agua",
+      "green building"
+    ],
+    "pregunta": "¿Parque Portales tiene algún programa de sostenibilidad?",
+    "respuesta": "Sí. Spectrum Sostenible es un programa de gestión responsable de desechos con el objetivo de implementar eficiencia en energía y agua, bienestar ambiental, naturaleza nativa y comunidad mejor conectada. Cuenta con apoyo técnico de Guatemala Green Building Council."
+  },
+  {
+    "id": "pp_modelo_s40",
+    "proyecto": "PPO",
+    "categoria": "modelos",
+    "tags": [
+      "s40",
+      "40m2",
+      "2 habitaciones",
+      "modelo",
+      "precio",
+      "parqueo"
+    ],
+    "pregunta": "¿Cómo es el modelo S40? ¿Qué incluye?",
+    "respuesta": "El modelo S40 tiene 40 m2. Incluye 2 dormitorios (1 principal + 1 secundario), 2 baños completos, cocina, sala-comedor, área de lavado y balcón. Viene con 1 parqueo de carro y 1 parqueo de moto. Vista hacia Centro Comercial Portales, bosque y Zona 17 (orientación este). Disponible también en nivel 24. Ideal para parejas o personas solteras."
+  },
+  {
+    "id": "pp_modelo_s52",
+    "proyecto": "PPO",
+    "categoria": "modelos",
+    "tags": [
+      "s52",
+      "52m2",
+      "2 habitaciones",
+      "modelo",
+      "parqueo"
+    ],
+    "pregunta": "¿Cómo es el modelo S52? ¿Qué incluye?",
+    "respuesta": "El modelo S52 tiene 52 m2. Incluye 2 dormitorios (1 principal + 1 secundario), 2 baños completos, cocina, sala-comedor, área de lavado y balcón. Viene con 1 parqueo de carro y 1 parqueo de moto. Vista hacia el interior del edificio. Disponible también en nivel 24."
+  },
+  {
+    "id": "pp_modelo_s70",
+    "proyecto": "PPO",
+    "categoria": "modelos",
+    "tags": [
+      "s70",
+      "70m2",
+      "3 habitaciones",
+      "estudio",
+      "walk-in closet",
+      "modelo",
+      "2 parqueos"
+    ],
+    "pregunta": "¿Cómo es el modelo S70? ¿Qué incluye?",
+    "respuesta": "El modelo S70 tiene 70 m2. Incluye 3 dormitorios (1 principal con walk-in closet + 2 secundarios), estudio, 2 baños completos, cocina, sala-comedor, área de lavado y balcón. Viene con 2 parqueos de carro. Vistas hacia Ciudad Zona 18 (norte) y Ciudad Puente Belice (oeste). Ideal para familias."
+  },
+  {
+    "id": "pp_modelo_s80",
+    "proyecto": "PPO",
+    "categoria": "modelos",
+    "tags": [
+      "s80",
+      "80m2",
+      "3 habitaciones",
+      "estudio",
+      "walk-in closet",
+      "modelo",
+      "2 parqueos",
+      "mas grande"
+    ],
+    "pregunta": "¿Cómo es el modelo S80? ¿Qué incluye?",
+    "respuesta": "El modelo S80 es el más amplio con 80 m2. Incluye 3 dormitorios (1 principal con walk-in closet + 2 secundarios), estudio, 2 baños completos, cocina, sala-comedor, área de lavado y balcón. Viene con 2 parqueos de carro. Vista hacia Calzada La Paz y volcanes (sur). Ideal para familias grandes."
+  },
+  {
+    "id": "pp_modelos_comparacion",
+    "proyecto": "PPO",
+    "categoria": "modelos",
+    "tags": [
+      "comparacion",
+      "modelos",
+      "resumen",
+      "diferencias",
+      "cual elegir"
+    ],
+    "pregunta": "¿Cuáles son los modelos disponibles en Parque Portales y sus diferencias?",
+    "respuesta": "Parque Portales tiene 4 modelos: S40 (40 m2, 2 dorm, 2 baños, 1 carro + 1 moto), S52 (52 m2, 2 dorm, 2 baños, 1 carro + 1 moto), S70 (70 m2, 3 dorm + estudio, 2 baños, 2 carros), S80 (80 m2, 3 dorm + estudio, 2 baños, 2 carros). Todos incluyen balcón, cocina, sala-comedor y área de lavado."
+  },
+  {
+    "id": "pp_precio_general",
+    "proyecto": "PPO",
+    "categoria": "precios",
+    "tags": [
+      "precio",
+      "costo",
+      "cuanto cuesta",
+      "valor",
+      "quetzales"
+    ],
+    "pregunta": "¿Cuánto cuesta un apartamento en Parque Portales?",
+    "respuesta": "Los precios en Parque Portales van desde Q695,000 hasta Q1,293,000 con IVA incluido, dependiendo del modelo y metraje. El modelo más accesible es el S40 (40 m2) y el más amplio el S80 (80 m2). Para conocer el precio exacto de una unidad específica, contactar al asesor al 4769-5952."
+  },
+  {
+    "id": "pp_precio_reserva",
+    "proyecto": "PPO",
+    "categoria": "precios",
+    "tags": [
+      "reserva",
+      "costo reserva",
+      "apartar",
+      "bloquear",
+      "4000"
+    ],
+    "pregunta": "¿Cuánto cuesta reservar un apartamento?",
+    "respuesta": "El costo de reserva es Q4,000. Este monto bloquea la unidad elegida para que no pueda ser ofrecida a otro cliente. Para que sea válida debe estar debidamente firmada por el cliente. La reserva puede hacerse en parqueportales.com.gt o llamando al 4769-5952."
+  },
+  {
+    "id": "pp_financiamiento_general",
+    "proyecto": "PPO",
+    "categoria": "precios",
+    "tags": [
+      "financiamiento",
+      "credito",
+      "banco",
+      "hipoteca",
+      "enganche",
+      "mensualidad"
+    ],
+    "pregunta": "¿Con qué bancos se puede financiar un apartamento en Parque Portales?",
+    "respuesta": "Parque Portales tiene respaldo de las principales instituciones financieras de Guatemala: FHA (desde 5% de enganche), BAC Credomatic, GyT Continental, CHN (Crédito Hipotecario Nacional), Banrural y Banco Industrial (estos últimos cinco desde 10% de enganche). El ingreso familiar mínimo requerido es Q10,000."
+  },
+  {
+    "id": "pp_financiamiento_fha",
+    "proyecto": "PPO",
+    "categoria": "precios",
+    "tags": [
+      "fha",
+      "enganche 5%",
+      "primera vivienda",
+      "gobierno",
+      "hipoteca asegurada"
+    ],
+    "pregunta": "¿Parque Portales tiene aval FHA? ¿Qué ventaja tiene el FHA?",
+    "respuesta": "Sí, Parque Portales cuenta con aval FHA (Instituto de Fomento de Hipotecas Aseguradas). La principal ventaja es que permite enganches desde el 5%, siendo la opción más accesible para familias. El FHA también realiza inspecciones durante la construcción como garantía adicional de calidad."
+  },
+  {
+    "id": "pp_financiamiento_enganche",
+    "proyecto": "PPO",
+    "categoria": "precios",
+    "tags": [
+      "enganche",
+      "inicial",
+      "porcentaje",
+      "cuanto dar de entrada"
+    ],
+    "pregunta": "¿Cuánto es el enganche mínimo para comprar en Parque Portales?",
+    "respuesta": "El enganche mínimo es desde el 5% con financiamiento FHA, o desde el 10% con crédito directo a través de BAC, GyT, CHN, Banrural o Banco Industrial. El ingreso familiar mínimo requerido es Q10,000."
+  },
+  {
+    "id": "pp_proceso_compra_pasos",
+    "proyecto": "PPO",
+    "categoria": "proceso_compra",
+    "tags": [
+      "proceso compra",
+      "pasos",
+      "como comprar",
+      "steps",
+      "compraventa"
+    ],
+    "pregunta": "¿Cuál es el proceso para comprar un apartamento en Parque Portales?",
+    "respuesta": "El proceso tiene 5 pasos: 1) Reserva (Q4,000 para bloquear la unidad), 2) Acuerdo de Compraventa (documento que establece condiciones de venta), 3) Formulario de Autorización de Referencias (investigación en InforNet, EQUIFAX, TransUnion, WORLDCHECKONE), 4) Promesa de Compraventa (contrato legal con notario), 5) Escritura Pública de Compraventa (transferencia final de propiedad)."
+  },
+  {
+    "id": "pp_proceso_reserva_como",
+    "proyecto": "PPO",
+    "categoria": "proceso_compra",
+    "tags": [
+      "como reservar",
+      "reserva",
+      "apartar unidad",
+      "proceso reserva"
+    ],
+    "pregunta": "¿Cómo puedo realizar una reserva?",
+    "respuesta": "La reserva puede realizarse de dos formas: a través del portal web oficial parqueportales.com.gt, o directamente con un asesor comercial llamando al 4769-5952. El costo es Q4,000 y el formulario debe estar debidamente llenado y firmado por el cliente."
+  },
+  {
+    "id": "pp_proceso_legal_factura",
+    "proyecto": "PPO",
+    "categoria": "proceso_compra",
+    "tags": [
+      "factura",
+      "escritura",
+      "nombre",
+      "legal",
+      "registro propiedad"
+    ],
+    "pregunta": "¿Puedo poner el apartamento a nombre de otra persona diferente a la factura?",
+    "respuesta": "No. La factura y las escrituras de compraventa deben estar a nombre de la misma persona. Es un requisito al presentar el testimonio de la escritura pública ante el Registro General de la Propiedad."
+  },
+  {
+    "id": "pp_proceso_legal_ceder",
+    "proyecto": "PPO",
+    "categoria": "proceso_compra",
+    "tags": [
+      "ceder derechos",
+      "vender antes",
+      "transferir",
+      "terceros"
+    ],
+    "pregunta": "¿Puedo vender o ceder los derechos de mi apartamento antes de escriturar?",
+    "respuesta": "No. La promesa de compraventa establece claramente que el comprador no puede ceder los derechos a terceras personas antes de escriturar. La misma parte compradora debe formalizar la escritura pública."
+  },
+  {
+    "id": "pp_parqueos_distribucion",
+    "proyecto": "PPO",
+    "categoria": "parqueos",
+    "tags": [
+      "parqueos",
+      "estacionamiento",
+      "carro",
+      "moto",
+      "visitas",
+      "tandem"
+    ],
+    "pregunta": "¿Cuántos parqueos tiene Parque Portales?",
+    "respuesta": "El proyecto tiene un total de 1,172 parqueos distribuidos así: 62 de visita, 17 para capacidades especiales, 155 para motos, 199 single y 894 tándem. Los modelos S40 y S52 incluyen 1 parqueo de carro y 1 de moto. Los modelos S70 y S80 incluyen 2 parqueos de carro."
+  },
+  {
+    "id": "pp_amenidades_lista",
+    "proyecto": "PPO",
+    "categoria": "amenidades",
+    "tags": [
+      "amenidades",
+      "que tiene",
+      "servicios",
+      "comodidades",
+      "lista"
+    ],
+    "pregunta": "¿Qué amenidades tiene Parque Portales?",
+    "respuesta": "Parque Portales cuenta con: Punto Central (lobby), Estudio Urbano (coworking), Piscina, Zona Infantil (interior), Juegos para niños (exterior), Sala Social, Espacio de Cine, Zona Familiar, Zona Activa (gimnasio), Cocina Abierta, Zona Café, Salones Sociales, Parrillas (nivel 24) y Terraza Mirador (nivel 24). También es pet friendly."
+  },
+  {
+    "id": "pp_amenidades_nivel1",
+    "proyecto": "PPO",
+    "categoria": "amenidades",
+    "tags": [
+      "nivel 1",
+      "planta baja",
+      "lobby",
+      "coworking",
+      "estudio urbano"
+    ],
+    "pregunta": "¿Qué amenidades hay en el nivel 1 de Parque Portales?",
+    "respuesta": "En el Nivel 01 (planta baja) se encuentran: Punto Central (área de bienvenida con diseño elegante, primer contacto al ingresar) y Estudio Urbano (espacio de coworking y trabajo profesional para desarrollo de proyectos y conexión con profesionales)."
+  },
+  {
+    "id": "pp_amenidades_nivel3",
+    "proyecto": "PPO",
+    "categoria": "amenidades",
+    "tags": [
+      "nivel 3",
+      "piscina",
+      "gimnasio",
+      "cine",
+      "salon social",
+      "zona familiar",
+      "infantil"
+    ],
+    "pregunta": "¿Qué amenidades hay en el nivel 3 de Parque Portales?",
+    "respuesta": "El Nivel 03 tiene las principales amenidades sociales y recreativas: Piscina (al aire libre con área de descanso), Zona Infantil (interior con juguetes interactivos), Juegos para niños (exterior con toboganes y columpios), Sala Social (con TV y billar), Espacio de Cine, Zona Familiar (lounge con sofás y juegos de mesa), Zona Activa (gimnasio), Cocina Abierta, Zona Café y Salones Sociales. Algunos apartamentos de este nivel tienen terraza privada adicional."
+  },
+  {
+    "id": "pp_amenidades_nivel24",
+    "proyecto": "PPO",
+    "categoria": "amenidades",
+    "tags": [
+      "nivel 24",
+      "terraza",
+      "parrillas",
+      "bbq",
+      "mirador",
+      "vistas panoramicas",
+      "ultimo piso"
+    ],
+    "pregunta": "¿Qué amenidades hay en el nivel 24 (último piso) de Parque Portales?",
+    "respuesta": "En el Nivel 24 (último piso) se encuentran: Parrillas (área de BBQ al aire libre para reuniones y parrilladas) y Terraza Mirador (terraza con vistas panorámicas, ideal para disfrutar atardeceres y desconectarse)."
+  },
+  {
+    "id": "pp_amenidades_pet_friendly",
+    "proyecto": "PPO",
+    "categoria": "amenidades",
+    "tags": [
+      "pet friendly",
+      "mascotas",
+      "perros",
+      "gatos",
+      "animales"
+    ],
+    "pregunta": "¿Parque Portales es pet friendly?",
+    "respuesta": "Sí, Parque Portales es pet friendly. El proyecto cuenta con Pet Park como amenidad para mascotas."
+  },
+  {
+    "id": "pp_seguridad",
+    "proyecto": "PPO",
+    "categoria": "amenidades",
+    "tags": [
+      "seguridad",
+      "vigilancia",
+      "camaras",
+      "accesos",
+      "24/7"
+    ],
+    "pregunta": "¿Qué seguridad tiene Parque Portales?",
+    "respuesta": "Parque Portales cuenta con seguridad privada 24/7, accesos controlados de entrada y salida, y cámaras de seguridad en áreas comunes."
+  },
+  {
+    "id": "pp_infraestructura",
+    "proyecto": "PPO",
+    "categoria": "amenidades",
+    "tags": [
+      "elevadores",
+      "gradas",
+      "planta tratamiento",
+      "pozo",
+      "infraestructura"
+    ],
+    "pregunta": "¿Qué infraestructura tiene el edificio?",
+    "respuesta": "Parque Portales cuenta con 6 elevadores, 2 juegos de gradas de emergencia, planta de tratamiento de aguas y pozo propio, lo que garantiza continuidad de servicios básicos."
+  },
+  {
+    "id": "pp_mantenimiento_que_es",
+    "proyecto": "PPO",
+    "categoria": "mantenimiento",
+    "tags": [
+      "cuota mantenimiento",
+      "que incluye",
+      "mensualidad",
+      "areas comunes"
+    ],
+    "pregunta": "¿Qué es la cuota de mantenimiento y qué cubre?",
+    "respuesta": "La cuota de mantenimiento es un pago mensual para preservar las áreas comunes del edificio. Cubre: energía eléctrica, extracción de basura, agua, teléfono, internet (Tele Entry), fumigación, mantenimiento de planta de tratamiento, extintores, elevadores, limpieza de vidrios, amenidades, pintura, señalización, cerco eléctrico, luminarias, cámaras, sistema de bombeo, piscina, decoración de temporada, asambleas, portal web, seguros (fianzas, incendio, responsabilidad civil) y personal completo (administración, recepción, seguridad, mantenimiento, jardinería, limpieza, monitoreo, auditoría)."
+  },
+  {
+    "id": "pp_mantenimiento_pago",
+    "proyecto": "PPO",
+    "categoria": "mantenimiento",
+    "tags": [
+      "donde pagar",
+      "pago mantenimiento",
+      "servipagos",
+      "portal web"
+    ],
+    "pregunta": "¿Dónde puedo pagar la cuota de mantenimiento?",
+    "respuesta": "La cuota de mantenimiento puede pagarse en el portal web parqueportales.com.gt o en SerVipagos."
+  },
+  {
+    "id": "pp_fecha_entrega",
+    "proyecto": "PPO",
+    "categoria": "proyecto",
+    "tags": [
+      "entrega",
+      "cuando",
+      "fecha",
+      "listo",
+      "mudarse"
+    ],
+    "pregunta": "¿Cuándo es la fecha de entrega de Parque Portales?",
+    "respuesta": "La fecha estimada de entrega de Parque Portales es diciembre de 2026. Actualmente el proyecto está en construcción: la obra gris ya está terminada y se encuentran en la fase de acabados."
+  },
+  {
+    "id": "pp_estado_construccion",
+    "proyecto": "PPO",
+    "categoria": "proyecto",
+    "tags": [
+      "estado",
+      "construccion",
+      "avance",
+      "obra gris",
+      "acabados"
+    ],
+    "pregunta": "¿En qué estado de construcción está Parque Portales?",
+    "respuesta": "Parque Portales está en construcción. La obra gris ya está terminada y actualmente se trabaja en los acabados. Se publican avances de obra periódicamente. La fecha estimada de entrega es diciembre de 2026."
+  },
+  {
+    "id": "pp_torres_niveles",
+    "proyecto": "PPO",
+    "categoria": "proyecto",
+    "tags": [
+      "torres",
+      "cuantas torres",
+      "niveles",
+      "pisos",
+      "altura"
+    ],
+    "pregunta": "¿Cuántas torres tiene Parque Portales? ¿Cuántos niveles?",
+    "respuesta": "Parque Portales es un proyecto de una sola torre con 24 niveles habitacionales, 5 sótanos y 2 niveles sobre nivel de calle. En total tiene 599 apartamentos, con 28 unidades por planta típica (niveles 5 al 22)."
+  },
+  {
+    "id": "pp_paso_peatonal",
+    "proyecto": "PPO",
+    "categoria": "ubicacion",
+    "tags": [
+      "paso peatonal",
+      "zona portales",
+      "centro comercial",
+      "conexion peatonal"
+    ],
+    "pregunta": "¿Va a haber paso peatonal del proyecto hacia Zona Portales?",
+    "respuesta": "Esta información debe confirmarse con el equipo comercial de Spectrum. Para consultas específicas sobre conectividad peatonal, contactar al 4769-5952 o visitar parqueportales.com.gt."
+  },
+  {
+    "id": "pp_contacto",
+    "proyecto": "PPO",
+    "categoria": "contacto",
+    "tags": [
+      "contacto",
+      "telefono",
+      "whatsapp",
+      "web",
+      "asesor",
+      "comunicacion"
+    ],
+    "pregunta": "¿Cómo puedo contactar a Parque Portales o agendar una cita?",
+    "respuesta": "Puedes contactar a Parque Portales por: Teléfono/WhatsApp: 4769-5952, Portal web: parqueportales.com.gt. Para reservar, agendar una cita o resolver cualquier duda, un asesor comercial te atenderá. Ubicación en Waze: https://www.waze.com/live-map/directions/centro-comercial-portales-c.c.-portales-zona-17,-guatemala?utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location&to=place.w.176619666.1766327737.584661"
+  },
+  {
+    "id": "pp_inversion_o_vivienda",
+    "proyecto": "PPO",
+    "categoria": "perfil_cliente",
+    "tags": [
+      "inversion",
+      "vivienda",
+      "para vivir",
+      "para rentar",
+      "primera vivienda"
+    ],
+    "pregunta": "¿Parque Portales es para vivir o para inversión?",
+    "respuesta": "Parque Portales es ideal tanto para vivir como para inversión. Está orientado a jóvenes adultos y profesionales. Importante: el proyecto no participa en el programa de Primera Vivienda ni es Vivienda Social. El uso como Airbnb no está permitido según la constitución del proyecto."
+  },
+  {
+    "id": "pp_competencia_diferenciadores",
+    "proyecto": "PPO",
+    "categoria": "proyecto",
+    "tags": [
+      "diferenciadores",
+      "ventajas",
+      "por que elegir",
+      "competencia",
+      "valor agregado"
+    ],
+    "pregunta": "¿Por qué elegir Parque Portales sobre otros proyectos?",
+    "respuesta": "⭐ Entrega Diciembre 2026 — obra gris terminada, en fase de acabados. Es el proyecto de mayor escala de Spectrum con entrega este año.\n\nParque Portales además destaca por: ubicación estratégica en Zona 17 (cerca del sector sin el tráfico de Zona 18), amenidades superiores (piscina, cine, gimnasio, coworking, pet park, parrillas, terraza mirador), muy buenos acabados, respaldo corporativo de Spectrum (16 proyectos de trayectoria), aval FHA — enganche desde el 5%, 6 elevadores, planta de tratamiento y pozo propio."
+  },
+  {
+    "id": "pp_sala_ventas",
+    "proyecto": "PPO",
+    "categoria": "ubicacion",
+    "tags": [
+      "sala de ventas",
+      "donde comprar",
+      "visitar",
+      "ubicacion ventas",
+      "centro comercial portales",
+      "nivel 3"
+    ],
+    "pregunta": "¿Dónde está la sala de ventas de Parque Portales?",
+    "respuesta": "La sala de ventas está en C.C. Portales, Nivel 3, Km. 4.5 Carretera al Atlántico 3-20, Zona 17, Guatemala. Video de cómo llegar: https://www.instagram.com/reel/DV3mNJSDfHk/?igsh=MTFzYnJ2dmo2OHZ0OA=="
+  }
 ]

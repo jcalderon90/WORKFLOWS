@@ -1,5 +1,5 @@
 # 🏢 SPECTRUM VIVIENDA: Agente Unificado — Estado del Proyecto
-> Última actualización: 2026-05-20 (Fix consulta_pendiente + Fix RSVP por proyecto + Fix proyecto_interes fase 2 WhatsApp)
+> Última actualización: 2026-05-21 (SerViPagos condicional + Urgencia Entrega 2026 + Material Visual siempre disponible)
 
 ## 🎯 Objetivo General
 Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquestador central (*Sof-IA*) delega tareas a sub-workflows especializados (Tools), con persistencia centralizada en MongoDB y sincronización diferida al CRM Dynamics 365 vía SOAP.
@@ -23,7 +23,7 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 ## 📦 Módulos (Workflows)
 
 ### 1. 🧠 Orquestador Central — `AGENT PRINCIPAL.json`
-**Estado: ✅ Activo — Robustez de Expresiones + Mejora Inteligencia de Context** | Última mod: 2026-05-19
+**Estado: ✅ Activo — Conversión + Material Visual + Urgencia Entrega 2026** | Última mod: 2026-05-21
 
 - ✅ **Completado**: Sincronización paramétrica con servidor (expresiones =URL y variables de input).
 - ✅ **Completado**: Búsqueda de usuarios segmentada por `manychat_id` + `page_id`.
@@ -44,6 +44,8 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ✅ **Completado (2026-05-20)**: **Fix `consulta_pendiente` no se guardaba en MongoDB:** Nodo `Prepare Update` usaba `$json.consulta_pendiente_guardar` pero `$json` en ese punto del flujo solo contenía `{ value: boolean }` del nodo `Hay Cambios?`. Corregido a `$('Parse response').item.json.consulta_pendiente_guardar`. Con esto, cuando el usuario da sus datos después de hacer una consulta, el bot retoma y responde la pregunta original correctamente.
 - ✅ **Completado (2026-05-20)**: **Visibilidad de `consulta_pendiente` en LLM:** Agregada línea explícita `Consulta pendiente del lead` al user message del nodo `PRINCIPAL` para mayor prominencia en el contexto del LLM.
 - ✅ **Completado (2026-05-20)**: **Fix `proyecto_interes` fase 2 WhatsApp:** Leads de WhatsApp que ya traen `custom_fields.proyecto_interes` definido (fase 2 — campañas con proyecto pre-asignado) ahora son detectados correctamente en `CONTEXT 1`. La expresión del campo `proyecto` en el branch de WhatsApp ahora lee primero `$('PARSE BODY').first().json.current_body.custom_fields.proyecto_interes` antes de intentar extraer el proyecto del mensaje. Resultado: la REGLA DE ORO no se dispara para estos leads, el bot no pregunta "¿en cuál proyecto estás interesado?" y entra directamente al flujo de atención con proyecto activo.
+- ✅ **Completado (2026-05-21)**: **Urgencia de Entrega 2026 — Estrategia de Conversión:** `PROJECT LIST` actualizado con ⭐ y año de entrega para PVV (Oct. 2026) y PPO (Dic. 2026). `REGLA DE ORO` actualizada para que Sof-IA mencione SIEMPRE que ambos proyectos entregan en 2026 al presentar opciones al lead.
+- ✅ **Completado (2026-05-21)**: **Material Visual — Respuesta siempre positiva:** Descripción de tool `send_media` y `REGLAS ESTRICTAS` actualizadas. Si el cliente pide material visual y no está disponible en el sistema, Sof-IA NUNCA dice que no existe — siempre confirma que sí hay material y que un asesor puede contactarle para enviárselo.
 
 ### 2. 👤 Captador de Leads — `Lead Collector.json`
 **Estado: ✅ Activo** | Última mod: 2026-05-13
@@ -52,10 +54,13 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ✅ **Completado**: Recepción y persistencia de `page_id` en MongoDB.
 - ✅ **Completado**: **Split inteligente de nombre** — Lead Agent extrae `primer_nombre` y `apellidos` por separado. Se persisten en MongoDB y se usan directamente en el XML SOAP (`_Nombre`, `_Apellido`), resolviendo apellidos compuestos y combinaciones de 2 nombres + 2 apellidos.
 
-### 3. 📚 Experto en Proyectos — `KB SEARCH.json`
-**Estado: ✅ Activo y Auditado al 100%** | Última mod: 2026-05-13
+### 3. 📚 Experto en Proyectos — `KB SEARCH.json` + KBs
+**Estado: ✅ Activo** | Última mod: 2026-05-21
 
 - ✅ **Completado**: Inclusión de todos los proyectos activos (PVV, PMAR, PPO, PPOL, PSB).
+- ✅ **Completado (2026-05-21)**: **SerViPagos condicional (PSB, PPOL):** SerViPagos eliminado de las respuestas generales de mantenimiento. Ahora solo aparece cuando el cliente pregunta explícitamente por métodos de pago. Creadas entradas dedicadas `sb_mantenimiento_pago` y `pl_mantenimiento_pago` con tags específicos (`servipagos`, `donde pagar`).
+- ✅ **Completado (2026-05-21)**: **Urgencia Entrega 2026 — KBs PVV y PPO:** Actualizados `pvv_resumen_general` y `pp_resumen_general` con nota de urgencia "⭐ ENTREGA ESTE AÑO". Creada nueva entrada `pvv_diferenciadores`. Actualizado `pp_competencia_diferenciadores` para abrir con la entrega 2026 como primer diferenciador.
+- ⏳ **Pendiente**: Re-vectorizar KB PVV, PPO, PSB y PPOL en n8n (workflow `LLiVnT0M6xvDKive`) para que los cambios de esta sesión surtan efecto en producción.
 
 ### 4. 🔔 Notificaciones y Citas — `Notifications Master.json` & `RSVP.json`
 **Estado: ✅ Activo** | Última mod: 2026-05-20
@@ -69,10 +74,10 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ⏳ **Pendiente**: Limpiar `chat_histories_rsvp` tras `cita_confirmada: true` para evitar que el agente arranque con contexto de citas anteriores al reagendar.
 
 ### 5. 🎞️ Envío de Media — `Send Media.json`
-**Estado: ✅ Activo y Auditado al 100%** | Última mod: 2026-05-13
+**Estado: ✅ Activo** | Última mod: 2026-05-21
 
 - ✅ **Completado**: URLs de prueba (`link-de-prueba.com`) reemplazadas por `null` en los 5 proyectos. Solo PVV/amenidades tiene URL real activa.
-- ✅ **Completado**: Lógica de fallback para media no disponible — nodo `IF Media Disponible` bifurca el flujo: si no hay URL, el agente ofrece al usuario 3 alternativas (asesor personal, visita a sala de ventas, llamada).
+- ✅ **Completado (2026-05-21)**: **Respuesta positiva cuando no hay media:** Nodo `No Media Response` actualizado — ya no dice "no está disponible". Ahora siempre confirma que sí existe material y que un asesor contactará al usuario por el mismo canal para enviárselo. Elimina fricción negativa en el embudo.
 - ⏳ **Pendiente**: Reemplazar `null` con las URLs reales cuando los archivos de brochures/renders/planos estén listos por proyecto.
 
 ### 6. 🔄 Sincronizador CRM — `Sync_CRM.json`
@@ -110,9 +115,9 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 
 ---
 
-## 🚀 Punto Actual del Proyecto (2026-05-21)
+## 🚀 Punto Actual del Proyecto (2026-05-21 — sesión tarde)
 
- Tras las optimizaciones recientes y los fixes de robustez del 19 de mayo, el sistema presenta el siguiente estatus técnico:
+Tras las optimizaciones de conversión y limpieza de mensajería del 21 de mayo, el sistema presenta el siguiente estatus técnico:
 - **Infraestructura Multitenant:** 100% Funcional. Enrutamiento dinámico por canal activado.
 - **WhatsApp Project Enforcement:** Se eliminó la herencia automática de proyecto por texto inicial en WhatsApp. Ahora el sistema deja el campo `proyecto` nulo para forzar al Orquestador a disparar el menú interactivo, mejorando la calidad de la atribución final.
 - **Fix Correo Lead:** Todas las notificaciones (`nuevo_lead`, `cita`, `escalacion`, `interes_precios`) ahora incluyen validación de correo lead con fallback robusto.
@@ -144,11 +149,14 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
   - Mejorada robustez de `RSVP.json` con fallbacks en notificación de cita
   - Cadena de fallback ahora es: `Parse response` → `Prepare Update` → `User Data` → valor por defecto
   - **Resultado:** Garantiza que datos del lead se envíen correctamente incluso si faltan en nodos intermedios
-- **Auditoría de Referencias (2026-05-21):** Validación completa de flujos reveló 0 problemas:
+- **Auditoría de Referencias (2026-05-21 mañana):** Validación completa de flujos reveló 0 problemas:
   - ✅ Todos los nodos referenciados existen
   - ✅ Campos enviados coinciden exactamente con los esperados
   - ✅ No hay referencias circulares ni campos huérfanos
   - ✅ Arquitectura de notificaciones es SEGURA y ROBUSTA
+- **SerViPagos condicional (2026-05-21):** KB PSB y PPOL corregidas. SerViPagos ya no se menciona proactivamente en respuestas de mantenimiento — solo aparece si el lead pregunta explícitamente por métodos de pago.
+- **Estrategia de Conversión — Urgencia 2026 (2026-05-21):** Sistema completo de señalización de urgencia implementado en 3 capas: (1) PROJECT LIST con ⭐ y año de entrega, (2) REGLA DE ORO instruye a Sof-IA mencionar PVV/PPO como entrega este año, (3) KBs de PVV y PPO actualizadas con lenguaje de urgencia y entradas de diferenciadores.
+- **Material Visual — Experiencia positiva (2026-05-21):** Send Media y AGENT PRINCIPAL alineados. El sistema nunca niega existencia de material visual — siempre ofrece la alternativa de asesor que lo enviará.
 
 ---
 

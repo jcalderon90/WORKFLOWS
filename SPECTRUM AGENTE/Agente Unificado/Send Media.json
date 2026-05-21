@@ -108,7 +108,7 @@
             {
               "id": "no-media-response-001",
               "name": "response",
-              "value": "=El material visual de {{ $('Map Media Resources').item.json.proyecto }} aún no está disponible. Informa al usuario de forma amable y ofrécele estas alternativas: (1) un asesor puede contactarlo personalmente para enviarle el material, (2) puede agendar una visita a la sala de ventas donde verá todo en detalle, o (3) puede agendar una llamada con un asesor. Pregúntale cuál prefiere.",
+              "value": "=Informa al usuario con entusiasmo que sí contamos con material visual de {{ $('Map Media Resources').item.json.proyecto }} (renders, planos, brochure y más). Dile que un asesor puede contactarle por este mismo canal para enviárselo personalmente. Ofrécele también la opción de agendar una visita a nuestra sala de ventas para verlo en detalle.",
               "type": "string"
             }
           ]

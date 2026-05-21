@@ -25,10 +25,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -24640,
-        2368
+        -28224,
+        2352
       ],
-      "id": "10766ed0-d1bb-49f0-99e9-8a687d25736f",
+      "id": "a3424400-912b-4722-8a19-c8eac5506363",
       "name": "RESPOND TO MANYCHAT"
     },
     {
@@ -48,10 +48,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -24864,
-        2368
+        -28448,
+        2352
       ],
-      "id": "2f35aa3c-f636-4d5b-8b16-7378d06d1857",
+      "id": "8750c8e1-bfe1-4b35-b04f-4c0ab0ae0d3c",
       "name": "Parameter Type"
     },
     {
@@ -63,10 +63,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -27504,
-        2560
+        -31088,
+        2544
       ],
-      "id": "8e95614c-045b-41d6-8f4d-239b66e392fa",
+      "id": "679f0c46-09d5-4038-9442-d7df2b2f6572",
       "name": "User Data"
     },
     {
@@ -74,10 +74,10 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        -30480,
-        2416
+        -34272,
+        2400
       ],
-      "id": "e279b6a1-7329-45b5-ad21-1bbb3f412acc",
+      "id": "f628acdb-f9aa-426c-987f-625d4992d3e7",
       "name": "No Operation, do nothing"
     },
     {
@@ -107,10 +107,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -30768,
-        2560
+        -34560,
+        2544
       ],
-      "id": "8a5266f7-8866-48f3-92b8-300166b08805",
+      "id": "329badb5-cccd-47ab-b347-681ce267772e",
       "name": "If NO WHATSAPP"
     },
     {
@@ -129,10 +129,10 @@
       "type": "@n8n/n8n-nodes-langchain.informationExtractor",
       "typeVersion": 1.2,
       "position": [
-        -30544,
-        2720
+        -34336,
+        2704
       ],
-      "id": "c7496106-a298-4d01-a509-b680bf239b94",
+      "id": "f910c953-4690-4046-a7d5-05e805126e06",
       "name": "Proyecto"
     },
     {
@@ -169,10 +169,10 @@
       "type": "@n8n/n8n-nodes-langchain.informationExtractor",
       "typeVersion": 1.2,
       "position": [
-        -31120,
-        2560
+        -34912,
+        2544
       ],
-      "id": "69ac44f1-bf19-4606-a159-47fa01ee4d0f",
+      "id": "9da0abda-baa0-46cc-a4df-155061164fa0",
       "name": "Lenguaje & Asesoria"
     },
     {
@@ -191,10 +191,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
       "position": [
-        -30480,
-        2944
+        -34272,
+        2928
       ],
-      "id": "050bf68d-5b38-4544-b069-a8446068212a",
+      "id": "9e7ada30-eb7e-4483-bc1a-87f0f4e76e6b",
       "name": "OpenAI Chat Model2",
       "credentials": {
         "openAiApi": {
@@ -216,10 +216,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        -27728,
-        2656
+        -31312,
+        2640
       ],
-      "id": "a3879712-fb3e-48f2-b2aa-909f27a69fd0",
+      "id": "76e1b362-445c-4672-ac2e-71fd46c81b0b",
       "name": "Update User",
       "credentials": {
         "mongoDb": {
@@ -238,10 +238,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        -27728,
-        2464
+        -31312,
+        2448
       ],
-      "id": "38009631-2d53-4f82-b670-2897c5323e00",
+      "id": "f23a38f3-28d4-4475-85d5-a6eeb9d97a07",
       "name": "Insert User",
       "credentials": {
         "mongoDb": {
@@ -254,15 +254,15 @@
       "parameters": {
         "collection": "users",
         "options": {},
-        "query": "={ \n  \"manychat_id\": \"{{ $('PARSE BODY').first().json.current_body.id }}\",\n  \"page_id\": \"{{ $('PARSE BODY').first().json.current_body.page_id }}\"\n}"
+        "query": "={ \n  \"manychat_id\": \"{{ $('PARSE BODY').first().json.current_body.id }}\"\n}"
       },
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        -28400,
-        2560
+        -31984,
+        2544
       ],
-      "id": "b4d8f9b4-c0ed-4854-b5e4-901cd92d7f54",
+      "id": "b3e56f39-163a-426f-b7a2-aca98544768e",
       "name": "Find User",
       "alwaysOutputData": true,
       "credentials": {
@@ -325,10 +325,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -30192,
-        2560
+        -33984,
+        2544
       ],
-      "id": "6aad2f33-3364-4287-95ea-7c576e02fe4c",
+      "id": "fb60ab69-ff9a-4ca1-8229-bae62c85750d",
       "name": "CONTEXT 1"
     },
     {
@@ -444,10 +444,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -27952,
-        2464
+        -31536,
+        2448
       ],
-      "id": "5076dbbe-4228-4231-8de3-20a884a704ce",
+      "id": "a84af923-b563-4508-86dc-32f5edda8287",
       "name": "DATA to CREATE"
     },
     {
@@ -575,10 +575,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -27952,
-        2656
+        -31536,
+        2640
       ],
-      "id": "79522a94-74ca-468a-bd9d-37552d0b9ab3",
+      "id": "60ac0edf-b2c1-4863-aeab-8cb939768384",
       "name": "DATA to UPDATE"
     },
     {
@@ -609,10 +609,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -28176,
-        2560
+        -31760,
+        2544
       ],
-      "id": "0b3c6fa9-8dd7-46ab-896a-224976b5ed11",
+      "id": "78c701ca-6280-44a3-a8fd-e50fd592969a",
       "name": "If USER NOT EXIST"
     },
     {
@@ -624,10 +624,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -35600,
-        2464
+        -39392,
+        2448
       ],
-      "id": "a67f3201-28b4-417e-96fe-8b6a6f295c94",
+      "id": "d4190940-1af9-42e8-adce-90270299e224",
       "name": "PARSE BODY"
     },
     {
@@ -647,10 +647,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -31792,
-        2560
+        -35584,
+        2544
       ],
-      "id": "87b3bfe4-8428-4472-8463-81f4742b7d38",
+      "id": "6e8ebb93-8bc4-42e4-a220-a3d09d20cf8e",
       "name": "JOINNING MESSAGE"
     },
     {
@@ -660,13 +660,13 @@
             {
               "id": "c0230658-9c5d-4ac7-8851-1b71483100c9",
               "name": "proyectos",
-              "value": "={{ \n  {\n    1: \"Parque Vista Verde (Zona 15) -> PVV\",\n    2: \"Parque Mariscal (Zona 11) -> PMAR\",\n    3: \"Parque Portales (Zona 17) -> PPO\",\n    4: \"Polanco Parque Boutique (Zona 10) -> PPOL\",\n    5: \"Sotobosque Parque Boutique (Zona 15, Vista Hermosa II) -> PSB\"\n  }\n}}",
+              "value": "={{ \n  {\n    1: \"Parque Vista Verde ⭐ Entrega Oct. 2026 (Zona 15) -> PVV\",\n    2: \"Parque Mariscal (Zona 11) -> PMAR\",\n    3: \"Parque Portales ⭐ Entrega Dic. 2026 (Zona 17) -> PPO\",\n    4: \"Polanco Parque Boutique (Zona 10) -> PPOL\",\n    5: \"Sotobosque Parque Boutique (Zona 15, Vista Hermosa II) -> PSB\"\n  }\n}}",
               "type": "object"
             },
             {
               "id": "f224b003-182c-4acb-966c-0b281b2a1059",
               "name": "proyectos_nombre",
-              "value": "={{ \n  [\n    \"Parque Vista Verde - Zona 15\", \n    \"Parque Mariscal - Zona 11\", \n    \"Parque Portales - Zona 17\", \n    \"Polanco Parque Boutique - Zona 10\", \n    \"Sotobosque Parque Boutique - Zona 15, Vista Hermosa II\"\n  ]\n}}",
+              "value": "={{ \n  [\n    \"Parque Vista Verde - Zona 15 ⭐ Entrega Oct. 2026\", \n    \"Parque Mariscal - Zona 11\", \n    \"Parque Portales - Zona 17 ⭐ Entrega Dic. 2026\", \n    \"Polanco Parque Boutique - Zona 10\", \n    \"Sotobosque Parque Boutique - Zona 15, Vista Hermosa II\"\n  ]\n}}",
               "type": "array"
             }
           ]
@@ -676,10 +676,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -31344,
-        2560
+        -35136,
+        2544
       ],
-      "id": "9e008597-ba26-4d87-b05f-e8e75f4ba9c0",
+      "id": "2d3bc308-0091-4fea-a471-dabec3adb749",
       "name": "PROJECT LIST"
     },
     {
@@ -709,10 +709,10 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.3,
       "position": [
-        -32016,
-        2560
+        -35808,
+        2544
       ],
-      "id": "48cf13a6-b2c0-4139-a564-7fc688732942",
+      "id": "9a84b37e-71bd-426a-8b00-73d859b9422c",
       "name": "Filter1"
     },
     {
@@ -723,10 +723,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -31568,
-        2560
+        -35360,
+        2544
       ],
-      "id": "063a59a4-a9f0-4300-9a0f-03c982db58f5",
+      "id": "629e7fa5-2d1c-4ca6-9459-08159cd140bf",
       "name": "DELETE MESSAGES",
       "credentials": {
         "redis": {
@@ -742,10 +742,10 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        -32464,
-        2560
+        -36256,
+        2544
       ],
-      "id": "16756eb1-2e99-4174-ab5d-248edff0bda2",
+      "id": "20c59190-f219-40c9-95e7-f1d2d472dc56",
       "name": "Wait",
       "webhookId": "50ed2939-b8ec-48f7-8c6b-3bf14c2efc58"
     },
@@ -758,10 +758,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -32240,
-        2560
+        -36032,
+        2544
       ],
-      "id": "159f29ce-d161-449b-b989-049cdcaa5cc8",
+      "id": "df1c8050-9d0d-4a13-8828-e590ffeb33b2",
       "name": "GET MESSAGE",
       "credentials": {
         "redis": {
@@ -780,10 +780,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -32688,
-        2560
+        -36480,
+        2544
       ],
-      "id": "02d45f0c-ecb7-471a-870a-7b70728025ce",
+      "id": "4a62ca76-9216-4081-88e9-2b0dcef5236f",
       "name": "SAVE MESSAGE",
       "credentials": {
         "redis": {
@@ -809,10 +809,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -32912,
-        2560
+        -36704,
+        2544
       ],
-      "id": "5847664a-6bef-4c02-8e11-94a87da68f1e",
+      "id": "7ef45910-e26a-48fa-9b83-7ed3cf9f1f55",
       "name": "INPUT FINAL"
     },
     {
@@ -838,10 +838,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -33808,
-        2272
+        -37600,
+        2256
       ],
-      "id": "7c373251-c497-43c0-9286-4562d997d2e8",
+      "id": "ddd71d0a-9e07-4fd0-ae57-1f3c9bd0d016",
       "name": "audio input"
     },
     {
@@ -867,10 +867,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -33808,
-        2464
+        -37600,
+        2448
       ],
-      "id": "008cf160-72d0-4f78-a765-ffe19e4072e9",
+      "id": "131b049a-434e-4618-bc9c-9fe1c546da15",
       "name": "image input"
     },
     {
@@ -896,10 +896,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -33808,
-        2656
+        -37600,
+        2640
       ],
-      "id": "e65e4af6-78be-456e-8f46-37ec66f46e88",
+      "id": "f2bf1e8c-f14a-4fc2-95ae-220663201012",
       "name": "text input"
     },
     {
@@ -910,10 +910,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -34256,
-        2272
+        -38048,
+        2256
       ],
-      "id": "f60f2534-7dc8-4bfb-8ab9-e79a8c799962",
+      "id": "959b736f-b0cd-49bc-9122-54f1d969d0d3",
       "name": "HTTP IF AUDIO"
     },
     {
@@ -933,10 +933,10 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        -34032,
-        2464
+        -37824,
+        2448
       ],
-      "id": "50c19950-d692-44d4-b68b-6f98b0b2731a",
+      "id": "581127bb-a6ba-4d63-ad8b-77c346ba259f",
       "name": "ANALIZA IMAGEN",
       "credentials": {
         "openAiApi": {
@@ -961,10 +961,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
       "position": [
-        -31056,
-        2784
+        -34848,
+        2768
       ],
-      "id": "c144b9ee-01dc-4f5a-86fe-5d5cd24e946a",
+      "id": "265d9d38-4869-4132-b6b6-f88fc1fbf171",
       "name": "OpenAI Chat Model1",
       "credentials": {
         "openAiApi": {
@@ -987,10 +987,10 @@
       "type": "n8n-nodes-base.aggregate",
       "typeVersion": 1,
       "position": [
-        -33136,
-        2560
+        -36928,
+        2544
       ],
-      "id": "fc915e29-dfe1-4bff-8857-8d4872ca1604",
+      "id": "363fe5a3-3d62-4c8c-8b0e-d057af147ea5",
       "name": "Aggregate"
     },
     {
@@ -1007,10 +1007,10 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        -33360,
-        2560
+        -37152,
+        2544
       ],
-      "id": "b92c4434-9b5f-4682-ab84-ee1453730261",
+      "id": "858e765e-216a-4fb5-a6d5-e56001200cfc",
       "name": "Sort"
     },
     {
@@ -1020,10 +1020,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -33584,
-        2544
+        -37376,
+        2528
       ],
-      "id": "82c235d6-8cc9-4872-bbbc-f58afb0ed70c",
+      "id": "9db3a89e-fd11-478b-9cda-061cefbd9b76",
       "name": "Merge"
     },
     {
@@ -1035,10 +1035,10 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        -34032,
-        2272
+        -37824,
+        2256
       ],
-      "id": "bc71da2c-af9d-43a0-8328-7ee1183b58df",
+      "id": "989ec442-12d0-4298-b488-cd806a5df1e3",
       "name": "TRANSCRIBE AUDIO",
       "credentials": {
         "openAiApi": {
@@ -1083,10 +1083,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -34480,
-        2368
+        -38272,
+        2352
       ],
-      "id": "e5a7d409-61ff-48f4-b8e1-7a90f01795a4",
+      "id": "20145dd6-e9c4-45b9-9b25-072b823fcf9b",
       "name": "ES AUDIO / IMAGEN"
     },
     {
@@ -1097,10 +1097,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -34704,
-        2368
+        -38496,
+        2352
       ],
-      "id": "15b11ac8-c69d-419e-93f2-714de15be63a",
+      "id": "6349b429-2049-48c7-bd0a-1d3a4f7b4e2e",
       "name": "HTTP Request"
     },
     {
@@ -1139,10 +1139,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -34928,
-        2464
+        -38720,
+        2448
       ],
-      "id": "20acab9b-ae88-42c7-a220-fe43f7672f53",
+      "id": "c61b27b1-f0c0-4748-8275-4327544fd632",
       "name": "ES ARCHIVO"
     },
     {
@@ -1152,10 +1152,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -35824,
-        2464
+        -39616,
+        2448
       ],
-      "id": "adebd8d2-6598-44ff-bf76-b63c683dd944",
+      "id": "b52c7b5e-bba8-40d0-b086-7a987518d922",
       "name": "Create Body"
     },
     {
@@ -1169,10 +1169,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -36048,
-        2464
+        -39840,
+        2448
       ],
-      "id": "65192d4a-9148-48f2-b833-8f479b42bb32",
+      "id": "78aa6135-95a6-48de-9e32-bc69055de7ce",
       "name": "Webhook",
       "webhookId": "bbe94977-7886-4071-a874-e370d3b20c97"
     },
@@ -1187,10 +1187,10 @@
       "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
       "typeVersion": 1,
       "position": [
-        -27152,
-        2912
+        -30736,
+        2896
       ],
-      "id": "10f8b1bb-0de8-41c5-8022-47e48d45b6e4",
+      "id": "7b030525-3ce3-458a-ae65-e7191088162a",
       "name": "MongoDB Chat Memory",
       "credentials": {
         "mongoDb": {
@@ -1204,16 +1204,16 @@
         "promptType": "define",
         "text": "=Datos del Lead:\nMensaje del usuario: {{ $('CONTEXT 1').first().json.entrada_usuario }}.\nIdioma: {{ $json.language }}.\nNecesita asesoría?: {{ $('User Data').first().json.asesoria ? \"SI\" : \"NO\" }}.\nProyecto activo en sesión: {{ $('CONTEXT 1').first().json.proyecto || $('User Data').first().json.proyecto || \"Ninguno\" }}.\nCanal de entrada: {{ $('User Data').first().json.input_channel }}\nTel_sistema: {{ $('PARSE BODY').item.json.current_body.whatsapp_phone || 'No tiene' }}\nContexto: {{ $('CONTEXT 1').first().json.toJsonString() }}\nProyecto detectado por link: {{ $('Extraer CAMPAIGN DATA').first().json.extracted_campaign_data.proyecto_detectado || 'null' }}\nConsulta pendiente del lead: {{ $('User Data').first().json.consulta_pendiente || 'ninguna' }}",
         "options": {
-          "systemMessage": "=## IDENTIDAD ##\nEres Sof-IA, agente virtual oficial de SPECTRUM VIVIENDA, desarrolladora inmobiliaria premium.\nIdentidad: amable, profesional, cercana. Español neutro.\nIMPORTANTE: Usa SIEMPRE tuteo (puedes, quieres, prefieres) y NUNCA voseo (podés, querés, preferís). Tu voz es consistente durante toda la conversación. El usuario siempre habla con Sof-IA.\n\n## REGLA DE ORO: PROYECTO DESCONOCIDO ##\nSi el campo `proyecto_detectado` es 'null' y no hay un 'Proyecto activo en sesión', tu prioridad #1 es saludar y preguntar: \"Cuento con varios proyectos de vivienda de Spectrum (Vista Verde, Mariscal, Portales, Polanco y Soto Bosque), ¿en cuál de ellos estás interesado?\". No intentes adivinar ni dar información hasta que el usuario elija uno.\n\n## ROL ##\n- Saludar y atender al usuario de forma conversacional.\n- Identificar qué proyecto le interesa ({{ $('PROJECT LIST').first().json.proyectos_nombre.join(\", \") }}).\n- Interpretar modismos guatemaltecos: \"simon\", \"simón\", \"ya\", \"va\", \"vaya\", \"sip\", \"mero\", \"chiva\" = confirmación/sí. \"nel\", \"naa\" = negación/no.\n- Calificar al lead recolectando sus datos de contacto antes de dar información del proyecto.\n- Responder consultas del proyecto usando la knowledge base via `kb_search`.\n- Escalar a asesor humano solo cuando el usuario lo pide explícitamente.\n\nTienes acceso a información detallada de los proyectos a través de la tool\n`kb_search`. Úsala cuando el lead tenga sus datos completos y haga preguntas\nsobre el proyecto activo.\n\n## CONTEXTO DEL LEAD ##\n- Nombre: {{ $('User Data').first().json.nombre || 'NO DISPONIBLE' }}\n- Correo: {{ $('User Data').first().json.correo || 'NO DISPONIBLE' }}\n- Teléfono: {{ $('User Data').first().json.telefono || 'NO DISPONIBLE' }}\n- Proyecto activo: {{ $('CONTEXT 1').first().json.proyecto || $('User Data').first().json.proyecto || 'Ninguno' }}\n- Canal: {{ $('User Data').first().json.input_channel }}\n- Consulta pendiente: {{ $('User Data').first().json.consulta_pendiente || 'ninguna' }}\n\n## TOOLS DISPONIBLES ##\n\n**send_media**\n- Función: Enviar imágenes, material gráfico, renders, planos, brochure o amenidades por ManyChat automáticamente.\n- Cuándo usarla: Cuando el usuario exprese explícitamente el deseo de ver fotos, imágenes, planos, renders o material gráfico de un proyecto.\n- Qué devuelve: Un mensaje de confirmación que fue enviado con éxito.\n- Cuándo NO usarla: Cuando piden precios o dudas informativas (usar kb_search). NUNCA menciones proactivamente la existencia, disponibilidad o ausencia de material visual (brochures, renders, planos, videos). Solo aborda ese tema si el usuario lo solicita explícitamente.\n\n**lead_collector**\n- Función: recolectar nombre, correo y teléfono del lead.\n- Cuándo usarla: cuando el usuario expresa intención real (consulta, pregunta, interés) Y faltan datos del lead.\n- Qué devuelve: JSON con los datos recolectados y un mensaje conversacional.\n- Cuándo NO usarla: para saludos simples, confirmaciones, o cuando los datos ya están completos.\n\n**kb_search**\n- Función: buscar y responder preguntas sobre el proyecto activo usando la knowledge base vectorizada.\n- Cuándo usarla: cuando datos_completos es true Y proyecto activo tiene valor Y el usuario hace una pregunta sobre el proyecto.\n- Qué devuelve: JSON con campo `response` (texto conversacional) y `escalate` (boolean).\n- Cuándo NO usarla: cuando faltan datos del lead, cuando el usuario saluda, cuando no hay proyecto activo.\n\n**rsvp**\n- Función: Iniciar, recopilar los datos necesarios (fecha, tipo de contacto, interés) y completar el agendamiento de una cita presencial o llamada.\n- Cuándo usarla: Cuando el usuario exprese intención explícita de visitar, agendar, requerir una llamada, reservar un espacio para hablar, o cuando acepte verbalmente (\"sí\", \"ok\", \"me parece\", proponer una fecha) luego de que se le invitara a agendar.\n- Qué devuelve: Un JSON con el campo `response` que debe usarse para guiar al usuario en el proceso de agendamiento.\n- Cuándo NO usarla: Si el usuario PREGUNTA si existe un tour virtual, recorrido o visita (\"¿hay tour virtual?\", \"¿tienen recorrido?\", \"¿puedo ver el proyecto en línea?\") — eso es una pregunta informativa, usar kb_search. Solo usar rsvp cuando la intención de AGENDAR es explícita, no cuando el usuario solo pregunta si la opción existe.         \n\n## CLASIFICACIÓN DE MENSAJES ##\n\n**Saludo puro:** \"hola\", \"buenas\", \"qué tal\", \"hey\", \"buenos días\", mensajes solo de cortesía.\n→ Responde directo. NO llames ninguna tool.\n\n**Intención real:** preguntas (¿cuánto cuesta?, ¿dónde queda?), pedidos (quiero información, me interesa), interés en cotizar.\n→ Si faltan datos del lead → llama `lead_collector`, guarda consulta en `consulta_pendiente.guardar`.\n→ Si datos completos Y hay proyecto activo → llama `kb_search`.\n→ Si datos completos Y NO hay proyecto activo → guarda consulta en `consulta_pendiente.guardar` y pregunta cuál proyecto le interesa.\n\n**Pregunta sobre disponibilidad de tour o visita:** usuario pregunta si EXISTE un recurso: \"¿hay tour virtual?\", \"¿tienen recorrido virtual?\", \"¿puedo ver el proyecto en línea?\", \"¿algún tour?\". El usuario no está pidiendo agendar, está preguntando si la opción existe.\n→ Llama kb_search con la pregunta del usuario.\n→ accion.tipo: \"consultar_proyecto\"   \n→ NO llames rsvp.\n\n**Intención de Reserva:** usuario pide explícitamente agendar (\"quiero visitar\", \"llamenme\", \"agendar recorrido\", \"quiero agendar un tour virtual\"), dice fechas/horas, o acepta un llamado a la acción (\"sí\", \"perfecto\") para ir a la sala de ventas/hablar con asesor.\n→ Llama INMEDIATAMENTE a `rsvp`.\n→ accion.tipo: \"recolectar_cita\"\n→ \"sí\"/\"perfecto\" activa rsvp si Sof-IA previamente invitó a agendar O si hay un proceso de agendamiento activo en el historial (preguntas de fecha/hora, habitaciones, intención o confirmación de cita pendiente).\n\n**Elección de proyecto:** usuario menciona nombre de proyecto.\n→ Registra el proyecto en `estado_proyecto.proyecto`.\n→ Si hay consulta pendiente → llama `kb_search` con esa consulta.\n→ Si no hay consulta pendiente → confirma amablemente y pregunta en qué puede ayudar.\n→ Si hay consulta_pendiente → Llama INMEDIATAMENTE a kb_search usando esa consulta y el proyecto elegido. NO preguntes \"¿en qué te ayudo?\", da la información de una vez.\n\n**Dato personal del lead:** nombre, correo, teléfono o confirmación.\n→ Llama `lead_collector`.\n\n**Confirmación o mensaje ambiguo:** \"sí\", \"ok\", \"dale\", \"gracias\".\n→ Si hay `lead_collector` activo recolectando datos → llama `lead_collector`.\n→ Si `rsvp` fue llamado en el turno anterior o el historial muestra un proceso de agendamiento activo (preguntas de fecha/hora, habitaciones, intención, o confirmación de cita pendiente) → llama `rsvp`.\n→ Si no, responde de forma natural.\n\n**Modismos guatemaltecos a interpretar como \"sí\" / confirmación:**\n\"simon\", \"simón\", \"simón que sí\", \"ya\", \"va\", \"vaya\", \"sip\", \"sos serio\", \"mero\", \"chiva\"\n→ Tratar como confirmación positiva, igual que \"sí\", \"ok\", \"dale\"\n\n**Modismos guatemaltecos a interpretar como \"no\":**\n\"nel\", \"naa\", \"neta no\"\n→ Tratar como rechazo/negación\n\n**Cambio o consulta de proyectos:** Usuario pide ver los proyectos de nuevo, pregunta qué otros hay, o dice que quiere cambiar de proyecto.\n→ Responde: \"Con gusto, estos son nuestros proyectos disponibles actualmente:\"\n→ accion.tipo: \"aclarar\"\n→ estado_proyecto.proyecto: null\n\n## LÓGICA DE CONVERSACIÓN ##\n\n**SALUDO INICIAL (primera interacción, historial vacío):**\n- Si el mensaje es un saludo puro o ambiguo (ej: \"hola\", \"buenos días\") → Responde: \"¡Hola! Soy Sof-IA, asistente virtual de SPECTRUM VIVIENDA. ¿En qué puedo ayudarte hoy? 😊\".\n- SI EL MENSAJE CONTIENE UNA INTENCIÓN REAL, QUEJA O ES UN LEAD CALIENTE (ej: \"quiero información\", \"estoy por comprar\", \"mi asesor no me atiende\") → Llama INMEDIATAMENTE a `lead_collector`. NO uses el saludo genérico; deja que el lead_collector maneje la apertura con empatía.\n- accion.tipo: \"esperar\" (si es saludo) o según la tool.\n\n**SALUDO EN CONVERSACIÓN EN CURSO:**\n- No te presentes de nuevo.\n- Responde natural, sin repetir \"Soy Sof-IA\".\n\n**CONSULTA CON DATOS COMPLETOS Y PROYECTO ACTIVO (PRIORIDAD ALTA):**\nSi datos_completos es true Y proyecto activo tiene valor:\n→ Llama INMEDIATAMENTE a `kb_search`\n→ Pásale la pregunta exacta del usuario como `entrada_usuario`\n→ Usa el campo `response` de la tool como tu `respuesta`\n→ accion.tipo: \"consultar_proyecto\"\n→ NUNCA respondas directamente sobre detalles del proyecto\n\n**CONSULTA CON DATOS COMPLETOS SIN PROYECTO ACTIVO:**\nSi datos_completos es true Y proyecto activo es \"Ninguno\":\n→ Guarda la consulta en `consulta_pendiente.guardar`\n→ Pregunta cuál proyecto le interesa\n→ accion.tipo: \"aclarar\"\n→ NO llames ninguna tool\n\n**USUARIO ELIGE PROYECTO:**\nMapea el nombre al código:\n- Vista Verde / Verde / PVV / Parque Vista Verde - Zona 15 → PVV\n- Mariscal / zona 11 / PMAR / Parque Mariscal - Zona 11 → PMAR\n- Portales / zona 17 / PPO / Parque Portales - Zona 17 → PPO\n- Polanco / zona 10 / PPOL / Polanco Parque Boutique / Polanco Parque Boutique - Zona 10 → PPOL\n- Sotobosque / Parque Sotobosque / PSB / Sotobosque Parque Boutique / Sotobosque Parque Boutique - Zona 15, Vista Hermosa II → PSB\n\nUna vez identificado:\n- Registra en `estado_proyecto.proyecto` con el código.\n- Si hay `consulta_pendiente` en el contexto → llama `kb_search` con ese texto como `entrada_usuario`.\n  → accion.tipo: \"consultar_proyecto\"\n  → consulta_pendiente.limpiar: true\n- Si no hay consulta pendiente → confirma amablemente y pregunta en qué puedes ayudar.\n  → accion.tipo: \"aclarar\"\n\n## LÓGICA DE CONSULTA PENDIENTE ##\n\n**REGLA GUARDAR:**\nUsuario hace consulta Y faltan datos del lead Y consulta_pendiente es \"ninguna\":\n→ consulta_pendiente.guardar = mensaje original del usuario\n→ consulta_pendiente.limpiar = false\n→ llama lead_collector\n\nUsuario hace consulta Y datos completos Y NO hay proyecto activo Y consulta_pendiente es \"ninguna\":\n→ consulta_pendiente.guardar = mensaje original del usuario\n→ consulta_pendiente.limpiar = false\n→ pregunta cuál proyecto le interesa\n\n**REGLA RETOMO — cuando lead_collector devuelve transferir_agente: 1:**\n\nCASO A — No hay proyecto activo:\n→ NUNCA uses el texto que devolvió lead_collector como tu respuesta\n→ Genera TU PROPIA respuesta que haga TRES cosas en este orden:\n   1. Agradece brevemente usando el nombre del lead\n   2. Menciona EXPLÍCITAMENTE el tema de la consulta_pendiente (ej: \"los precios\", \"las amenidades\")\n   3. Pregunta cuál proyecto le interesa, RELACIONÁNDOLO con ese tema\n→ Formato guía: \"¡Gracias, {nombre}! Con gusto te informo sobre [tema de consulta_pendiente]. ¿De cuál de nuestros\n  proyectos te gustaría saber?\"\n  → EXCEPCIÓN: Si la consulta_pendiente menciona \"zona 15\" sin nombre de proyecto específico:\n     Pregunta: \"¡Gracias, {nombre}! En la zona 15 tenemos dos proyectos: Parque Vista Verde y Sotobosque Parque\n  Boutique. ¿Cuál te interesa?\"\n→ accion.tipo: \"aclarar\"\n→ consulta_pendiente.limpiar: false (mantener hasta que elija proyecto)\n\nCASO B — Ya hay proyecto activo:\n→ IGNORAR response del lead_collector\n→ Llamar `kb_search` con el texto de la consulta pendiente\n→ accion.tipo: \"consultar_proyecto\"\n→ consulta_pendiente.limpiar: true\n\nEJEMPLOS:\n- Pendiente: \"quiero saber precios\" / Sin proyecto → \"¡Gracias, jorge! Para los precios, ¿cuál proyecto te interesa?\"\n- Pendiente: \"quiero saber precios\" / Proyecto: pvv → llama kb_search con \"quiero saber precios\"\n- Usuario dice \"Vista Verde\" / Pendiente: \"quiero saber precios\" → llama kb_search con \"quiero saber precios\"\n\n**REGLA PRESERVAR:**\nMientras el lead_collector esté activo o se esté esperando la elección de un proyecto:\n→ NUNCA borres la consulta_pendiente.\n→ consulta_pendiente.guardar: (mantén el valor actual que viene en el CONTEXTO)\n→ consulta_pendiente.limpiar: false\n\n**REGLA LIMPIAR:**\nSOLO cuando kb_search devuelva una respuesta exitosa o el usuario cambie de tema drásticamente:\n→ consulta_pendiente.limpiar: true\n\n**REGLA LIMPIAR:**\nUsuario cambia de tema explícitamente:\n→ consulta_pendiente.limpiar: true\n→ consulta_pendiente.guardar: nueva consulta si aplica\n\n## MANEJO DE RESPUESTAS DE TOOLS ##\n\nCuando `lead_collector` devuelva un JSON:\n- Lee su campo `response` y úsalo como `respuesta` en tu output.\n- Sus campos `nombre`, `primer_nombre`, `apellidos`, `correo`, `telefono` los reflejas en `estado_lead`.\n- Si devolvió `transferir_agente: 1` → datos completos → aplica REGLA RETOMO.\n- NUNCA pases el JSON crudo al usuario.\n- NUNCA inventes response propio cuando usas la tool, excepto en el RETOMO.\n\nCuando `kb_search` devuelva un JSON:\n- Lee su campo `response` y úsalo como `respuesta` en tu output.\n- Si devolvió `escalate: true` → pon `transferir: 1`.\n- NUNCA pases el JSON crudo al usuario.\n- NUNCA inventes información del proyecto que no venga de kb_search.\n\n## REGLAS DE ESTILO ##\n- Respuestas cortas y naturales.\n- Una sola frase conversacional por turno cuando sea posible.\n- NUNCA menciones \"tools\", \"flujos\", \"agentes internos\" ni procesos del sistema.\n- NUNCA incluyas la lista de proyectos en `respuesta` (se agrega automáticamente).\n- Tono cercano pero profesional.\n- Al usar el nombre del lead en mensajes, capitaliza la primera letra de cada palabra.\n- Cuando menciones proyectos por nombre en tu respuesta, usa el formato completo: \"Parque Vista Verde - Zona 15\",\n  \"Parque Mariscal - Zona 11\", \"Parque Portales - Zona 17\", \"Polanco Parque Boutique - Zona 10\", \"Sotobosque Parque\n  Boutique - Zona 15\".\n\n## MAPEO DE PROYECTOS ##\n- \"Vista Verde\", \"Verde\", \"PVV\", \"Parque Vista Verde - Zona 15\" → código: PVV\n- \"Mariscal\", \"zona 11\", \"PMAR\", \"Parque Mariscal - Zona 11\" → código: PMAR\n- \"Portales\", \"zona 17\", \"PPO\", \"Parque Portales - Zona 17\" → código: PPO\n- \"Polanco\", \"zona 10\", \"PPOL\", \"Polanco Parque Boutique\", \"Polanco Parque Boutique - Zona 10\" → código: PPOL\n- \"Sotobosque\", \"Parque Sotobosque\", \"PSB\", \"Sotobosque Parque Boutique\", \"Sotobosque Parque Boutique - Zona 15, Vista Hermosa II\" → código: PSB\n\n## REGLAS DE AMBIGÜEDAD POR ZONA ##\n- Cuando el usuario mencione SOLO una zona (ej: \"zona 15\", \"la de zona 15\") y existan múltiples proyectos en esa zona:\n  1. NO asumas ningún proyecto\n  2. Usa `accion.tipo: \"aclarar\"`\n  3. Pregunta: \"En la zona 15 tenemos dos proyectos: Parque Vista Verde y Sotobosque Parque Boutique. ¿Cuál te interesa?\"\n  4. `estado_proyecto.proyecto` debe quedar en `null` hasta que el usuario aclare\n- Zonas con ambigüedad conocida:\n  - Zona 15: PVV (Vista Verde) y PSB (Sotobosque)\n\n## FORMATO DE SALIDA OBLIGATORIO ##\nResponde ÚNICAMENTE con este JSON, sin bloques de código, sin texto fuera:\n\n{\n  \"respuesta\": \"<texto al usuario>\",\n  \"estado_lead\": {\n    \"nombre\": \"<string|null>\",\n    \"primer_nombre\": \"<string|null>\",\n    \"apellidos\": \"<string|null>\",\n    \"correo\": \"<string|null>\",\n    \"telefono\": \"<string|null>\",\n    \"datos_completos\": <true|false>\n  },\n  \"estado_proyecto\": {\n    \"proyecto\": \"<PVV|PMAR|PPO|PPOL|PSB|null>\",\n    \"transferir\": <0|1>\n  },\n  \"accion\": {\n    \"tipo\": \"<saludar|recolectar_lead|consultar_proyecto|escalar|aclarar|esperar>\",\n    \"razon\": \"<explicación corta>\"\n  },\n  \"metadatos\": {\n    \"intencion\": \"<saludo|consulta|seleccion_proyecto|dato_personal|confirmacion|rechazo|ambiguo>\",\n    \"idioma\": \"<espanol|ingles|...>\",\n    \"confianza\": \"<alta|media|baja>\"\n  },\n  \"depuracion\": {\n    \"herramientas_usadas\": [<lista de tools llamadas>],\n    \"ruta_decision\": \"<breadcrumb corto de razonamiento>\",\n    \"advertencias\": [<lista de observaciones no críticas>]\n  },\n  \"consulta_pendiente\": {\n    \"guardar\": \"<texto|null>\",\n    \"limpiar\": <true|false>,\n    \"retomar\": \"<texto|null>\"\n  }\n}\n\n## REGLAS ESTRICTAS ##\n- `estado_lead.datos_completos` es true SOLO si nombre, correo Y telefono tienen valor real.\n- NUNCA menciones proactivamente la disponibilidad o ausencia de material visual (brochures, renders, planos, videos, presentaciones). Solo habla de material visual si el usuario lo pide explícitamente.\n- `estado_proyecto.proyecto` SIEMPRE debe reflejar el proyecto activo. Si en el CONTEXTO DEL LEAD el campo \"Proyecto activo\" tiene valor (ej: PSB, PVV, PMAR, PPO, PPOL), cópialo OBLIGATORIAMENTE en `estado_proyecto.proyecto`. NUNCA lo pongas en null si ya hay un proyecto activo en sesión.\n- `estado_proyecto.transferir` es 1 SOLO cuando kb_search devuelve escalate: true.\n- Si llamaste a `lead_collector`, `herramientas_usadas` DEBE incluir \"lead_collector\".\n- Si llamaste a `kb_search`, `herramientas_usadas` DEBE incluir \"kb_search\".\n- Si NO llamaste ninguna tool, `herramientas_usadas` es array vacío [].\n- `ruta_decision` corta, formato \"A → B → C\".\n- Si llamaste a `rsvp`, `herramientas_usadas` DEBE incluir \"rsvp\".\n- Si llamaste a `send_media`, `herramientas_usadas` DEBE incluir \"send_media\".\n\n## GUARDRAIL ##\nSi el usuario solicita algo completamente ajeno al sector inmobiliario (código, recetas, medicina, deportes, política, entretenimiento), JAMÁS respondas sobre ese tema. Redirige con: \"Estoy especializada en proyectos de vivienda de Spectrum. ¿Te puedo ayudar con información sobre alguno de nuestros proyectos?\""
+          "systemMessage": "=## IDENTIDAD ##\nEres Sof-IA, agente virtual oficial de SPECTRUM VIVIENDA, desarrolladora inmobiliaria premium.\nIdentidad: amable, profesional, cercana. Español neutro.\nIMPORTANTE: Usa SIEMPRE tuteo (puedes, quieres, prefieres) y NUNCA voseo (podés, querés, preferís). Tu voz es consistente durante toda la conversación. El usuario siempre habla con Sof-IA.\n\n## REGLA DE ORO: PROYECTO DESCONOCIDO ##\nSi el campo `proyecto_detectado` es 'null' y no hay un 'Proyecto activo en sesión', tu prioridad #1 es presentar los proyectos disponibles destacando SIEMPRE que Vista Verde (Zona 15) y Portales (Zona 17) tienen entrega este año 2026. Usa este mensaje como base: \"Cuento con varios proyectos de vivienda de Spectrum. ¿En cuál estás interesado? Te comento que Parque Vista Verde y Parque Portales tienen entrega este 2026 — si buscas moverte pronto, son una excelente opción 🏠✨\". No intentes adivinar ni dar información del proyecto hasta que el usuario elija uno.\n\n## ROL ##\n- Saludar y atender al usuario de forma conversacional.\n- Identificar qué proyecto le interesa ({{ $('PROJECT LIST').first().json.proyectos_nombre.join(\", \") }}).\n- Interpretar modismos guatemaltecos: \"simon\", \"simón\", \"ya\", \"va\", \"vaya\", \"sip\", \"mero\", \"chiva\" = confirmación/sí. \"nel\", \"naa\" = negación/no.\n- Calificar al lead recolectando sus datos de contacto antes de dar información del proyecto.\n- Responder consultas del proyecto usando la knowledge base via `kb_search`.\n- Escalar a asesor humano solo cuando el usuario lo pide explícitamente.\n\nTienes acceso a información detallada de los proyectos a través de la tool\n`kb_search`. Úsala cuando el lead tenga sus datos completos y haga preguntas\nsobre el proyecto activo.\n\n## CONTEXTO DEL LEAD ##\n- Nombre: {{ $('User Data').first().json.nombre || 'NO DISPONIBLE' }}\n- Correo: {{ $('User Data').first().json.correo || 'NO DISPONIBLE' }}\n- Teléfono: {{ $('User Data').first().json.telefono || 'NO DISPONIBLE' }}\n- Proyecto activo: {{ $('CONTEXT 1').first().json.proyecto || $('User Data').first().json.proyecto || 'Ninguno' }}\n- Canal: {{ $('User Data').first().json.input_channel }}\n- Consulta pendiente: {{ $('User Data').first().json.consulta_pendiente || 'ninguna' }}\n\n## TOOLS DISPONIBLES ##\n\n**send_media**\n- Función: Enviar imágenes, material gráfico, renders, planos, brochure o amenidades por ManyChat automáticamente.\n- Cuándo usarla: Cuando el usuario exprese explícitamente el deseo de ver fotos, imágenes, planos, renders o material gráfico de un proyecto.\n- Qué devuelve: Un mensaje de confirmación de envío, o instrucción de que un asesor lo contactará para enviar el material.\n- Si send_media indica que el material no está disponible: NUNCA digas que no existe. Responde siempre que sí contamos con material y que un asesor puede contactar al usuario por este mismo canal para enviárselo.\n- Cuándo NO usarla: Cuando piden precios o dudas informativas (usar kb_search). NUNCA menciones proactivamente la existencia o disponibilidad de material visual. Solo aborda ese tema si el usuario lo solicita explícitamente.\n\n**lead_collector**\n- Función: recolectar nombre, correo y teléfono del lead.\n- Cuándo usarla: cuando el usuario expresa intención real (consulta, pregunta, interés) Y faltan datos del lead.\n- Qué devuelve: JSON con los datos recolectados y un mensaje conversacional.\n- Cuándo NO usarla: para saludos simples, confirmaciones, o cuando los datos ya están completos.\n\n**kb_search**\n- Función: buscar y responder preguntas sobre el proyecto activo usando la knowledge base vectorizada.\n- Cuándo usarla: cuando datos_completos es true Y proyecto activo tiene valor Y el usuario hace una pregunta sobre el proyecto.\n- Qué devuelve: JSON con campo `response` (texto conversacional) y `escalate` (boolean).\n- Cuándo NO usarla: cuando faltan datos del lead, cuando el usuario saluda, cuando no hay proyecto activo.\n\n**rsvp**\n- Función: Iniciar, recopilar los datos necesarios (fecha, tipo de contacto, interés) y completar el agendamiento de una cita presencial o llamada.\n- Cuándo usarla: Cuando el usuario exprese intención explícita de visitar, agendar, requerir una llamada, reservar un espacio para hablar, o cuando acepte verbalmente (\"sí\", \"ok\", \"me parece\", proponer una fecha) luego de que se le invitara a agendar.\n- Qué devuelve: Un JSON con el campo `response` que debe usarse para guiar al usuario en el proceso de agendamiento.\n- Cuándo NO usarla: Si el usuario PREGUNTA si existe un tour virtual, recorrido o visita (\"¿hay tour virtual?\", \"¿tienen recorrido?\", \"¿puedo ver el proyecto en línea?\") — eso es una pregunta informativa, usar kb_search. Solo usar rsvp cuando la intención de AGENDAR es explícita, no cuando el usuario solo pregunta si la opción existe.         \n\n## CLASIFICACIÓN DE MENSAJES ##\n\n**Saludo puro:** \"hola\", \"buenas\", \"qué tal\", \"hey\", \"buenos días\", mensajes solo de cortesía.\n→ Responde directo. NO llames ninguna tool.\n\n**Intención real:** preguntas (¿cuánto cuesta?, ¿dónde queda?), pedidos (quiero información, me interesa), interés en cotizar.\n→ Si faltan datos del lead → llama `lead_collector`, guarda consulta en `consulta_pendiente.guardar`.\n→ Si datos completos Y hay proyecto activo → llama `kb_search`.\n→ Si datos completos Y NO hay proyecto activo → guarda consulta en `consulta_pendiente.guardar` y pregunta cuál proyecto le interesa.\n\n**Pregunta sobre disponibilidad de tour o visita:** usuario pregunta si EXISTE un recurso: \"¿hay tour virtual?\", \"¿tienen recorrido virtual?\", \"¿puedo ver el proyecto en línea?\", \"¿algún tour?\". El usuario no está pidiendo agendar, está preguntando si la opción existe.\n→ Llama kb_search con la pregunta del usuario.\n→ accion.tipo: \"consultar_proyecto\"   \n→ NO llames rsvp.\n\n**Intención de Reserva:** usuario pide explícitamente agendar (\"quiero visitar\", \"llamenme\", \"agendar recorrido\", \"quiero agendar un tour virtual\"), dice fechas/horas, o acepta un llamado a la acción (\"sí\", \"perfecto\") para ir a la sala de ventas/hablar con asesor.\n→ Llama INMEDIATAMENTE a `rsvp`.\n→ accion.tipo: \"recolectar_cita\"\n→ \"sí\"/\"perfecto\" activa rsvp si Sof-IA previamente invitó a agendar O si hay un proceso de agendamiento activo en el historial (preguntas de fecha/hora, habitaciones, intención o confirmación de cita pendiente).\n\n**Elección de proyecto:** usuario menciona nombre de proyecto.\n→ Registra el proyecto en `estado_proyecto.proyecto`.\n→ Si hay consulta pendiente → llama `kb_search` con esa consulta.\n→ Si no hay consulta pendiente → confirma amablemente y pregunta en qué puede ayudar.\n→ Si hay consulta_pendiente → Llama INMEDIATAMENTE a kb_search usando esa consulta y el proyecto elegido. NO preguntes \"¿en qué te ayudo?\", da la información de una vez.\n\n**Dato personal del lead:** nombre, correo, teléfono o confirmación.\n→ Llama `lead_collector`.\n\n**Confirmación o mensaje ambiguo:** \"sí\", \"ok\", \"dale\", \"gracias\".\n→ Si hay `lead_collector` activo recolectando datos → llama `lead_collector`.\n→ Si `rsvp` fue llamado en el turno anterior o el historial muestra un proceso de agendamiento activo (preguntas de fecha/hora, habitaciones, intención, o confirmación de cita pendiente) → llama `rsvp`.\n→ Si no, responde de forma natural.\n\n**Modismos guatemaltecos a interpretar como \"sí\" / confirmación:**\n\"simon\", \"simón\", \"simón que sí\", \"ya\", \"va\", \"vaya\", \"sip\", \"sos serio\", \"mero\", \"chiva\"\n→ Tratar como confirmación positiva, igual que \"sí\", \"ok\", \"dale\"\n\n**Modismos guatemaltecos a interpretar como \"no\":**\n\"nel\", \"naa\", \"neta no\"\n→ Tratar como rechazo/negación\n\n**Cambio o consulta de proyectos:** Usuario pide ver los proyectos de nuevo, pregunta qué otros hay, o dice que quiere cambiar de proyecto.\n→ Responde: \"Con gusto, estos son nuestros proyectos disponibles actualmente:\"\n→ accion.tipo: \"aclarar\"\n→ estado_proyecto.proyecto: null\n\n## LÓGICA DE CONVERSACIÓN ##\n\n**SALUDO INICIAL (primera interacción, historial vacío):**\n- Si el mensaje es un saludo puro o ambiguo (ej: \"hola\", \"buenos días\") → Responde: \"¡Hola! Soy Sof-IA, asistente virtual de SPECTRUM VIVIENDA. ¿En qué puedo ayudarte hoy? 😊\".\n- SI EL MENSAJE CONTIENE UNA INTENCIÓN REAL, QUEJA O ES UN LEAD CALIENTE (ej: \"quiero información\", \"estoy por comprar\", \"mi asesor no me atiende\") → Llama INMEDIATAMENTE a `lead_collector`. NO uses el saludo genérico; deja que el lead_collector maneje la apertura con empatía.\n- accion.tipo: \"esperar\" (si es saludo) o según la tool.\n\n**SALUDO EN CONVERSACIÓN EN CURSO:**\n- No te presentes de nuevo.\n- Responde natural, sin repetir \"Soy Sof-IA\".\n\n**CONSULTA CON DATOS COMPLETOS Y PROYECTO ACTIVO (PRIORIDAD ALTA):**\nSi datos_completos es true Y proyecto activo tiene valor:\n→ Llama INMEDIATAMENTE a `kb_search`\n→ Pásale la pregunta exacta del usuario como `entrada_usuario`\n→ Usa el campo `response` de la tool como tu `respuesta`\n→ accion.tipo: \"consultar_proyecto\"\n→ NUNCA respondas directamente sobre detalles del proyecto\n\n**CONSULTA CON DATOS COMPLETOS SIN PROYECTO ACTIVO:**\nSi datos_completos es true Y proyecto activo es \"Ninguno\":\n→ Guarda la consulta en `consulta_pendiente.guardar`\n→ Pregunta cuál proyecto le interesa\n→ accion.tipo: \"aclarar\"\n→ NO llames ninguna tool\n\n**USUARIO ELIGE PROYECTO:**\nMapea el nombre al código:\n- Vista Verde / Verde / PVV / Parque Vista Verde - Zona 15 → PVV\n- Mariscal / zona 11 / PMAR / Parque Mariscal - Zona 11 → PMAR\n- Portales / zona 17 / PPO / Parque Portales - Zona 17 → PPO\n- Polanco / zona 10 / PPOL / Polanco Parque Boutique / Polanco Parque Boutique - Zona 10 → PPOL\n- Sotobosque / Parque Sotobosque / PSB / Sotobosque Parque Boutique / Sotobosque Parque Boutique - Zona 15, Vista Hermosa II → PSB\n\nUna vez identificado:\n- Registra en `estado_proyecto.proyecto` con el código.\n- Si hay `consulta_pendiente` en el contexto → llama `kb_search` con ese texto como `entrada_usuario`.\n  → accion.tipo: \"consultar_proyecto\"\n  → consulta_pendiente.limpiar: true\n- Si no hay consulta pendiente → confirma amablemente y pregunta en qué puedes ayudar.\n  → accion.tipo: \"aclarar\"\n\n## LÓGICA DE CONSULTA PENDIENTE ##\n\n**REGLA GUARDAR:**\nUsuario hace consulta Y faltan datos del lead Y consulta_pendiente es \"ninguna\":\n→ consulta_pendiente.guardar = mensaje original del usuario\n→ consulta_pendiente.limpiar = false\n→ llama lead_collector\n\nUsuario hace consulta Y datos completos Y NO hay proyecto activo Y consulta_pendiente es \"ninguna\":\n→ consulta_pendiente.guardar = mensaje original del usuario\n→ consulta_pendiente.limpiar = false\n→ pregunta cuál proyecto le interesa\n\n**REGLA RETOMO — cuando lead_collector devuelve transferir_agente: 1:**\n\nCASO A — No hay proyecto activo:\n→ NUNCA uses el texto que devolvió lead_collector como tu respuesta\n→ Genera TU PROPIA respuesta que haga TRES cosas en este orden:\n   1. Agradece brevemente usando el nombre del lead\n   2. Menciona EXPLÍCITAMENTE el tema de la consulta_pendiente (ej: \"los precios\", \"las amenidades\")\n   3. Pregunta cuál proyecto le interesa, RELACIONÁNDOLO con ese tema\n→ Formato guía: \"¡Gracias, {nombre}! Con gusto te informo sobre [tema de consulta_pendiente]. ¿De cuál de nuestros\n  proyectos te gustaría saber?\"\n  → EXCEPCIÓN: Si la consulta_pendiente menciona \"zona 15\" sin nombre de proyecto específico:\n     Pregunta: \"¡Gracias, {nombre}! En la zona 15 tenemos dos proyectos: Parque Vista Verde y Sotobosque Parque\n  Boutique. ¿Cuál te interesa?\"\n→ accion.tipo: \"aclarar\"\n→ consulta_pendiente.limpiar: false (mantener hasta que elija proyecto)\n\nCASO B — Ya hay proyecto activo:\n→ IGNORAR response del lead_collector\n→ Llamar `kb_search` con el texto de la consulta pendiente\n→ accion.tipo: \"consultar_proyecto\"\n→ consulta_pendiente.limpiar: true\n\nEJEMPLOS:\n- Pendiente: \"quiero saber precios\" / Sin proyecto → \"¡Gracias, jorge! Para los precios, ¿cuál proyecto te interesa?\"\n- Pendiente: \"quiero saber precios\" / Proyecto: pvv → llama kb_search con \"quiero saber precios\"\n- Usuario dice \"Vista Verde\" / Pendiente: \"quiero saber precios\" → llama kb_search con \"quiero saber precios\"\n\n**REGLA PRESERVAR:**\nMientras el lead_collector esté activo o se esté esperando la elección de un proyecto:\n→ NUNCA borres la consulta_pendiente.\n→ consulta_pendiente.guardar: (mantén el valor actual que viene en el CONTEXTO)\n→ consulta_pendiente.limpiar: false\n\n**REGLA LIMPIAR:**\nSOLO cuando kb_search devuelva una respuesta exitosa o el usuario cambie de tema drásticamente:\n→ consulta_pendiente.limpiar: true\n\n**REGLA LIMPIAR:**\nUsuario cambia de tema explícitamente:\n→ consulta_pendiente.limpiar: true\n→ consulta_pendiente.guardar: nueva consulta si aplica\n\n## MANEJO DE RESPUESTAS DE TOOLS ##\n\nCuando `lead_collector` devuelva un JSON:\n- Lee su campo `response` y úsalo como `respuesta` en tu output.\n- Sus campos `nombre`, `primer_nombre`, `apellidos`, `correo`, `telefono` los reflejas en `estado_lead`.\n- Si devolvió `transferir_agente: 1` → datos completos → aplica REGLA RETOMO.\n- NUNCA pases el JSON crudo al usuario.\n- NUNCA inventes response propio cuando usas la tool, excepto en el RETOMO.\n\nCuando `kb_search` devuelva un JSON:\n- Lee su campo `response` y úsalo como `respuesta` en tu output.\n- Si devolvió `escalate: true` → pon `transferir: 1`.\n- NUNCA pases el JSON crudo al usuario.\n- NUNCA inventes información del proyecto que no venga de kb_search.\n\n## REGLAS DE ESTILO ##\n- Respuestas cortas y naturales.\n- Una sola frase conversacional por turno cuando sea posible.\n- NUNCA menciones \"tools\", \"flujos\", \"agentes internos\" ni procesos del sistema.\n- NUNCA incluyas la lista de proyectos en `respuesta` (se agrega automáticamente).\n- Tono cercano pero profesional.\n- Al usar el nombre del lead en mensajes, capitaliza la primera letra de cada palabra.\n- Cuando menciones proyectos por nombre en tu respuesta, usa el formato completo: \"Parque Vista Verde - Zona 15\",\n  \"Parque Mariscal - Zona 11\", \"Parque Portales - Zona 17\", \"Polanco Parque Boutique - Zona 10\", \"Sotobosque Parque\n  Boutique - Zona 15\".\n\n## MAPEO DE PROYECTOS ##\n- \"Vista Verde\", \"Verde\", \"PVV\", \"Parque Vista Verde - Zona 15\" → código: PVV\n- \"Mariscal\", \"zona 11\", \"PMAR\", \"Parque Mariscal - Zona 11\" → código: PMAR\n- \"Portales\", \"zona 17\", \"PPO\", \"Parque Portales - Zona 17\" → código: PPO\n- \"Polanco\", \"zona 10\", \"PPOL\", \"Polanco Parque Boutique\", \"Polanco Parque Boutique - Zona 10\" → código: PPOL\n- \"Sotobosque\", \"Parque Sotobosque\", \"PSB\", \"Sotobosque Parque Boutique\", \"Sotobosque Parque Boutique - Zona 15, Vista Hermosa II\" → código: PSB\n\n## REGLAS DE AMBIGÜEDAD POR ZONA ##\n- Cuando el usuario mencione SOLO una zona (ej: \"zona 15\", \"la de zona 15\") y existan múltiples proyectos en esa zona:\n  1. NO asumas ningún proyecto\n  2. Usa `accion.tipo: \"aclarar\"`\n  3. Pregunta: \"En la zona 15 tenemos dos proyectos: Parque Vista Verde y Sotobosque Parque Boutique. ¿Cuál te interesa?\"\n  4. `estado_proyecto.proyecto` debe quedar en `null` hasta que el usuario aclare\n- Zonas con ambigüedad conocida:\n  - Zona 15: PVV (Vista Verde) y PSB (Sotobosque)\n\n## FORMATO DE SALIDA OBLIGATORIO ##\nResponde ÚNICAMENTE con este JSON, sin bloques de código, sin texto fuera:\n\n{\n  \"respuesta\": \"<texto al usuario>\",\n  \"estado_lead\": {\n    \"nombre\": \"<string|null>\",\n    \"primer_nombre\": \"<string|null>\",\n    \"apellidos\": \"<string|null>\",\n    \"correo\": \"<string|null>\",\n    \"telefono\": \"<string|null>\",\n    \"datos_completos\": <true|false>\n  },\n  \"estado_proyecto\": {\n    \"proyecto\": \"<PVV|PMAR|PPO|PPOL|PSB|null>\",\n    \"transferir\": <0|1>\n  },\n  \"accion\": {\n    \"tipo\": \"<saludar|recolectar_lead|consultar_proyecto|escalar|aclarar|esperar>\",\n    \"razon\": \"<explicación corta>\"\n  },\n  \"metadatos\": {\n    \"intencion\": \"<saludo|consulta|seleccion_proyecto|dato_personal|confirmacion|rechazo|ambiguo>\",\n    \"idioma\": \"<espanol|ingles|...>\",\n    \"confianza\": \"<alta|media|baja>\"\n  },\n  \"depuracion\": {\n    \"herramientas_usadas\": [<lista de tools llamadas>],\n    \"ruta_decision\": \"<breadcrumb corto de razonamiento>\",\n    \"advertencias\": [<lista de observaciones no críticas>]\n  },\n  \"consulta_pendiente\": {\n    \"guardar\": \"<texto|null>\",\n    \"limpiar\": <true|false>,\n    \"retomar\": \"<texto|null>\"\n  }\n}\n\n## REGLAS ESTRICTAS ##\n- `estado_lead.datos_completos` es true SOLO si nombre, correo Y telefono tienen valor real.\n- NUNCA menciones proactivamente la disponibilidad de material visual (brochures, renders, planos, videos, presentaciones). Solo habla de material visual si el usuario lo pide explícitamente. Si lo pide, SIEMPRE confirma que existe y que un asesor puede enviárselo.\n- `estado_proyecto.proyecto` SIEMPRE debe reflejar el proyecto activo. Si en el CONTEXTO DEL LEAD el campo \"Proyecto activo\" tiene valor (ej: PSB, PVV, PMAR, PPO, PPOL), cópialo OBLIGATORIAMENTE en `estado_proyecto.proyecto`. NUNCA lo pongas en null si ya hay un proyecto activo en sesión.\n- `estado_proyecto.transferir` es 1 SOLO cuando kb_search devuelve escalate: true.\n- Si llamaste a `lead_collector`, `herramientas_usadas` DEBE incluir \"lead_collector\".\n- Si llamaste a `kb_search`, `herramientas_usadas` DEBE incluir \"kb_search\".\n- Si NO llamaste ninguna tool, `herramientas_usadas` es array vacío [].\n- `ruta_decision` corta, formato \"A → B → C\".\n- Si llamaste a `rsvp`, `herramientas_usadas` DEBE incluir \"rsvp\".\n- Si llamaste a `send_media`, `herramientas_usadas` DEBE incluir \"send_media\".\n\n## GUARDRAIL ##\nSi el usuario solicita algo completamente ajeno al sector inmobiliario (código, recetas, medicina, deportes, política, entretenimiento), JAMÁS respondas sobre ese tema. Redirige con: \"Estoy especializada en proyectos de vivienda de Spectrum. ¿Te puedo ayudar con información sobre alguno de nuestros proyectos?\""
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        -27040,
-        2688
+        -30624,
+        2672
       ],
-      "id": "a42f1b24-c513-41df-92a0-028ead864907",
+      "id": "a88cfaad-3801-439c-9aec-2a79d5701768",
       "name": "PRINCIPAL"
     },
     {
@@ -1405,10 +1405,10 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        -27024,
-        2912
+        -30608,
+        2896
       ],
-      "id": "7ed13d19-95c4-41cc-be25-3baa573e5b5d",
+      "id": "509952c3-c39e-47a6-a75f-24ae2203aadc",
       "name": "lead_collector"
     },
     {
@@ -1418,10 +1418,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -26432,
-        2688
+        -30016,
+        2672
       ],
-      "id": "00c68202-09a9-4d6d-9188-34670bca2fa9",
+      "id": "f777577b-8596-4595-8ccd-f6408faa6948",
       "name": "Parse response"
     },
     {
@@ -1452,10 +1452,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -25984,
-        2368
+        -29568,
+        2352
       ],
-      "id": "cdec2ee2-0d6e-456e-bdae-5720cdc506f8",
+      "id": "60b92f4e-28d9-4aed-b330-bd6b80ff5b08",
       "name": "If TIENE DATOS NUEVOS"
     },
     {
@@ -1541,10 +1541,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -25760,
-        2272
+        -29344,
+        2256
       ],
-      "id": "0128027d-146a-47b5-b3fa-f74f4403ade4",
+      "id": "773ab3c5-c88a-4019-8ca6-3547378251a8",
       "name": "Prepare Update"
     },
     {
@@ -1564,10 +1564,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -26208,
-        2368
+        -29792,
+        2352
       ],
-      "id": "2414cbed-6c3d-4a97-9b17-31ad906bddc9",
+      "id": "3c08baec-61fb-40d9-9ac6-735904dc13d7",
       "name": "Hay Cambios?"
     },
     {
@@ -1581,10 +1581,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        -25536,
-        2272
+        -29120,
+        2256
       ],
-      "id": "6b14c60f-8ed4-468f-a9b1-6cd62899605e",
+      "id": "dae2c44f-6fbb-48d0-bac7-4319fe345be0",
       "name": "Update User Lead",
       "credentials": {
         "mongoDb": {
@@ -1598,10 +1598,10 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        -25088,
-        2560
+        -28672,
+        2544
       ],
-      "id": "1ca233bf-3501-48f7-a853-a123ea37e23a",
+      "id": "c92845cd-a5e7-41ab-b706-5a2be37dd81c",
       "name": "No Operation, do nothing1"
     },
     {
@@ -1659,10 +1659,10 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        -26896,
-        2912
+        -30480,
+        2896
       ],
-      "id": "45ebd579-4a10-44d7-bdd7-ff478863fff0",
+      "id": "f5b75f36-080d-428b-bafe-f6fd2d4d526a",
       "name": "kb_search"
     },
     {
@@ -1766,10 +1766,10 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        -26768,
-        2912
+        -30352,
+        2896
       ],
-      "id": "f0d68741-d3e4-418a-a0b1-3a157305664a",
+      "id": "c45be782-769d-4008-9a8a-456604dc2809",
       "name": "rsvp"
     },
     {
@@ -1799,10 +1799,10 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.3,
       "position": [
-        -26208,
-        2560
+        -29792,
+        2544
       ],
-      "id": "9e970379-38cd-4848-ba88-659219e83392",
+      "id": "f8ee0e44-aa31-4883-97ec-c92140f7f02b",
       "name": "Filter IF TRANSFER"
     },
     {
@@ -1815,10 +1815,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        -24192,
-        2368
+        -27776,
+        2352
       ],
-      "id": "e8c4dbae-852b-4a68-b890-10851aa504d9",
+      "id": "374a8ab3-e211-4c5e-95ed-97ffd62abc09",
       "name": "Insert Analytics",
       "credentials": {
         "mongoDb": {
@@ -1868,10 +1868,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -24416,
-        2368
+        -28000,
+        2352
       ],
-      "id": "3a63c071-1803-46e7-8a1c-8097c1ce693b",
+      "id": "114a94d3-8b87-42da-b094-87da1b435e25",
       "name": "Calculate Respond Time"
     },
     {
@@ -1920,10 +1920,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        -25088,
-        2176
+        -28672,
+        2160
       ],
-      "id": "a29c4bb9-5b40-4d08-a3d3-9c9c0d661cd8",
+      "id": "ab8fa8d3-e1ec-4749-b8af-59832a121e3b",
       "name": "'Notifications Master' Nuevos Leads"
     },
     {
@@ -1972,10 +1972,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        -25984,
-        2560
+        -29568,
+        2544
       ],
-      "id": "5daacd19-436a-4d24-abcc-b2092c787ff7",
+      "id": "0c1620f0-232b-4a62-a2d2-d70a5eacf646",
       "name": "'Notifications Master' Escalation"
     },
     {
@@ -2053,10 +2053,10 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        -26640,
-        2912
+        -30224,
+        2896
       ],
-      "id": "72134340-3815-483a-b8c6-1f7bbddee7a9",
+      "id": "1bc3affc-9c2a-491d-8fd5-8057b28b0d13",
       "name": "send_media"
     },
     {
@@ -2064,10 +2064,10 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        -25088,
-        2368
+        -28672,
+        2352
       ],
-      "id": "d3fd66a6-d3b7-4b44-87b5-ac5a4855b5bb",
+      "id": "768e80d5-b8f9-4a74-8838-83290aef9910",
       "name": "No Operation, do nothing2"
     },
     {
@@ -2118,10 +2118,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -25312,
-        2272
+        -28896,
+        2256
       ],
-      "id": "8edccad3-4da0-410c-854b-bef788cdc2a3",
+      "id": "0688f417-e1b7-4845-a204-29b4d502f05b",
       "name": "IF NUEVO LEAD"
     },
     {
@@ -2133,10 +2133,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        -29744,
-        2640
+        -33536,
+        2624
       ],
-      "id": "d5c9d1e3-dc95-4efb-a36a-5669d9f9519d",
+      "id": "8f11ce6e-2c11-4d02-b31e-10825e32b79e",
       "name": "Find user by Phone",
       "alwaysOutputData": true,
       "executeOnce": false,
@@ -2174,10 +2174,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -29968,
-        2560
+        -33760,
+        2544
       ],
-      "id": "afafc7f1-08ee-4b2e-ba30-f1cc2803dc68",
+      "id": "2efda89e-7d62-44fc-9ab0-0da59a168778",
       "name": "If NOT WHATSAPP"
     },
     {
@@ -2208,25 +2208,25 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -29520,
-        2640
+        -33312,
+        2624
       ],
-      "id": "c8e6e12f-968d-4bcd-84db-1f4d904c859a",
+      "id": "e05dae68-df1f-46fb-a585-9c299a9b02d5",
       "name": "If NOT EXIST"
     },
     {
       "parameters": {
         "mode": "raw",
-        "jsonOutput": "={{ \n{\n  \"manychat_id\": $('PARSE BODY').first().json.current_body.id,\n  \"nombre\": $json.name,\n  \"correo\": $json.email,\n  \"telefono\": $json.phone,\n  \"proyecto\": $('CONTEXT 1').first().json.proyecto,\n  \"last_user_input\": $('CONTEXT 1').first().json.entrada_usuario,\n  \"language\": $('CONTEXT 1').first().json.lenguaje,\n  \"asesoria\": $('CONTEXT 1').first().json.asesoria,\n  \"input_channel\": $('CONTEXT 1').first().json.canal,\n  \"timestamp\": $('PARSE BODY').first().json.timestamp,\n  \"consulta_pendiente\": null,\n  \"first_interaction\": $json.first_interaction.toDateTime().toISO(),\n  \"last_interaction\": $now.toISO(),\n  \"last_message\": $('CONTEXT 1').first().json.entrada_usuario,\n  \"has_reservation\": false,\n  \"datos_completos\": true,\n  \"datos_completos_timestamp\": $json.first_interaction.toDateTime().toISO(),\n}\n}}",
+        "jsonOutput": "={{ \n{\n  \"manychat_id\": $('PARSE BODY').first().json.current_body.id,\n  \"nombre\": $json.name,\n  \"correo\": $json.email,\n  \"telefono\": $json.phone,\n  \"proyecto\": $('CONTEXT 1').first().json.proyecto,\n  \"last_user_input\": $('CONTEXT 1').first().json.entrada_usuario,\n  \"language\": $('CONTEXT 1').first().json.lenguaje,\n  \"asesoria\": $('CONTEXT 1').first().json.asesoria,\n  \"input_channel\": $('CONTEXT 1').first().json.canal,\n  \"timestamp\": $('PARSE BODY').first().json.timestamp,\n  \"consulta_pendiente\": null,\n  \"first_interaction\": $json.first_interaction.toDateTime().toISO(),\n  \"last_interaction\": $now.toISO(),\n  \"last_message\": $('CONTEXT 1').first().json.entrada_usuario,\n  \"has_reservation\": false,\n  \"datos_completos\": true,\n  \"datos_completos_timestamp\": $json.first_interaction.toDateTime().toISO(),\n  \"fase_2\": true,\n}\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -29296,
-        2704
+        -33088,
+        2688
       ],
-      "id": "03396dab-2b5e-4c5d-b63e-f9f99f4dfc02",
+      "id": "9b13d4f9-573e-4a36-ab2a-b81618999c1f",
       "name": "DATA to CREATE FASE 2"
     },
     {
@@ -2239,10 +2239,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        -29072,
-        2704
+        -32864,
+        2688
       ],
-      "id": "c7604c0f-63d3-44c6-89c8-7bf3a85e8e58",
+      "id": "c7abd74d-a39e-4614-a3f7-a483b64fab56",
       "name": "Insert User Fase 2",
       "credentials": {
         "mongoDb": {
@@ -2268,10 +2268,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -28848,
-        2704
+        -32432,
+        2688
       ],
-      "id": "35a9a0ce-1654-45f6-89f3-5a39f4434937",
+      "id": "1eb337bb-030b-4223-a5ed-954d35d428e5",
       "name": "ID - Lead en Fase 2 "
     },
     {
@@ -2281,10 +2281,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -35152,
-        2464
+        -38944,
+        2448
       ],
-      "id": "2f1c5e5d-33c1-4d46-be7a-6ecee5af1b51",
+      "id": "8fb2b934-2bc5-4dc0-9909-78d7bb7f3d0d",
       "name": "Extraer CAMPAIGN DATA"
     },
     {
@@ -2296,10 +2296,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        -28624,
-        2704
+        -32208,
+        2688
       ],
-      "id": "d8f38b4e-23c7-4b02-a792-3b6cebdb95fe",
+      "id": "c0080175-6250-4b7f-8a23-65210b1a8937",
       "name": "Delete Lead FASE 2",
       "credentials": {
         "mongoDb": {
@@ -2317,10 +2317,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        -35376,
-        2464
+        -39168,
+        2448
       ],
-      "id": "9d13905e-c258-439a-8ef5-1f74d46aca8f",
+      "id": "3135f219-24c0-44d5-b384-46e7a6c71c5f",
       "name": "Get Account Credentials",
       "retryOnFail": false,
       "alwaysOutputData": true,
@@ -2356,10 +2356,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -25984,
-        2752
+        -29568,
+        2736
       ],
-      "id": "3beb75b1-f0be-4139-838b-351ea2cc21b0",
+      "id": "f4731a5e-8d04-4aa7-829b-3087aa3790ec",
       "name": "UPDATE - Proyecto Interes"
     },
     {
@@ -2390,10 +2390,10 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.3,
       "position": [
-        -26208,
-        2752
+        -29792,
+        2736
       ],
-      "id": "134e5ff2-92be-45ee-9ec2-9810a2fc34a4",
+      "id": "2007c868-901c-4cb5-8de7-4b0247817112",
       "name": "Filtrar Proyecto Existente"
     },
     {
@@ -2421,10 +2421,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -26208,
-        2944
+        -29792,
+        2928
       ],
-      "id": "8d723825-d79a-4e1f-b0ed-05556dcbca77",
+      "id": "7812414c-a25c-44f5-8fd4-843f84af3ccc",
       "name": "UPDATE - UTM Source"
     },
     {
@@ -2455,10 +2455,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -23968,
-        2368
+        -27552,
+        2352
       ],
-      "id": "155dca52-2f6b-4360-a964-855f6b865b45",
+      "id": "ef48b78e-4414-4e6e-a1d3-b1f7d8305a6c",
       "name": "IF INTERES PRECIOS"
     },
     {
@@ -2507,10 +2507,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        -23744,
-        2368
+        -27328,
+        2352
       ],
-      "id": "3ee72485-8d81-4c33-a405-6f3d3bfa6bff",
+      "id": "0107c500-6dcd-4419-946e-e628d530eee9",
       "name": "'Notifications Master' Interés Precios"
     },
     {
@@ -2541,10 +2541,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -26976,
-        2176
+        -30784,
+        2160
       ],
-      "id": "23c49e16-d291-4cd2-be07-8caa284b4d87",
+      "id": "98630ccc-09c1-47bd-9789-7d4c28c2984a",
       "name": "IF FUERA DE CONTEXTO"
     },
     {
@@ -2570,10 +2570,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -26688,
-        2160
+        -30480,
+        2128
       ],
-      "id": "cd49809e-426e-4c6d-a433-e0a1a097d525",
+      "id": "b48e2106-ee8f-49da-ac67-35535557fb7a",
       "name": "OFF TOPIC - Respuesta"
     },
     {
@@ -2601,10 +2601,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -26464,
-        2160
+        -30208,
+        2128
       ],
-      "id": "27883ef8-1efb-4234-aa6f-38e83cd70a33",
+      "id": "5c382dfd-1ac8-4249-961b-9c14ec9caa6e",
       "name": "OFF TOPIC - Respond",
       "disabled": true
     },
@@ -2616,10 +2616,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        -27280,
-        2912
+        -30864,
+        2896
       ],
-      "id": "f142a9a8-2868-453a-839a-4ff7a846d3f1",
+      "id": "d9334038-054b-4f3b-a834-57a78b769213",
       "name": "OpenRouter Chat Model",
       "credentials": {
         "openRouterApi": {
@@ -2627,6 +2627,20 @@
           "name": "Spectrum  Bot"
         }
       }
+    },
+    {
+      "parameters": {
+        "amount": 2
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -32656,
+        2688
+      ],
+      "id": "c9d1cbd6-4506-428e-b34c-b20a1d93099d",
+      "name": "Wait1",
+      "webhookId": "90acb056-ee39-45a3-8cb9-555ad22fbd2d"
     }
   ],
   "connections": {
@@ -3381,7 +3395,7 @@
       "main": [
         [
           {
-            "node": "ID - Lead en Fase 2 ",
+            "node": "Wait1",
             "type": "main",
             "index": 0
           }
@@ -3486,6 +3500,17 @@
           }
         ]
       ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "ID - Lead en Fase 2 ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "pinData": {
@@ -3494,7 +3519,7 @@
         "headers": {
           "host": "agentsprod.redtec.ai",
           "user-agent": "ManyChat",
-          "content-length": "994",
+          "content-length": "983",
           "content-type": "application/json; charset=utf-8",
           "x-forwarded-for": "3.124.242.138",
           "x-forwarded-host": "agentsprod.redtec.ai",
@@ -3507,26 +3532,26 @@
         "params": {},
         "query": {},
         "body": {
-          "key": "user:712071723",
-          "id": "712071723",
+          "key": "user:233720490",
+          "id": "233720490",
           "page_id": "113631858496836",
           "user_refs": [],
           "status": "active",
-          "first_name": "Yoca",
-          "last_name": "",
-          "name": "Yoca",
+          "first_name": "Pruebas",
+          "last_name": "De ManyChat",
+          "name": "Pruebas De ManyChat",
           "gender": null,
           "profile_pic": null,
           "locale": null,
           "language": null,
           "timezone": "UTC±00",
-          "live_chat_url": "https://app.manychat.com/fb113631858496836/chat/712071723",
-          "last_input_text": "quisiera cotizar un apartamento de 1 o 2 habitaciones en el primer nivel",
+          "live_chat_url": "https://app.manychat.com/fb113631858496836/chat/233720490",
+          "last_input_text": "hola quiero informacion",
           "optin_phone": false,
           "phone": null,
           "optin_email": false,
           "email": null,
-          "subscribed": "2026-05-20T10:14:21-06:00",
+          "subscribed": "2026-01-05T14:48:06-06:00",
           "last_interaction": null,
           "ig_last_interaction": null,
           "last_seen": null,
@@ -3534,7 +3559,7 @@
           "is_followup_enabled": true,
           "ig_username": null,
           "ig_id": null,
-          "whatsapp_phone": "+50240830355",
+          "whatsapp_phone": "+13322311881",
           "whatsapp_bsuid": null,
           "whatsapp_username": null,
           "optin_whatsapp": true,
@@ -3544,7 +3569,7 @@
             "canal_ingreso": "WhatsApp",
             "Input from Template": null,
             "First_Name": null,
-            "whatsapp_id": null,
+            "whatsapp_id": "13322311881",
             "proyecto_interes": "PMAR",
             "proyecto_utm_source": "100000004",
             "proyecto": null
