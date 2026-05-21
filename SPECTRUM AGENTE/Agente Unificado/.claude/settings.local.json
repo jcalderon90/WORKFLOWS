@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat)",
+      "Read(//tmp/**)",
+      "Read(//Users/jorgecalderon/Desktop/PROYECTOS/WORKFLOWS/**)",
+      "Bash(find . -name \"estado_proyecto.md\")"
+    ]
+  }
+}
