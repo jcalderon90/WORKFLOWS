@@ -110,7 +110,7 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 
 ---
 
-## 🚀 Punto Actual del Proyecto (2026-05-20)
+## 🚀 Punto Actual del Proyecto (2026-05-21)
 
  Tras las optimizaciones recientes y los fixes de robustez del 19 de mayo, el sistema presenta el siguiente estatus técnico:
 - **Infraestructura Multitenant:** 100% Funcional. Enrutamiento dinámico por canal activado.
@@ -138,6 +138,17 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - **Fix consulta_pendiente (2026-05-20):** Resuelto bug crítico donde el bot recolectaba datos del lead pero no respondía la pregunta original. Causa raíz: `$json` en `Prepare Update` perdía el contexto de `Parse response` al pasar por el nodo `Hay Cambios?`. Corregido con referencia explícita al nodo.
 - **Fix RSVP por proyecto (2026-05-20):** `Find Appointment` ahora filtra por `manychat_id` + `proyecto`. Evita sobreescritura de citas entre proyectos distintos para el mismo usuario.
 - **Fix `proyecto_interes` fase 2 WhatsApp (2026-05-20):** Leads de WhatsApp con `proyecto_interes` ya definido en ManyChat (fase 2) ahora entran directamente al flujo con proyecto activo. El nodo `CONTEXT 1` lee `custom_fields.proyecto_interes` como primera prioridad en el branch de WhatsApp antes de intentar extraer el proyecto del mensaje. La REGLA DE ORO ya no se dispara para estos leads. Auditoría completa confirma que todos los flujos downstream (Lead Collector, KB SEARCH, RSVP, Sync_CRM) funcionan correctamente con este valor pre-seteado.
+- **Fix Notificaciones con datos incompletos (2026-05-21):** Corregidas referencias inválidas en nodos de notificaciones:
+  - `'Notifications Master' Nuevos Leads`: Removidas referencias a `$json.nombre/telefono/correo` que nunca existían en ese contexto
+  - Agregados fallbacks a `$('Prepare Update')` en Nuevos Leads, Precios y Escalación
+  - Mejorada robustez de `RSVP.json` con fallbacks en notificación de cita
+  - Cadena de fallback ahora es: `Parse response` → `Prepare Update` → `User Data` → valor por defecto
+  - **Resultado:** Garantiza que datos del lead se envíen correctamente incluso si faltan en nodos intermedios
+- **Auditoría de Referencias (2026-05-21):** Validación completa de flujos reveló 0 problemas:
+  - ✅ Todos los nodos referenciados existen
+  - ✅ Campos enviados coinciden exactamente con los esperados
+  - ✅ No hay referencias circulares ni campos huérfanos
+  - ✅ Arquitectura de notificaciones es SEGURA y ROBUSTA
 
 ---
 
