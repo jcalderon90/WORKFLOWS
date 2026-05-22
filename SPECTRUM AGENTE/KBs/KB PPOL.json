@@ -205,21 +205,28 @@
       "quetzales"
     ],
     "pregunta": "¿Cuánto cuesta un apartamento en Polanco?",
-    "respuesta": "Los precios en Polanco varían según el modelo:\n\n🏘️ 1 Habitación:\n- S-40: Q1,049,000 - Q1,176,000\n\n🏘️ 2 Habitaciones:\n- S-56: Q1,359,000 - Q1,507,000\n- S-61: Q1,491,000 - Q1,605,000\n- S-64: Q1,576,000 - Q1,659,000\n\n🏘️ 3 Habitaciones:\n- S-79: Q1,733,000 - Q1,738,000\n- S-80: Q1,674,000\n- S-106: Q2,268,000\n\nPara disponibilidad actual y detalles específicos, contacta con un asesor comercial de Spectrum."
+    "respuesta": "Para conocer los precios actualizados por modelo y unidades disponibles en Polanco, consulta con un asesor comercial de Spectrum."
   },
   {
     "id": "pl_precio_reserva",
     "proyecto": "PPOL",
     "categoria": "precios",
     "tags": [
-      "reserva",
-      "costo reserva",
-      "apartar",
+      "monto reserva",
+      "separar",
       "bloquear",
-      "como reservar"
+      "como reservar",
+      "cuanto es la reserva",
+      "reservar",
+      "precio reserva",
+      "Q15000",
+      "costo reserva",
+      "15 mil",
+      "reserva",
+      "apartar"
     ],
-    "pregunta": "¿Cómo puedo reservar un apartamento en Polanco?",
-    "respuesta": "La reserva se realiza directamente con un asesor comercial de Spectrum. Una vez formalizada la reserva, la unidad queda bloqueada. Requiere formulario de reserva debidamente llenado y firmado."
+    "pregunta": "¿Cuánto cuesta la reserva en Polanco? ¿Cómo puedo reservar un apartamento en Polanco?",
+    "respuesta": "La reserva de un apartamento en Polanco tiene un costo de Q15,000. 🏡\n\nEste monto bloquea la unidad elegida para que no pueda ser ofrecida a otro cliente.\n\nLa reserva se formaliza directamente con un asesor comercial de Spectrum y requiere formulario de reserva debidamente llenado y firmado.\n\n¿Te gustaría agendar una cita para iniciar el proceso? 📅"
   },
   {
     "id": "pl_financiamiento_general",

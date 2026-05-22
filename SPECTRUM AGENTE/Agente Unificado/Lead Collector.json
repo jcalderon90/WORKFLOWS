@@ -212,7 +212,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://crm.spectrum.com.gt:8055/Spectrum_WS_GeneracionLead/service.asmx",
+        "url": "https://crm.spectrum.com.gt:8055/Spectrum_WS_GeneracionLead/Service.asmx",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [

@@ -110,7 +110,7 @@
             {
               "id": "3",
               "name": "html_body",
-              "value": "=<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"utf-8\"></head><body style=\"background:#f7f7f8;margin:0;padding:0;font-family:Arial,sans-serif;\"><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr><td align=\"center\" style=\"padding:28px 16px;\"><table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);\"><tr><td style=\"background:#8e44ad;padding:24px 32px;\"><h1 style=\"color:#fff;margin:0;font-size:20px;\">💰 INTERÉS COMERCIAL</h1><p style=\"color:#e0c3fc;margin:4px 0 0;font-size:14px;\">Lead consultando por precios o disponibilidad</p></td></tr><tr><td style=\"padding:24px 32px;\"><h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">Datos del Lead</h2><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Proyecto</td><td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">{{ $json.datos.proyecto }}</td></tr><tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Nombre</td><td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">{{ $json.datos.nombre_lead }}</td></tr><tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Teléfono</td><td style=\"font-size:14px;color:#1a1a2e;\">{{ $json.datos.telefono_lead || 'No registrado' }}</td></tr><tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Correo</td><td style=\"font-size:14px;color:#1a1a2e;\">{{ $json.datos.correo_lead || 'No registrado' }}</td></tr></table></td></tr><tr><td style=\"padding:0 32px 24px;\"><h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">Consulta Reciente</h2><div style=\"background:#f9f9f9;padding:16px;border-radius:4px;border-left:4px solid #8e44ad;font-style:italic;color:#333;\">\"{{ $json.datos.ultima_consulta }}\"</div></td></tr><tr><td style=\"background:#f7f7f8;padding:14px 32px;border-top:1px solid #eee;\"><p style=\"margin:0;font-size:12px;color:#aaa;text-align:center;\">Sistema automatizado SPECTRUM VIVIENDA</p></td></tr></table></td></tr></table></body></html>",
+              "value": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body style=\"margin:0;padding:0;background:#f7f7f8;font-family:Arial,sans-serif;\">\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n  <tr><td align=\"center\" style=\"padding:28px 16px;\">\n    <table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#fff;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);\">\n      <tr><td style=\"background:#8e44ad;padding:24px 32px;\"><h1 style=\"color:#fff;margin:0;font-size:20px;\">💰 INTERÉS COMERCIAL</h1><p style=\"color:#e0c3fc;margin:4px 0 0;font-size:14px;\">Lead consultando por precios o disponibilidad</p></td></tr>\n      <tr><td style=\"background:#f9f3f3;padding:12px 32px;border-left:4px solid #8e44ad;\"><p style=\"margin:0;font-size:12px;color:#8e44ad;font-weight:bold;\">⚠️ {{ $json.datos.nombre_lead && $json.datos.nombre_lead !== 'No registrado' ? 'Datos completos' : 'En espera de datos de contacto completos' }}</p></td></tr>\n      <tr><td style=\"padding:24px 32px;\">\n        <h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">Información Disponible</h2>\n        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n          <tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Proyecto</td><td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">{{ $json.datos.proyecto || '—' }}</td></tr>\n          <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Nombre</td><td style=\"font-size:14px;font-weight:bold;color:{{ $json.datos.nombre_lead && $json.datos.nombre_lead !== 'No registrado' ? '#1a1a2e' : '#aaa' }};\">{{ $json.datos.nombre_lead && $json.datos.nombre_lead !== 'No registrado' ? $json.datos.nombre_lead : '(Pendiente)' }}</td></tr>\n          <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Teléfono</td><td style=\"font-size:14px;font-weight:bold;color:{{ $json.datos.telefono_lead && $json.datos.telefono_lead !== 'No registrado' ? '#1a1a2e' : '#aaa' }};\">{{ $json.datos.telefono_lead && $json.datos.telefono_lead !== 'No registrado' ? $json.datos.telefono_lead : '(Pendiente)' }}</td></tr>\n          <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Correo</td><td style=\"font-size:14px;font-weight:bold;color:{{ $json.datos.correo_lead && $json.datos.correo_lead !== 'No registrado' ? '#1a1a2e' : '#aaa' }};\">{{ $json.datos.correo_lead && $json.datos.correo_lead !== 'No registrado' ? $json.datos.correo_lead : '(Pendiente)' }}</td></tr>\n        </table>\n      </td></tr>\n      <tr><td style=\"padding:0 32px 24px;\">\n        <h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">Consulta</h2>\n        <div style=\"background:#f9f9f9;padding:16px;border-radius:4px;border-left:4px solid #8e44ad;font-style:italic;color:#333;\">&ldquo;{{ $json.datos.ultima_consulta }}&rdquo;</div>\n      </td></tr>\n      <tr><td style=\"background:#f7f7f8;padding:14px 32px;border-top:1px solid #eee;\"><p style=\"margin:0;font-size:12px;color:#aaa;text-align:center;\">Sistema automatizado SPECTRUM VIVIENDA</p></td></tr>\n    </table>\n  </td></tr>\n</table>\n</body>\n</html>",
               "type": "string"
             }
           ]
@@ -210,7 +210,7 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        832,
+        944,
         864
       ],
       "id": "4782b0d6-fe9e-4cc1-9e11-e0a70dccd113",
@@ -222,6 +222,41 @@
           "name": "Soporte Garoo"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9e213aeb-5d26-4405-9c34-95b001959c64",
+              "name": "subject",
+              "value": "={{ $json.subject }}",
+              "type": "string"
+            },
+            {
+              "id": "0a0ca15b-7f1b-4c99-bd3a-ac8a01bee654",
+              "name": "sendTo",
+              "value": "={{ $json.sendTo }}",
+              "type": "string"
+            },
+            {
+              "id": "b764518b-142c-49f0-899a-dd9ddbe3d25a",
+              "name": "html_body",
+              "value": "={{ $json.html_body }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        720,
+        864
+      ],
+      "id": "2aa51695-07f1-4956-9bdf-17cc18e401ab",
+      "name": "Edit Fields"
     }
   ],
   "connections": {
@@ -272,7 +307,7 @@
       "main": [
         [
           {
-            "node": "Send Gmail Notification",
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
@@ -283,7 +318,7 @@
       "main": [
         [
           {
-            "node": "Send Gmail Notification",
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
@@ -294,7 +329,7 @@
       "main": [
         [
           {
-            "node": "Send Gmail Notification",
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
@@ -305,7 +340,7 @@
       "main": [
         [
           {
-            "node": "Send Gmail Notification",
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
@@ -316,9 +351,33 @@
       "main": [
         []
       ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Send Gmail Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "pinData": {},
+  "pinData": {
+    "START": [
+      {
+        "tipo_alerta": "interes_precios",
+        "datos": {
+          "proyecto": "PMAR",
+          "nombre_lead": "No registrado",
+          "telefono_lead": "+50230206485",
+          "correo_lead": "No registrado",
+          "ultima_consulta": "O envíen cotización de 2 cuartos"
+        }
+      }
+    ]
+  },
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"

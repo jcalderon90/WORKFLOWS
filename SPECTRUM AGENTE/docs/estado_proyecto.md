@@ -1,5 +1,5 @@
 # 🏢 SPECTRUM VIVIENDA: Agente Unificado — Estado del Proyecto
-> Última actualización: 2026-05-21 (SerViPagos condicional + Urgencia Entrega 2026 + Material Visual siempre disponible)
+> Última actualización: 2026-05-22 (Precios Sotobosque + Precio reserva PPOL/PSB + Fix URL SOAP Lead Collector)
 
 ## 🎯 Objetivo General
 Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquestador central (*Sof-IA*) delega tareas a sub-workflows especializados (Tools), con persistencia centralizada en MongoDB y sincronización diferida al CRM Dynamics 365 vía SOAP.
@@ -48,19 +48,23 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ✅ **Completado (2026-05-21)**: **Material Visual — Respuesta siempre positiva:** Descripción de tool `send_media` y `REGLAS ESTRICTAS` actualizadas. Si el cliente pide material visual y no está disponible en el sistema, Sof-IA NUNCA dice que no existe — siempre confirma que sí hay material y que un asesor puede contactarle para enviárselo.
 
 ### 2. 👤 Captador de Leads — `Lead Collector.json`
-**Estado: ✅ Activo** | Última mod: 2026-05-13
+**Estado: ✅ Activo** | Última mod: 2026-05-22
 
 - ✅ **Completado**: Implementación de controles defensivos para inputs nulos en la lógica de nombres.
 - ✅ **Completado**: Recepción y persistencia de `page_id` en MongoDB.
 - ✅ **Completado**: **Split inteligente de nombre** — Lead Agent extrae `primer_nombre` y `apellidos` por separado. Se persisten en MongoDB y se usan directamente en el XML SOAP (`_Nombre`, `_Apellido`), resolviendo apellidos compuestos y combinaciones de 2 nombres + 2 apellidos.
+- ✅ **Completado (2026-05-22)**: **Fix URL SOAP:** Nodo `GENERAR LEAD CONTACT` corregido de `service.asmx` → `Service.asmx` para consistencia con `Sync_CRM.json` y la especificación del endpoint.
 
 ### 3. 📚 Experto en Proyectos — `KB SEARCH.json` + KBs
-**Estado: ✅ Activo** | Última mod: 2026-05-21
+**Estado: ✅ Activo** | Última mod: 2026-05-22
 
 - ✅ **Completado**: Inclusión de todos los proyectos activos (PVV, PMAR, PPO, PPOL, PSB).
 - ✅ **Completado (2026-05-21)**: **SerViPagos condicional (PSB, PPOL):** SerViPagos eliminado de las respuestas generales de mantenimiento. Ahora solo aparece cuando el cliente pregunta explícitamente por métodos de pago. Creadas entradas dedicadas `sb_mantenimiento_pago` y `pl_mantenimiento_pago` con tags específicos (`servipagos`, `donde pagar`).
 - ✅ **Completado (2026-05-21)**: **Urgencia Entrega 2026 — KBs PVV y PPO:** Actualizados `pvv_resumen_general` y `pp_resumen_general` con nota de urgencia "⭐ ENTREGA ESTE AÑO". Creada nueva entrada `pvv_diferenciadores`. Actualizado `pp_competencia_diferenciadores` para abrir con la entrega 2026 como primer diferenciador.
-- ⏳ **Pendiente**: Re-vectorizar KB PVV, PPO, PSB y PPOL en n8n (workflow `LLiVnT0M6xvDKive`) para que los cambios de esta sesión surtan efecto en producción.
+- ✅ **Completado (2026-05-22)**: **Precios Sotobosque (PSB):** `sb_precio_general` actualizado con tabla completa de precios por modelo (S-40 a S-106). Agregados 7 docs individuales de precio por modelo para mejor matching RAG. KB re-vectorizado.
+- ✅ **Completado (2026-05-22)**: **Limpieza precios Polanco (PPOL):** `pl_precio_general` tenía precios de Sotobosque copiados incorrectamente. Reemplazados por mensaje genérico de asesor hasta tener precios reales. KB re-vectorizado.
+- ✅ **Completado (2026-05-22)**: **Precio de reserva PSB y PPOL:** `sb_precio_reserva` y `pl_precio_reserva` actualizados con monto Q15,000. Agregados tags de búsqueda semántica. KBs re-vectorizados.
+- ⏳ **Pendiente**: Re-vectorizar KB PVV y PPO en n8n (workflow `LLiVnT0M6xvDKive`) para que los cambios del 2026-05-21 surtan efecto en producción.
 
 ### 4. 🔔 Notificaciones y Citas — `Notifications Master.json` & `RSVP.json`
 **Estado: ✅ Activo** | Última mod: 2026-05-20
@@ -115,7 +119,7 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 
 ---
 
-## 🚀 Punto Actual del Proyecto (2026-05-21 — sesión tarde)
+## 🚀 Punto Actual del Proyecto (2026-05-22)
 
 Tras las optimizaciones de conversión y limpieza de mensajería del 21 de mayo, el sistema presenta el siguiente estatus técnico:
 - **Infraestructura Multitenant:** 100% Funcional. Enrutamiento dinámico por canal activado.
@@ -157,6 +161,8 @@ Tras las optimizaciones de conversión y limpieza de mensajería del 21 de mayo,
 - **SerViPagos condicional (2026-05-21):** KB PSB y PPOL corregidas. SerViPagos ya no se menciona proactivamente en respuestas de mantenimiento — solo aparece si el lead pregunta explícitamente por métodos de pago.
 - **Estrategia de Conversión — Urgencia 2026 (2026-05-21):** Sistema completo de señalización de urgencia implementado en 3 capas: (1) PROJECT LIST con ⭐ y año de entrega, (2) REGLA DE ORO instruye a Sof-IA mencionar PVV/PPO como entrega este año, (3) KBs de PVV y PPO actualizadas con lenguaje de urgencia y entradas de diferenciadores.
 - **Material Visual — Experiencia positiva (2026-05-21):** Send Media y AGENT PRINCIPAL alineados. El sistema nunca niega existencia de material visual — siempre ofrece la alternativa de asesor que lo enviará.
+- **Precios Sotobosque y limpieza Polanco (2026-05-22):** KB PSB actualizada con precios reales por modelo (S-40 a S-106) y precio de reserva Q15,000. KB PPOL corregida — precios de Sotobosque que estaban asignados incorrectamente fueron removidos. Ambos KBs re-vectorizados.
+- **Fix URL SOAP Lead Collector (2026-05-22):** Endpoint corregido de `service.asmx` → `Service.asmx` para consistencia con Sync_CRM y la especificación oficial.
 
 ---
 
