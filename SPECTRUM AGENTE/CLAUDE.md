@@ -20,6 +20,22 @@ Antes de cualquier tarea en este proyecto, lee los skills que apliquen:
 
 ---
 
+## ⚠️ REGLA CRÍTICA - VALIDACIÓN DE DATOS OBLIGATORIA
+
+**El agente PRINCIPAL DEBE validar que existan nombre, correo Y teléfono ANTES de cualquier otra acción.**
+
+Si el lead NO ha compartido estos 3 datos:
+- ❌ NO responder sobre proyectos
+- ❌ NO llamar `kb_search`  
+- ❌ NO llamar `rsvp`
+- ✅ SOLO llamar `lead_collector`
+
+**SIN EXCEPCIONES.** Esto es imperativo. Ver sección "🔴 VALIDACIÓN OBLIGATORIA PRIMERO" en AGENT PRINCIPAL.json → systemMessage.
+
+Motivo: Caso real (2026-05-22): Lead sin datos respondió consulta sobre Portales y el agente respondió sin recolectar datos primero.
+
+---
+
 ## Arquitectura del sistema
 
 Agente conversacional inmobiliario para **SPECTRUM VIVIENDA**. El orquestador central (*Sof-IA*) recibe mensajes desde ManyChat (WhatsApp, Instagram, Messenger), clasifica la intención y delega a sub-workflows especializados (tools). La persistencia es MongoDB Atlas y la sincronización al CRM es diferida via SOAP.

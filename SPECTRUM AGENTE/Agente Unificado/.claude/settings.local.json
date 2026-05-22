@@ -5,7 +5,14 @@
       "Read(//tmp/**)",
       "Read(//Users/jorgecalderon/Desktop/PROYECTOS/WORKFLOWS/**)",
       "Bash(find . -name \"estado_proyecto.md\")",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Read(//Users/jorgecalderon/**)",
+      "Bash(curl -s \"https://agentsprod.redtec.ai/api/v1/workflows/iXaptKTUXaXrP7aF\" -H \"Authorization: Bearer $\\(cat ~/.n8n_token || echo ''\\)\")",
+      "Bash(npm list *)",
+      "Bash(chmod +x \"/Users/jorgecalderon/Desktop/PROYECTOS/WORKFLOWS/SPECTRUM AGENTE/Agente Unificado/scripts/run_tests.sh\")",
+      "Bash(awk '{print \" \" $9 \" \\(\" $5 \"\\)\"}')",
+      "Bash(awk '{print \"  \" $9 \" \\(\" $5 \"\\)\"}')",
+      "Bash(awk '{print \"  scripts/test_agent.py: \" $1 \" líneas\"}')"
     ]
   }
 }

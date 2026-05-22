@@ -1,0 +1,225 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                  SPECTRUM AGENTE - TESTING GUIDE                          ║
+║                                                                            ║
+║  Script de pruebas automatizadas para simular clientes reales             ║
+║  Acceso: https://agentsprod.redtec.ai/webhook/spectrum-agent             ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+
+📂 ARCHIVOS CREADOS
+═══════════════════════════════════════════════════════════════════════════
+
+scripts/
+├── test_agent.py              ⭐ Script principal de pruebas
+│                              (450 líneas, sin dependencias externas)
+│
+├── run_tests.sh               ⭐ Menú interactivo para ejecutar tests
+│                              (Más fácil que recordar comandos)
+│
+└── README_TEST_AGENT.md       Documentación técnica completa
+
+Raíz del proyecto/
+├── QUICK_START_TESTING.md     Guía rápida en 3 pasos ⭐ LEE ESTO PRIMERO
+├── TEST_SUITE_COMPLETE.md     Detalles técnicos y beneficios
+└── TESTING_GUIDE.txt          Este archivo
+
+
+🚀 CÓMO EMPEZAR (3 OPCIONES)
+═══════════════════════════════════════════════════════════════════════════
+
+OPCIÓN 1: Menú interactivo (RECOMENDADO PARA NO PROGRAMADORES)
+────────────────────────────────────────────────────────────────
+$ cd "Agente Unificado"
+$ ./scripts/run_tests.sh
+
+→ Te mostrará un menú para elegir qué test ejecutar
+
+───────────────────────────────────────────────────────────────────────────
+
+OPCIÓN 2: Comandos directos (PARA DESARROLLADORES)
+────────────────────────────────────────────────────────────────
+$ cd "Agente Unificado"
+
+# Ver qué tests hay
+$ python3 scripts/test_agent.py --list
+
+# Ejecutar un test rápido
+$ python3 scripts/test_agent.py --scenario saludo_inicial
+
+# Ejecutar la conversación completa
+$ python3 scripts/test_agent.py --scenario happy_path_completo
+
+# Ejecutar TODOS (10 tests, ~10 minutos)
+$ python3 scripts/test_agent.py
+
+───────────────────────────────────────────────────────────────────────────
+
+OPCIÓN 3: Script bash directo
+────────────────────────────────────────────────────────────────
+$ cd "Agente Unificado"
+$ ./scripts/run_tests.sh quick      # Test rápido
+$ ./scripts/run_tests.sh happy      # Happy path
+$ ./scripts/run_tests.sh all        # Todos
+
+
+📋 LOS 10 ESCENARIOS
+═══════════════════════════════════════════════════════════════════════════
+
+1. saludo_inicial
+   → Valida bienvenida sin datos previos
+   ⏱ ~30 segundos
+
+2. happy_path_completo ⭐ RECOMENDADO
+   → Conversación completa: saludo → datos → proyecto → consulta
+   ⏱ ~3-5 minutos
+
+3. lead_sin_datos
+   → Verifica que lead_collector se active cuando faltan datos
+   ⏱ ~30 segundos
+
+4. fuera_de_contexto
+   → Valida guardrail (rechaza código, recetas, medicina, etc.)
+   ⏱ ~30 segundos
+
+5. mencion_proyecto_directo
+   → Usuario menciona proyecto en primer mensaje
+   ⏱ ~30 segundos
+
+6. solicita_asesoria
+   → Usuario pide hablar con asesor humano
+   ⏱ ~1-2 minutos
+
+7. multiples_proyectos
+   → Maneja ambigüedad ("zona 15" → PVV o PSB)
+   ⏱ ~30 segundos
+
+8. canal_instagram
+   → Funciona igual en Instagram que en WhatsApp
+   ⏱ ~30 segundos
+
+9. rsvp_flow
+   → Usuario quiere agendar una visita/cita
+   ⏱ ~3-5 minutos
+
+10. modismos_guatemaltecos
+    → Entiende "simón", "va", "nel", etc.
+    ⏱ ~1-2 minutos
+
+
+💻 EJEMPLO DE EJECUCIÓN
+═══════════════════════════════════════════════════════════════════════════
+
+$ python3 scripts/test_agent.py --scenario happy_path_completo
+
+======================================================================
+ESCENARIO: happy_path_completo
+======================================================================
+
+Descripción: Conversación completa...
+Canal: WhatsApp
+
+User ID (sesión): test_a1b2c3d4
+
+✅ [1/4] Usuario: "Hola, me interesa saber..."
+   Respuesta (2340ms):
+      respuesta: ¡Hola! Soy Sof-IA, asistente virtual de SPECTRUM...
+      accion: recolectar_lead
+      tools: [lead_collector]
+
+[... más turnos ...]
+
+✅ Todos los tests pasaron correctamente
+
+
+🎯 QUIÉN PUEDE USAR ESTO
+═══════════════════════════════════════════════════════════════════════════
+
+✅ Desarrolladores      → QA antes de deployments
+✅ DevOps              → Healthchecks del agente
+✅ Product Managers    → Validar features sin cliente real
+✅ Cualquier IA        → Ejecutable automáticamente
+✅ Clientes            → Demo interactivo
+
+
+📊 VERIFICACIÓN POST-TEST
+═══════════════════════════════════════════════════════════════════════════
+
+Después de ejecutar, puedes verificar en:
+
+1. MongoDB Atlas
+   → Colección: Centralizado.users
+   → Filtro: manychat_id que empiece con "test_"
+
+2. n8n Dashboard
+   → URL: https://agentsprod.redtec.ai
+   → Workflow: AGENT PRINCIPAL
+   → Pestaña: Executions
+   → Busca: user_id que empiece con "test_"
+
+3. Redis (temporal)
+   → Keys: test_<user_id>
+   → Se limpian automáticamente tras el flujo
+
+
+🛠 REQUISITOS
+═══════════════════════════════════════════════════════════════════════════
+
+- Python 3.6+
+- Internet (para conectarse al webhook remoto)
+- Terminal/Bash
+- CERO dependencias externas (solo stdlib)
+
+
+⏱ TIEMPOS ESPERADOS
+═══════════════════════════════════════════════════════════════════════════
+
+Un test (saludo)        : 30-40 segundos
+Happy path             : 3-5 minutos (4 turnos)
+Suite completa (10)    : 8-10 minutos
+
+
+📖 DOCUMENTACIÓN
+═══════════════════════════════════════════════════════════════════════════
+
+LÉELA EN ESTE ORDEN:
+
+1. QUICK_START_TESTING.md
+   → Empieza aquí si quieres ir rápido (5 minutos)
+
+2. scripts/README_TEST_AGENT.md
+   → Documentación técnica completa (15 minutos)
+
+3. TEST_SUITE_COMPLETE.md
+   → Detalles de implementación y beneficios (20 minutos)
+
+
+✨ BENEFICIOS
+═══════════════════════════════════════════════════════════════════════════
+
+Antes:
+  ❌ Necesitabas cliente real (ManyChat, WhatsApp)
+  ❌ Manual (pruebas manuales toman horas)
+  ❌ Difícil de debuggear
+  ❌ Una IA no podía probar el sistema
+
+Ahora:
+  ✅ Script puro, sin dependencias externas
+  ✅ Automatizado (10 escenarios en 10 minutos)
+  ✅ Output claro con timing y colores
+  ✅ Cualquier IA puede ejecutarlo
+  ✅ Datos persistidos en MongoDB + logs en n8n
+
+
+🎬 PRÓXIMOS PASOS
+═══════════════════════════════════════════════════════════════════════════
+
+1. Hoy:    Ejecuta uno de los comandos de arriba
+2. Luego:  Lee la documentación
+3. Después: Integra en tu CI/CD si lo deseas
+
+
+═══════════════════════════════════════════════════════════════════════════
+Creado por: Claude Code
+Fecha: 2026-05-22
+Estado: ✅ Completado y probado
+═══════════════════════════════════════════════════════════════════════════
