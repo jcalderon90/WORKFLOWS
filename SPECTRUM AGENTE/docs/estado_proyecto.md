@@ -1,5 +1,5 @@
 # 🏢 SPECTRUM VIVIENDA: Agente Unificado — Estado del Proyecto
-> Última actualización: 2026-05-22 (Precios Sotobosque + Precio reserva PPOL/PSB + Fix URL SOAP Lead Collector)
+> Última actualización: 2026-05-22 (Validación Imperativa de Datos + Precios Sotobosque + Fix URL SOAP Lead Collector)
 
 ## 🎯 Objetivo General
 Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquestador central (*Sof-IA*) delega tareas a sub-workflows especializados (Tools), con persistencia centralizada en MongoDB y sincronización diferida al CRM Dynamics 365 vía SOAP.
@@ -23,7 +23,7 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 ## 📦 Módulos (Workflows)
 
 ### 1. 🧠 Orquestador Central — `AGENT PRINCIPAL.json`
-**Estado: ✅ Activo — Conversión + Material Visual + Urgencia Entrega 2026** | Última mod: 2026-05-21
+**Estado: ✅ Activo — Conversión + Material Visual + Urgencia Entrega 2026 + Validación Imperativa de Datos** | Última mod: 2026-05-22
 
 - ✅ **Completado**: Sincronización paramétrica con servidor (expresiones =URL y variables de input).
 - ✅ **Completado**: Búsqueda de usuarios segmentada por `manychat_id` + `page_id`.
@@ -64,6 +64,7 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ✅ **Completado (2026-05-22)**: **Precios Sotobosque (PSB):** `sb_precio_general` actualizado con tabla completa de precios por modelo (S-40 a S-106). Agregados 7 docs individuales de precio por modelo para mejor matching RAG. KB re-vectorizado.
 - ✅ **Completado (2026-05-22)**: **Limpieza precios Polanco (PPOL):** `pl_precio_general` tenía precios de Sotobosque copiados incorrectamente. Reemplazados por mensaje genérico de asesor hasta tener precios reales. KB re-vectorizado.
 - ✅ **Completado (2026-05-22)**: **Precio de reserva PSB y PPOL:** `sb_precio_reserva` y `pl_precio_reserva` actualizados con monto Q15,000. Agregados tags de búsqueda semántica. KBs re-vectorizados.
+- ✅ **Completado (2026-05-22)**: **Validación Imperativa de Datos del Lead:** Reforzada regla 🔴 VALIDACIÓN OBLIGATORIA PRIMERO en systemMessage de PRINCIPAL. Lead DEBE compartir nombre + correo + teléfono ANTES de cualquier respuesta, sin excepciones. Bloqueado: kb_search, rsvp, material visual. SOLO lead_collector hasta que datos completos. Incidente: Lead respondió consulta sobre Portales sin datos compartidos.
 - ⏳ **Pendiente**: Re-vectorizar KB PVV y PPO en n8n (workflow `LLiVnT0M6xvDKive`) para que los cambios del 2026-05-21 surtan efecto en producción.
 
 ### 4. 🔔 Notificaciones y Citas — `Notifications Master.json` & `RSVP.json`
