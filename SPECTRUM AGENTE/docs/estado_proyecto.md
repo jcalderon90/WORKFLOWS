@@ -1,5 +1,5 @@
 # 🏢 SPECTRUM VIVIENDA: Agente Unificado — Estado del Proyecto
-> Última actualización: 2026-05-22 (Validación Imperativa de Datos + Precios Sotobosque + Fix URL SOAP Lead Collector)
+> Última actualización: 2026-05-24 (RSVP: Eliminada restricción de horario laboral)
 
 ## 🎯 Objetivo General
 Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquestador central (*Sof-IA*) delega tareas a sub-workflows especializados (Tools), con persistencia centralizada en MongoDB y sincronización diferida al CRM Dynamics 365 vía SOAP.
@@ -68,12 +68,13 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ⏳ **Pendiente**: Re-vectorizar KB PVV y PPO en n8n (workflow `LLiVnT0M6xvDKive`) para que los cambios del 2026-05-21 surtan efecto en producción.
 
 ### 4. 🔔 Notificaciones y Citas — `Notifications Master.json` & `RSVP.json`
-**Estado: ✅ Activo** | Última mod: 2026-05-20
+**Estado: ✅ Activo** | Última mod: 2026-05-24
 
 - ✅ **Completado**: Agregado `aduarte@spectrum.com.gt` (Andy Duarte) como destinatario CC en los 4 tipos de alerta: Nuevo Lead, Interés en Precios, Nueva Cita y Escalación.
 - ✅ **Completado**: **Template premium de citas:** `Payload Cita` actualizado con diseño profesional (header oscuro SPECTRUM VIVIENDA, tablas de datos del lead y detalles de cita) — paridad con el template de `RSVP.json`.
 - ✅ **Completado (2026-05-19)**: **Reformateo de RSVP.json:** Aplicado estándar de indentación de 2 espacios, reorganización visual de nodos y IDs para mejorar legibilidad y mantenibilidad futura.
 - ✅ **Completado (2026-05-20)**: **Fix `Find Appointment` por proyecto:** Query de búsqueda ahora filtra por `manychat_id` + `proyecto`. Antes solo filtraba por `manychat_id`, lo que causaba que un usuario con citas en múltiples proyectos sobreescribiera la cita anterior.
+- ✅ **Completado (2026-05-24)**: **Eliminada restricción de horario laboral en RSVP:** Removida la validación de "lunes a sábado, 9:00 a 18:00" del system prompt del agente de agendamiento. Ahora solo se rechazan fechas pasadas — el lead puede proponer cualquier horario y el asesor coordina disponibilidad directamente.
 - ⏳ **Pendiente**: Limpiar campos `metodo_contacto_pref` y `estado_civil` de nodos `Insert/Update Appointment Data` — el agente nunca los recolecta, siempre llegan `null`.
 - ⏳ **Pendiente**: `sendTo` dinámico — los correos de notificación de citas están hardcodeados en el nodo `CONTEXT`. Mover a `manychat_settings` en MongoDB.
 - ⏳ **Pendiente**: Limpiar `chat_histories_rsvp` tras `cita_confirmada: true` para evitar que el agente arranque con contexto de citas anteriores al reagendar.
@@ -120,7 +121,7 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 
 ---
 
-## 🚀 Punto Actual del Proyecto (2026-05-22)
+## 🚀 Punto Actual del Proyecto (2026-05-24)
 
 Tras las optimizaciones de conversión y limpieza de mensajería del 21 de mayo, el sistema presenta el siguiente estatus técnico:
 - **Infraestructura Multitenant:** 100% Funcional. Enrutamiento dinámico por canal activado.
@@ -164,6 +165,7 @@ Tras las optimizaciones de conversión y limpieza de mensajería del 21 de mayo,
 - **Material Visual — Experiencia positiva (2026-05-21):** Send Media y AGENT PRINCIPAL alineados. El sistema nunca niega existencia de material visual — siempre ofrece la alternativa de asesor que lo enviará.
 - **Precios Sotobosque y limpieza Polanco (2026-05-22):** KB PSB actualizada con precios reales por modelo (S-40 a S-106) y precio de reserva Q15,000. KB PPOL corregida — precios de Sotobosque que estaban asignados incorrectamente fueron removidos. Ambos KBs re-vectorizados.
 - **Fix URL SOAP Lead Collector (2026-05-22):** Endpoint corregido de `service.asmx` → `Service.asmx` para consistencia con Sync_CRM y la especificación oficial.
+- **RSVP sin restricción de horario (2026-05-24):** Eliminada la validación de horario laboral (lunes-sábado 9:00-18:00) del agente RSVP. El lead puede proponer cualquier horario; el asesor coordina disponibilidad. Solo se sigue rechazando fechas pasadas.
 
 ---
 

@@ -11,12 +11,12 @@ Antes de cualquier tarea en este proyecto, lee los skills que apliquen:
 | Situación | Skill |
 |---|---|
 | Siempre (arquitectura, CRM, catálogos) | `Agente Unificado/.skills/spectrum-agente-unificado/SKILL.md` |
-| Crear o diseñar un workflow nuevo | `.skills/n8n-workflow-patterns/SKILL.md` |
-| Configurar parámetros de un nodo | `.skills/n8n-node-configuration/SKILL.md` |
-| Código en nodo Code (JS) | `.skills/n8n-code-javascript/SKILL.md` |
-| Expresiones `{{ }}` | `.skills/n8n-expression-syntax/SKILL.md` |
-| Interpretar errores de validación | `.skills/n8n-validation-expert/SKILL.md` |
-| Usar herramientas MCP de n8n | `.skills/n8n-mcp-tools-expert/SKILL.md` |
+| Crear o diseñar un workflow nuevo | `Agente Unificado/.skills/n8n-workflow-patterns/SKILL.md` |
+| Configurar parámetros de un nodo | `Agente Unificado/.skills/n8n-node-configuration/SKILL.md` |
+| Código en nodo Code (JS) | `Agente Unificado/.skills/n8n-code-javascript/SKILL.md` |
+| Expresiones `{{ }}` | `Agente Unificado/.skills/n8n-expression-syntax/SKILL.md` |
+| Interpretar errores de validación | `Agente Unificado/.skills/n8n-validation-expert/SKILL.md` |
+| Usar herramientas MCP de n8n | `Agente Unificado/.skills/n8n-mcp-tools-expert/SKILL.md` |
 
 ---
 

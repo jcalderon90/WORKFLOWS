@@ -125,7 +125,8 @@
       "Bash(claude mcp *)",
       "Bash(Get-ChildItem -Path \"E:\\\\1TRABAJO\\\\PROGRAMMING\\\\Proyectos\\\\n8n-workflows\\\\SPECTRUM AGENTE\\\\Agente Unificado\" -Filter \"*.json\")",
       "Bash(Select-Object Name, Length)",
-      "PowerShell(Test-Path \"E:\\\\1TRABAJO\\\\PROGRAMMING\\\\Proyectos\\\\n8n-workflows\\\\SPECTRUM AGENTE\\\\Agente Unificado\"; Get-ChildItem -Path \"E:\\\\1TRABAJO\\\\PROGRAMMING\\\\Proyectos\\\\n8n-workflows\\\\SPECTRUM AGENTE\\\\Agente Unificado\" -ErrorAction SilentlyContinue | ForEach-Object { $_.Name })"
+      "PowerShell(Test-Path \"E:\\\\1TRABAJO\\\\PROGRAMMING\\\\Proyectos\\\\n8n-workflows\\\\SPECTRUM AGENTE\\\\Agente Unificado\"; Get-ChildItem -Path \"E:\\\\1TRABAJO\\\\PROGRAMMING\\\\Proyectos\\\\n8n-workflows\\\\SPECTRUM AGENTE\\\\Agente Unificado\" -ErrorAction SilentlyContinue | ForEach-Object { $_.Name })",
+      "Bash(npx skills *)"
     ]
   }
 }
