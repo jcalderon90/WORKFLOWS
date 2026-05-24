@@ -1,5 +1,5 @@
 # 🏢 SPECTRUM VIVIENDA: Agente Unificado — Estado del Proyecto
-> Última actualización: 2026-05-24 (RSVP: Eliminada restricción de horario laboral)
+> Última actualización: 2026-05-24 (Scaffold del servidor MCP de simulación `spectrum-sim-mcp`)
 
 ## 🎯 Objetivo General
 Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquestador central (*Sof-IA*) delega tareas a sub-workflows especializados (Tools), con persistencia centralizada en MongoDB y sincronización diferida al CRM Dynamics 365 vía SOAP.
@@ -102,6 +102,29 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 
 - ✅ **Completado**: Verificación de correspondencia con flujo remoto en n8n a través de MCP.
 
+### 8. 🧪 Simulador para IAs externas — `spectrum-sim-mcp/`
+**Estado: 🟡 Scaffold listo, parcialmente operativo** | Última mod: 2026-05-24
+
+Servidor MCP en Python que permite a cualquier IA (Claude Desktop/Code, Cursor, Gemini CLI, Continue) **simular conversaciones contra Sof-IA como si fuera un cliente real de ManyChat** y observar el resultado (ejecuciones n8n + estado en Mongo).
+
+- ✅ **Completado**: Scaffold del paquete (`pyproject.toml`, entrypoint `spectrum-sim-mcp`, deps `mcp` + `httpx` + `pymongo` + `python-dotenv`).
+- ✅ **Completado**: 8 tools registradas: `send_message`, `new_test_user_id`, `list_workflows`, `list_executions`, `get_execution`, `tail_executions`, `read_user_state`, `reset_user`.
+- ✅ **Completado**: `webhook.py` arma el payload tipo ManyChat (`key`, `body.id`, `body.page_id`, `custom_fields`, `last_input_text`, `whatsapp_phone`) idéntico al que recibe `AGENT PRINCIPAL` en producción.
+- ✅ **Completado**: `n8n_client.py` con auth `X-N8N-API-KEY`; `list_executions` / `get_execution` / `list_workflows` con manejo de errores y paginación.
+- ✅ **Completado**: `tail_executions` (polling con deadline) para capturar la ejecución que un `send_message` acaba de disparar — workaround a la limitación de la API n8n que no filtra por `user_id`.
+- ✅ **Completado**: `mongo_client.py` con workaround DNS Google (`8.8.8.8`/`8.8.4.4`) documentado en CLAUDE.md para SRV de Atlas.
+- ✅ **Completado**: Guardrails de `reset_user` — exige `MONGO_ALLOW_RESET=true` en `.env` **Y** prefijo `test_` en el `manychat_id`. Doble bloqueo para no tocar leads reales.
+- ✅ **Completado**: Tools de Mongo se autoregistran sólo si `MONGO_URI` está configurado; si Atlas cae, las tools devuelven error legible en vez de tumbar el servidor.
+- ✅ **Completado**: `WORKFLOW_IDS` mapea nombres amigables → IDs n8n para que el LLM cliente no tenga que memorizarlos (`AGENT PRINCIPAL` → `iXaptKTUXaXrP7aF`, etc.).
+- ✅ **Completado**: `.env` configurado con `N8N_API_KEY`, `MONGO_URI`, `MONGO_DB=Centralizado`, `DEFAULT_PAGE_ID=576411852216119` (PMAR), `WEBHOOK_TIMEOUT=35`, `MONGO_ALLOW_RESET=true`.
+- ✅ **Completado**: Conectividad Atlas verificada — IP `162.43.188.28` agregada al Network Access del cluster.
+- ⏳ **Pendiente / 🔴 Bloqueante**: Otorgar rol `readWrite` sobre la DB `Centralizado` al usuario `jcalderon900610_db_user` en Atlas. Hoy sólo tiene privilegios sobre la DB `Database` (otra del mismo cluster), por lo que `read_user_state` retorna `null` y `reset_user` no borra nada. Atlas devuelve documentos vacíos silenciosamente cuando faltan privilegios (no lanza "not authorized").
+- ⏳ **Pendiente**: Registrar el servidor en `~/.claude.json` (`claude mcp add spectrum-sim -s user -- spectrum-sim-mcp`) tras desbloquear los permisos de Mongo.
+- ⏳ **Pendiente**: Smoke test end-to-end desde Claude Code — "saluda como cliente nuevo, captura la ejecución y dime qué tools llamó".
+- ⏳ **Pendiente**: Tests automatizados (carpeta `tests/` existe pero vacía).
+- ⚠️ **Riesgo**: La API key n8n y la URI de Mongo con password fueron pegadas en la conversación durante el setup. Rotar credenciales tras cerrar la fase de validación.
+- 📎 **Alternativa paralela**: Se registró también el `mongodb-mcp-server` oficial (npm) en Claude Code, pero falla al iniciar por un bug de npm 11.14.1 (`Invalid Version` al deduplicar `express-rate-limit → ip-address`). No bloquea al servidor custom; queda como vía de respaldo si se requiere acceso Mongo desde Claude Code sin pasar por este simulador.
+
 ---
 
 ## 🏗️ Infraestructura Multitenant
@@ -166,6 +189,7 @@ Tras las optimizaciones de conversión y limpieza de mensajería del 21 de mayo,
 - **Precios Sotobosque y limpieza Polanco (2026-05-22):** KB PSB actualizada con precios reales por modelo (S-40 a S-106) y precio de reserva Q15,000. KB PPOL corregida — precios de Sotobosque que estaban asignados incorrectamente fueron removidos. Ambos KBs re-vectorizados.
 - **Fix URL SOAP Lead Collector (2026-05-22):** Endpoint corregido de `service.asmx` → `Service.asmx` para consistencia con Sync_CRM y la especificación oficial.
 - **RSVP sin restricción de horario (2026-05-24):** Eliminada la validación de horario laboral (lunes-sábado 9:00-18:00) del agente RSVP. El lead puede proponer cualquier horario; el asesor coordina disponibilidad. Solo se sigue rechazando fechas pasadas.
+- **Servidor MCP de simulación `spectrum-sim-mcp` (2026-05-24):** Scaffold completo en Python con 8 tools que permiten a cualquier IA externa (Claude/Gemini/Cursor) hablar con Sof-IA como cliente ManyChat y leer el resultado (ejecuciones n8n + estado Mongo). Tools de n8n (webhook, list/get/tail executions) operativas. Tools de Mongo (`read_user_state`, `reset_user`) implementadas con guardrails (`MONGO_ALLOW_RESET` + prefijo `test_`) pero bloqueadas hasta que se otorgue `readWrite` sobre la DB `Centralizado` al usuario `jcalderon900610_db_user` en Atlas. Falta registrar el servidor en `~/.claude.json` y smoke test end-to-end.
 
 ---
 

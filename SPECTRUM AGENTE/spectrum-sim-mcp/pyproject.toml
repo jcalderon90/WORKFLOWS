@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spectrum-sim-mcp"
+version = "0.1.0"
+description = "MCP server to simulate ManyChat traffic against the SPECTRUM VIVIENDA (Sof-IA) n8n agent and observe its executions."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "GAROO / Spectrum" }]
+license = { text = "Proprietary" }
+dependencies = [
+    "mcp>=1.2.0",
+    "httpx>=0.27",
+    "pymongo>=4.7",
+    "dnspython>=2.6",
+    "python-dotenv>=1.0",
+    "pydantic>=2.6",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4",
+]
+
+[project.scripts]
+spectrum-sim-mcp = "spectrum_sim_mcp.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

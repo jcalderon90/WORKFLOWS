@@ -4,154 +4,183 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ---
 
-## Skills requeridos
+## What this repo is
 
-Antes de cualquier tarea en este proyecto, lee los skills que apliquen:
+n8n workflow source for **SPECTRUM VIVIENDA** — a multitenant real-estate conversational agent (*Sof-IA*) deployed on `https://agentsprod.redtec.ai`. The local `.json` files are the authoritative workflow definitions; they are pushed to the n8n server via MCP. The server is the runtime; this repo is the source of truth.
 
-| Situación | Skill |
-|---|---|
-| Siempre (arquitectura, CRM, catálogos) | `Agente Unificado/.skills/spectrum-agente-unificado/SKILL.md` |
-| Crear o diseñar un workflow nuevo | `Agente Unificado/.skills/n8n-workflow-patterns/SKILL.md` |
-| Configurar parámetros de un nodo | `Agente Unificado/.skills/n8n-node-configuration/SKILL.md` |
-| Código en nodo Code (JS) | `Agente Unificado/.skills/n8n-code-javascript/SKILL.md` |
-| Expresiones `{{ }}` | `Agente Unificado/.skills/n8n-expression-syntax/SKILL.md` |
-| Interpretar errores de validación | `Agente Unificado/.skills/n8n-validation-expert/SKILL.md` |
-| Usar herramientas MCP de n8n | `Agente Unificado/.skills/n8n-mcp-tools-expert/SKILL.md` |
+The agent receives ManyChat traffic from 6 pages (WhatsApp / Instagram / Messenger across 5 real-estate projects + GAROO internal). A central orchestrator (`AGENT PRINCIPAL.json`) classifies intent and delegates to sub-workflows (tools). Persistence is MongoDB Atlas; CRM sync is deferred via SOAP.
 
 ---
 
-## ⚠️ REGLA CRÍTICA - VALIDACIÓN DE DATOS OBLIGATORIA
+## 🔴 CRITICAL RULE — Data validation gate
 
-**El agente PRINCIPAL DEBE validar que existan nombre, correo Y teléfono ANTES de cualquier otra acción.**
+`AGENT PRINCIPAL.json` must NEVER call `kb_search`, `rsvp`, or `send_media` until the lead has shared **name + email + phone**. The only tool callable before that gate is `lead_collector`.
 
-Si el lead NO ha compartido estos 3 datos:
-- ❌ NO responder sobre proyectos
-- ❌ NO llamar `kb_search`  
-- ❌ NO llamar `rsvp`
-- ✅ SOLO llamar `lead_collector`
-
-**SIN EXCEPCIONES.** Esto es imperativo. Ver sección "🔴 VALIDACIÓN OBLIGATORIA PRIMERO" en AGENT PRINCIPAL.json → systemMessage.
-
-Motivo: Caso real (2026-05-22): Lead sin datos respondió consulta sobre Portales y el agente respondió sin recolectar datos primero.
+This is enforced in the `PRINCIPAL` node's `systemMessage` under "🔴 VALIDACIÓN OBLIGATORIA PRIMERO". If you edit that system prompt, **do not weaken this rule** — it was added to fix a real 2026-05-22 incident where the bot answered project questions to an anonymous lead.
 
 ---
 
-## Arquitectura del sistema
-
-Agente conversacional inmobiliario para **SPECTRUM VIVIENDA**. El orquestador central (*Sof-IA*) recibe mensajes desde ManyChat (WhatsApp, Instagram, Messenger), clasifica la intención y delega a sub-workflows especializados (tools). La persistencia es MongoDB Atlas y la sincronización al CRM es diferida via SOAP.
+## Architecture
 
 ```
 Agente Unificado/
-├── AGENT PRINCIPAL.json       ← Orquestador: clasifica intenciones, delega a tools
-├── Lead Collector.json        ← Captura y persiste datos del lead en MongoDB
-├── KB SEARCH.json             ← RAG por proyecto (Vector Search en MongoDB)
-├── RSVP.json                  ← Gestión de citas; escribe en colección `appointments`
-├── Send Media.json            ← Envío de brochures/archivos por WhatsApp
-├── Sync_CRM.json              ← Sincronización diferida al CRM SOAP (cada 10-15 min)
-└── Notifications Master.json  ← Notificaciones internas al equipo
+├── AGENT PRINCIPAL.json       ← Orchestrator (gpt-5-mini). Classifies intent, calls tools via Execute Workflow
+├── Lead Collector.json        ← Captures name/email/phone, splits primer_nombre/apellidos via LLM, persists to MongoDB
+├── KB SEARCH.json             ← RAG over MongoDB Atlas Vector Index, filtered by proyecto
+├── RSVP.json                  ← Appointment booking. Writes to `appointments`. No business-hours validation
+├── Send Media.json            ← Brochures/renders. Always responds positively even when URL is null
+├── Sync_CRM.json              ← Scheduled (~10–15 min). Posts to Dynamics 365 SOAP. Builds _UTMCampaing summary
+├── Notifications Master.json  ← HTML email alerts (new lead, price interest, appointment, escalation)
+└── Vectorizar los KBs.json    ← Ingests KBs/*.json into the vector collection
+
+KBs/                            ← Source-of-truth knowledge bases. Re-vectorize via the n8n workflow after editing
+docs/                           ← Project state and reference docs
+scripts/                        ← Python comparators and JS workflow patchers (root-level scripts/)
+Agente Unificado/scripts/       ← Test runner + jq helpers (workflow-level scripts/)
+spectrum-sim-mcp/               ← MCP server (Python) — lets external AIs simulate ManyChat traffic and read n8n/Mongo state
 ```
 
-### Colecciones MongoDB
-- `users` — datos del lead
-- `appointments` — citas agendadas
-- `chat_histories*` — historial de conversación por contacto
-- `quality_logs` — auditoría de calidad post-sync
+**Channel routing:** `manychat_settings` (MongoDB) maps `page_id` → `proyecto`. For Instagram/Messenger the project is pre-assigned by `page_id`; for WhatsApp the "Regla de Oro" interactive menu fires unless `custom_fields.proyecto_interes` is pre-set (phase-2 campaign leads). The `CONTEXT 1` node in `AGENT PRINCIPAL.json` implements this resolution order.
 
-### Modelos IA
-- `gpt-5.4-mini` — Orquestador (`AGENT PRINCIPAL.json`)
-- `gpt-5-mini` — Tools especializadas (`KB SEARCH.json`)
-- `gpt-4o` — Procesamiento de media (`Send Media.json`)
+**Message debouncing:** Redis groups rapid messages (10s wait) before the orchestrator processes them — that's why webhook tests need a ~35s timeout.
+
+**Deferred CRM sync:** Leads are flagged with `conversation_analysis: false` on each new message; `Sync_CRM.json` runs on schedule, picks up leads idle >10–15 min, generates the summary, posts to SOAP, then sets `conversation_analysis: true`.
 
 ---
 
-## Knowledge Bases (KBs)
+## MongoDB collections
 
-Los archivos en `/KBs` se cargan en MongoDB Atlas (colección `documents`) para la búsqueda vectorial. El índice se llama `spectrum_vector_index`. El filtro es por el campo `"proyecto"` en **MAYÚSCULAS**.
-
-| Archivo | Código de proyecto |
+| Collection | Purpose |
 |---|---|
-| `KB PVV.json` | `PVV` |
-| `KB PMAR.json` | `PMAR` |
-| `KB PPO.json` | `PPO` |
-| `KB PPOL.json` | `PPOL` |
-| `KB PSB.json` | `PSB` |
+| `users` | Lead profile (one doc per `manychat_id` + `page_id`) |
+| `appointments` | RSVP bookings. **Query by `manychat_id` + `proyecto`** — a user can have appointments across multiple projects |
+| `chat_histories` | Orchestrator memory |
+| `chat_histories_rsvp` | RSVP agent memory (separate from above) |
+| `manychat_settings` | Per-page config: `page_id`, `api_key`, `proyecto`, notification recipients |
+| `quality_logs` | Post-sync audit |
+| `analytics_logs` | Latency + tool-call telemetry |
+| `documents` (vector) | KB chunks. Index: `spectrum_vector_index`. **Filter by `proyecto` field in UPPERCASE.** |
+
+KB → project code mapping:
+
+| File | Code |
+|---|---|
+| `KBs/KB PVV.json` | `PVV` (Parque Vista Verde — ⭐ entrega Oct. 2026) |
+| `KBs/KB PMAR.json` | `PMAR` (Parque Mariscal — only project with approved traffic) |
+| `KBs/KB PPO.json` | `PPO` (Parque Portales — ⭐ entrega Dic. 2026) |
+| `KBs/KB PPOL.json` | `PPOL` (Parque Polanco) |
+| `KBs/KB PSB.json` | `PSB` (Parque Sotobosque) |
+
+After editing a KB, re-run the `Vectorizar los KBs` workflow on the server (ID `LLiVnT0M6xvDKive`) so changes hit production.
 
 ---
 
-## Reglas críticas del CRM SOAP
+## SOAP CRM — non-obvious rules
 
-**Endpoint:** `https://crm.spectrum.com.gt:8055/Spectrum_WS_GeneracionLead/Service.asmx`  
+**Endpoint:** `https://crm.spectrum.com.gt:8055/Spectrum_WS_GeneracionLead/Service.asmx` (note **`Service.asmx`** — capital S; lowercase `service.asmx` was a bug fixed 2026-05-22).
 **SOAPAction:** `http://tempuri.org/CreacionClientePotencialBot`
 
-### Typos obligatorios en el XML (así está definido en la API — no corregir)
-- Email: `<_CorreEletronico>` (sin "o" en *Correo*, sin "c" en *Electrónico*)
-- Campaña UTM: `<_UTMCampaing>` (sin "i" en *Campaign*)
+### XML tag typos — these are intentional, do NOT "fix" them
+- Email tag: `<_CorreEletronico>` — missing "o" in *Correo*, missing "c" in *Electrónico*
+- Campaign tag: `<_UTMCampaing>` — missing "i" in *Campaign*
 
-### Etiquetas opcionales
-Omitir la etiqueta completa si el valor es nulo. Solo `_Comentarios` puede enviarse vacío:
+### Field rules
+- Omit optional tags entirely when null. Only `_Comentarios` accepts empty (`<_Comentarios/>`).
+- `_Apellido` is required — send `"N/A"` if unknown. `Lead Collector` splits names via LLM into `primer_nombre` / `apellidos` to avoid this fallback.
+- `_TelefonoMovil` must include country code: `+502XXXXXXXX`.
+- `_FechaCita` is ISO 8601 UTC: `2026-05-10T15:00:00.000Z`.
+- `_UTMCampaing` format is strict: `"Cliente atendido desde chatbot a través de [medio]"`.
+
+### Catalog values (most-used)
+`_OrigenCliente` is **always** `100000001` (Chat).
+`_UTMSource`: WhatsApp `100000004`, Instagram `100000012`, Facebook `100000005`.
+`_MetodocontactoPref` uses simple ints `2–5` (NOT the CRM's `100000xxx` catalog).
+
+Full catalogs in `docs/spectrum-soap-api.md`.
+
+### Attribution fields
+Both `DATA to CREATE` and `DATA to UPDATE` (in `AGENT PRINCIPAL.json`) must populate `atribucion_tag`, `atribucion_medio`, `atribucion_contacto`, `utm_source_crm` — the older `tag_medio` name is a renamed field, do not reintroduce it. On WhatsApp the auto-detected campaign is intentionally suppressed so the bot qualifies the lead manually.
+
+---
+
+## Remote workflow IDs (for n8n MCP)
+
+When calling MCP tools against `agentsprod.redtec.ai`:
+
+| Local file | n8n ID |
+|---|---|
+| `AGENT PRINCIPAL.json` | `iXaptKTUXaXrP7aF` |
+| `Sync_CRM.json` | `TTVNRX38pPoPmK2X` |
+| `Lead Collector.json` | `SHPFhvoal7k1Rqf9` |
+| `KB SEARCH.json` | `D3LKuNi6CmMIdvzg` |
+| `RSVP.json` | `TjFPzHs5aimxILH7` |
+| `Send Media.json` | `NtTiyrNy2LHimE7u` |
+| `Notifications Master.json` | `r1Jf5vwrkBrT4dEu` |
+| `Vectorizar los KBs.json` | `LLiVnT0M6xvDKive` |
+
+If you hit `ECONNREFUSED` connecting to MongoDB Atlas from a local script, override DNS in-process: `dns.setServers(['8.8.8.8', '8.8.4.4'])`.
+
+---
+
+## Commands
+
+### End-to-end testing (hits production webhook)
+```bash
+cd "Agente Unificado"
+python3 scripts/test_agent.py --list                            # show 10 scenarios
+python3 scripts/test_agent.py --scenario saludo_inicial         # smoke test (~35s)
+python3 scripts/test_agent.py --scenario happy_path_completo    # multi-turn conversation
+python3 scripts/test_agent.py                                   # full suite (~10 min)
 ```
-{{ $json.valor ? '<_Tag>' + $json.valor + '</_Tag>' : '' }}
+Each run uses a fresh `test_<hex>` user_id; data persists in MongoDB for auditing. The 35s per-message timeout accounts for the Redis 10s debounce wait.
+
+### Workflow inspection (jq required)
+```bash
+./Agente\ Unificado/scripts/list-nodes.sh "Agente Unificado/AGENT PRINCIPAL.json"
+./Agente\ Unificado/scripts/get-node.sh "Agente Unificado/AGENT PRINCIPAL.json" "PRINCIPAL"
+./Agente\ Unificado/scripts/get-node-param.sh "Agente Unificado/AGENT PRINCIPAL.json" "PRINCIPAL" "systemMessage"
+```
+Useful params: `systemMessage`, `text`, `jsCode`, `assignments`, `conditions`.
+
+### Local-vs-remote diff
+`scripts/compare.py` diffs two workflow JSONs by node name and parameters — edit the hardcoded paths at the bottom before running.
+
+### Simulator MCP server (`spectrum-sim-mcp/`)
+Python MCP server that exposes 8 tools so any MCP-compatible AI (Claude Desktop/Code, Cursor, Gemini CLI) can talk to Sof-IA as if it were ManyChat AND inspect the resulting n8n executions + Mongo state.
+
+```powershell
+cd spectrum-sim-mcp
+py -m venv .venv; .\.venv\Scripts\Activate.ps1
+pip install -e .
+Copy-Item .env.example .env       # fill N8N_API_KEY, MONGO_URI, DEFAULT_PAGE_ID
+spectrum-sim-mcp                  # arranca stdio (Ctrl+C para salir)
 ```
 
-### Catálogos de referencia rápida
-Ver `spectrum-soap-api.md` para los códigos completos. Valores más usados:
+Tools: `send_message`, `new_test_user_id`, `list_workflows`, `list_executions`, `get_execution`, `tail_executions`, `read_user_state`, `reset_user`.
 
-| Campo | Valor | Label |
-|---|---|---|
-| `_OrigenCliente` | `100000001` | Chat (siempre fijo) |
-| `_UTMSource` WhatsApp | `100000004` | — |
-| `_UTMSource` Instagram | `100000012` | — |
-| `_MetodocontactoPref` WhatsApp | `4` | ⚠️ Entero simple, no el catálogo CRM |
-| `_EstadoCivil` Soltero | `100000000` | — |
-| `_MotivoInteres` Inversión | `100000001` | — |
-| `_Apellido` no disponible | `"N/A"` | Campo requerido |
-| `_TelefonoMovil` | `+502XXXXXXXX` | Siempre con código de país |
-| `_FechaCita` | ISO 8601 UTC | Ej: `2026-05-10T15:00:00.000Z` |
+**Guardrails:**
+- `reset_user` requires `MONGO_ALLOW_RESET=true` AND the `manychat_id` must start with `test_`. Both checks are mandatory — never weaken.
+- Mongo tools auto-skip registration when `MONGO_URI` is empty.
+- The `webhook.py` payload shape must match what `AGENT PRINCIPAL` reads (`body.id`, `body.page_id`, `body.custom_fields`, `body.last_input_text`, `body.whatsapp_phone`).
+
+`WORKFLOW_IDS` in `config.py` mirrors the table above — keep them in sync if a workflow ID changes on the server.
 
 ---
 
-## Control de flujo y sincronización
+## Editing workflow JSON — gotchas
 
-- **`conversation_analysis` flag:** El orquestador lo resetea a `false` con cada mensaje nuevo. `Sync_CRM.json` lo marca `true` tras sincronizar.
-- **Anti-duplicados:** Verificar existencia en MongoDB antes de crear un nuevo documento de lead.
-- **Sync_CRM trigger:** Schedule cada 10-15 min. Filtra leads con `last_interaction` < 15 min atrás y `conversation_analysis != true`.
-
----
-
-## Referencia de documentos del proyecto
-
-- `docs/estado_proyecto.md` — Estado actual de cada módulo y acciones pendientes
-- `docs/spectrum-soap-api.md` — Catálogo completo de códigos de la API SOAP
-- `docs/estrategia_captacion_whatsapp.md` — Estrategia general
-- `docs/reporte_agente_sofia.md` — Reporte de orquestador
-- `flujos de muestra Version anterior/` — Flujos de referencia antiguos para entender patrones aplicados
+- **Use `.first().json` not `.item.json`** in expressions. The codebase was normalized to `.first()` for robustness with multi-item outputs. Don't reintroduce `.item`.
+- **Expression references must be reachable from every execution path.** n8n raises `"No path back to referenced node"` if a JSON expression references a node not on the current branch — restructure or duplicate the value into a node that IS reachable.
+- **`$json` loses upstream context across Set/IF nodes.** If you need a field from an earlier node (e.g. `Parse response`), use the explicit form `$('Parse response').first().json.field` rather than `$json.field`.
+- **`setCustomFieldByName` via httpRequest** is the standardized way to update ManyChat fields — don't use legacy ManyChat nodes.
+- **Indentation: 2 spaces** in workflow JSONs (RSVP was reformatted to this standard 2026-05-19; new edits should follow it).
 
 ---
 
-## 🔌 Integración MCP (MongoDB & n8n)
+## Project state and skills
 
-Para auditar, inspeccionar o modificar la base de datos y los flujos remotamente, cualquier IA debe utilizar las siguientes configuraciones MCP locales.
-
-**1. MongoDB MCP (spectrum-mongodb-mcp-server)**
-- Se encuentra configurado localmente en el archivo `mcp_config.json` de la IA.
-- *Tip de conexión:* Si estás ejecutando en local y encuentras errores `ECONNREFUSED` hacia Atlas, debes sobrescribir temporalmente el DNS en tu script usando `dns.setServers(['8.8.8.8', '8.8.4.4'])` para evitar el bloqueo de VPN/ISP locales, o simplemente conectarte usando `mcp_spectrum-mongodb-mcp-server_...`.
-
-**2. n8n MCP Server**
-- URL de n8n: `https://agentsprod.redtec.ai`
-- Comando configurado en el `mcp_config.json`: `npx -y @n8n/mcp-remote agentsprod.redtec.ai`
-- Puedes invocar la herramienta `mcp_n8n-mcp-server_get_workflow_details` y proporcionarle el ID exacto del flujo remoto (ver abajo) para obtener o modificar el JSON actual en producción.
-
-### 🆔 Directorio de Workflow IDs en n8n
-
-Para interactuar rápidamente con los flujos de "SPECTRUM AGENTE" en el servidor remoto, utiliza estos IDs en tus llamadas a MCP:
-
-| Flujo Local | ID en n8n Servidor | Descripción |
-|---|---|---|
-| `AGENT PRINCIPAL.json` | `iXaptKTUXaXrP7aF` | Orquestador principal |
-| `Sync_CRM.json` | `TTVNRX38pPoPmK2X` | Cronjob para la sincronización SOAP |
-| `Lead Collector.json` | `SHPFhvoal7k1Rqf9` | Extractor de datos del lead |
-| `KB SEARCH.json` | `D3LKuNi6CmMIdvzg` | Motor de búsqueda RAG |
-| `RSVP.json` | `TjFPzHs5aimxILH7` | Agendamiento de citas |
-| `Send Media.json` | `NtTiyrNy2LHimE7u` | Envío de adjuntos |
-| `Notifications Master.json` | `r1Jf5vwrkBrT4dEu` | Manejo de correos internos |
-| `Vectorizar los KBs.json` | `LLiVnT0M6xvDKive` | Flujo interno para ingesta vectorial |
+- `docs/estado_proyecto.md` is the living changelog — read it before making non-trivial changes; it explains *why* current quirks exist.
+- `docs/spectrum-soap-api.md` — full SOAP catalogs.
+- `Agente Unificado/.skills/spectrum-agente-unificado/SKILL.md` — domain context skill (read first for any task).
+- `.skills_n8n/` and `Agente Unificado/.skills/` — n8n-specific skills (expression syntax, node configuration, validation, MCP tools, code nodes). Consult the matching skill when writing the corresponding kind of n8n content.
+- `flujos de muestra Version anterior/` — legacy monolithic workflows kept for pattern reference, NOT in production.
