@@ -1,0 +1,27 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-fase-2",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "9a9a753c-6099-4e24-97f4-a470e2f89d4d",
+      "name": "Webhook",
+      "webhookId": "f4ef21eb-873a-4fda-985a-75fb1abd9131"
+    }
+  ],
+  "connections": {},
+  "pinData": {},
+  "meta": {
+    "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"
+  }
+}

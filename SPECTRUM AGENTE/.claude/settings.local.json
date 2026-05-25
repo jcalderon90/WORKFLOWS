@@ -22,7 +22,11 @@
       "Bash(python3 -c 'import json,sys; json.load\\(open\\('\\\\''__TRACKED_VAR__'\\\\''\\)\\); print\\('\\\\''OK: __TRACKED_VAR__'\\\\''\\)')",
       "Bash(python3 -c \"import json; json.load\\(open\\('Agente Unificado/RSVP.json'\\)\\); json.load\\(open\\('Agente Unificado/AGENT PRINCIPAL.json'\\)\\); print\\('OK'\\)\")",
       "Bash(grep *)",
-      "Bash(awk '{print $0}')"
+      "Bash(awk '{print $0}')",
+      "Bash(python3 -c ' *)",
+      "Bash(python3 -)",
+      "Bash(python3 -c \"import json; wf=json.load\\(open\\('Agente Unificado/RSVP.json'\\)\\); print\\(json.dumps\\(wf\\)\\)\")",
+      "Bash(python3 -c \"import json; wf=json.load\\(open\\('Agente Unificado/Sync_CRM.json'\\)\\); print\\(json.dumps\\(wf\\)\\)\")"
     ]
   }
 }

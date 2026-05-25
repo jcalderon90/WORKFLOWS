@@ -1,0 +1,636 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 22
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -2736,
+        576
+      ],
+      "id": "1a971f54-fbef-4dba-9ed8-d840dc3f0d83",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "edcd60e9-69c5-45a8-87cf-ad5e76a269c8",
+              "name": "conversacion",
+              "value": "={{ $json.messages }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1168,
+        328
+      ],
+      "id": "d4268a65-5ab7-4469-9af8-932846033d0c",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -2064,
+        576
+      ],
+      "id": "072fef9b-39c4-4035-bbf9-4d505f2b6e9a",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        976,
+        328
+      ],
+      "id": "bc9d5155-575d-4c26-9219-bf9b0efa162f"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -144,
+        80
+      ],
+      "id": "c1c54638-c5b6-4748-8ade-8d0fa63f58d4",
+      "name": "Merge",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "aggregate",
+        "collection": "users",
+        "query": "=[\n  {\n    \"$match\": {\n      \"$expr\": {\n        \"$and\": [\n          {\n            \"$gte\": [\n              \"$first_interaction\",\n              {\n                \"$dateFromString\": { \"dateString\": \"{{ $json.currentDate.toDateTime().minus(1, \"days\").format('yyyy-MM-dd') }}\" }\n              }\n            ]\n          },\n          {\n            \"$lt\": [\n              \"$first_interaction\",\n              {\n                \"$dateFromString\": { \"dateString\": \"{{ $json.currentDate.toDateTime().format('yyyy-MM-dd')}}\" }\n              }\n            ]\n          }\n        ]\n      }\n    }\n  }\n]"
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        -2288,
+        576
+      ],
+      "id": "a2274f9c-c289-4790-9de6-feeaefb3d02a",
+      "name": "ENCONTRAR USER DIARIO",
+      "credentials": {
+        "mongoDb": {
+          "id": "UzcANqeDFO1QLbfd",
+          "name": "SPECTRUM - CENTRALIZADO"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d7d5c8fb-6293-4d1e-9381-cbfb19fae1db",
+              "name": "ID_seleccionado",
+              "value": "={{ $json.user_id }}",
+              "type": "string"
+            },
+            {
+              "id": "67080ecc-1d66-491a-a759-a9788befc666",
+              "name": "_id",
+              "value": "={{ $json._id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1840,
+        132
+      ],
+      "id": "2b0d07bc-db2b-4b43-ba28-be7674b8ea71",
+      "name": "USUARIO Y KEY"
+    },
+    {
+      "parameters": {
+        "collection": "chat_histories",
+        "options": {},
+        "query": "={\n  \"sessionId\": \"user:{{ $json.ID_seleccionado }}\"\n}\n"
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        -1616,
+        204
+      ],
+      "id": "8d72d5c9-1701-40e8-9321-5ef99b5d8ac0",
+      "name": "ENCONTRAR USUARIOS",
+      "notesInFlow": false,
+      "alwaysOutputData": true,
+      "credentials": {
+        "mongoDb": {
+          "id": "UzcANqeDFO1QLbfd",
+          "name": "SPECTRUM - CENTRALIZADO"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=CONVERSATION BETWEEN AI AGENT AND HUMAN IN JSON FORMAT:  {{ $json.conversacion }}",
+        "options": {
+          "systemMessage": "Eres un asistente encargado de monitorear las emociones del usuario en negativo, positivo y neutro. La conversacion esta en formato JSON y de darme un informe de esto, juntos con las palabras claves solo una palabra. Este informe es netamente por usuario \n\n-Entre las palabras clave, solo debe ser UNA de las siguientes palabras: RESERVA, PRECIOS, UBICACION, INFORMACION. ESTA PROHIBIDO QUE EN LA PALABRA CLAVE INCLUYAS ALGUNA PALABRA QUE NO ESTE ENTRE LAS 4 QUE TE MENCIONE\n\n-En la EMOCION DETECTADA, SOLO debes detectar una de  las  tres emociones: POSITIVA, NEUTRO, NEGATIVO. ESTA PROHIBIDO LLENAR EL CAMPO EMOCION DETECTADA CON ALGUNA OTRA PALABRA QUE NO SEA LAS QUE TE MENCIONE\n\nQuiero que me respondas SIEMPRE unicamente con los campos:\n-EMOCION DETECTADA:\n-PALABRA CLAVE(1):\n- RESUMEN DE LA CONVERSACIÓN(BREVE):\n\nRESUMEN DE CONVERSACIONES:  Cuando generes los resumenes de conversacion, no es necesario siempre empezar con la oracion: \"El usuario pregunta\" o \"El usuario consulta\". Se mas creativo y conciso\n\nLAS PALABRAS CLAVE SOLO DEBEN ESTAR ENTRE ESTAS:\nprecios, amenidades, ubicaciones, financiamiento, propiedad (para cosas como modelo, metraje, acabados, etc), disponibilidad, requisitos, otros\n\nNO INCLUYAS OTRAS PALABRAS EN LAS PALABRAS CLAVE"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -944,
+        328
+      ],
+      "id": "8f93e96d-3838-45dd-8648-41647a5f5598",
+      "name": "AGENTE RESPUESTA"
+    },
+    {
+      "parameters": {
+        "jsCode": "const output = items[0].json.output || '';\n\n// Regex flexibles\nconst emocionMatch = output.match(/EMOCION\\s*DETECTADA[:\\-]?\\s*([^\\n]+)/i);\nconst palabraMatch = output.match(/PALABRA\\s*CLAVE(?:\\s*\\(\\d+\\))?[:\\-]?\\s*([^\\n]+)/i);\nconst resumenMatch = output.match(/RESUMEN\\s*DE\\s*LA\\s*CONVERSACI(?:O|Ó)N(?:\\s*\\(BREVE\\))?[:\\-]?\\s*([^\\n]+)/i);\n\n// Extraemos los valores si existen y pasamos a mayúsculas\nlet emocion = emocionMatch?.[1]?.trim().toUpperCase() || '';\nlet palabra = palabraMatch?.[1]?.trim().toUpperCase() || '';\nlet resumen = resumenMatch?.[1]?.trim().toUpperCase() || '';\n\n// Respaldo si alguna etiqueta no se detecta\nif (!emocion || !palabra || !resumen) {\n  const lines = output.split(/\\r?\\n/).map(l => l.trim()).filter(Boolean);\n  for (const line of lines) {\n    const lower = line.toLowerCase();\n    if (!emocion && lower.startsWith('emocion detectada')) {\n      emocion = line.split(':').slice(1).join(':').trim().toUpperCase();\n    } else if (!palabra && lower.startsWith('palabra clave')) {\n      palabra = line.split(':').slice(1).join(':').trim().toUpperCase();\n    } else if (\n      !resumen &&\n      (lower.startsWith('resumen de la conversacion') || lower.startsWith('resumen de la conversación'))\n    ) {\n      resumen = line.split(':').slice(1).join(':').trim().toUpperCase();\n    }\n  }\n}\n\n// Devolvemos resultado\nreturn [{\n  json: {\n    emocion_detectada: emocion,\n    palabra_clave: palabra,\n    resumen_breve: resumen\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -592,
+        328
+      ],
+      "id": "cfd72919-139c-4d74-b304-89f087a3d112",
+      "name": "PARSEAR RESPUESTA"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5d78dc5a-e910-4b45-a44a-65920b26fc01",
+              "name": "emocion_detectada",
+              "value": "={{ $json.emocion_detectada }}",
+              "type": "string"
+            },
+            {
+              "id": "b523bd8c-54ac-4094-af09-ed7aacb64ac7",
+              "name": "palabra_clave",
+              "value": "={{ $json.palabra_clave }}",
+              "type": "string"
+            },
+            {
+              "id": "d900170e-070c-4109-873d-454ef76d9a62",
+              "name": "resumen_breve",
+              "value": "={{ $json.resumen_breve }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -368,
+        328
+      ],
+      "id": "cff9435b-e9f9-4237-88a4-826a7822999c",
+      "name": "RESPUESTA AGENTE"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "79b442f5-aa07-4d89-8d74-0c6c3f8a4e7d",
+              "name": "_id",
+              "value": "={{ $json._id }}",
+              "type": "string"
+            },
+            {
+              "id": "b8786f87-8e27-4c1c-9104-15fb444cbc22",
+              "name": "emocion_detectada",
+              "value": "={{ $json.emocion_detectada }}",
+              "type": "string"
+            },
+            {
+              "id": "3c5b5100-f10a-42ac-a31d-332fe3d82a67",
+              "name": "palabra_clave",
+              "value": "={{ $json.palabra_clave }}",
+              "type": "string"
+            },
+            {
+              "id": "dd5be83d-06d0-4f69-9e2b-175d3a0eaf7d",
+              "name": "resumen_breve",
+              "value": "={{ $json.resumen_breve }}",
+              "type": "string"
+            },
+            {
+              "id": "c921f399-5c45-4d61-addd-51a179f4d47c",
+              "name": "cliente",
+              "value": "Vista Verde",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        304,
+        80
+      ],
+      "id": "82da9a74-172d-4c56-a809-c24bc82d5691",
+      "name": "CAMPOS COMPLETOS"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n  // Clonamos todos los campos originales\n  const data = { ...item.json };\n\n  // Si existe el campo key_user, lo limpiamos\n  if (data.key_user) {\n    data.key_user = String(data.key_user).replace(/['\"]/g, '').trim();\n  }\n\n  // También limpiamos _id si existiera\n  if (data._id) {\n    data._id = String(data._id).replace(/['\"]/g, '').trim();\n  }\n\n  return { json: data };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        528,
+        80
+      ],
+      "id": "0b645e5f-bc23-4009-bed5-48dd67a216d4",
+      "name": "PASEAR RESPUESTA"
+    },
+    {
+      "parameters": {
+        "operation": "findOneAndUpdate",
+        "collection": "users",
+        "updateKey": "=_id",
+        "fields": "emocion_detectada,palabra_clave,resumen_breve,cliente",
+        "upsert": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        752,
+        80
+      ],
+      "id": "41f03d6b-d260-4681-9a5b-099c9199a3e4",
+      "name": "ACTUALIZAR USER",
+      "alwaysOutputData": true,
+      "credentials": {
+        "mongoDb": {
+          "id": "UzcANqeDFO1QLbfd",
+          "name": "SPECTRUM - CENTRALIZADO"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "9f63bdd4-d1b1-4d13-8028-4bc3ff9f8adc",
+              "leftValue": "={{ $json.messages }}",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1392,
+        204
+      ],
+      "id": "2e7d119a-2c13-4aa5-b976-2f377e7af124",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "df1845f2-7a6d-471c-9075-52463efa8528",
+              "leftValue": "={{ $json.emocion_detectada }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        80,
+        80
+      ],
+      "id": "fa1d375e-d510-495c-ad0e-896df072346c",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "options": {
+          "timezone": "America/Guatemala"
+        }
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        -2512,
+        576
+      ],
+      "id": "63d1a81b-49c6-4ed0-bcc5-5c88f71ba7b5",
+      "name": "DIA ACTUAL"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -872,
+        552
+      ],
+      "id": "0a8e3cb5-fffd-40fe-b15d-80ff3e135a0d",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "fl0nmLLeTH299pzW",
+          "name": "Spectrum  Bot"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "DIA ACTUAL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "AGENTE RESPUESTA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "USUARIO Y KEY",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ENCONTRAR USER DIARIO": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "USUARIO Y KEY": {
+      "main": [
+        [
+          {
+            "node": "ENCONTRAR USUARIOS",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ENCONTRAR USUARIOS": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AGENTE RESPUESTA": {
+      "main": [
+        [
+          {
+            "node": "PARSEAR RESPUESTA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PARSEAR RESPUESTA": {
+      "main": [
+        [
+          {
+            "node": "RESPUESTA AGENTE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RESPUESTA AGENTE": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "CAMPOS COMPLETOS": {
+      "main": [
+        [
+          {
+            "node": "PASEAR RESPUESTA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PASEAR RESPUESTA": {
+      "main": [
+        [
+          {
+            "node": "ACTUALIZAR USER",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ACTUALIZAR USER": {
+      "main": [
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "CAMPOS COMPLETOS",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DIA ACTUAL": {
+      "main": [
+        [
+          {
+            "node": "ENCONTRAR USER DIARIO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AGENTE RESPUESTA",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"
+  }
+}

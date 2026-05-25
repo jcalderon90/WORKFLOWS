@@ -1,5 +1,5 @@
 # 🏢 SPECTRUM VIVIENDA: Agente Unificado — Estado del Proyecto
-> Última actualización: 2026-05-24 (Fix notificación de llamada + zona horaria GT + categoría unificada llamada teléfono/WhatsApp)
+> Última actualización: 2026-05-25 (Nuevos workflows: Analytics Centralizado, WEB FORM, LEAD FASE 2 — auditoría completa + cambios pendientes de commit)
 
 ## 🎯 Objetivo General
 Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquestador central (*Sof-IA*) delega tareas a sub-workflows especializados (Tools), con persistencia centralizada en MongoDB y sincronización diferida al CRM Dynamics 365 vía SOAP.
@@ -102,7 +102,46 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ✅ **Completado**: Fix `_Nombre`/`_Apellido` — Body XML usa `primer_nombre`/`apellidos` con fallback al split de `nombre`.
 - ⏳ **Pendiente**: **QA Sincronización:** Validar con equipo CRM/Andy que el campo `_UTMCampaing` se está reflejando correctamente en la base de datos de producción con el nuevo formato estricto tras las siguientes ejecuciones.
 
-### 7. 🛠️ Utilidad de Vectorización — `Vectorizar los KBs.json`
+### 7. 📊 Analytics Centralizado — `Analytics Centralizado.json`
+**Estado: 🟡 Scaffold — pendiente ID remoto n8n y registro en CLAUDE.md** | Última mod: 2026-05-25
+
+Pipeline diario (22:00 hora GT) que analiza conversaciones del día y persiste métricas en `users`.
+
+- ✅ **18 nodos** — Schedule Trigger → ENCONTRAR USUARIOS (MongoDB) → Loop batches → AGENTE RESPUESTA (OpenRouter) → PARSEAR RESPUESTA → ACTUALIZAR USER
+- ✅ Persiste en cada lead: `emotion_detectada` (POSITIVA/NEUTRO/NEGATIVO), `palabra_clave` (enum 8 valores), `resumen_breve`
+- ✅ Accede a colección `chat_histories_lead` (no estaba documentada previamente)
+- ⏳ **Pendiente**: Obtener ID remoto en n8n y agregarlo a la tabla de IDs en CLAUDE.md
+- ⏳ **Pendiente**: Publicar/activar en producción (actualmente solo local)
+
+---
+
+### 8. 📋 Formulario Web — `WEB FORM.json`
+**Estado: 🟡 Scaffold — pendiente deploy y validación** | Última mod: 2026-05-25
+
+Endpoint REST (`POST /webhook/webform`) que recibe datos de formulario web, inserta en MongoDB y envía notificación por Gmail.
+
+- ✅ Webhook `POST /webform` — CORS abierto (`*`)
+- ✅ Inserta en colección `appointments_website` (colección nueva, separada de `appointments`)
+- ✅ Notificación Gmail a `jorge.calderon@garooinc.com` con asunto `SPECTRUM - LEAD FROM WEBSITE!!`
+- ⏳ **Pendiente**: Destinatario final (actualmente solo Jorge, falta Andy/equipo Spectrum)
+- ⏳ **Pendiente**: Validación de campos requeridos (actualmente inserta todo el body sin validar)
+- ⏳ **Pendiente**: Subir a n8n y obtener ID remoto
+- 📎 **Nota**: Colección `appointments_website` no estaba documentada en CLAUDE.md — agregar cuando se active
+
+---
+
+### 9. 🚀 Lead Fase 2 — `LEAD FASE 2.json`
+**Estado: 🟡 Stub — webhook vacío sin lógica** | Última mod: 2026-05-25
+
+Scaffold de 1 nodo (solo Webhook). No tiene lógica de procesamiento todavía.
+
+- ⏳ **Pendiente**: Definir alcance (¿nutrición de leads calificados? ¿retargeting?)
+- ⏳ **Pendiente**: Implementar nodos de procesamiento
+- ⏳ **Pendiente**: Subir a n8n cuando esté listo
+
+---
+
+### 10. 🛠️ Utilidad de Vectorización — `Vectorizar los KBs.json`
 **Estado: ✅ Auditado al 100% (ID: LLiVnT0M6xvDKive)** | Última mod: 2026-05-13
 
 - ✅ **Completado**: Verificación de correspondencia con flujo remoto en n8n a través de MCP.
@@ -149,7 +188,7 @@ Servidor MCP en Python que permite a cualquier IA (Claude Desktop/Code, Cursor, 
 
 ---
 
-## 🚀 Punto Actual del Proyecto (2026-05-24)
+## 🚀 Punto Actual del Proyecto (2026-05-25)
 
 Tras las optimizaciones de conversión y limpieza de mensajería del 21 de mayo, el sistema presenta el siguiente estatus técnico:
 - **Infraestructura Multitenant:** 100% Funcional. Enrutamiento dinámico por canal activado.
@@ -195,6 +234,8 @@ Tras las optimizaciones de conversión y limpieza de mensajería del 21 de mayo,
 - **Fix URL SOAP Lead Collector (2026-05-22):** Endpoint corregido de `service.asmx` → `Service.asmx` para consistencia con Sync_CRM y la especificación oficial.
 - **RSVP sin restricción de horario (2026-05-24):** Eliminada la validación de horario laboral (lunes-sábado 9:00-18:00) del agente RSVP. El lead puede proponer cualquier horario; el asesor coordina disponibilidad. Solo se sigue rechazando fechas pasadas.
 - **Servidor MCP de simulación `spectrum-sim-mcp` (2026-05-24):** Scaffold completo en Python con 8 tools que permiten a cualquier IA externa (Claude/Gemini/Cursor) hablar con Sof-IA como cliente ManyChat y leer el resultado (ejecuciones n8n + estado Mongo). Tools de n8n (webhook, list/get/tail executions) operativas. Tools de Mongo (`read_user_state`, `reset_user`) implementadas con guardrails (`MONGO_ALLOW_RESET` + prefijo `test_`) pero bloqueadas hasta que se otorgue `readWrite` sobre la DB `Centralizado` al usuario `jcalderon900610_db_user` en Atlas. Falta registrar el servidor en `~/.claude.json` y smoke test end-to-end.
+- **Nuevos workflows scaffold (2026-05-25):** 3 archivos nuevos no trackeados en git: `Analytics Centralizado.json` (pipeline diario AI de analytics sobre conversaciones, usa OpenRouter, escribe `emotion_detectada`/`palabra_clave`/`resumen_breve` en `users`), `WEB FORM.json` (webhook para formulario web → `appointments_website` + Gmail), `LEAD FASE 2.json` (stub de 1 nodo). Los 3 están **solo en local** — no deployados en n8n aún.
+- **Cambios pendientes de commit (2026-05-25):** 6 workflows modificados (AGENT PRINCIPAL, Lead Collector, Notifications Master, RSVP, Send Media, Sync_CRM) + 3 nuevos archivos sin commitear. ~12,000 líneas de diff en total — incluye todas las correcciones de auditoría 2026-05-25.
 
 ---
 

@@ -1,308 +1,21 @@
 {
-  "nodes": [
-    {
-      "parameters": {
-        "workflowInputs": {
-          "values": [
-            {
-              "name": "tipo_alerta"
-            },
-            {
-              "name": "datos",
-              "type": "object"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.executeWorkflowTrigger",
-      "typeVersion": 1.1,
-      "position": [
-        -64,
-        864
-      ],
-      "id": "d2d9c18e-a77b-4dee-aa23-c0c0c115d55c",
-      "name": "START"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "test-user-check",
-              "leftValue": "={{ ($json.datos?.manychat_id || '').startsWith('test_') }}",
-              "rightValue": true,
-              "operator": {
-                "type": "boolean",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        160,
-        864
-      ],
-      "id": "a1b2c3d4-e5f6-7890-abcd-test0filter01",
-      "name": "IF Test User"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        400,
-        720
-      ],
-      "id": "b2c3d4e5-f6g7-8901-bcde-test0filter02",
-      "name": "Skip Test"
-    },
-    {
-      "parameters": {
-        "dataType": "string",
-        "value1": "={{ $json.tipo_alerta }}",
-        "rules": {
-          "rules": [
-            {
-              "value2": "nuevo_lead"
-            },
-            {
-              "value2": "interes_precios",
-              "output": 1
-            },
-            {
-              "value2": "cita",
-              "output": 2
-            },
-            {
-              "value2": "escalacion",
-              "output": 3
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 1,
-      "position": [
-        400,
-        1008
-      ],
-      "id": "547c9f08-706c-4b1c-95fc-23e47795a40d",
-      "name": "Switch Alerta"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "1",
-              "name": "subject",
-              "value": "=NUEVO LEAD REGISTRADO - {{ $json.datos.proyecto }}",
-              "type": "string"
-            },
-            {
-              "id": "2",
-              "name": "sendTo",
-              "value": "=jorge.menzel@garooinc.com,hpalma@spectrum.com.gt,vramirez@spectrum.com.gt,lrivas@spectrum.com.gt,dmartinez@spectrum.com.gt,aduarte@spectrum.com.gt,fernando.ortiz@garooinc.com",
-              "type": "string"
-            },
-            {
-              "id": "3",
-              "name": "html_body",
-              "value": "=<div style=\"font-family: Arial; padding: 20px; background-color: #f4f6f9; border-radius: 8px;\"><h2 style=\"color: #2c3e50;\">🔥 Nuevo Lead Captado</h2><hr><p><strong>Proyecto:</strong> {{ $json.datos.proyecto }}</p><p><strong>Nombre:</strong> {{ $json.datos.nombre_lead }}</p><p><strong>Teléfono:</strong> {{ $json.datos.telefono_lead }}</p><p><strong>Correo:</strong> {{ $json.datos.correo_lead }}</p><p><strong>Canal:</strong> {{ $json.datos.canal }}</p></div>",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        384,
-        576
-      ],
-      "id": "ebad3ee3-a11e-4314-b169-1c6c4afa8e92",
-      "name": "Payload Nuevo Lead"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "1",
-              "name": "subject",
-              "value": "=Lead interesado en precios - {{ $json.datos.proyecto }}",
-              "type": "string"
-            },
-            {
-              "id": "2",
-              "name": "sendTo",
-              "value": "=hpalma@spectrum.com.gt,jorge.menzel@garooinc.com,vramirez@spectrum.com.gt,lrivas@spectrum.com.gt,dmartinez@spectrum.com.gt,aduarte@spectrum.com.gt,fernando.ortiz@garooinc.com",
-              "type": "string"
-            },
-            {
-              "id": "3",
-              "name": "html_body",
-              "value": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body style=\"margin:0;padding:0;background:#f7f7f8;font-family:Arial,sans-serif;\">\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n  <tr><td align=\"center\" style=\"padding:28px 16px;\">\n    <table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#fff;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);\">\n      <tr><td style=\"background:#8e44ad;padding:24px 32px;\"><h1 style=\"color:#fff;margin:0;font-size:20px;\">💰 INTERÉS COMERCIAL</h1><p style=\"color:#e0c3fc;margin:4px 0 0;font-size:14px;\">Lead consultando por precios o disponibilidad</p></td></tr>\n      <tr><td style=\"background:#f9f3f3;padding:12px 32px;border-left:4px solid #8e44ad;\"><p style=\"margin:0;font-size:12px;color:#8e44ad;font-weight:bold;\">⚠️ {{ $json.datos.nombre_lead && $json.datos.nombre_lead !== 'No registrado' ? 'Datos completos' : 'En espera de datos de contacto completos' }}</p></td></tr>\n      <tr><td style=\"padding:24px 32px;\">\n        <h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">Información Disponible</h2>\n        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n          <tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Proyecto</td><td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">{{ $json.datos.proyecto || '—' }}</td></tr>\n          <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Nombre</td><td style=\"font-size:14px;font-weight:bold;color:{{ $json.datos.nombre_lead && $json.datos.nombre_lead !== 'No registrado' ? '#1a1a2e' : '#aaa' }};\">{{ $json.datos.nombre_lead && $json.datos.nombre_lead !== 'No registrado' ? $json.datos.nombre_lead : '(Pendiente)' }}</td></tr>\n          <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Teléfono</td><td style=\"font-size:14px;font-weight:bold;color:{{ $json.datos.telefono_lead && $json.datos.telefono_lead !== 'No registrado' ? '#1a1a2e' : '#aaa' }};\">{{ $json.datos.telefono_lead && $json.datos.telefono_lead !== 'No registrado' ? $json.datos.telefono_lead : '(Pendiente)' }}</td></tr>\n          <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Correo</td><td style=\"font-size:14px;font-weight:bold;color:{{ $json.datos.correo_lead && $json.datos.correo_lead !== 'No registrado' ? '#1a1a2e' : '#aaa' }};\">{{ $json.datos.correo_lead && $json.datos.correo_lead !== 'No registrado' ? $json.datos.correo_lead : '(Pendiente)' }}</td></tr>\n        </table>\n      </td></tr>\n      <tr><td style=\"padding:0 32px 24px;\">\n        <h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">Consulta</h2>\n        <div style=\"background:#f9f9f9;padding:16px;border-radius:4px;border-left:4px solid #8e44ad;font-style:italic;color:#333;\">&ldquo;{{ $json.datos.ultima_consulta }}&rdquo;</div>\n      </td></tr>\n      <tr><td style=\"background:#f7f7f8;padding:14px 32px;border-top:1px solid #eee;\"><p style=\"margin:0;font-size:12px;color:#aaa;text-align:center;\">Sistema automatizado SPECTRUM VIVIENDA</p></td></tr>\n    </table>\n  </td></tr>\n</table>\n</body>\n</html>",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        384,
-        768
-      ],
-      "id": "d588b445-0b9c-4f56-bc1d-bdcec5e3dd3f",
-      "name": "Payload Precios"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "1",
-              "name": "subject",
-              "value": "={{ $json.datos.tipo_agendamiento === 'llamada' ? '📞 NUEVA LLAMADA AGENDADA' : '🗓️ NUEVA CITA REGISTRADA' }} - {{ $json.datos.proyecto }}",
-              "type": "string"
-            },
-            {
-              "id": "2",
-              "name": "sendTo",
-              "value": "=jorge.menzel@garooinc.com,hpalma@spectrum.com.gt,vramirez@spectrum.com.gt,lrivas@spectrum.com.gt,dmartinez@spectrum.com.gt,aduarte@spectrum.com.gt,fernando.ortiz@garooinc.com",
-              "type": "string"
-            },
-            {
-              "id": "3",
-              "name": "html_body",
-              "value": "=<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"utf-8\"><title>Nueva cita — SPECTRUM VIVIENDA</title></head><body style=\"background:#f7f7f8;margin:0;padding:0;font-family:Arial,sans-serif;\"><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr><td align=\"center\" style=\"padding:28px 16px;\"><table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);\"><tr><td style=\"background:#1a1a2e;padding:24px 32px;\"><h1 style=\"color:#fff;margin:0;font-size:20px;\">🏢 SPECTRUM VIVIENDA</h1><p style=\"color:#a0a0b0;margin:4px 0 0;font-size:14px;\">{{ $json.datos.tipo_agendamiento === 'llamada' ? 'Nueva llamada agendada por Sof-IA' : 'Nueva cita registrada por Sof-IA' }}</p></td></tr><tr><td style=\"background:#f0f4ff;padding:16px 32px;border-bottom:1px solid #e0e8ff;\"><p style=\"margin:0;font-size:16px;font-weight:bold;color:#1a1a2e;\">📍 {{ $json.datos.proyecto }}</p><p style=\"margin:4px 0 0;font-size:14px;color:#555;\">{{ $json.datos.modalidad }}</p></td></tr><tr><td style=\"padding:24px 32px;\"><h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">Datos del Lead</h2><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Nombre</td><td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">{{ $json.datos.nombre_lead }}</td></tr><tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Teléfono</td><td style=\"font-size:14px;color:#1a1a2e;\">{{ $json.datos.telefono_lead }}</td></tr><tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Correo</td><td style=\"font-size:14px;color:#1a1a2e;\">{{ $json.datos.correo_lead || '—' }}</td></tr></table></td></tr><tr><td style=\"padding:0 32px 24px;\"><h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">{{ $json.datos.tipo_agendamiento === 'llamada' ? 'Detalles de la llamada' : 'Detalles de la cita' }}</h2><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">{{ $json.datos.tipo_agendamiento === 'llamada' ? ('<tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Horario preferido</td><td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">' + ($json.datos.horario_preferido || '—') + '</td></tr><tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Medio de llamada</td><td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">' + ($json.datos.medio_llamada_label || '—') + '</td></tr>') : ('<tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Fecha y hora</td><td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">' + $json.datos.fecha_cita + '</td></tr><tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Modalidad</td><td style=\"font-size:14px;color:#1a1a2e;\">' + $json.datos.modalidad + '</td></tr>') }}</table></td></tr><tr><td style=\"background:#f7f7f8;padding:14px 32px;border-top:1px solid #eee;\"><p style=\"margin:0;font-size:12px;color:#aaa;text-align:center;\">Sistema automatizado SPECTRUM VIVIENDA</p></td></tr></table></td></tr></table></body></html>",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        384,
-        960
-      ],
-      "id": "a6fb4e4f-d63e-48be-b061-26900ce7ad96",
-      "name": "Payload Cita"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "1",
-              "name": "subject",
-              "value": "=🚨 Solicitud de escalación / Contacto Humano - {{ $json.datos.proyecto }}",
-              "type": "string"
-            },
-            {
-              "id": "2",
-              "name": "sendTo",
-              "value": "=hpalma@spectrum.com.gt,jorge.menzel@garooinc.com,vramirez@spectrum.com.gt,lrivas@spectrum.com.gt,dmartinez@spectrum.com.gt,aduarte@spectrum.com.gt,fernando.ortiz@garooinc.com",
-              "type": "string"
-            },
-            {
-              "id": "3",
-              "name": "html_body",
-              "value": "=<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"utf-8\"></head><body style=\"background:#f7f7f8;margin:0;padding:0;font-family:Arial,sans-serif;\"><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr><td align=\"center\" style=\"padding:28px 16px;\"><table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);\"><tr><td style=\"background:#c0392b;padding:24px 32px;\"><h1 style=\"color:#fff;margin:0;font-size:20px;\">🚨 ESCALACIÓN REQUERIDA</h1><p style=\"color:#f5b7b1;margin:4px 0 0;font-size:14px;\">Atención humana solicitada o requerida</p></td></tr><tr><td style=\"padding:24px 32px;\"><h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">Datos del Lead</h2><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Proyecto</td><td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">{{ $json.datos.proyecto }}</td></tr><tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Nombre</td><td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">{{ $json.datos.nombre_lead }}</td></tr><tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Teléfono</td><td style=\"font-size:14px;color:#1a1a2e;\">{{ $json.datos.telefono_lead || 'No registrado' }}</td></tr><tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Correo</td><td style=\"font-size:14px;color:#1a1a2e;\">{{ $json.datos.correo_lead || 'No registrado' }}</td></tr></table></td></tr><tr><td style=\"padding:0 32px 24px;\"><h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">Último Mensaje</h2><div style=\"background:#fef9f7;padding:16px;border-radius:4px;border-left:4px solid #c0392b;font-style:italic;color:#333;\">\"{{ $json.datos.ultima_consulta }}\"</div></td></tr><tr><td style=\"background:#f7f7f8;padding:14px 32px;border-top:1px solid #eee;\"><p style=\"margin:0;font-size:12px;color:#aaa;text-align:center;\">Sistema automatizado SPECTRUM VIVIENDA</p></td></tr></table></td></tr></table></body></html>",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        384,
-        1152
-      ],
-      "id": "997a8b0b-6359-4a84-b17e-8ccd2ea80b0c",
-      "name": "Payload Escalación"
-    },
-    {
-      "parameters": {
-        "sendTo": "=jorge.calderon@garooinc.com",
-        "subject": "={{ $json.subject }}",
-        "message": "={{ $json.html_body }}",
-        "options": {
-          "appendAttribution": false,
-          "ccList": "={{ $json.sendTo }}",
-          "senderName": "Soporte Redtec"
-        }
-      },
-      "type": "n8n-nodes-base.gmail",
-      "typeVersion": 2.1,
-      "position": [
-        944,
-        864
-      ],
-      "id": "4782b0d6-fe9e-4cc1-9e11-e0a70dccd113",
-      "name": "Send Gmail Notification",
-      "webhookId": "bea4c899-a024-4a95-b8cf-4d862abd51f2",
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "H8Qx7NlrthXmHUiy",
-          "name": "Soporte Garoo"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "9e213aeb-5d26-4405-9c34-95b001959c64",
-              "name": "subject",
-              "value": "={{ $json.subject }}",
-              "type": "string"
-            },
-            {
-              "id": "0a0ca15b-7f1b-4c99-bd3a-ac8a01bee654",
-              "name": "sendTo",
-              "value": "={{ $json.sendTo }}",
-              "type": "string"
-            },
-            {
-              "id": "b764518b-142c-49f0-899a-dd9ddbe3d25a",
-              "name": "html_body",
-              "value": "={{ $json.html_body }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        720,
-        864
-      ],
-      "id": "2aa51695-07f1-4956-9bdf-17cc18e401ab",
-      "name": "Edit Fields"
-    }
-  ],
+  "id": "r1Jf5vwrkBrT4dEu",
+  "name": "Notifications Master",
+  "active": true,
+  "isArchived": false,
+  "versionId": "804fe04a-e6c6-46c4-b068-d424b68d2cb4",
+  "activeVersionId": "804fe04a-e6c6-46c4-b068-d424b68d2cb4",
+  "triggerCount": 0,
+  "createdAt": "2026-04-21T03:53:06.487Z",
+  "updatedAt": "2026-05-25T19:04:27.772Z",
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": true,
+    "errorWorkflow": "1vyPDStd2kybsWQD"
+  },
   "connections": {
     "START": {
       "main": [
@@ -409,11 +122,6 @@
         ]
       ]
     },
-    "Send Gmail Notification": {
-      "main": [
-        []
-      ]
-    },
     "Edit Fields": {
       "main": [
         [
@@ -426,22 +134,296 @@
       ]
     }
   },
-  "pinData": {
-    "START": [
-      {
-        "tipo_alerta": "interes_precios",
-        "datos": {
-          "proyecto": "PMAR",
-          "nombre_lead": "No registrado",
-          "telefono_lead": "+50230206485",
-          "correo_lead": "No registrado",
-          "ultima_consulta": "O envíen cotización de 2 cuartos"
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "tipo_alerta"
+            },
+            {
+              "name": "datos",
+              "type": "object"
+            }
+          ]
         }
-      }
-    ]
-  },
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -16,
+        912
+      ],
+      "id": "af9c51a9-703d-4349-be64-73bece901ea6",
+      "name": "START"
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.tipo_alerta }}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "nuevo_lead"
+            },
+            {
+              "value2": "interes_precios",
+              "output": 1
+            },
+            {
+              "value2": "cita",
+              "output": 2
+            },
+            {
+              "value2": "escalacion",
+              "output": 3
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        432,
+        992
+      ],
+      "id": "69d4b0d1-75fc-4c1a-8a93-749122b9c09e",
+      "name": "Switch Alerta"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "subject",
+              "value": "=NUEVO LEAD REGISTRADO - {{ $json.datos.proyecto }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "sendTo",
+              "value": "=jorge.menzel@garooinc.com,hpalma@spectrum.com.gt,vramirez@spectrum.com.gt,lrivas@spectrum.com.gt,dmartinez@spectrum.com.gt,aduarte@spectrum.com.gt,fernando.ortiz@garooinc.com",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "html_body",
+              "value": "=<div style=\"font-family: Arial; padding: 20px; background-color: #f4f6f9; border-radius: 8px;\"><h2 style=\"color: #2c3e50;\">🔥 Nuevo Lead Captado</h2><hr><p><strong>Proyecto:</strong> {{ $json.datos.proyecto }}</p><p><strong>Nombre:</strong> {{ $json.datos.nombre_lead }}</p><p><strong>Teléfono:</strong> {{ $json.datos.telefono_lead }}</p><p><strong>Correo:</strong> {{ $json.datos.correo_lead }}</p><p><strong>Canal:</strong> {{ $json.datos.canal }}</p></div>",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        656,
+        736
+      ],
+      "id": "c44d2452-7842-4a0d-bd1b-20fc44d28102",
+      "name": "Payload Nuevo Lead"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "subject",
+              "value": "=Lead interesado en precios - {{ $json.datos.proyecto }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "sendTo",
+              "value": "=hpalma@spectrum.com.gt,jorge.menzel@garooinc.com,vramirez@spectrum.com.gt,lrivas@spectrum.com.gt,dmartinez@spectrum.com.gt,aduarte@spectrum.com.gt,fernando.ortiz@garooinc.com",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "html_body",
+              "value": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body style=\"margin:0;padding:0;background:#f7f7f8;font-family:Arial,sans-serif;\">\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n  <tr><td align=\"center\" style=\"padding:28px 16px;\">\n    <table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#fff;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);\">\n      <tr><td style=\"background:#8e44ad;padding:24px 32px;\"><h1 style=\"color:#fff;margin:0;font-size:20px;\">💰 INTERÉS COMERCIAL</h1><p style=\"color:#e0c3fc;margin:4px 0 0;font-size:14px;\">Lead consultando por precios o disponibilidad</p></td></tr>\n      <tr><td style=\"background:#f9f3f3;padding:12px 32px;border-left:4px solid #8e44ad;\"><p style=\"margin:0;font-size:12px;color:#8e44ad;font-weight:bold;\">⚠️ {{ $json.datos.nombre_lead && $json.datos.nombre_lead !== 'No registrado' ? 'Datos completos' : 'En espera de datos de contacto completos' }}</p></td></tr>\n      <tr><td style=\"padding:24px 32px;\">\n        <h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">Información Disponible</h2>\n        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n          <tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Proyecto</td><td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">{{ $json.datos.proyecto || '—' }}</td></tr>\n          <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Nombre</td><td style=\"font-size:14px;font-weight:bold;color:{{ $json.datos.nombre_lead && $json.datos.nombre_lead !== 'No registrado' ? '#1a1a2e' : '#aaa' }};\">{{ $json.datos.nombre_lead && $json.datos.nombre_lead !== 'No registrado' ? $json.datos.nombre_lead : '(Pendiente)' }}</td></tr>\n          <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Teléfono</td><td style=\"font-size:14px;font-weight:bold;color:{{ $json.datos.telefono_lead && $json.datos.telefono_lead !== 'No registrado' ? '#1a1a2e' : '#aaa' }};\">{{ $json.datos.telefono_lead && $json.datos.telefono_lead !== 'No registrado' ? $json.datos.telefono_lead : '(Pendiente)' }}</td></tr>\n          <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Correo</td><td style=\"font-size:14px;font-weight:bold;color:{{ $json.datos.correo_lead && $json.datos.correo_lead !== 'No registrado' ? '#1a1a2e' : '#aaa' }};\">{{ $json.datos.correo_lead && $json.datos.correo_lead !== 'No registrado' ? $json.datos.correo_lead : '(Pendiente)' }}</td></tr>\n        </table>\n      </td></tr>\n      <tr><td style=\"padding:0 32px 24px;\">\n        <h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">Consulta</h2>\n        <div style=\"background:#f9f9f9;padding:16px;border-radius:4px;border-left:4px solid #8e44ad;font-style:italic;color:#333;\">&ldquo;{{ $json.datos.ultima_consulta }}&rdquo;</div>\n      </td></tr>\n      <tr><td style=\"background:#f7f7f8;padding:14px 32px;border-top:1px solid #eee;\"><p style=\"margin:0;font-size:12px;color:#aaa;text-align:center;\">Sistema automatizado SPECTRUM VIVIENDA</p></td></tr>\n    </table>\n  </td></tr>\n</table>\n</body>\n</html>",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        656,
+        928
+      ],
+      "id": "6fba2c9f-524e-40e8-ad87-326a307e6f82",
+      "name": "Payload Precios"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "subject",
+              "value": "={{ $json.datos.tipo_agendamiento === 'llamada' ? '📞 NUEVA LLAMADA AGENDADA' : '🗓️ NUEVA CITA REGISTRADA' }} - {{ $json.datos.proyecto }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "sendTo",
+              "value": "=jorge.menzel@garooinc.com,hpalma@spectrum.com.gt,vramirez@spectrum.com.gt,lrivas@spectrum.com.gt,dmartinez@spectrum.com.gt,aduarte@spectrum.com.gt,fernando.ortiz@garooinc.com",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "html_body",
+              "value": "=<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"utf-8\"><title>Nueva cita — SPECTRUM VIVIENDA</title></head><body style=\"background:#f7f7f8;margin:0;padding:0;font-family:Arial,sans-serif;\"><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr><td align=\"center\" style=\"padding:28px 16px;\"><table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);\"><tr><td style=\"background:#1a1a2e;padding:24px 32px;\"><h1 style=\"color:#fff;margin:0;font-size:20px;\">🏢 SPECTRUM VIVIENDA</h1><p style=\"color:#a0a0b0;margin:4px 0 0;font-size:14px;\">{{ $json.datos.tipo_agendamiento === 'llamada' ? 'Nueva llamada agendada por Sof-IA' : 'Nueva cita registrada por Sof-IA' }}</p></td></tr><tr><td style=\"background:#f0f4ff;padding:16px 32px;border-bottom:1px solid #e0e8ff;\"><p style=\"margin:0;font-size:16px;font-weight:bold;color:#1a1a2e;\">📍 {{ $json.datos.proyecto }}</p><p style=\"margin:4px 0 0;font-size:14px;color:#555;\">{{ $json.datos.modalidad }}</p></td></tr><tr><td style=\"padding:24px 32px;\"><h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">Datos del Lead</h2><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Nombre</td><td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">{{ $json.datos.nombre_lead }}</td></tr><tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Teléfono</td><td style=\"font-size:14px;color:#1a1a2e;\">{{ $json.datos.telefono_lead }}</td></tr><tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Correo</td><td style=\"font-size:14px;color:#1a1a2e;\">{{ $json.datos.correo_lead || '—' }}</td></tr></table></td></tr><tr><td style=\"padding:0 32px 24px;\"><h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">{{ $json.datos.tipo_agendamiento === 'llamada' ? 'Detalles de la llamada' : 'Detalles de la cita' }}</h2><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">{{ $json.datos.tipo_agendamiento === 'llamada' ? ('<tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Horario preferido</td><td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">' + ($json.datos.horario_preferido || '—') + '</td></tr><tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Medio de llamada</td><td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">' + ($json.datos.medio_llamada_label || '—') + '</td></tr>') : ('<tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Fecha y hora</td><td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">' + $json.datos.fecha_cita + '</td></tr><tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Modalidad</td><td style=\"font-size:14px;color:#1a1a2e;\">' + $json.datos.modalidad + '</td></tr>') }}</table></td></tr><tr><td style=\"background:#f7f7f8;padding:14px 32px;border-top:1px solid #eee;\"><p style=\"margin:0;font-size:12px;color:#aaa;text-align:center;\">Sistema automatizado SPECTRUM VIVIENDA</p></td></tr></table></td></tr></table></body></html>",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        656,
+        1120
+      ],
+      "id": "b826bc81-02d8-4d76-8fb9-e549587d0f53",
+      "name": "Payload Cita"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "subject",
+              "value": "=🚨 Solicitud de escalación / Contacto Humano - {{ $json.datos.proyecto }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "sendTo",
+              "value": "=hpalma@spectrum.com.gt,jorge.menzel@garooinc.com,vramirez@spectrum.com.gt,lrivas@spectrum.com.gt,dmartinez@spectrum.com.gt,aduarte@spectrum.com.gt,fernando.ortiz@garooinc.com",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "html_body",
+              "value": "=<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"utf-8\"></head><body style=\"background:#f7f7f8;margin:0;padding:0;font-family:Arial,sans-serif;\"><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr><td align=\"center\" style=\"padding:28px 16px;\"><table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);\"><tr><td style=\"background:#c0392b;padding:24px 32px;\"><h1 style=\"color:#fff;margin:0;font-size:20px;\">🚨 ESCALACIÓN REQUERIDA</h1><p style=\"color:#f5b7b1;margin:4px 0 0;font-size:14px;\">Atención humana solicitada o requerida</p></td></tr><tr><td style=\"padding:24px 32px;\"><h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">Datos del Lead</h2><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Proyecto</td><td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">{{ $json.datos.proyecto }}</td></tr><tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Nombre</td><td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">{{ $json.datos.nombre_lead }}</td></tr><tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Teléfono</td><td style=\"font-size:14px;color:#1a1a2e;\">{{ $json.datos.telefono_lead || 'No registrado' }}</td></tr><tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Correo</td><td style=\"font-size:14px;color:#1a1a2e;\">{{ $json.datos.correo_lead || 'No registrado' }}</td></tr></table></td></tr><tr><td style=\"padding:0 32px 24px;\"><h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">Último Mensaje</h2><div style=\"background:#fef9f7;padding:16px;border-radius:4px;border-left:4px solid #c0392b;font-style:italic;color:#333;\">\"{{ $json.datos.ultima_consulta }}\"</div></td></tr><tr><td style=\"background:#f7f7f8;padding:14px 32px;border-top:1px solid #eee;\"><p style=\"margin:0;font-size:12px;color:#aaa;text-align:center;\">Sistema automatizado SPECTRUM VIVIENDA</p></td></tr></table></td></tr></table></body></html>",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        656,
+        1312
+      ],
+      "id": "558a313f-8632-4b41-9849-657433d1744c",
+      "name": "Payload Escalación"
+    },
+    {
+      "parameters": {
+        "sendTo": "=jorge.calderon@garooinc.com",
+        "subject": "={{ $json.subject }}",
+        "message": "={{ $json.html_body }}",
+        "options": {
+          "appendAttribution": false,
+          "ccList": "={{ $json.sendTo }}",
+          "senderName": "Soporte Redtec"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1104,
+        1120
+      ],
+      "id": "35ffe5f9-dd1a-4271-b611-99d0d345eb4f",
+      "name": "Send Gmail Notification",
+      "webhookId": "bea4c899-a024-4a95-b8cf-4d862abd51f2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9e213aeb-5d26-4405-9c34-95b001959c64",
+              "name": "subject",
+              "value": "={{ $json.subject }}",
+              "type": "string"
+            },
+            {
+              "id": "0a0ca15b-7f1b-4c99-bd3a-ac8a01bee654",
+              "name": "sendTo",
+              "value": "={{ $json.sendTo }}",
+              "type": "string"
+            },
+            {
+              "id": "b764518b-142c-49f0-899a-dd9ddbe3d25a",
+              "name": "html_body",
+              "value": "={{ $json.html_body }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        880,
+        1120
+      ],
+      "id": "25278857-6795-4a16-85ba-cc36f9c59fe7",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.datos?.manychat_id || '' }}",
+              "operation": "startsWith",
+              "value2": "test_"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        208,
+        912
+      ],
+      "id": "0f772694-bfb5-46cd-ae13-746c56c72006",
+      "name": "IF Test User"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        432,
+        800
+      ],
+      "id": "773a5bbf-c4e6-4e43-b548-d7ad6a041fd1",
+      "name": "Skip Test"
+    }
+  ],
+  "tags": [],
   "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"
-  }
+    "templateCredsSetupCompleted": true
+  },
+  "parentFolderId": null,
+  "description": "Fllujo para enviar notificaciones"
 }

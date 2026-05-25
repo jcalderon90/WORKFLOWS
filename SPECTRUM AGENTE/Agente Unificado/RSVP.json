@@ -1,565 +1,21 @@
 {
-  "nodes": [
-    {
-      "parameters": {
-        "workflowInputs": {
-          "values": [
-            {
-              "name": "manychat_id"
-            },
-            {
-              "name": "proyecto"
-            },
-            {
-              "name": "nombre"
-            },
-            {
-              "name": "correo"
-            },
-            {
-              "name": "telefono"
-            },
-            {
-              "name": "entrada_usuario"
-            },
-            {
-              "name": "lista_proyectos",
-              "type": "object"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.executeWorkflowTrigger",
-      "typeVersion": 1.1,
-      "position": [
-        -496,
-        992
-      ],
-      "id": "6406bc5d-52b7-4a68-b874-dbcfab3798e7",
-      "name": "START"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "bf094ca3-c00a-43ab-ace2-67fd0e615aed",
-              "name": "manychat_id",
-              "value": "={{ $json.manychat_id }}",
-              "type": "string"
-            },
-            {
-              "id": "5780b9e2-72a8-42a7-b7b8-d5c9087d0cde",
-              "name": "proyecto",
-              "value": "={{ $json.proyecto }}",
-              "type": "string"
-            },
-            {
-              "id": "f205ffa2-6326-40fb-9a28-879e084e4263",
-              "name": "proyecto_nombre",
-              "value": "={{ \n  Object.values($json.lista_proyectos)\n    .find(p => p.includes($json.proyecto))\n    ?.split('->')[0]\n    .trim() || $json.proyecto \n}}",
-              "type": "string"
-            },
-            {
-              "id": "abdcd4a9-2c7d-4043-9f86-eec5da4aa55d",
-              "name": "nombre",
-              "value": "={{ $json.nombre }}",
-              "type": "string"
-            },
-            {
-              "id": "f1aaf0c3-bcf4-4986-b3fa-df08d329e423",
-              "name": "correo",
-              "value": "={{ $json.correo }}",
-              "type": "string"
-            },
-            {
-              "id": "a0f6512e-dcb6-43b7-b491-fb3963bbe716",
-              "name": "telefono",
-              "value": "={{ $json.telefono }}",
-              "type": "string"
-            },
-            {
-              "id": "cc78333c-91f0-4007-ad4a-607b3f5f3fd6",
-              "name": "entrada_usuario",
-              "value": "={{ $json.entrada_usuario }}",
-              "type": "string"
-            },
-            {
-              "id": "2b56aad2-0829-4706-a928-ac1d8d0d2308",
-              "name": "sendTo",
-              "value": "=jorge.menzel@garooinc.com,hpalma@spectrum.com.gt,vramirez@spectrum.com.gt,lrivas@spectrum.com.gt,dmartinez@spectrum.com.gt",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -272,
-        992
-      ],
-      "id": "f4ae20e9-eb8b-4f70-a5eb-26df9f054901",
-      "name": "CONTEXT"
-    },
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "={{ $json.entrada_usuario }}",
-        "options": {
-          "systemMessage": "=  # Zona horaria: America/Guatemala (UTC-6)\n  # Fecha y hora actual: {{\n  $now.setZone('America/Guatemala').toFormat('yyyy-MM-dd HH:mm') }}\n  # IMPORTANTE: Al emitir `fecha_hora` usa SIEMPRE ISO 8601 CON offset Guatemala: YYYY-MM-DDTHH:MM:00-06:00. NUNCA omitas el `-06:00` ni emitas la fecha en UTC (`Z`). Si lo haces, el sistema guardará una hora 6 horas distinta a la que pidió el lead.\n  # Proyecto: {{ $('CONTEXT').item.json.proyecto_nombre }}\n\n  ## ROL ##\n  Eres un agente de agendamiento de SPECTRUM VIVIENDA.\n  Tu única función: recolectar los datos necesarios para agendar una cita o\n   coordinar una llamada con el lead.\n  No das información del proyecto. No respondes preguntas sobre el\n  proyecto. Solo agendas.\n\n  ## CONTEXTO DEL LEAD ##\n  - Nombre: {{ $('CONTEXT').item.json.nombre }}\n  - Correo: {{ $('CONTEXT').item.json.correo }}\n  - Teléfono: {{ $('CONTEXT').item.json.telefono }}\n  - Proyecto de interés: {{ $('CONTEXT').item.json.proyecto_nombre }}\n\n  ## TIPOS DE AGENDAMIENTO ##\n\n  **cita_presencial:** Visita física en sala de ventas.\n  **cita_virtual:** Videollamada por Teams, Google Meet, Zoom o la\n  plataforma que prefiera el cliente.\n  **llamada:** El lead quiere ser contactado por voz por un asesor. ESTO INCLUYE TANTO LA LLAMADA TELEFÓNICA COMO LA LLAMADA POR WHATSAPP — ambas son la MISMA categoría `tipo_agendamiento: \"llamada\"`. NUNCA clasifiques una \"llamada por WhatsApp\" como `cita_virtual`, ni crees sub-tipos. Por defecto se asume llamada telefónica; el campo `medio_llamada` solo se llena con \"whatsapp\" SI el cliente lo menciona explícitamente — NO se le pregunta activamente.\n\n  ## DATOS A RECOLECTAR SEGÚN TIPO ##\n\n  ### Para cita_presencial y cita_virtual:\n  1. fecha_hora (ISO 8601 YYYY-MM-DDTHH:MM:00-06:00 — SIEMPRE con offset Guatemala)\n     - Pregunta siempre: \"¿Para qué fecha y a qué hora te gustaría\n  visitarnos?\"\n     - Convierte lenguaje natural: \"mañana a las 3\" → fecha ISO\n     - Si da fecha pasada, indícalo amablemente y pide otra\n     - Al mostrar la fecha al usuario SIEMPRE usa formato natural: día de semana + día + mes en letras + hora con a.m./p.m. Ejemplo: el viernes 22 de mayo a las 10:00 a.m. NUNCA uses formato ISO al hablar con el usuario.\n  2. numero_habitaciones: \"1\", \"2\" o \"3\"\n     - Pregunta: \"¿Cuántas habitaciones te interesan?\"\n  3. intencion_compra: \"V\" (vivir) o \"I\" (invertir)\n     - Pregunta: \"¿Buscas el apartamento para vivir o para invertir?\"\n     - NUNCA expongas los códigos V/I al usuario\n\n  ### Para llamada:\n  1. horario_preferido: texto natural del horario preferido\n     - Pregunta: \"¿En qué horario te queda bien recibir la llamada?\"\n  2. intencion_compra: \"V\" (vivir) o \"I\" (invertir)\n     - Pregunta: \"¿Buscas el apartamento para vivir o para invertir?\"\n     - NUNCA expongas los códigos V/I al usuario\n  - NO pidas fecha_hora específica.\n  - medio_llamada: NO se pregunta activamente. Valor por defecto: \"telefono\". Solo se cambia a \"whatsapp\" si el cliente lo menciona espontáneamente (\"llámenme por WhatsApp\", \"prefiero que me contacten por WhatsApp\", \"mejor por WhatsApp\", etc.). En cualquier otro caso, asume \"telefono\".\n\n  ORDEN OBLIGATORIO para llamada:\n  1. Pregunta horario_preferido\n  2. Pregunta intencion_compra\n  3. SOLO cuando tengas LOS DOS datos → confirma y marca cita_confirmada:\n  true (este flag es OBLIGATORIO para que se dispare la notificación al asesor; sin él la llamada NO llega al equipo).\n  NUNCA confirmes sin tener intencion_compra.\n  NUNCA preguntes por el medio (teléfono vs WhatsApp) — solo regístralo si el usuario lo dijo por su cuenta.\n\n  ## FLUJO DE CONVERSACIÓN ##\n\n  **PASO 1 — IDENTIFICAR TIPO:**\n  Si el usuario no especifica, pregunta:\n  \"¿Prefieres una visita presencial en sala de ventas, una cita virtual o\n  que te llamemos?\"\n  - Una vez que confirme el tipo, confirma de recibido e INMEDIATAMENTE\n  pregúntale por la fecha/hora en el mismo mensaje.\n\n  **CUANDO EL USUARIO PIDE SOLO UNA LLAMADA:**\n  Antes de aceptarlo, ofrece la cita virtual:\n  \"¡Claro! También tenemos la opción de una cita virtual por Teams, Google\n  Meet o Zoom — sin necesidad de ir a sala de ventas. Un asesor te atiende\n  personalmente y resuelve todas tus dudas. ¿Te interesaría esa opción?\"\n\n  - Si acepta → tipo: \"cita_virtual\" → sigue con el flujo de cita\n  - Si insiste en llamada → tipo: \"llamada\" → pide horario_preferido e\n  intención\n\n  **PASO 2 — RECOLECCIÓN SECUENCIAL:**\n  Pregunta solo UN dato por mensaje. No bombardees con todo junto.\n  Si el usuario da varios datos a la vez, procésalos todos y pide solo los\n  faltantes.\n\n  **PASO 3 — CONFIRMACIÓN:**\n  Cuando tengas todos los datos obligatorios:\n  - Para cita_presencial/cita_virtual: confirma fecha, tipo y habitaciones\n    \"Perfecto, entonces agendamos una [tipo] el [fecha] a las [hora]. ¿Es\n  correcto?\"\n  - Para llamada: confirma horario\n    \"Perfecto, un asesor te contactará en el horario que indicaste: [horario]. ¿Es correcto?\" (si el usuario mencionó WhatsApp por su cuenta, agrega \"por WhatsApp\" tras \"contactará\"; si no, no menciones el medio).\n  Cuando el usuario confirme → activa cita_confirmada: true\n  El mensaje final DEBE incluir:\n  1. Confirmación breve de la cita (tipo + fecha/hora).\n  2. Mencionar explícitamente que un asesor contactará al lead por WhatsApp\n   para enviarle el enlace de la reunión (si es virtual) o confirmar\n  detalles.\n  3. Invitación abierta a seguir preguntando.\n  Ejemplo para cita virtual: \"¡Perfecto, [nombre]! Tu cita virtual quedó\n  agendada para el [fecha] a las [hora]. Un asesor te contactará por\n  WhatsApp para enviarte el enlace de la reunión y confirmar los detalles.\n  ¿Puedo ayudarte con algo más? 😊\"\n\n  ## REGLAS ESTRICTAS ##\n  - El bot NUNCA ofrece enviar el enlace de la reunión por sí mismo;\n  siempre delega esta acción al asesor.\n  - Pregunta solo UN dato por mensaje.\n  - NUNCA menciones los campos internos ni los códigos al usuario.\n  - NUNCA uses \"RESERVA\" en el response.\n  - NUNCA incluyas prefijos como \"Tu:\" ni markdown.\n  - NUNCA expongas los códigos V/I al usuario.\n  - En cada respuesta incluye TODOS los parámetros ya recopilados, aunque\n  no sean nuevos en ese turno; solo van como null los que el lead AÚN NO\n  ha proporcionado.\n  - NO avances al siguiente dato hasta que el actual sea válido.\n\n  ## FORMATO DE SALIDA OBLIGATORIO ##\n  Responde ÚNICAMENTE con este JSON en una sola línea, sin bloques de\n  código:\n\n  {\"response\":\"<texto al usuario>\",\"parameters\":{\"tipo_agendamiento\":\"<cita\n  _presencial|cita_virtual|llamada|null>\",\"horario_preferido\":\"<texto|null>\n  \",\"medio_llamada\":\"<telefono|whatsapp|null>\",\"fecha_hora\":\"<ISO_con_offset_-06:00|null>\",\"numero_habitaciones\":\"<1|2|3|null>\",\"intenci\n  on_compra\":\"<V|I|null>\",\"cita_confirmada\":<true|false>}}"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 3.1,
-      "position": [
-        -48,
-        992
-      ],
-      "id": "23dbe026-c435-4121-8101-05e1053f5862",
-      "name": "RSVP Agent"
-    },
-    {
-      "parameters": {
-        "sessionIdType": "customKey",
-        "sessionKey": "={{ $('CONTEXT').item.json.manychat_id }}",
-        "collectionName": "chat_histories_rsvp",
-        "databaseName": "Centralizado",
-        "contextWindowLength": 20
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
-      "typeVersion": 1,
-      "position": [
-        80,
-        1216
-      ],
-      "id": "53ef281e-362e-4e3d-a070-6743f562fd4f",
-      "name": "MongoDB Chat Memory",
-      "credentials": {
-        "mongoDb": {
-          "id": "UzcANqeDFO1QLbfd",
-          "name": "SPECTRUM - CENTRALIZADO"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "92c59e06-0b5e-4ace-af31-3303c130b394",
-              "leftValue": "={{ \n  (\n    $json.output.parameters.fecha_hora !== null && \n    $json.output.parameters.fecha_hora !== 'null' && \n    $json.output.parameters.fecha_hora !== ''\n  ) \n  ||\n  (\n    $json.output.parameters.tipo_agendamiento === 'llamada' && \n    $json.output.parameters.horario_preferido !== null &&\n    $json.output.parameters.horario_preferido !== 'null' &&\n    $json.output.parameters.horario_preferido !== ''\n  )\n  ||\n  $json.output.parameters.cita_confirmada === true\n}}",
-              "rightValue": "",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        528,
-        992
-      ],
-      "id": "2ad62ef2-7f2b-4e61-b4e8-af37f9bfd284",
-      "name": "If TIENE FECHA"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "d992e9f0-ff10-42ea-9dc8-c756f5d77cc5",
-              "leftValue": "={{ $('Find Appointment').item.json.isNotEmpty() }}",
-              "rightValue": "",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        992,
-        720
-      ],
-      "id": "ff26e4a8-6e31-4834-a097-a046a6b5a3ee",
-      "name": "IF APPOINTMENT EXIST"
-    },
-    {
-      "parameters": {
-        "jsCode": "const params = $('Parse RSVP Output').first().json.output.parameters;\nconst ctx = $('CONTEXT').item.json;\n\nconst data = {\n  _id: $('Find Appointment').first().json._id.toString().replace(/^\"(.*)\"$/, '$1'),\n  updated_at: $now.toISO()\n};\n\nif (params.tipo_agendamiento && params.tipo_agendamiento !== 'null') data.tipo = params.tipo_agendamiento;\nif (params.fecha_hora && params.fecha_hora !== 'null') data.fecha_hora = params.fecha_hora;\nif (params.horario_preferido && params.horario_preferido !== 'null') data.horario_preferido = params.horario_preferido;\nif (params.medio_llamada && params.medio_llamada !== 'null') data.medio_llamada = params.medio_llamada;\nif (params.numero_habitaciones && params.numero_habitaciones !== 'null') data.habitaciones = params.numero_habitaciones;\nif (params.intencion_compra && params.intencion_compra !== 'null') data.intencion = params.intencion_compra;\nif (params.metodo_contacto_pref && params.metodo_contacto_pref !== 'null') data.contacto_pref = params.metodo_contacto_pref;\nif (params.estado_civil && params.estado_civil !== 'null') data.estado_civil = params.estado_civil;\nif (params.cita_confirmada) data.confirmada = params.cita_confirmada;\n\nreturn [{ json: data }];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1216,
-        624
-      ],
-      "id": "d9f5dc5a-a874-474d-b7f8-f5c4a5289c55",
-      "name": "Update Appointment Data"
-    },
-    {
-      "parameters": {
-        "jsCode": "const params = $('Parse RSVP Output').first().json.output.parameters;\nconst ctx = $('CONTEXT').item.json;\n\nconst data = {\n  manychat_id: ctx.manychat_id,\n  proyecto: ctx.proyecto,\n  nombre: ctx.nombre,\n  correo: ctx.correo,\n  telefono: ctx.telefono,\n  created_at: $now.toISO(),\n  updated_at: $now.toISO()\n};\n\nif (params.tipo_agendamiento && params.tipo_agendamiento !== 'null') data.tipo = params.tipo_agendamiento;\nif (params.fecha_hora && params.fecha_hora !== 'null') data.fecha_hora = params.fecha_hora;\nif (params.horario_preferido && params.horario_preferido !== 'null') data.horario_preferido = params.horario_preferido;\nif (params.medio_llamada && params.medio_llamada !== 'null') data.medio_llamada = params.medio_llamada;\nif (params.numero_habitaciones && params.numero_habitaciones !== 'null') data.habitaciones = params.numero_habitaciones;\nif (params.intencion_compra && params.intencion_compra !== 'null') data.intencion = params.intencion_compra;\nif (params.metodo_contacto_pref && params.metodo_contacto_pref !== 'null') data.contacto_pref = params.metodo_contacto_pref;\nif (params.estado_civil && params.estado_civil !== 'null') data.estado_civil = params.estado_civil;\nif (params.cita_confirmada) data.confirmada = params.cita_confirmada;\n\nreturn [{ json: data }];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1216,
-        832
-      ],
-      "id": "e906b3d2-6c55-4d47-a263-d37d64c63d3f",
-      "name": "Insert Appointment Data"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "collection": "appointments",
-        "updateKey": "_id",
-        "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(',') }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.mongoDb",
-      "typeVersion": 1.2,
-      "position": [
-        1440,
-        624
-      ],
-      "id": "dea104d3-e27c-4a01-b9e6-b5311d1da7d3",
-      "name": "Update Appointment",
-      "credentials": {
-        "mongoDb": {
-          "id": "UzcANqeDFO1QLbfd",
-          "name": "SPECTRUM - CENTRALIZADO"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "insert",
-        "collection": "appointments",
-        "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(',') }}",
-        "options": {
-          "dateFields": "created_at,updated_at"
-        }
-      },
-      "type": "n8n-nodes-base.mongoDb",
-      "typeVersion": 1.2,
-      "position": [
-        1440,
-        832
-      ],
-      "id": "88d94861-f8b4-4182-925d-6f76047d2640",
-      "name": "Insert Appointment",
-      "credentials": {
-        "mongoDb": {
-          "id": "UzcANqeDFO1QLbfd",
-          "name": "SPECTRUM - CENTRALIZADO"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "workflowId": {
-          "__rl": true,
-          "value": "r1Jf5vwrkBrT4dEu",
-          "mode": "list",
-          "cachedResultUrl": "/workflow/r1Jf5vwrkBrT4dEu",
-          "cachedResultName": "Notifications Master"
-        },
-        "workflowInputs": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "tipo_alerta": "cita",
-            "datos": "={{ \n  {\n    \"proyecto\": $('CONTEXT').item.json.proyecto_nombre || 'No identificado',\n    \"nombre_lead\": $('CONTEXT').item.json.nombre || 'No registrado',\n    \"telefono_lead\": $('CONTEXT').item.json.telefono || 'No registrado',\n    \"correo_lead\": $('CONTEXT').item.json.correo || 'No registrado',\n    \"fecha_cita\": $('HTML').item.json.fecha || 'Por confirmar',\n    \"modalidad\": $('HTML').item.json.modalidad || 'Presencial',\n    \"tipo_agendamiento\": $('HTML').item.json.tipo_agendamiento || null,\n    \"horario_preferido\": $('HTML').item.json.horario_preferido || null,\n    \"medio_llamada\": $('HTML').item.json.medio_llamada || null,\n    \"medio_llamada_label\": $('HTML').item.json.medio_llamada_label || '-'\n  }\n}}"
-          },
-          "matchingColumns": [],
-          "schema": [
-            {
-              "id": "tipo_alerta",
-              "displayName": "tipo_alerta",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "canBeUsedToMatch": true,
-              "type": "string"
-            },
-            {
-              "id": "datos",
-              "displayName": "datos",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "canBeUsedToMatch": true,
-              "type": "object"
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": true
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.executeWorkflow",
-      "typeVersion": 1.3,
-      "position": [
-        2336,
-        624
-      ],
-      "id": "7427b864-a354-4715-a5b5-96c3394299e5",
-      "name": "'Notifications Master' Cita"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "4a3c4317-c310-4233-8dbc-6b7190a3417f",
-              "leftValue": "={{ $('Parse RSVP Output').item.json.output.parameters.cita_confirmada === true }}",
-              "rightValue": "",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        1664,
-        720
-      ],
-      "id": "c8fc66f3-36f4-4f56-879a-f767e7c9bee2",
-      "name": "IF CONFIRMADA"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "a1e815fb-c2c8-4ea2-8702-0469bce83c44",
-              "name": "response",
-              "value": "={{ $('Parse RSVP Output').item.json.output.response }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        2784,
-        1008
-      ],
-      "id": "06512343-900e-4d0b-b3e2-3b3ca2804769",
-      "name": "RESPONSE 1"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        2784,
-        816
-      ],
-      "id": "c87ad921-e4fc-4bb6-a012-8d04923b9167",
-      "name": "NADA"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "17040735-ba26-4907-a78f-586ea71fcbe9",
-              "name": "response",
-              "value": "={{ $('Parse RSVP Output').item.json.output.response }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        3008,
-        816
-      ],
-      "id": "134b4163-714f-43f4-839d-aa1a558c3626",
-      "name": "RESPONSE FINAL"
-    },
-    {
-      "parameters": {
-        "jsCode": "const ctx = $('CONTEXT').item.json;\nconst params = $('Parse RSVP Output').item.json.output.parameters;\n\nconst proyectoNombre = ctx.proyecto_nombre || ctx.proyecto;\nconst intencion = params.intencion_compra === 'V' ? 'Vivir' : params.intencion_compra === 'I' ? 'Invertir' : '-';\nconst contacto = {'2':'Correo','3':'Llamada','4':'WhatsApp','5':'Cualquiera'}[params.metodo_contacto_pref] || '-';\n\nconst esCita = ['cita_presencial', 'cita_virtual'].includes(params.tipo_agendamiento);\n\nconst tipoLabel = {\n  'cita_presencial': '🏢 Visita presencial en sala de ventas',\n  'cita_virtual': '💻 Cita virtual (Teams / Meet / Zoom)',\n  'llamada': '📞 Llamada telefónica'\n}[params.tipo_agendamiento] || '-';\n\nconst fechaIso = params.fecha_hora || $('Find Appointment').first().json.fecha_hora;\nlet fecha = '-';\nif (fechaIso) {\n  const { DateTime } = require('luxon');\n  const hasOffset = /[+-]\\d{2}:?\\d{2}$|Z$/.test(fechaIso);\n  const dt = hasOffset\n    ? DateTime.fromISO(fechaIso).setZone('America/Guatemala')\n    : DateTime.fromISO(fechaIso, { zone: 'America/Guatemala' });\n  if (dt.isValid) {\n    const txt = dt.setLocale('es').toFormat(\"cccc d 'de' LLLL 'de' yyyy 'a las' h:mm a\");\n    fecha = txt.charAt(0).toUpperCase() + txt.slice(1) + ' (hora Guatemala)';\n  }\n}\nconst medioLlamadaLabel = params.medio_llamada === 'whatsapp' ? '📱 WhatsApp' : params.medio_llamada === 'telefono' ? '📞 Teléfono' : '-';\n\nconst html = `<!DOCTYPE html>\n<html lang=\"es\">\n<head><meta charset=\"utf-8\"><title>Nueva cita — SPECTRUM VIVIENDA</title></head>\n<body style=\"background:#f7f7f8;margin:0;padding:0;font-family:Arial,sans-serif;\">\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n<tr><td align=\"center\" style=\"padding:28px 16px;\">\n<table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);\">\n\n  <tr><td style=\"background:#1a1a2e;padding:24px 32px;\">\n    <h1 style=\"color:#fff;margin:0;font-size:20px;\">🏢 SPECTRUM VIVIENDA</h1>\n    <p style=\"color:#a0a0b0;margin:4px 0 0;font-size:14px;\">\n      ${esCita ? 'Nueva cita registrada' : 'Nueva solicitud de llamada'}\n    </p>\n  </td></tr>\n\n  <tr><td style=\"background:#f0f4ff;padding:16px 32px;border-bottom:1px solid #e0e8ff;\">\n    <p style=\"margin:0;font-size:16px;font-weight:bold;color:#1a1a2e;\">📍 ${proyectoNombre}</p>\n    <p style=\"margin:4px 0 0;font-size:14px;color:#555;\">${tipoLabel}</p>\n  </td></tr>\n\n  <tr><td style=\"padding:24px 32px;\">\n    <h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">Datos del Lead</h2>\n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Nombre</td>\n          <td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">${ctx.nombre}</td></tr>\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Correo</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${ctx.correo}</td></tr>\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Teléfono</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${ctx.telefono}</td></tr>\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Intención</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${intencion}</td></tr>\n      ${params.estado_civil ? `\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Estado civil</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${params.estado_civil}</td></tr>` : ''}\n    </table>\n  </td></tr>\n\n  <tr><td style=\"padding:0 32px 24px;\">\n    <h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">\n      ${esCita ? 'Detalles de la cita' : 'Detalles de la llamada'}\n    </h2>\n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Tipo</td>\n          <td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">${tipoLabel}</td></tr>\n      ${esCita ? `\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Fecha y hora</td>\n          <td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">${fecha}</td></tr>\n      ${params.numero_habitaciones ? `\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Habitaciones</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${params.numero_habitaciones}</td></tr>` : ''}\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Contacto preferido</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${contacto}</td></tr>` : `\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Horario preferido</td>\n          <td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">${params.horario_preferido || '-'}</td></tr>\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Medio de llamada</td>\n          <td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">${medioLlamadaLabel}</td></tr>`}\n    </table>\n  </td></tr>\n\n  <tr><td style=\"background:#f7f7f8;padding:14px 32px;border-top:1px solid #eee;\">\n    <p style=\"margin:0;font-size:12px;color:#aaa;text-align:center;\">\n      Sistema automatizado SPECTRUM VIVIENDA · ${new Date().toLocaleString('es-GT', {timeZone:'America/Guatemala'})}\n    </p>\n  </td></tr>\n\n</table>\n</td></tr>\n</table>\n</body>\n</html>`;\n\nreturn [{ json: { html, fecha, modalidad: tipoLabel, tipo_agendamiento: params.tipo_agendamiento || null, horario_preferido: params.horario_preferido || null, medio_llamada: params.medio_llamada || null, medio_llamada_label: medioLlamadaLabel } }];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1888,
-        624
-      ],
-      "id": "fe538326-8ddf-4dc7-843e-c97d96aca44c",
-      "name": "HTML"
-    },
-    {
-      "parameters": {
-        "collection": "appointments",
-        "options": {},
-        "query": "={\n  \"manychat_id\": \"{{$('CONTEXT').item.json.manychat_id}}\",\n  \"proyecto\": \"{{$('CONTEXT').item.json.proyecto}}\"\n}"
-      },
-      "type": "n8n-nodes-base.mongoDb",
-      "typeVersion": 1.2,
-      "position": [
-        768,
-        720
-      ],
-      "id": "b42d792b-26c2-46a6-a81e-c63c213e188d",
-      "name": "Find Appointment",
-      "alwaysOutputData": true,
-      "credentials": {
-        "mongoDb": {
-          "id": "UzcANqeDFO1QLbfd",
-          "name": "SPECTRUM - CENTRALIZADO"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "jsCode": "const raw = $input.first().json.output || '';\n\nfunction extractJSON(text) {\n  const match = text.match(/\\{[\\s\\S]*\\}/);\n  if (!match) return null;\n  try {\n    return JSON.parse(match[0]);\n  } catch(e) {\n    return null;\n  }\n}\n\nconst parsed = extractJSON(raw);\n\nif (!parsed) {\n  return [{\n    json: {\n      output: {\n        response: raw,\n        parameters: {\n          tipo_agendamiento: null,\n          horario_preferido: null,\n          medio_llamada: null,\n          fecha_hora: null,\n          numero_habitaciones: null,\n          intencion_compra: null,\n          metodo_contacto_pref: null,\n          estado_civil: null,\n          cita_confirmada: false\n        }\n      }\n    }\n  }];\n}\n\nconst p = parsed.parameters || {};\n\n// Normaliza valores \"null\" string a null real\nconst norm = (v) => (v === 'null' || v === '' || v === undefined) ? null : v;\n\nreturn [{\n  json: {\n    output: {\n      response: parsed.response || raw,\n      parameters: {\n        tipo_agendamiento: norm(p.tipo_agendamiento),\n        horario_preferido: norm(p.horario_preferido),\n        medio_llamada: (() => { const v = norm(p.medio_llamada); if (!v) return null; const s = String(v).toLowerCase().replace(/[^a-z]/g, ''); if (s.includes('whats')) return 'whatsapp'; if (s.includes('telef') || s.includes('phone') || s === 'tel') return 'telefono'; return s === 'telefono' || s === 'whatsapp' ? s : null; })(),\n        fecha_hora: norm(p.fecha_hora),\n        numero_habitaciones: norm(p.numero_habitaciones),\n        intencion_compra: norm(p.intencion_compra),\n        metodo_contacto_pref: norm(p.metodo_contacto_pref),\n        estado_civil: norm(p.estado_civil),\n        cita_confirmada: p.cita_confirmada === true\n      }\n    }\n  }\n}];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        304,
-        992
-      ],
-      "id": "eab57d00-4b8c-4dc9-b835-18e81923b3dd",
-      "name": "Parse RSVP Output"
-    },
-    {
-      "parameters": {
-        "html": "{{ $json.html }}"
-      },
-      "type": "n8n-nodes-base.html",
-      "typeVersion": 1.2,
-      "position": [
-        2112,
-        624
-      ],
-      "id": "0b15fc89-5e6f-4d57-8bb1-57400231cc88",
-      "name": "HTML PURO"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "collection": "users",
-        "updateKey": "_id",
-        "fields": "has_reservation",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.mongoDb",
-      "typeVersion": 1.2,
-      "position": [
-        2784,
-        624
-      ],
-      "id": "b09c3ab6-f9bb-4f74-b330-d1ce04df3884",
-      "name": "Update User",
-      "credentials": {
-        "mongoDb": {
-          "id": "UzcANqeDFO1QLbfd",
-          "name": "SPECTRUM - CENTRALIZADO"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "4a52d8ad-da2c-4760-9834-ac9e439b4841",
-              "name": "_id",
-              "value": "={{ \n  $('Update Appointment').isExecuted\n    ? \n    $('Find Appointment').item.json._id.toJsonString().replace(/^\"(.*)\"$/, '$1')\n    : \n    $('Insert Appointment').item.json._id.toJsonString().replace(/^\"(.*)\"$/, '$1')\n}}",
-              "type": "string"
-            },
-            {
-              "id": "1660f796-d040-4c8c-9bd3-e26e6eda9daf",
-              "name": "has_reservation",
-              "value": true,
-              "type": "boolean"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        2560,
-        624
-      ],
-      "id": "4d4bf18e-3d75-4d58-8aa5-8d84893eb96b",
-      "name": "reservation update"
-    },
-    {
-      "parameters": {
-        "options": {
-          "temperature": 0.1
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
-      "typeVersion": 1,
-      "position": [
-        -80,
-        1216
-      ],
-      "id": "4a0dcc11-3399-42e6-b971-a5f19022c172",
-      "name": "OpenRouter Chat Model",
-      "credentials": {
-        "openRouterApi": {
-          "id": "fl0nmLLeTH299pzW",
-          "name": "Spectrum  Bot"
-        }
-      }
-    }
-  ],
+  "id": "TjFPzHs5aimxILH7",
+  "name": "RSVP",
+  "active": true,
+  "isArchived": false,
+  "versionId": "29dde0a6-d11b-4430-b896-3c43c97b564a",
+  "activeVersionId": "29dde0a6-d11b-4430-b896-3c43c97b564a",
+  "triggerCount": 0,
+  "createdAt": "2026-04-19T23:08:52.707Z",
+  "updatedAt": "2026-05-25T20:11:58.675Z",
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true,
+    "timeSavedMode": "fixed",
+    "errorWorkflow": "1vyPDStd2kybsWQD",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
   "connections": {
     "START": {
       "main": [
@@ -814,27 +270,1332 @@
       ]
     }
   },
-  "pinData": {
-    "START": [
-      {
-        "manychat_id": "112699262",
-        "proyecto": "PVV",
-        "nombre": "Julio Santizo",
-        "correo": "juliosantizom@gmail.com",
-        "telefono": "+50230570267",
-        "entrada_usuario": "Si, está bien",
-        "lista_proyectos": {
-          "1": "Parque Vista Verde (Zona 15) -> PVV",
-          "2": "Parque Mariscal (Zona 11) -> PMAR",
-          "3": "Parque Portales (Zona 17) -> PPO",
-          "4": "Polanco Parque Boutique (Zona 10) -> PPOL",
-          "5": "Sotobosque Parque Boutique (Zona 15, Vista Hermosa II) -> PSB"
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "manychat_id"
+            },
+            {
+              "name": "proyecto"
+            },
+            {
+              "name": "nombre"
+            },
+            {
+              "name": "correo"
+            },
+            {
+              "name": "telefono"
+            },
+            {
+              "name": "entrada_usuario"
+            },
+            {
+              "name": "lista_proyectos",
+              "type": "object"
+            }
+          ]
         }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1024,
+        1328
+      ],
+      "id": "f06a1e69-81cc-4b89-a099-b2adf5a7d809",
+      "name": "START"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bf094ca3-c00a-43ab-ace2-67fd0e615aed",
+              "name": "manychat_id",
+              "value": "={{ $json.manychat_id }}",
+              "type": "string"
+            },
+            {
+              "id": "5780b9e2-72a8-42a7-b7b8-d5c9087d0cde",
+              "name": "proyecto",
+              "value": "={{ $json.proyecto }}",
+              "type": "string"
+            },
+            {
+              "id": "f205ffa2-6326-40fb-9a28-879e084e4263",
+              "name": "proyecto_nombre",
+              "value": "={{ \n  Object.values($json.lista_proyectos)\n    .find(p => p.includes($json.proyecto))\n    ?.split('->')[0]\n    .trim() || $json.proyecto \n}}",
+              "type": "string"
+            },
+            {
+              "id": "abdcd4a9-2c7d-4043-9f86-eec5da4aa55d",
+              "name": "nombre",
+              "value": "={{ $json.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "f1aaf0c3-bcf4-4986-b3fa-df08d329e423",
+              "name": "correo",
+              "value": "={{ $json.correo }}",
+              "type": "string"
+            },
+            {
+              "id": "a0f6512e-dcb6-43b7-b491-fb3963bbe716",
+              "name": "telefono",
+              "value": "={{ $json.telefono }}",
+              "type": "string"
+            },
+            {
+              "id": "cc78333c-91f0-4007-ad4a-607b3f5f3fd6",
+              "name": "entrada_usuario",
+              "value": "={{ $json.entrada_usuario }}",
+              "type": "string"
+            },
+            {
+              "id": "2b56aad2-0829-4706-a928-ac1d8d0d2308",
+              "name": "sendTo",
+              "value": "=jorge.menzel@garooinc.com,hpalma@spectrum.com.gt,vramirez@spectrum.com.gt,lrivas@spectrum.com.gt,dmartinez@spectrum.com.gt",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -800,
+        1328
+      ],
+      "id": "70613f13-1eeb-402f-984d-05e80de651f4",
+      "name": "CONTEXT"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.entrada_usuario }}",
+        "options": {
+          "systemMessage": "=  # Zona horaria: America/Guatemala (UTC-6)\n  # Fecha y hora actual: {{\n  $now.setZone('America/Guatemala').toFormat('yyyy-MM-dd HH:mm') }}\n  # IMPORTANTE: Al emitir `fecha_hora` usa SIEMPRE ISO 8601 CON offset Guatemala: YYYY-MM-DDTHH:MM:00-06:00. NUNCA omitas el `-06:00` ni emitas la fecha en UTC (`Z`). Si lo haces, el sistema guardará una hora 6 horas distinta a la que pidió el lead.\n  # Proyecto: {{ $('CONTEXT').item.json.proyecto_nombre }}\n\n  ## ROL ##\n  Eres un agente de agendamiento de SPECTRUM VIVIENDA.\n  Tu única función: recolectar los datos necesarios para agendar una cita o\n   coordinar una llamada con el lead.\n  No das información del proyecto. No respondes preguntas sobre el\n  proyecto. Solo agendas.\n\n  ## CONTEXTO DEL LEAD ##\n  - Nombre: {{ $('CONTEXT').item.json.nombre }}\n  - Correo: {{ $('CONTEXT').item.json.correo }}\n  - Teléfono: {{ $('CONTEXT').item.json.telefono }}\n  - Proyecto de interés: {{ $('CONTEXT').item.json.proyecto_nombre }}\n\n  ## TIPOS DE AGENDAMIENTO ##\n\n  **cita_presencial:** Visita física en sala de ventas.\n  **cita_virtual:** Videollamada por Teams, Google Meet, Zoom o la\n  plataforma que prefiera el cliente.\n  **llamada:** El lead quiere ser contactado por voz por un asesor. ESTO INCLUYE TANTO LA LLAMADA TELEFÓNICA COMO LA LLAMADA POR WHATSAPP — ambas son la MISMA categoría `tipo_agendamiento: \"llamada\"`. NUNCA clasifiques una \"llamada por WhatsApp\" como `cita_virtual`, ni crees sub-tipos. Por defecto se asume llamada telefónica; el campo `medio_llamada` solo se llena con \"whatsapp\" SI el cliente lo menciona explícitamente — NO se le pregunta activamente.\n  **Atajo directo:** si el cliente dice \"contáctenme por WhatsApp\", \"por WhatsApp\", \"prefiero WhatsApp\" u otra variante como primera respuesta al tipo de cita → clasifica DIRECTAMENTE como `tipo_agendamiento: \"llamada\"` + `medio_llamada: \"whatsapp\"` sin pasar por el upsell de cita virtual.\n\n  ## DATOS A RECOLECTAR SEGÚN TIPO ##\n\n  ### Para cita_presencial y cita_virtual:\n  1. fecha_hora (ISO 8601 YYYY-MM-DDTHH:MM:00-06:00 — SIEMPRE con offset Guatemala)\n     - Pregunta siempre: \"¿Para qué fecha y a qué hora te gustaría\n  visitarnos?\"\n     - Convierte lenguaje natural: \"mañana a las 3\" → fecha ISO\n     - Si da fecha pasada, indícalo amablemente y pide otra\n     - Al mostrar la fecha al usuario SIEMPRE usa formato natural: día de semana + día + mes en letras + hora con a.m./p.m. Ejemplo: el viernes 22 de mayo a las 10:00 a.m. NUNCA uses formato ISO al hablar con el usuario.\n  2. numero_habitaciones: \"1\", \"2\" o \"3\"\n     - Pregunta: \"¿Cuántas habitaciones te interesan?\"\n  3. intencion_compra: \"V\" (vivir) o \"I\" (invertir)\n     - Pregunta: \"¿Buscas el apartamento para vivir o para invertir?\"\n     - NUNCA expongas los códigos V/I al usuario\n\n  ### Para llamada:\n  1. horario_preferido: texto natural del horario preferido\n     - Pregunta: \"¿En qué horario te queda bien recibir la llamada?\"\n  2. intencion_compra: \"V\" (vivir) o \"I\" (invertir)\n     - Pregunta: \"¿Buscas el apartamento para vivir o para invertir?\"\n     - NUNCA expongas los códigos V/I al usuario\n  - NO pidas fecha_hora específica.\n  - medio_llamada: NO se pregunta activamente. Valor por defecto: \"telefono\". Solo se cambia a \"whatsapp\" si el cliente lo menciona espontáneamente (\"llámenme por WhatsApp\", \"prefiero que me contacten por WhatsApp\", \"mejor por WhatsApp\", etc.). En cualquier otro caso, asume \"telefono\".\n\n  ORDEN OBLIGATORIO para llamada:\n  1. Pregunta horario_preferido\n  2. Pregunta intencion_compra\n  3. SOLO cuando tengas LOS DOS datos → confirma y marca cita_confirmada:\n  true (este flag es OBLIGATORIO para que se dispare la notificación al asesor; sin él la llamada NO llega al equipo).\n  NUNCA confirmes sin tener intencion_compra.\n  NUNCA preguntes por el medio (teléfono vs WhatsApp) — solo regístralo si el usuario lo dijo por su cuenta.\n\n  ## FLUJO DE CONVERSACIÓN ##\n\n  **PASO 1 — IDENTIFICAR TIPO:**\n  Si el usuario no especifica, pregunta:\n  \"¿Prefieres una visita presencial en sala de ventas, una cita virtual o\n  que te llamemos?\"\n  - Una vez que confirme el tipo, confirma de recibido e INMEDIATAMENTE\n  pregúntale por la fecha/hora en el mismo mensaje.\n\n  **CUANDO EL USUARIO PIDE SOLO UNA LLAMADA:**\n  Antes de aceptarlo, ofrece la cita virtual:\n  \"¡Claro! También tenemos la opción de una cita virtual por Teams, Google\n  Meet o Zoom — sin necesidad de ir a sala de ventas. Un asesor te atiende\n  personalmente y resuelve todas tus dudas. ¿Te interesaría esa opción?\"\n\n  - Si acepta → tipo: \"cita_virtual\" → sigue con el flujo de cita\n  - Si insiste en llamada → tipo: \"llamada\" → pide horario_preferido e\n  intención\n\n  **CUANDO EL CLIENTE MENCIONA WHATSAPP EXPLÍCITAMENTE:**\n  No ofrezcas cita virtual. Clasifica directamente como `tipo_agendamiento: \"llamada\"` con `medio_llamada: \"whatsapp\"` y avanza a pedir `horario_preferido`.\n\n  **PASO 2 — RECOLECCIÓN SECUENCIAL:**\n  Pregunta solo UN dato por mensaje. No bombardees con todo junto.\n  Si el usuario da varios datos a la vez, procésalos todos y pide solo los\n  faltantes.\n\n  **PASO 3 — CONFIRMACIÓN:**\n  Cuando tengas todos los datos obligatorios:\n  - Para cita_presencial/cita_virtual: confirma fecha, tipo y habitaciones\n    \"Perfecto, entonces agendamos una [tipo] el [fecha] a las [hora]. ¿Es\n  correcto?\"\n  - Para llamada: confirma horario\n    \"Perfecto, un asesor te contactará en el horario que indicaste: [horario]. ¿Es correcto?\" (si el usuario mencionó WhatsApp por su cuenta, agrega \"por WhatsApp\" tras \"contactará\"; si no, no menciones el medio).\n  Cuando el usuario confirme → activa cita_confirmada: true\n  El mensaje final DEBE incluir:\n  1. Confirmación breve de la cita (tipo + fecha/hora).\n  2. Mencionar explícitamente que un asesor contactará al lead por WhatsApp\n   para enviarle el enlace de la reunión (si es virtual) o confirmar\n  detalles.\n  3. Invitación abierta a seguir preguntando.\n  Ejemplo para cita virtual: \"¡Perfecto, [nombre]! Tu cita virtual quedó\n  agendada para el [fecha] a las [hora]. Un asesor te contactará por\n  WhatsApp para enviarte el enlace de la reunión y confirmar los detalles.\n  ¿Puedo ayudarte con algo más? 😊\"\n\n  ## REGLAS ESTRICTAS ##\n  - El bot NUNCA ofrece enviar el enlace de la reunión por sí mismo;\n  siempre delega esta acción al asesor.\n  - Pregunta solo UN dato por mensaje.\n  - NUNCA menciones los campos internos ni los códigos al usuario.\n  - NUNCA uses \"RESERVA\" en el response.\n  - NUNCA incluyas prefijos como \"Tu:\" ni markdown.\n  - NUNCA expongas los códigos V/I al usuario.\n  - En cada respuesta incluye TODOS los parámetros ya recopilados, aunque\n  no sean nuevos en ese turno; solo van como null los que el lead AÚN NO\n  ha proporcionado.\n  - NO avances al siguiente dato hasta que el actual sea válido.\n\n  ## FORMATO DE SALIDA OBLIGATORIO ##\n  Responde ÚNICAMENTE con este JSON en una sola línea, sin bloques de\n  código:\n\n  {\"response\":\"<texto al usuario>\",\"parameters\":{\"tipo_agendamiento\":\"<cita\n  _presencial|cita_virtual|llamada|null>\",\"horario_preferido\":\"<texto|null>\n  \",\"medio_llamada\":\"<telefono|whatsapp|null>\",\"fecha_hora\":\"<ISO_con_offset_-06:00|null>\",\"numero_habitaciones\":\"<1|2|3|null>\",\"intenci\n  on_compra\":\"<V|I|null>\",\"cita_confirmada\":<true|false>}}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -576,
+        1328
+      ],
+      "id": "e3732e18-1638-4dd3-b365-a5b10bc4efaf",
+      "name": "RSVP Agent"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('CONTEXT').item.json.manychat_id }}",
+        "collectionName": "chat_histories_rsvp",
+        "databaseName": "Centralizado",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1,
+      "position": [
+        -440,
+        1552
+      ],
+      "id": "2805abe5-4ce0-4699-8c79-878e9db6d9d5",
+      "name": "MongoDB Chat Memory"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "92c59e06-0b5e-4ace-af31-3303c130b394",
+              "leftValue": "={{ \n  (\n    $json.output.parameters.fecha_hora !== null && \n    $json.output.parameters.fecha_hora !== 'null' && \n    $json.output.parameters.fecha_hora !== ''\n  ) \n  ||\n  (\n    $json.output.parameters.tipo_agendamiento === 'llamada' && \n    $json.output.parameters.horario_preferido !== null &&\n    $json.output.parameters.horario_preferido !== 'null' &&\n    $json.output.parameters.horario_preferido !== ''\n  )\n  ||\n  $json.output.parameters.cita_confirmada === true\n}}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        0,
+        1328
+      ],
+      "id": "a28be8a3-6abb-4f3c-824f-8a72a67bc67d",
+      "name": "If TIENE FECHA"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "d992e9f0-ff10-42ea-9dc8-c756f5d77cc5",
+              "leftValue": "={{ $('Find Appointment').item.json.isNotEmpty() }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        448,
+        1232
+      ],
+      "id": "86bb8a32-33ff-4851-9582-b366397318b3",
+      "name": "IF APPOINTMENT EXIST"
+    },
+    {
+      "parameters": {
+        "jsCode": "const params = $('Parse RSVP Output').first().json.output.parameters;\nconst ctx = $('CONTEXT').item.json;\n\nconst data = {\n  _id: $('Find Appointment').first().json._id.toString().replace(/^\"(.*)\"$/, '$1'),\n  updated_at: $now.toISO()\n};\n\nif (params.tipo_agendamiento && params.tipo_agendamiento !== 'null') data.tipo = params.tipo_agendamiento;\nif (params.fecha_hora && params.fecha_hora !== 'null') data.fecha_hora = params.fecha_hora;\nif (params.horario_preferido && params.horario_preferido !== 'null') data.horario_preferido = params.horario_preferido;\nif (params.medio_llamada && params.medio_llamada !== 'null') data.medio_llamada = params.medio_llamada;\nif (params.numero_habitaciones && params.numero_habitaciones !== 'null') data.habitaciones = params.numero_habitaciones;\nif (params.intencion_compra && params.intencion_compra !== 'null') data.intencion = params.intencion_compra;\nif (params.metodo_contacto_pref && params.metodo_contacto_pref !== 'null') data.contacto_pref = params.metodo_contacto_pref;\nif (params.estado_civil && params.estado_civil !== 'null') data.estado_civil = params.estado_civil;\nif (params.cita_confirmada) data.confirmada = params.cita_confirmada;\n\nreturn [{ json: data }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        672,
+        1136
+      ],
+      "id": "12604a6c-9f6c-422d-94c7-4fa64f0a5215",
+      "name": "Update Appointment Data"
+    },
+    {
+      "parameters": {
+        "jsCode": "const params = $('Parse RSVP Output').first().json.output.parameters;\nconst ctx = $('CONTEXT').item.json;\n\nconst data = {\n  manychat_id: ctx.manychat_id,\n  proyecto: ctx.proyecto,\n  nombre: ctx.nombre,\n  correo: ctx.correo,\n  telefono: ctx.telefono,\n  created_at: $now.toISO(),\n  updated_at: $now.toISO()\n};\n\nif (params.tipo_agendamiento && params.tipo_agendamiento !== 'null') data.tipo = params.tipo_agendamiento;\nif (params.fecha_hora && params.fecha_hora !== 'null') data.fecha_hora = params.fecha_hora;\nif (params.horario_preferido && params.horario_preferido !== 'null') data.horario_preferido = params.horario_preferido;\nif (params.medio_llamada && params.medio_llamada !== 'null') data.medio_llamada = params.medio_llamada;\nif (params.numero_habitaciones && params.numero_habitaciones !== 'null') data.habitaciones = params.numero_habitaciones;\nif (params.intencion_compra && params.intencion_compra !== 'null') data.intencion = params.intencion_compra;\nif (params.metodo_contacto_pref && params.metodo_contacto_pref !== 'null') data.contacto_pref = params.metodo_contacto_pref;\nif (params.estado_civil && params.estado_civil !== 'null') data.estado_civil = params.estado_civil;\nif (params.cita_confirmada) data.confirmada = params.cita_confirmada;\n\nreturn [{ json: data }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        672,
+        1352
+      ],
+      "id": "f0323184-cf86-44f3-9af0-72dea8d64591",
+      "name": "Insert Appointment Data"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "collection": "appointments",
+        "updateKey": "_id",
+        "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(',') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        896,
+        1136
+      ],
+      "id": "a47aa04e-f42f-468d-9bf5-1dba0f8a4f38",
+      "name": "Update Appointment"
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "collection": "appointments",
+        "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(',') }}",
+        "options": {
+          "dateFields": "created_at,updated_at"
+        }
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        896,
+        1352
+      ],
+      "id": "bed368a0-8a07-4cfe-8868-aed1d4e0b719",
+      "name": "Insert Appointment"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "r1Jf5vwrkBrT4dEu",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/r1Jf5vwrkBrT4dEu",
+          "cachedResultName": "Notifications Master"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "tipo_alerta": "cita",
+            "datos": "={{ \n  {\n    \"proyecto\": $('CONTEXT').item.json.proyecto_nombre || 'No identificado',\n    \"nombre_lead\": $('CONTEXT').item.json.nombre || 'No registrado',\n    \"telefono_lead\": $('CONTEXT').item.json.telefono || 'No registrado',\n    \"correo_lead\": $('CONTEXT').item.json.correo || 'No registrado',\n    \"fecha_cita\": $('HTML').item.json.fecha || 'Por confirmar',\n    \"modalidad\": $('HTML').item.json.modalidad || 'Presencial',\n    \"tipo_agendamiento\": $('HTML').item.json.tipo_agendamiento || null,\n    \"horario_preferido\": $('HTML').item.json.horario_preferido || null,\n    \"medio_llamada\": $('HTML').item.json.medio_llamada || null,\n    \"medio_llamada_label\": $('HTML').item.json.medio_llamada_label || '-'\n  }\n}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "tipo_alerta",
+              "displayName": "tipo_alerta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "datos",
+              "displayName": "datos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "object"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        1792,
+        1136
+      ],
+      "id": "a338531d-674f-40a2-9037-65361dbf2852",
+      "name": "'Notifications Master' Cita"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "4a3c4317-c310-4233-8dbc-6b7190a3417f",
+              "leftValue": "={{ $('Parse RSVP Output').item.json.output.parameters.cita_confirmada === true }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1120,
+        1232
+      ],
+      "id": "e629471c-69e3-421a-bed8-98b454cdc86f",
+      "name": "IF CONFIRMADA"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1e815fb-c2c8-4ea2-8702-0469bce83c44",
+              "name": "response",
+              "value": "={{ $('Parse RSVP Output').item.json.output.response }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2240,
+        1520
+      ],
+      "id": "25bff6be-4593-47d5-a339-e8ad2992c4bf",
+      "name": "RESPONSE 1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2240,
+        1328
+      ],
+      "id": "06a98a1f-2dd2-4536-a3e2-f4f8282518bd",
+      "name": "NADA"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "17040735-ba26-4907-a78f-586ea71fcbe9",
+              "name": "response",
+              "value": "={{ $('Parse RSVP Output').item.json.output.response }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2464,
+        1328
+      ],
+      "id": "ca801033-018d-4a89-b02f-38a254fe6a2e",
+      "name": "RESPONSE FINAL"
+    },
+    {
+      "parameters": {
+        "jsCode": "const ctx = $('CONTEXT').item.json;\nconst params = $('Parse RSVP Output').item.json.output.parameters;\n\nconst proyectoNombre = ctx.proyecto_nombre || ctx.proyecto;\nconst intencion = params.intencion_compra === 'V' ? 'Vivir' : params.intencion_compra === 'I' ? 'Invertir' : '-';\nconst contacto = {'2':'Correo','3':'Llamada','4':'WhatsApp','5':'Cualquiera'}[params.metodo_contacto_pref] || '-';\n\nconst esCita = ['cita_presencial', 'cita_virtual'].includes(params.tipo_agendamiento);\n\nconst tipoLabel = {\n  'cita_presencial': '🏢 Visita presencial en sala de ventas',\n  'cita_virtual': '💻 Cita virtual (Teams / Meet / Zoom)',\n  'llamada': '📞 Llamada telefónica'\n}[params.tipo_agendamiento] || '-';\n\nconst fechaIso = params.fecha_hora || $('Find Appointment').first().json.fecha_hora;\nlet fecha = '-';\nif (fechaIso) {\n    const hasOffset = /[+-]\\d{2}:?\\d{2}$|Z$/.test(fechaIso);\n  const dt = hasOffset\n    ? DateTime.fromISO(fechaIso).setZone('America/Guatemala')\n    : DateTime.fromISO(fechaIso, { zone: 'America/Guatemala' });\n  if (dt.isValid) {\n    const txt = dt.setLocale('es').toFormat(\"cccc d 'de' LLLL 'de' yyyy 'a las' h:mm a\");\n    fecha = txt.charAt(0).toUpperCase() + txt.slice(1) + ' (hora Guatemala)';\n  }\n}\nconst medioLlamadaLabel = params.medio_llamada === 'whatsapp' ? '📱 WhatsApp' : params.medio_llamada === 'telefono' ? '📞 Teléfono' : '-';\n\nconst html = `<!DOCTYPE html>\n<html lang=\"es\">\n<head><meta charset=\"utf-8\"><title>Nueva cita — SPECTRUM VIVIENDA</title></head>\n<body style=\"background:#f7f7f8;margin:0;padding:0;font-family:Arial,sans-serif;\">\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n<tr><td align=\"center\" style=\"padding:28px 16px;\">\n<table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);\">\n\n  <tr><td style=\"background:#1a1a2e;padding:24px 32px;\">\n    <h1 style=\"color:#fff;margin:0;font-size:20px;\">🏢 SPECTRUM VIVIENDA</h1>\n    <p style=\"color:#a0a0b0;margin:4px 0 0;font-size:14px;\">\n      ${esCita ? 'Nueva cita registrada' : 'Nueva solicitud de llamada'}\n    </p>\n  </td></tr>\n\n  <tr><td style=\"background:#f0f4ff;padding:16px 32px;border-bottom:1px solid #e0e8ff;\">\n    <p style=\"margin:0;font-size:16px;font-weight:bold;color:#1a1a2e;\">📍 ${proyectoNombre}</p>\n    <p style=\"margin:4px 0 0;font-size:14px;color:#555;\">${tipoLabel}</p>\n  </td></tr>\n\n  <tr><td style=\"padding:24px 32px;\">\n    <h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">Datos del Lead</h2>\n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Nombre</td>\n          <td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">${ctx.nombre}</td></tr>\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Correo</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${ctx.correo}</td></tr>\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Teléfono</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${ctx.telefono}</td></tr>\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Intención</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${intencion}</td></tr>\n      ${params.estado_civil ? `\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Estado civil</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${params.estado_civil}</td></tr>` : ''}\n    </table>\n  </td></tr>\n\n  <tr><td style=\"padding:0 32px 24px;\">\n    <h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">\n      ${esCita ? 'Detalles de la cita' : 'Detalles de la llamada'}\n    </h2>\n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Tipo</td>\n          <td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">${tipoLabel}</td></tr>\n      ${esCita ? `\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Fecha y hora</td>\n          <td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">${fecha}</td></tr>\n      ${params.numero_habitaciones ? `\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Habitaciones</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${params.numero_habitaciones}</td></tr>` : ''}\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Contacto preferido</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${contacto}</td></tr>` : `\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Horario preferido</td>\n          <td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">${params.horario_preferido || '-'}</td></tr>\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Medio de llamada</td>\n          <td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">${medioLlamadaLabel}</td></tr>`}\n    </table>\n  </td></tr>\n\n  <tr><td style=\"background:#f7f7f8;padding:14px 32px;border-top:1px solid #eee;\">\n    <p style=\"margin:0;font-size:12px;color:#aaa;text-align:center;\">\n      Sistema automatizado SPECTRUM VIVIENDA · ${new Date().toLocaleString('es-GT', {timeZone:'America/Guatemala'})}\n    </p>\n  </td></tr>\n\n</table>\n</td></tr>\n</table>\n</body>\n</html>`;\n\nreturn [{ json: { html, fecha, modalidad: tipoLabel, tipo_agendamiento: params.tipo_agendamiento || null, horario_preferido: params.horario_preferido || null, medio_llamada: params.medio_llamada || null, medio_llamada_label: medioLlamadaLabel } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1344,
+        1136
+      ],
+      "id": "ed332b48-6171-45ac-835f-d69ec24b3f31",
+      "name": "HTML"
+    },
+    {
+      "parameters": {
+        "collection": "appointments",
+        "options": {},
+        "query": "={\n  \"manychat_id\": \"{{$('CONTEXT').item.json.manychat_id}}\",\n  \"proyecto\": \"{{$('CONTEXT').item.json.proyecto}}\"\n}"
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        224,
+        1232
+      ],
+      "id": "ea14b8a5-bce5-41a8-b5d1-20d0fc28d781",
+      "name": "Find Appointment",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $input.first().json.output || '';\n\nfunction extractJSON(text) {\n  const match = text.match(/\\{[\\s\\S]*\\}/);\n  if (!match) return null;\n  try {\n    return JSON.parse(match[0]);\n  } catch(e) {\n    return null;\n  }\n}\n\nconst parsed = extractJSON(raw);\n\nif (!parsed) {\n  return [{\n    json: {\n      output: {\n        response: raw,\n        parameters: {\n          tipo_agendamiento: null,\n          horario_preferido: null,\n          medio_llamada: null,\n          fecha_hora: null,\n          numero_habitaciones: null,\n          intencion_compra: null,\n          metodo_contacto_pref: null,\n          estado_civil: null,\n          cita_confirmada: false\n        }\n      }\n    }\n  }];\n}\n\nconst p = parsed.parameters || {};\n\n// Normaliza valores \"null\" string a null real\nconst norm = (v) => (v === 'null' || v === '' || v === undefined) ? null : v;\n\nreturn [{\n  json: {\n    output: {\n      response: parsed.response || raw,\n      parameters: {\n        tipo_agendamiento: norm(p.tipo_agendamiento),\n        horario_preferido: norm(p.horario_preferido),\n        medio_llamada: (() => { const v = norm(p.medio_llamada); if (!v) return null; const s = String(v).toLowerCase().replace(/[^a-z]/g, ''); if (s.includes('whats')) return 'whatsapp'; if (s.includes('telef') || s.includes('phone') || s === 'tel') return 'telefono'; return s === 'telefono' || s === 'whatsapp' ? s : null; })(),\n        fecha_hora: (() => { const raw = norm(p.fecha_hora); if (!raw) return null; const local =\n  raw.replace(/(\\.[0-9]+)?(Z|[+-]\\d{2}:?\\d{2})$/, ''); return local + '-06:00'; })(),\n        numero_habitaciones: norm(p.numero_habitaciones),\n        intencion_compra: norm(p.intencion_compra),\n        metodo_contacto_pref: norm(p.metodo_contacto_pref),\n        estado_civil: norm(p.estado_civil),\n        cita_confirmada: p.cita_confirmada === true\n      }\n    }\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -224,
+        1328
+      ],
+      "id": "c1f4779c-df83-4ea2-bbc8-e14f37ddfd55",
+      "name": "Parse RSVP Output"
+    },
+    {
+      "parameters": {
+        "html": "{{ $json.html }}"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        1568,
+        1136
+      ],
+      "id": "6fd69fbe-09fb-425e-a03d-efbb09fae3b0",
+      "name": "HTML PURO"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "collection": "users",
+        "updateKey": "_id",
+        "fields": "has_reservation",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        2240,
+        1136
+      ],
+      "id": "97840f99-ffb5-4ba3-8d23-01bf4112395d",
+      "name": "Update User"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4a52d8ad-da2c-4760-9834-ac9e439b4841",
+              "name": "_id",
+              "value": "={{ \n  $('Update Appointment').isExecuted\n    ? \n    $('Find Appointment').item.json._id.toJsonString().replace(/^\"(.*)\"$/, '$1')\n    : \n    $('Insert Appointment').item.json._id.toJsonString().replace(/^\"(.*)\"$/, '$1')\n}}",
+              "type": "string"
+            },
+            {
+              "id": "1660f796-d040-4c8c-9bd3-e26e6eda9daf",
+              "name": "has_reservation",
+              "value": true,
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2016,
+        1136
+      ],
+      "id": "c50081a8-2a67-4a59-81e0-932d0d95b16f",
+      "name": "reservation update"
+    },
+    {
+      "parameters": {
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -568,
+        1552
+      ],
+      "id": "0f42eedb-be04-4218-b2d7-56658293aa37",
+      "name": "OpenRouter Chat Model"
+    }
+  ],
+  "activeVersion": {
+    "nodes": [
+      {
+        "parameters": {
+          "workflowInputs": {
+            "values": [
+              {
+                "name": "manychat_id"
+              },
+              {
+                "name": "proyecto"
+              },
+              {
+                "name": "nombre"
+              },
+              {
+                "name": "correo"
+              },
+              {
+                "name": "telefono"
+              },
+              {
+                "name": "entrada_usuario"
+              },
+              {
+                "name": "lista_proyectos",
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -1024,
+          1328
+        ],
+        "id": "f06a1e69-81cc-4b89-a099-b2adf5a7d809",
+        "name": "START"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "bf094ca3-c00a-43ab-ace2-67fd0e615aed",
+                "name": "manychat_id",
+                "value": "={{ $json.manychat_id }}",
+                "type": "string"
+              },
+              {
+                "id": "5780b9e2-72a8-42a7-b7b8-d5c9087d0cde",
+                "name": "proyecto",
+                "value": "={{ $json.proyecto }}",
+                "type": "string"
+              },
+              {
+                "id": "f205ffa2-6326-40fb-9a28-879e084e4263",
+                "name": "proyecto_nombre",
+                "value": "={{ \n  Object.values($json.lista_proyectos)\n    .find(p => p.includes($json.proyecto))\n    ?.split('->')[0]\n    .trim() || $json.proyecto \n}}",
+                "type": "string"
+              },
+              {
+                "id": "abdcd4a9-2c7d-4043-9f86-eec5da4aa55d",
+                "name": "nombre",
+                "value": "={{ $json.nombre }}",
+                "type": "string"
+              },
+              {
+                "id": "f1aaf0c3-bcf4-4986-b3fa-df08d329e423",
+                "name": "correo",
+                "value": "={{ $json.correo }}",
+                "type": "string"
+              },
+              {
+                "id": "a0f6512e-dcb6-43b7-b491-fb3963bbe716",
+                "name": "telefono",
+                "value": "={{ $json.telefono }}",
+                "type": "string"
+              },
+              {
+                "id": "cc78333c-91f0-4007-ad4a-607b3f5f3fd6",
+                "name": "entrada_usuario",
+                "value": "={{ $json.entrada_usuario }}",
+                "type": "string"
+              },
+              {
+                "id": "2b56aad2-0829-4706-a928-ac1d8d0d2308",
+                "name": "sendTo",
+                "value": "=jorge.menzel@garooinc.com,hpalma@spectrum.com.gt,vramirez@spectrum.com.gt,lrivas@spectrum.com.gt,dmartinez@spectrum.com.gt",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -800,
+          1328
+        ],
+        "id": "70613f13-1eeb-402f-984d-05e80de651f4",
+        "name": "CONTEXT"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "={{ $json.entrada_usuario }}",
+          "options": {
+            "systemMessage": "=  # Zona horaria: America/Guatemala (UTC-6)\n  # Fecha y hora actual: {{\n  $now.setZone('America/Guatemala').toFormat('yyyy-MM-dd HH:mm') }}\n  # IMPORTANTE: Al emitir `fecha_hora` usa SIEMPRE ISO 8601 CON offset Guatemala: YYYY-MM-DDTHH:MM:00-06:00. NUNCA omitas el `-06:00` ni emitas la fecha en UTC (`Z`). Si lo haces, el sistema guardará una hora 6 horas distinta a la que pidió el lead.\n  # Proyecto: {{ $('CONTEXT').item.json.proyecto_nombre }}\n\n  ## ROL ##\n  Eres un agente de agendamiento de SPECTRUM VIVIENDA.\n  Tu única función: recolectar los datos necesarios para agendar una cita o\n   coordinar una llamada con el lead.\n  No das información del proyecto. No respondes preguntas sobre el\n  proyecto. Solo agendas.\n\n  ## CONTEXTO DEL LEAD ##\n  - Nombre: {{ $('CONTEXT').item.json.nombre }}\n  - Correo: {{ $('CONTEXT').item.json.correo }}\n  - Teléfono: {{ $('CONTEXT').item.json.telefono }}\n  - Proyecto de interés: {{ $('CONTEXT').item.json.proyecto_nombre }}\n\n  ## TIPOS DE AGENDAMIENTO ##\n\n  **cita_presencial:** Visita física en sala de ventas.\n  **cita_virtual:** Videollamada por Teams, Google Meet, Zoom o la\n  plataforma que prefiera el cliente.\n  **llamada:** El lead quiere ser contactado por voz por un asesor. ESTO INCLUYE TANTO LA LLAMADA TELEFÓNICA COMO LA LLAMADA POR WHATSAPP — ambas son la MISMA categoría `tipo_agendamiento: \"llamada\"`. NUNCA clasifiques una \"llamada por WhatsApp\" como `cita_virtual`, ni crees sub-tipos. Por defecto se asume llamada telefónica; el campo `medio_llamada` solo se llena con \"whatsapp\" SI el cliente lo menciona explícitamente — NO se le pregunta activamente.\n\n  ## DATOS A RECOLECTAR SEGÚN TIPO ##\n\n  ### Para cita_presencial y cita_virtual:\n  1. fecha_hora (ISO 8601 YYYY-MM-DDTHH:MM:00-06:00 — SIEMPRE con offset Guatemala)\n     - Pregunta siempre: \"¿Para qué fecha y a qué hora te gustaría\n  visitarnos?\"\n     - Convierte lenguaje natural: \"mañana a las 3\" → fecha ISO\n     - Si da fecha pasada, indícalo amablemente y pide otra\n     - Al mostrar la fecha al usuario SIEMPRE usa formato natural: día de semana + día + mes en letras + hora con a.m./p.m. Ejemplo: el viernes 22 de mayo a las 10:00 a.m. NUNCA uses formato ISO al hablar con el usuario.\n  2. numero_habitaciones: \"1\", \"2\" o \"3\"\n     - Pregunta: \"¿Cuántas habitaciones te interesan?\"\n  3. intencion_compra: \"V\" (vivir) o \"I\" (invertir)\n     - Pregunta: \"¿Buscas el apartamento para vivir o para invertir?\"\n     - NUNCA expongas los códigos V/I al usuario\n\n  ### Para llamada:\n  1. horario_preferido: texto natural del horario preferido\n     - Pregunta: \"¿En qué horario te queda bien recibir la llamada?\"\n  2. intencion_compra: \"V\" (vivir) o \"I\" (invertir)\n     - Pregunta: \"¿Buscas el apartamento para vivir o para invertir?\"\n     - NUNCA expongas los códigos V/I al usuario\n  - NO pidas fecha_hora específica.\n  - medio_llamada: NO se pregunta activamente. Valor por defecto: \"telefono\". Solo se cambia a \"whatsapp\" si el cliente lo menciona espontáneamente (\"llámenme por WhatsApp\", \"prefiero que me contacten por WhatsApp\", \"mejor por WhatsApp\", etc.). En cualquier otro caso, asume \"telefono\".\n\n  ORDEN OBLIGATORIO para llamada:\n  1. Pregunta horario_preferido\n  2. Pregunta intencion_compra\n  3. SOLO cuando tengas LOS DOS datos → confirma y marca cita_confirmada:\n  true (este flag es OBLIGATORIO para que se dispare la notificación al asesor; sin él la llamada NO llega al equipo).\n  NUNCA confirmes sin tener intencion_compra.\n  NUNCA preguntes por el medio (teléfono vs WhatsApp) — solo regístralo si el usuario lo dijo por su cuenta.\n\n  ## FLUJO DE CONVERSACIÓN ##\n\n  **PASO 1 — IDENTIFICAR TIPO:**\n  Si el usuario no especifica, pregunta:\n  \"¿Prefieres una visita presencial en sala de ventas, una cita virtual o\n  que te llamemos?\"\n  - Una vez que confirme el tipo, confirma de recibido e INMEDIATAMENTE\n  pregúntale por la fecha/hora en el mismo mensaje.\n\n  **CUANDO EL USUARIO PIDE SOLO UNA LLAMADA:**\n  Antes de aceptarlo, ofrece la cita virtual:\n  \"¡Claro! También tenemos la opción de una cita virtual por Teams, Google\n  Meet o Zoom — sin necesidad de ir a sala de ventas. Un asesor te atiende\n  personalmente y resuelve todas tus dudas. ¿Te interesaría esa opción?\"\n\n  - Si acepta → tipo: \"cita_virtual\" → sigue con el flujo de cita\n  - Si insiste en llamada → tipo: \"llamada\" → pide horario_preferido e\n  intención\n\n  **PASO 2 — RECOLECCIÓN SECUENCIAL:**\n  Pregunta solo UN dato por mensaje. No bombardees con todo junto.\n  Si el usuario da varios datos a la vez, procésalos todos y pide solo los\n  faltantes.\n\n  **PASO 3 — CONFIRMACIÓN:**\n  Cuando tengas todos los datos obligatorios:\n  - Para cita_presencial/cita_virtual: confirma fecha, tipo y habitaciones\n    \"Perfecto, entonces agendamos una [tipo] el [fecha] a las [hora]. ¿Es\n  correcto?\"\n  - Para llamada: confirma horario\n    \"Perfecto, un asesor te contactará en el horario que indicaste: [horario]. ¿Es correcto?\" (si el usuario mencionó WhatsApp por su cuenta, agrega \"por WhatsApp\" tras \"contactará\"; si no, no menciones el medio).\n  Cuando el usuario confirme → activa cita_confirmada: true\n  El mensaje final DEBE incluir:\n  1. Confirmación breve de la cita (tipo + fecha/hora).\n  2. Mencionar explícitamente que un asesor contactará al lead por WhatsApp\n   para enviarle el enlace de la reunión (si es virtual) o confirmar\n  detalles.\n  3. Invitación abierta a seguir preguntando.\n  Ejemplo para cita virtual: \"¡Perfecto, [nombre]! Tu cita virtual quedó\n  agendada para el [fecha] a las [hora]. Un asesor te contactará por\n  WhatsApp para enviarte el enlace de la reunión y confirmar los detalles.\n  ¿Puedo ayudarte con algo más? 😊\"\n\n  ## REGLAS ESTRICTAS ##\n  - El bot NUNCA ofrece enviar el enlace de la reunión por sí mismo;\n  siempre delega esta acción al asesor.\n  - Pregunta solo UN dato por mensaje.\n  - NUNCA menciones los campos internos ni los códigos al usuario.\n  - NUNCA uses \"RESERVA\" en el response.\n  - NUNCA incluyas prefijos como \"Tu:\" ni markdown.\n  - NUNCA expongas los códigos V/I al usuario.\n  - En cada respuesta incluye TODOS los parámetros ya recopilados, aunque\n  no sean nuevos en ese turno; solo van como null los que el lead AÚN NO\n  ha proporcionado.\n  - NO avances al siguiente dato hasta que el actual sea válido.\n\n  ## FORMATO DE SALIDA OBLIGATORIO ##\n  Responde ÚNICAMENTE con este JSON en una sola línea, sin bloques de\n  código:\n\n  {\"response\":\"<texto al usuario>\",\"parameters\":{\"tipo_agendamiento\":\"<cita\n  _presencial|cita_virtual|llamada|null>\",\"horario_preferido\":\"<texto|null>\n  \",\"medio_llamada\":\"<telefono|whatsapp|null>\",\"fecha_hora\":\"<ISO_con_offset_-06:00|null>\",\"numero_habitaciones\":\"<1|2|3|null>\",\"intenci\n  on_compra\":\"<V|I|null>\",\"cita_confirmada\":<true|false>}}"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          -576,
+          1328
+        ],
+        "id": "e3732e18-1638-4dd3-b365-a5b10bc4efaf",
+        "name": "RSVP Agent"
+      },
+      {
+        "parameters": {
+          "sessionIdType": "customKey",
+          "sessionKey": "={{ $('CONTEXT').item.json.manychat_id }}",
+          "collectionName": "chat_histories_rsvp",
+          "databaseName": "Centralizado",
+          "contextWindowLength": 20
+        },
+        "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+        "typeVersion": 1,
+        "position": [
+          -440,
+          1552
+        ],
+        "id": "2805abe5-4ce0-4699-8c79-878e9db6d9d5",
+        "name": "MongoDB Chat Memory"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "92c59e06-0b5e-4ace-af31-3303c130b394",
+                "leftValue": "={{ \n  (\n    $json.output.parameters.fecha_hora !== null && \n    $json.output.parameters.fecha_hora !== 'null' && \n    $json.output.parameters.fecha_hora !== ''\n  ) \n  ||\n  (\n    $json.output.parameters.tipo_agendamiento === 'llamada' && \n    $json.output.parameters.horario_preferido !== null &&\n    $json.output.parameters.horario_preferido !== 'null' &&\n    $json.output.parameters.horario_preferido !== ''\n  )\n  ||\n  $json.output.parameters.cita_confirmada === true\n}}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          0,
+          1328
+        ],
+        "id": "a28be8a3-6abb-4f3c-824f-8a72a67bc67d",
+        "name": "If TIENE FECHA"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "d992e9f0-ff10-42ea-9dc8-c756f5d77cc5",
+                "leftValue": "={{ $('Find Appointment').item.json.isNotEmpty() }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          448,
+          1232
+        ],
+        "id": "86bb8a32-33ff-4851-9582-b366397318b3",
+        "name": "IF APPOINTMENT EXIST"
+      },
+      {
+        "parameters": {
+          "jsCode": "const params = $('Parse RSVP Output').first().json.output.parameters;\nconst ctx = $('CONTEXT').item.json;\n\nconst data = {\n  _id: $('Find Appointment').first().json._id.toString().replace(/^\"(.*)\"$/, '$1'),\n  updated_at: $now.toISO()\n};\n\nif (params.tipo_agendamiento && params.tipo_agendamiento !== 'null') data.tipo = params.tipo_agendamiento;\nif (params.fecha_hora && params.fecha_hora !== 'null') data.fecha_hora = params.fecha_hora;\nif (params.horario_preferido && params.horario_preferido !== 'null') data.horario_preferido = params.horario_preferido;\nif (params.medio_llamada && params.medio_llamada !== 'null') data.medio_llamada = params.medio_llamada;\nif (params.numero_habitaciones && params.numero_habitaciones !== 'null') data.habitaciones = params.numero_habitaciones;\nif (params.intencion_compra && params.intencion_compra !== 'null') data.intencion = params.intencion_compra;\nif (params.metodo_contacto_pref && params.metodo_contacto_pref !== 'null') data.contacto_pref = params.metodo_contacto_pref;\nif (params.estado_civil && params.estado_civil !== 'null') data.estado_civil = params.estado_civil;\nif (params.cita_confirmada) data.confirmada = params.cita_confirmada;\n\nreturn [{ json: data }];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          672,
+          1136
+        ],
+        "id": "12604a6c-9f6c-422d-94c7-4fa64f0a5215",
+        "name": "Update Appointment Data"
+      },
+      {
+        "parameters": {
+          "jsCode": "const params = $('Parse RSVP Output').first().json.output.parameters;\nconst ctx = $('CONTEXT').item.json;\n\nconst data = {\n  manychat_id: ctx.manychat_id,\n  proyecto: ctx.proyecto,\n  nombre: ctx.nombre,\n  correo: ctx.correo,\n  telefono: ctx.telefono,\n  created_at: $now.toISO(),\n  updated_at: $now.toISO()\n};\n\nif (params.tipo_agendamiento && params.tipo_agendamiento !== 'null') data.tipo = params.tipo_agendamiento;\nif (params.fecha_hora && params.fecha_hora !== 'null') data.fecha_hora = params.fecha_hora;\nif (params.horario_preferido && params.horario_preferido !== 'null') data.horario_preferido = params.horario_preferido;\nif (params.medio_llamada && params.medio_llamada !== 'null') data.medio_llamada = params.medio_llamada;\nif (params.numero_habitaciones && params.numero_habitaciones !== 'null') data.habitaciones = params.numero_habitaciones;\nif (params.intencion_compra && params.intencion_compra !== 'null') data.intencion = params.intencion_compra;\nif (params.metodo_contacto_pref && params.metodo_contacto_pref !== 'null') data.contacto_pref = params.metodo_contacto_pref;\nif (params.estado_civil && params.estado_civil !== 'null') data.estado_civil = params.estado_civil;\nif (params.cita_confirmada) data.confirmada = params.cita_confirmada;\n\nreturn [{ json: data }];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          672,
+          1352
+        ],
+        "id": "f0323184-cf86-44f3-9af0-72dea8d64591",
+        "name": "Insert Appointment Data"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "collection": "appointments",
+          "updateKey": "_id",
+          "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(',') }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          896,
+          1136
+        ],
+        "id": "a47aa04e-f42f-468d-9bf5-1dba0f8a4f38",
+        "name": "Update Appointment"
+      },
+      {
+        "parameters": {
+          "operation": "insert",
+          "collection": "appointments",
+          "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(',') }}",
+          "options": {
+            "dateFields": "created_at,updated_at"
+          }
+        },
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          896,
+          1352
+        ],
+        "id": "bed368a0-8a07-4cfe-8868-aed1d4e0b719",
+        "name": "Insert Appointment"
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "r1Jf5vwrkBrT4dEu",
+            "mode": "list",
+            "cachedResultUrl": "/workflow/r1Jf5vwrkBrT4dEu",
+            "cachedResultName": "Notifications Master"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "tipo_alerta": "cita",
+              "datos": "={{ \n  {\n    \"proyecto\": $('CONTEXT').item.json.proyecto_nombre || 'No identificado',\n    \"nombre_lead\": $('CONTEXT').item.json.nombre || 'No registrado',\n    \"telefono_lead\": $('CONTEXT').item.json.telefono || 'No registrado',\n    \"correo_lead\": $('CONTEXT').item.json.correo || 'No registrado',\n    \"fecha_cita\": $('HTML').item.json.fecha || 'Por confirmar',\n    \"modalidad\": $('HTML').item.json.modalidad || 'Presencial',\n    \"tipo_agendamiento\": $('HTML').item.json.tipo_agendamiento || null,\n    \"horario_preferido\": $('HTML').item.json.horario_preferido || null,\n    \"medio_llamada\": $('HTML').item.json.medio_llamada || null,\n    \"medio_llamada_label\": $('HTML').item.json.medio_llamada_label || '-'\n  }\n}}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "tipo_alerta",
+                "displayName": "tipo_alerta",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string"
+              },
+              {
+                "id": "datos",
+                "displayName": "datos",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "object"
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          1792,
+          1136
+        ],
+        "id": "a338531d-674f-40a2-9037-65361dbf2852",
+        "name": "'Notifications Master' Cita"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "4a3c4317-c310-4233-8dbc-6b7190a3417f",
+                "leftValue": "={{ $('Parse RSVP Output').item.json.output.parameters.cita_confirmada === true }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1120,
+          1232
+        ],
+        "id": "e629471c-69e3-421a-bed8-98b454cdc86f",
+        "name": "IF CONFIRMADA"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "a1e815fb-c2c8-4ea2-8702-0469bce83c44",
+                "name": "response",
+                "value": "={{ $('Parse RSVP Output').item.json.output.response }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2240,
+          1520
+        ],
+        "id": "25bff6be-4593-47d5-a339-e8ad2992c4bf",
+        "name": "RESPONSE 1"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2240,
+          1328
+        ],
+        "id": "06a98a1f-2dd2-4536-a3e2-f4f8282518bd",
+        "name": "NADA"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "17040735-ba26-4907-a78f-586ea71fcbe9",
+                "name": "response",
+                "value": "={{ $('Parse RSVP Output').item.json.output.response }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2464,
+          1328
+        ],
+        "id": "ca801033-018d-4a89-b02f-38a254fe6a2e",
+        "name": "RESPONSE FINAL"
+      },
+      {
+        "parameters": {
+          "jsCode": "const ctx = $('CONTEXT').item.json;\nconst params = $('Parse RSVP Output').item.json.output.parameters;\n\nconst proyectoNombre = ctx.proyecto_nombre || ctx.proyecto;\nconst intencion = params.intencion_compra === 'V' ? 'Vivir' : params.intencion_compra === 'I' ? 'Invertir' : '-';\nconst contacto = {'2':'Correo','3':'Llamada','4':'WhatsApp','5':'Cualquiera'}[params.metodo_contacto_pref] || '-';\n\nconst esCita = ['cita_presencial', 'cita_virtual'].includes(params.tipo_agendamiento);\n\nconst tipoLabel = {\n  'cita_presencial': '🏢 Visita presencial en sala de ventas',\n  'cita_virtual': '💻 Cita virtual (Teams / Meet / Zoom)',\n  'llamada': '📞 Llamada telefónica'\n}[params.tipo_agendamiento] || '-';\n\nconst fechaIso = params.fecha_hora || $('Find Appointment').first().json.fecha_hora;\nlet fecha = '-';\nif (fechaIso) {\n  const { DateTime } = require('luxon');\n  const hasOffset = /[+-]\\d{2}:?\\d{2}$|Z$/.test(fechaIso);\n  const dt = hasOffset\n    ? DateTime.fromISO(fechaIso).setZone('America/Guatemala')\n    : DateTime.fromISO(fechaIso, { zone: 'America/Guatemala' });\n  if (dt.isValid) {\n    const txt = dt.setLocale('es').toFormat(\"cccc d 'de' LLLL 'de' yyyy 'a las' h:mm a\");\n    fecha = txt.charAt(0).toUpperCase() + txt.slice(1) + ' (hora Guatemala)';\n  }\n}\nconst medioLlamadaLabel = params.medio_llamada === 'whatsapp' ? '📱 WhatsApp' : params.medio_llamada === 'telefono' ? '📞 Teléfono' : '-';\n\nconst html = `<!DOCTYPE html>\n<html lang=\"es\">\n<head><meta charset=\"utf-8\"><title>Nueva cita — SPECTRUM VIVIENDA</title></head>\n<body style=\"background:#f7f7f8;margin:0;padding:0;font-family:Arial,sans-serif;\">\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n<tr><td align=\"center\" style=\"padding:28px 16px;\">\n<table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);\">\n\n  <tr><td style=\"background:#1a1a2e;padding:24px 32px;\">\n    <h1 style=\"color:#fff;margin:0;font-size:20px;\">🏢 SPECTRUM VIVIENDA</h1>\n    <p style=\"color:#a0a0b0;margin:4px 0 0;font-size:14px;\">\n      ${esCita ? 'Nueva cita registrada' : 'Nueva solicitud de llamada'}\n    </p>\n  </td></tr>\n\n  <tr><td style=\"background:#f0f4ff;padding:16px 32px;border-bottom:1px solid #e0e8ff;\">\n    <p style=\"margin:0;font-size:16px;font-weight:bold;color:#1a1a2e;\">📍 ${proyectoNombre}</p>\n    <p style=\"margin:4px 0 0;font-size:14px;color:#555;\">${tipoLabel}</p>\n  </td></tr>\n\n  <tr><td style=\"padding:24px 32px;\">\n    <h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">Datos del Lead</h2>\n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Nombre</td>\n          <td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">${ctx.nombre}</td></tr>\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Correo</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${ctx.correo}</td></tr>\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Teléfono</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${ctx.telefono}</td></tr>\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Intención</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${intencion}</td></tr>\n      ${params.estado_civil ? `\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Estado civil</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${params.estado_civil}</td></tr>` : ''}\n    </table>\n  </td></tr>\n\n  <tr><td style=\"padding:0 32px 24px;\">\n    <h2 style=\"font-size:13px;text-transform:uppercase;color:#888;margin:0 0 12px;\">\n      ${esCita ? 'Detalles de la cita' : 'Detalles de la llamada'}\n    </h2>\n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;width:45%;\">Tipo</td>\n          <td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">${tipoLabel}</td></tr>\n      ${esCita ? `\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Fecha y hora</td>\n          <td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">${fecha}</td></tr>\n      ${params.numero_habitaciones ? `\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Habitaciones</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${params.numero_habitaciones}</td></tr>` : ''}\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Contacto preferido</td>\n          <td style=\"font-size:14px;color:#1a1a2e;\">${contacto}</td></tr>` : `\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Horario preferido</td>\n          <td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">${params.horario_preferido || '-'}</td></tr>\n      <tr><td style=\"padding:5px 0;font-size:14px;color:#555;\">Medio de llamada</td>\n          <td style=\"font-size:14px;color:#1a1a2e;font-weight:bold;\">${medioLlamadaLabel}</td></tr>`}\n    </table>\n  </td></tr>\n\n  <tr><td style=\"background:#f7f7f8;padding:14px 32px;border-top:1px solid #eee;\">\n    <p style=\"margin:0;font-size:12px;color:#aaa;text-align:center;\">\n      Sistema automatizado SPECTRUM VIVIENDA · ${new Date().toLocaleString('es-GT', {timeZone:'America/Guatemala'})}\n    </p>\n  </td></tr>\n\n</table>\n</td></tr>\n</table>\n</body>\n</html>`;\n\nreturn [{ json: { html, fecha, modalidad: tipoLabel, tipo_agendamiento: params.tipo_agendamiento || null, horario_preferido: params.horario_preferido || null, medio_llamada: params.medio_llamada || null, medio_llamada_label: medioLlamadaLabel } }];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1344,
+          1136
+        ],
+        "id": "ed332b48-6171-45ac-835f-d69ec24b3f31",
+        "name": "HTML"
+      },
+      {
+        "parameters": {
+          "collection": "appointments",
+          "options": {},
+          "query": "={\n  \"manychat_id\": \"{{$('CONTEXT').item.json.manychat_id}}\",\n  \"proyecto\": \"{{$('CONTEXT').item.json.proyecto}}\"\n}"
+        },
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          224,
+          1232
+        ],
+        "id": "ea14b8a5-bce5-41a8-b5d1-20d0fc28d781",
+        "name": "Find Appointment",
+        "alwaysOutputData": true
+      },
+      {
+        "parameters": {
+          "jsCode": "const raw = $input.first().json.output || '';\n\nfunction extractJSON(text) {\n  const match = text.match(/\\{[\\s\\S]*\\}/);\n  if (!match) return null;\n  try {\n    return JSON.parse(match[0]);\n  } catch(e) {\n    return null;\n  }\n}\n\nconst parsed = extractJSON(raw);\n\nif (!parsed) {\n  return [{\n    json: {\n      output: {\n        response: raw,\n        parameters: {\n          tipo_agendamiento: null,\n          horario_preferido: null,\n          medio_llamada: null,\n          fecha_hora: null,\n          numero_habitaciones: null,\n          intencion_compra: null,\n          metodo_contacto_pref: null,\n          estado_civil: null,\n          cita_confirmada: false\n        }\n      }\n    }\n  }];\n}\n\nconst p = parsed.parameters || {};\n\n// Normaliza valores \"null\" string a null real\nconst norm = (v) => (v === 'null' || v === '' || v === undefined) ? null : v;\n\nreturn [{\n  json: {\n    output: {\n      response: parsed.response || raw,\n      parameters: {\n        tipo_agendamiento: norm(p.tipo_agendamiento),\n        horario_preferido: norm(p.horario_preferido),\n        medio_llamada: (() => { const v = norm(p.medio_llamada); if (!v) return null; const s = String(v).toLowerCase().replace(/[^a-z]/g, ''); if (s.includes('whats')) return 'whatsapp'; if (s.includes('telef') || s.includes('phone') || s === 'tel') return 'telefono'; return s === 'telefono' || s === 'whatsapp' ? s : null; })(),\n        fecha_hora: (() => { const raw = norm(p.fecha_hora); if (!raw) return null; const local =\n  raw.replace(/(\\.[0-9]+)?(Z|[+-]\\d{2}:?\\d{2})$/, ''); return local + '-06:00'; })(),\n        numero_habitaciones: norm(p.numero_habitaciones),\n        intencion_compra: norm(p.intencion_compra),\n        metodo_contacto_pref: norm(p.metodo_contacto_pref),\n        estado_civil: norm(p.estado_civil),\n        cita_confirmada: p.cita_confirmada === true\n      }\n    }\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -224,
+          1328
+        ],
+        "id": "c1f4779c-df83-4ea2-bbc8-e14f37ddfd55",
+        "name": "Parse RSVP Output"
+      },
+      {
+        "parameters": {
+          "html": "{{ $json.html }}"
+        },
+        "type": "n8n-nodes-base.html",
+        "typeVersion": 1.2,
+        "position": [
+          1568,
+          1136
+        ],
+        "id": "6fd69fbe-09fb-425e-a03d-efbb09fae3b0",
+        "name": "HTML PURO"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "collection": "users",
+          "updateKey": "_id",
+          "fields": "has_reservation",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          2240,
+          1136
+        ],
+        "id": "97840f99-ffb5-4ba3-8d23-01bf4112395d",
+        "name": "Update User"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "4a52d8ad-da2c-4760-9834-ac9e439b4841",
+                "name": "_id",
+                "value": "={{ \n  $('Update Appointment').isExecuted\n    ? \n    $('Find Appointment').item.json._id.toJsonString().replace(/^\"(.*)\"$/, '$1')\n    : \n    $('Insert Appointment').item.json._id.toJsonString().replace(/^\"(.*)\"$/, '$1')\n}}",
+                "type": "string"
+              },
+              {
+                "id": "1660f796-d040-4c8c-9bd3-e26e6eda9daf",
+                "name": "has_reservation",
+                "value": true,
+                "type": "boolean"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2016,
+          1136
+        ],
+        "id": "c50081a8-2a67-4a59-81e0-932d0d95b16f",
+        "name": "reservation update"
+      },
+      {
+        "parameters": {
+          "options": {
+            "temperature": 0.1
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+        "typeVersion": 1,
+        "position": [
+          -568,
+          1552
+        ],
+        "id": "0f42eedb-be04-4218-b2d7-56658293aa37",
+        "name": "OpenRouter Chat Model"
       }
-    ]
+    ],
+    "connections": {
+      "START": {
+        "main": [
+          [
+            {
+              "node": "CONTEXT",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "CONTEXT": {
+        "main": [
+          [
+            {
+              "node": "RSVP Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "RSVP Agent": {
+        "main": [
+          [
+            {
+              "node": "Parse RSVP Output",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "MongoDB Chat Memory": {
+        "ai_memory": [
+          [
+            {
+              "node": "RSVP Agent",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If TIENE FECHA": {
+        "main": [
+          [
+            {
+              "node": "Find Appointment",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "RESPONSE 1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "IF APPOINTMENT EXIST": {
+        "main": [
+          [
+            {
+              "node": "Update Appointment Data",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Insert Appointment Data",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update Appointment Data": {
+        "main": [
+          [
+            {
+              "node": "Update Appointment",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Insert Appointment Data": {
+        "main": [
+          [
+            {
+              "node": "Insert Appointment",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update Appointment": {
+        "main": [
+          [
+            {
+              "node": "IF CONFIRMADA",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Insert Appointment": {
+        "main": [
+          [
+            {
+              "node": "IF CONFIRMADA",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "'Notifications Master' Cita": {
+        "main": [
+          [
+            {
+              "node": "reservation update",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "IF CONFIRMADA": {
+        "main": [
+          [
+            {
+              "node": "HTML",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "NADA",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "RESPONSE 1": {
+        "main": [
+          [
+            {
+              "node": "RESPONSE FINAL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "NADA": {
+        "main": [
+          [
+            {
+              "node": "RESPONSE FINAL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTML": {
+        "main": [
+          [
+            {
+              "node": "HTML PURO",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Find Appointment": {
+        "main": [
+          [
+            {
+              "node": "IF APPOINTMENT EXIST",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Parse RSVP Output": {
+        "main": [
+          [
+            {
+              "node": "If TIENE FECHA",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTML PURO": {
+        "main": [
+          [
+            {
+              "node": "'Notifications Master' Cita",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update User": {
+        "main": [
+          [
+            {
+              "node": "RESPONSE FINAL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "reservation update": {
+        "main": [
+          [
+            {
+              "node": "Update User",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OpenRouter Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "RSVP Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    }
   },
+  "tags": [],
   "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"
-  }
+    "templateCredsSetupCompleted": true
+  },
+  "parentFolderId": null,
+  "description": "Flujo del agente de reservas",
+  "scopes": [
+    "workflow:create",
+    "workflow:delete",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update",
+    "workflow:updateRedactionSetting"
+  ],
+  "canExecute": true
 }

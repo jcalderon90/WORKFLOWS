@@ -1,0 +1,297 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "webform",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -320,
+        -16
+      ],
+      "id": "6ae5274a-30a7-4045-92a1-35e49b47c795",
+      "name": "Webhook",
+      "webhookId": "359e2f7c-1580-4a49-9be1-2e7cf35572d9"
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "collection": "appointments_website",
+        "fields": "={{ Object.keys($json).join(\",\") }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        96,
+        -16
+      ],
+      "id": "aa847602-cc2f-4fe6-952e-dec041bf501e",
+      "name": "Insert Appointment",
+      "credentials": {
+        "mongoDb": {
+          "id": "UzcANqeDFO1QLbfd",
+          "name": "SPECTRUM - CENTRALIZADO"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "00c09eab-3ec4-4ac1-b139-46078788c392",
+              "name": "name",
+              "value": "={{ $json.body.name }}",
+              "type": "string"
+            },
+            {
+              "id": "d8fa7f89-c11c-4b36-8c00-dc63b83d08af",
+              "name": "lastname",
+              "value": "={{ $json.body.lastname }}",
+              "type": "string"
+            },
+            {
+              "id": "62839e65-cd72-4b9a-8096-736666451b6a",
+              "name": "email",
+              "value": "={{ $json.body.email }}",
+              "type": "string"
+            },
+            {
+              "id": "16d08fed-70d6-410c-8b04-82f495d01bda",
+              "name": "phone",
+              "value": "={{ $json.body.phone }}",
+              "type": "string"
+            },
+            {
+              "id": "638ec6e3-ce7a-48ed-b784-14234b428cc2",
+              "name": "fecha_cita",
+              "value": "={{ $json.body.fecha_cita }}",
+              "type": "string"
+            },
+            {
+              "id": "9ead119d-6ffd-49af-8353-3d26a1d44b97",
+              "name": "hora_cita",
+              "value": "={{ $json.body.hora_cita }}",
+              "type": "string"
+            },
+            {
+              "id": "5d4ec581-d01b-49a6-9dbf-eb807e8ee439",
+              "name": "comment",
+              "value": "={{ $json.body.comment }}",
+              "type": "string"
+            },
+            {
+              "id": "be6ea097-6b1a-456c-9932-9dd5348adaa6",
+              "name": "utm_source",
+              "value": "={{ $json.body.utm_source }}",
+              "type": "string"
+            },
+            {
+              "id": "9457b81a-d334-4871-8823-9158978b435a",
+              "name": "utm_campaign",
+              "value": "={{ $json.body.utm_campaign }}",
+              "type": "string"
+            },
+            {
+              "id": "c76ee601-4dd0-495a-862f-3081cad3dd1b",
+              "name": "proyecto",
+              "value": "={{ $json.body.proyecto }}",
+              "type": "string"
+            },
+            {
+              "id": "11079982-e332-4e0b-ba47-23639e9151ec",
+              "name": "origen",
+              "value": "={{ $json.body.origen }}",
+              "type": "string"
+            },
+            {
+              "id": "bcbf1625-7665-4c6c-bd30-e4a4ef35a1ba",
+              "name": "site",
+              "value": "={{ $json.body.site }}",
+              "type": "string"
+            },
+            {
+              "id": "1b44ff5b-3cae-49bb-92af-4e3eb491aa52",
+              "name": "site_url",
+              "value": "={{ $json.body.site_url }}",
+              "type": "string"
+            },
+            {
+              "id": "644d146a-c86e-44dc-accb-c000954955d1",
+              "name": "submitted_at",
+              "value": "={{ $json.body.submitted_at }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -112,
+        -16
+      ],
+      "id": "6f39d3d5-ac3f-453e-ad86-c6fbf0378170",
+      "name": "APPOINTMENT"
+    },
+    {
+      "parameters": {
+        "sendTo": "=jorge.calderon@garooinc.com",
+        "subject": "SPECTRUM - LEAD FROM WEBSITE!!",
+        "message": "={{ $json.html }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        704,
+        -16
+      ],
+      "id": "12cb21b2-c764-41a0-b418-e0c29d83c1a9",
+      "name": "Send a message",
+      "webhookId": "e6d72891-c509-4a7a-9903-bfc0455c293e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "H8Qx7NlrthXmHUiy",
+          "name": "Soporte Garoo"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Iteramos sobre los elementos que entran al nodo\nfor (const item of $input.all()) {\n  const cliente = item.json;\n\n  // Creamos la plantilla HTML con los 5 datos clave usando estilos inline\n  item.json.html_notificacion = `\n    <div style=\"font-family: Arial, sans-serif; background-color: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #e1e4e8; max-width: 400px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);\">\n        <h2 style=\"margin-top: 0; color: #1a1a1a; font-size: 20px; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px;\">Resumen de Cita</h2>\n        \n        <div style=\"margin-bottom: 12px;\">\n            <span style=\"font-size: 11px; text-transform: uppercase; color: #8c8c8c; font-weight: bold; display: block;\">Cliente</span>\n            <span style=\"font-size: 15px; color: #333333; font-weight: 500;\">${cliente.name} ${cliente.lastname}</span>\n        </div>\n        \n        <div style=\"margin-bottom: 12px;\">\n            <span style=\"font-size: 11px; text-transform: uppercase; color: #8c8c8c; font-weight: bold; display: block;\">Correo Electrónico</span>\n            <span style=\"font-size: 15px; color: #333333;\">${cliente.email}</span>\n        </div>\n        \n        <div style=\"margin-bottom: 12px;\">\n            <span style=\"font-size: 11px; text-transform: uppercase; color: #8c8c8c; font-weight: bold; display: block;\">Teléfono</span>\n            <span style=\"font-size: 15px; color: #333333;\">${cliente.phone}</span>\n        </div>\n        \n        <div style=\"margin-bottom: 12px;\">\n            <span style=\"font-size: 11px; text-transform: uppercase; color: #8c8c8c; font-weight: bold; display: block;\">Fecha y Hora</span>\n            <span style=\"font-size: 15px; color: #0076ff; font-weight: bold;\">${cliente.fecha_cita} a las ${cliente.hora_cita}</span>\n        </div>\n        \n        <div style=\"margin-bottom: 0;\">\n            <span style=\"font-size: 11px; text-transform: uppercase; color: #8c8c8c; font-weight: bold; display: block;\">Proyecto de Interés</span>\n            <span style=\"font-size: 15px; color: #333333;\">${cliente.proyecto} (${cliente.site})</span>\n        </div>\n    </div>\n  `;\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        304,
+        -16
+      ],
+      "id": "28f1cf73-cd93-440c-a56a-9ada41825519",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "html": "{{ $json.html_notificacion }}"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        512,
+        -16
+      ],
+      "id": "3d0705e1-c0a2-4824-a7c3-c8360e89cb89",
+      "name": "HTML"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "APPOINTMENT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert Appointment": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "APPOINTMENT": {
+      "main": [
+        [
+          {
+            "node": "Insert Appointment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {
+    "Webhook": [
+      {
+        "headers": {
+          "host": "agentsprod.redtec.ai",
+          "user-agent": "WordPress/6.6.1; https://dev-spectrum-mariscal.tww.gt",
+          "content-length": "410",
+          "accept": "*/*",
+          "accept-encoding": "deflate, gzip, br, zstd",
+          "content-type": "application/json; charset=utf-8",
+          "x-forwarded-for": "101.44.26.122",
+          "x-forwarded-host": "agentsprod.redtec.ai",
+          "x-forwarded-port": "443",
+          "x-forwarded-proto": "https",
+          "x-forwarded-server": "2a862d2f5b19",
+          "x-real-ip": "101.44.26.122"
+        },
+        "params": {},
+        "query": {},
+        "body": {
+          "name": "Dayrin Alemka Martínez Aguirre",
+          "lastname": "Prueba WEB",
+          "email": "dmartinez@spectrum.com.gt",
+          "phone": "1111",
+          "fecha_cita": "2026-05-22",
+          "hora_cita": "05:50 PM",
+          "comment": "empleados Spectrum",
+          "utm_source": "",
+          "utm_campaign": "Citas Soto Bosque",
+          "proyecto": "PVV",
+          "origen": "100000011",
+          "site": "Parque Mariscal",
+          "site_url": "https://dev-spectrum-mariscal.tww.gt",
+          "submitted_at": "2026-05-22T17:19:04+00:00"
+        },
+        "webhookUrl": "https://agentsprod.redtec.ai/webhook/webform",
+        "executionMode": "production"
+      }
+    ]
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"
+  }
+}
