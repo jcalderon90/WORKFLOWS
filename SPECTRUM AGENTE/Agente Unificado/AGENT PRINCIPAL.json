@@ -1901,7 +1901,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "tipo_alerta": "nuevo_lead",
-            "datos": "={{ \n  {\n    \"proyecto\": $('Parse response').first().json.proyecto || $('User Data').first().json.proyecto || 'Sin definir',\n    \"nombre_lead\": $('Parse response').first().json.lead_nombre || $('Prepare Update').first().json.nombre || $('User Data').first().json.nombre || 'No registrado',\n    \"telefono_lead\": $('Parse response').first().json.lead_telefono || $('Prepare Update').first().json.telefono || $('User Data').first().json.telefono || 'No registrado',\n    \"correo_lead\": $('Parse response').first().json.lead_correo || $('Prepare Update').first().json.correo || $('User Data').first().json.correo || 'No registrado',\n    \"canal\": $('User Data').first().json.input_channel\n  }\n}}"
+            "datos": "={{ \n  {\n    \"proyecto\": $('Parse response').first().json.proyecto || $('User Data').first().json.proyecto || 'Sin definir',\n    \"nombre_lead\": $('Parse response').first().json.lead_nombre || $('Prepare Update').first().json.nombre || $('User Data').first().json.nombre || 'No registrado',\n    \"telefono_lead\": $('Parse response').first().json.lead_telefono || $('Prepare Update').first().json.telefono || $('User Data').first().json.telefono || 'No registrado',\n    \"correo_lead\": $('Parse response').first().json.lead_correo || $('Prepare Update').first().json.correo || $('User Data').first().json.correo || 'No registrado',\n    \"canal\": $('User Data').first().json.input_channel,\n    \"manychat_id\": $('User Data').first().json.manychat_id\n  }\n}}"
           },
           "matchingColumns": [],
           "schema": [
@@ -1953,7 +1953,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "tipo_alerta": "escalacion",
-            "datos": "={{ \n  {\n    \"proyecto\": $('Parse response').first().json.proyecto || $('User Data').first().json.proyecto || 'Parque Vista Verde',\n    \"nombre_lead\": $('Parse response').first().json.lead_nombre || $('Prepare Update').first().json.nombre || $('User Data').first().json.nombre || 'No registrado',\n    \"telefono_lead\": $('Parse response').first().json.lead_telefono || $('Prepare Update').first().json.telefono || $('User Data').first().json.telefono || 'No registrado',\n    \"correo_lead\": $('Parse response').first().json.lead_correo || $('Prepare Update').first().json.correo || $('User Data').first().json.correo || 'No registrado',\n    \"canal\": $('User Data').first().json.input_channel,\n    \"ultima_consulta\": $('CONTEXT 1').first().json.entrada_usuario\n  }\n}}"
+            "datos": "={{ \n  {\n    \"proyecto\": $('Parse response').first().json.proyecto || $('User Data').first().json.proyecto || 'Parque Vista Verde',\n    \"nombre_lead\": $('Parse response').first().json.lead_nombre || $('Prepare Update').first().json.nombre || $('User Data').first().json.nombre || 'No registrado',\n    \"telefono_lead\": $('Parse response').first().json.lead_telefono || $('Prepare Update').first().json.telefono || $('User Data').first().json.telefono || 'No registrado',\n    \"correo_lead\": $('Parse response').first().json.lead_correo || $('Prepare Update').first().json.correo || $('User Data').first().json.correo || 'No registrado',\n    \"canal\": $('User Data').first().json.input_channel,\n    \"ultima_consulta\": $('CONTEXT 1').first().json.entrada_usuario,\n    \"manychat_id\": $('User Data').first().json.manychat_id\n  }\n}}"
           },
           "matchingColumns": [],
           "schema": [
@@ -2462,7 +2462,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "tipo_alerta": "interes_precios",
-            "datos": "={{ \n  {\n    \"proyecto\": $('Parse response').first().json.proyecto || $('User Data').first().json.proyecto || 'No identificado',\n    \"nombre_lead\": $('Parse response').first().json.lead_nombre || $('Prepare Update').first().json.nombre || $('User Data').first().json.nombre || 'No registrado',\n    \"telefono_lead\": $('Parse response').first().json.lead_telefono || $('Prepare Update').first().json.telefono || $('User Data').first().json.telefono || 'No registrado',\n    \"correo_lead\": $('Parse response').first().json.lead_correo || $('Prepare Update').first().json.correo || $('User Data').first().json.correo || 'No registrado',\n    \"ultima_consulta\": $('CONTEXT 1').first().json.entrada_usuario\n  }\n}}"
+            "datos": "={{ \n  {\n    \"proyecto\": $('Parse response').first().json.proyecto || $('User Data').first().json.proyecto || 'No identificado',\n    \"nombre_lead\": $('Parse response').first().json.lead_nombre || $('Prepare Update').first().json.nombre || $('User Data').first().json.nombre || 'No registrado',\n    \"telefono_lead\": $('Parse response').first().json.lead_telefono || $('Prepare Update').first().json.telefono || $('User Data').first().json.telefono || 'No registrado',\n    \"correo_lead\": $('Parse response').first().json.lead_correo || $('Prepare Update').first().json.correo || $('User Data').first().json.correo || 'No registrado',\n    \"ultima_consulta\": $('CONTEXT 1').first().json.entrada_usuario,\n    \"manychat_id\": $('User Data').first().json.manychat_id\n  }\n}}"
           },
           "matchingColumns": [],
           "schema": [

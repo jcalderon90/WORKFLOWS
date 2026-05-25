@@ -50,7 +50,7 @@ def _text(payload: Any) -> list[TextContent]:
     return [TextContent(type="text", text=json.dumps(payload, indent=2, default=str))]
 
 
-def build_server(config: Config) -> Server:
+def build_server(config: Config) -> tuple[Server, MongoStore | None]:
     n8n = N8nClient(config.n8n_base_url, config.n8n_api_key)
     mongo: MongoStore | None = None
     if config.mongo_enabled:
@@ -337,7 +337,7 @@ def build_server(config: Config) -> Server:
             log.exception("tool %s falló", name)
             return _text({"error": f"{type(e).__name__}: {e}"})
 
-    return server
+    return server, mongo
 
 
 def _parse_iso(value: str) -> datetime:
@@ -356,10 +356,15 @@ async def _amain() -> None:
     except RuntimeError as e:
         print(f"[spectrum-sim-mcp] config error: {e}", file=sys.stderr)
         sys.exit(2)
-    server = build_server(config)
+    server, mongo = build_server(config)
     log.info("starting spectrum-sim-mcp (n8n=%s, db=%s)", config.n8n_base_url, config.mongo_db)
-    async with stdio_server() as (read_stream, write_stream):
-        await server.run(read_stream, write_stream, server.create_initialization_options())
+    try:
+        async with stdio_server() as (read_stream, write_stream):
+            await server.run(read_stream, write_stream, server.create_initialization_options())
+    finally:
+        if mongo is not None:
+            log.info("closing MongoDB connection")
+            mongo.close()
 
 
 def main() -> None:

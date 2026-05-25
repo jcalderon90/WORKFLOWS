@@ -149,7 +149,7 @@ b4a13f4 fix: Auditoría y correcciones críticas de workflows
 
 ## Próximos pasos
 
-1. **En n8n:** Pushear cambios de AGENT PRINCIPAL.json y Sync_CRM.json a producción
+1. ✅ **En n8n:** AGENT PRINCIPAL.json y Sync_CRM.json pusheados a producción (2026-05-25)
 2. **Testing:** Correr `python3 scripts/test_agent.py --scenario happy_path_completo` para validar atribución end-to-end
 3. **MongoDB:** Verificar que nuevos documentos en `users` incluyan los 4 campos de atribución
 4. **Retomar sesión:** Hacer Paso 3 (`.item.json` en flujos de soporte)

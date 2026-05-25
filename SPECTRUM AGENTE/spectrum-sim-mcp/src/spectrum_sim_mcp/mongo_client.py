@@ -113,13 +113,22 @@ class MongoStore:
 
 
 def _stringify_ids(doc: dict[str, Any] | None) -> dict[str, Any] | None:
-    """Convierte ObjectId a str para que sea serializable en JSON."""
+    """Convierte ObjectId a str para que sea serializable en JSON (recursivo)."""
     if doc is None:
         return None
-    out: dict[str, Any] = {}
-    for k, v in doc.items():
-        if k == "_id":
-            out[k] = str(v)
-        else:
-            out[k] = v
-    return out
+
+    def _convert(obj: Any) -> Any:
+        if obj is None:
+            return None
+        # ObjectId → str
+        if str(type(obj).__name__) == "ObjectId":
+            return str(obj)
+        # dict → recursivo
+        if isinstance(obj, dict):
+            return {k: _convert(v) for k, v in obj.items()}
+        # list → recursivo
+        if isinstance(obj, list):
+            return [_convert(item) for item in obj]
+        return obj
+
+    return _convert(doc)
