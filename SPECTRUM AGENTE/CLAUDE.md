@@ -30,7 +30,7 @@ Agente Unificado/
 ├── RSVP.json                  ← Appointment booking. Writes to `appointments`. No business-hours validation
 ├── Send Media.json            ← Brochures/renders. Always responds positively even when URL is null
 ├── Sync_CRM.json              ← Scheduled (~10–15 min). Posts to Dynamics 365 SOAP. Builds _UTMCampaing summary
-├── Notifications Master.json  ← HTML email alerts (new lead, price interest, appointment, escalation)
+├── Notifications Master.json  ← HTML email alerts (new lead, price interest, appointment, escalation). Recipients hardcoded; not configurable per-page.
 └── Vectorizar los KBs.json    ← Ingests KBs/*.json into the vector collection
 
 KBs/                            ← Source-of-truth knowledge bases. Re-vectorize via the n8n workflow after editing
@@ -56,7 +56,7 @@ spectrum-sim-mcp/               ← MCP server (Python) — lets external AIs si
 | `appointments` | RSVP bookings. **Query by `manychat_id` + `proyecto`** — a user can have appointments across multiple projects |
 | `chat_histories` | Orchestrator memory |
 | `chat_histories_rsvp` | RSVP agent memory (separate from above) |
-| `manychat_settings` | Per-page config: `page_id`, `api_key`, `proyecto`, notification recipients |
+| `manychat_settings` | Per-page config: `page_id`, `api_key`, `proyecto` |
 | `quality_logs` | Post-sync audit |
 | `analytics_logs` | Latency + tool-call telemetry |
 | `documents` (vector) | KB chunks. Index: `spectrum_vector_index`. **Filter by `proyecto` field in UPPERCASE.** |

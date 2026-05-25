@@ -18,7 +18,11 @@
       "PowerShell(claude *)",
       "PowerShell(cmd /c \"claude.cmd mcp add mongodb -s user -e MDB_MCP_CONNECTION_STRING=mongodb+srv://jcalderon900610_db_user:jgHqZAZf53H7B5rq@cluster0.5l8w3jl.mongodb.net/?appName=Cluster0 -- npx -y mongodb-mcp-server\")",
       "PowerShell($env:MDB_MCP_CONNECTION_STRING = \"mongodb+srv://jcalderon900610_db_user:jgHqZAZf53H7B5rq@cluster0.5l8w3jl.mongodb.net/?appName=Cluster0\"; cmd /c \"npx -y mongodb-mcp-server --help 2>&1\" | Select-Object -First 50)",
-      "PowerShell(npm cache *)"
+      "PowerShell(npm cache *)",
+      "Bash(python3 -c 'import json,sys; json.load\\(open\\('\\\\''__TRACKED_VAR__'\\\\''\\)\\); print\\('\\\\''OK: __TRACKED_VAR__'\\\\''\\)')",
+      "Bash(python3 -c \"import json; json.load\\(open\\('Agente Unificado/RSVP.json'\\)\\); json.load\\(open\\('Agente Unificado/AGENT PRINCIPAL.json'\\)\\); print\\('OK'\\)\")",
+      "Bash(grep *)",
+      "Bash(awk '{print $0}')"
     ]
   }
 }
