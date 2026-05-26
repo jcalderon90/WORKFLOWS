@@ -31,7 +31,9 @@
       "Bash(node -e ' *)",
       "Bash(node *)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "mcp__n8n-mcp-server__get_workflow_details",
+      "Bash(python3 *)"
     ]
   }
 }

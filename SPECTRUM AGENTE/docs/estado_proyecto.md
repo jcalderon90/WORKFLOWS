@@ -1,5 +1,5 @@
 # 🏢 SPECTRUM VIVIENDA: Agente Unificado — Estado del Proyecto
-> Última actualización: 2026-05-25 (RSVP: múltiples opciones + rangos hora + no repite tipo + no ofrece 'solo info' · AGENT PRINCIPAL: saludo Fase 2 · Pendiente: investigar campos Tribal en CRM para proteger atribución Fase 2 en Sync_CRM)
+> Última actualización: 2026-05-26 (KBs: precios reales 1/2/3 hab en los 5 proyectos + re-vectorizados · Sync_CRM: Resumen enriquecido con nivel de interés, modelo y objeciones · RSVP: auditado, Find User correcto en producción · WEB FORM: en producción, primera prueba exitosa · Pendiente: chat_histories_rsvp cleanup, sendTo dinámico, atribución Tribal)
 
 ## 🎯 Objetivo General
 Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquestador central (*Sof-IA*) delega tareas a sub-workflows especializados (Tools), con persistencia centralizada en MongoDB y sincronización diferida al CRM Dynamics 365 vía SOAP.
@@ -67,7 +67,7 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ✅ **Completado (2026-05-22)**: **Limpieza precios Polanco (PPOL):** `pl_precio_general` tenía precios de Sotobosque copiados incorrectamente. Reemplazados por mensaje genérico de asesor hasta tener precios reales. KB re-vectorizado.
 - ✅ **Completado (2026-05-22)**: **Precio de reserva PSB y PPOL:** `sb_precio_reserva` y `pl_precio_reserva` actualizados con monto Q15,000. Agregados tags de búsqueda semántica. KBs re-vectorizados.
 - ✅ **Completado (2026-05-22)**: **Validación Imperativa de Datos del Lead:** Reforzada regla 🔴 VALIDACIÓN OBLIGATORIA PRIMERO en systemMessage de PRINCIPAL. Lead DEBE compartir nombre + correo + teléfono ANTES de cualquier respuesta, sin excepciones. Bloqueado: kb_search, rsvp, material visual. SOLO lead_collector hasta que datos completos. Incidente: Lead respondió consulta sobre Portales sin datos compartidos.
-- ⏳ **Pendiente**: Re-vectorizar KB PVV y PPO en n8n (workflow `LLiVnT0M6xvDKive`) para que los cambios del 2026-05-21 surtan efecto en producción.
+- ✅ **Completado (2026-05-26)**: **Precios reales en todos los KBs:** `pl_precio_general` (PPOL), `pvv_precio_general` (PVV) y `pp_precio_general` (PPO) actualizados con precios reales por 1/2/3 habitaciones (antes solo decían "consulta con asesor" o tenían rango genérico). PSB: S-79 corregido a Q1,707,002 y `sb_precio_general` actualizado. PMAR: S-41 corregido a Q899,000, S-71 a Q1,327,000, comparativo y `pm_precio_general` actualizados. Todos los KBs re-vectorizados en n8n (`LLiVnT0M6xvDKive`).
 
 ### 4. 🔔 Notificaciones y Citas — `Notifications Master.json` & `RSVP.json`
 **Estado: ✅ Activo — Fix bug llamada + zona horaria + categoría unificada** | Última mod: 2026-05-24
@@ -83,7 +83,8 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ✅ **Completado (2026-05-24)**: **Notifications Master diferencia cita vs llamada:** El nodo `Payload Cita` ahora usa expresiones condicionales (`$json.datos.tipo_agendamiento === 'llamada' ? ... : ...`) para: asunto del correo (`📞 NUEVA LLAMADA AGENDADA` vs `🗓️ NUEVA CITA REGISTRADA`), header HTML, y sección "Detalles" (para llamada muestra `horario_preferido` + `medio_llamada_label`; para cita muestra `fecha_cita` + `modalidad`). Se mantiene `tipo_alerta: "cita"` en el switch — la bifurcación se hace dentro del payload, sin agregar ramas al workflow.
 - ✅ **Completado (2026-05-25)**: **RSVP no repite tipo de cita ni ofrece "solo información":** El agente RSVP ya no repite el tipo de agendamiento una vez que el lead lo ha indicado, y se eliminó la opción de "solo quiero información" del flujo — toda interacción lleva a cita presencial, virtual o llamada.
 - ✅ **Completado (2026-05-25)**: **RSVP: múltiples opciones y rangos de hora en `fecha_hora`:** Dos reglas añadidas al bullet list de `fecha_hora` en el system prompt del agente: (1) Si el lead da múltiples opciones ("martes 3pm o miércoles 4pm"), el bot toma SIEMPRE la primera opción y confirma; (2) Si da un rango de horas ("entre las 9 y la 1"), toma el INICIO del rango; rangos vagos se canonicalizan (mañana=9:00, tarde=14:00, noche=19:00). Ambas reglas aplican solo a `cita_presencial`/`cita_virtual` (campo `fecha_hora`). Para `llamada`, `horario_preferido` es texto libre y no requiere regla. Commit: `3a92620`. Deploy: ID `TjFPzHs5aimxILH7`.
-- ⏳ **Pendiente**: Limpiar campos `metodo_contacto_pref` y `estado_civil` de nodos `Insert/Update Appointment Data` — el agente nunca los recolecta, siempre llegan `null`.
+- ✅ **Auditado (2026-05-26)**: Workflow de producción revisado. Nodo `Find User` (MongoDB find por `manychat_id`) → `reservation update` → `Update User` ya implementado correctamente en producción. `has_reservation` sí se escribe en `users` con el `_id` correcto.
+- ⏳ **Pendiente (intencional)**: Campos `metodo_contacto_pref` y `estado_civil` en `Parse RSVP Output`, `Insert/Update Appointment Data` y `HTML` — dead code dejado intencionalmente hasta que Spectrum solicite implementar esos datos.
 - ⏳ **Pendiente**: `sendTo` dinámico — los correos de notificación de citas están hardcodeados en el nodo `CONTEXT`. Mover a `manychat_settings` en MongoDB.
 - ⏳ **Pendiente**: Limpiar `chat_histories_rsvp` tras `cita_confirmada: true` para evitar que el agente arranque con contexto de citas anteriores al reagendar.
 
@@ -104,6 +105,7 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ✅ **Completado**: Poblar campo `_UTMCampaing` con formato `"Cliente atendido desde chatbot a través de [medio]"`.
 - ✅ **Completado**: Fix `_Nombre`/`_Apellido` — Body XML usa `primer_nombre`/`apellidos` con fallback al split de `nombre`.
 - ✅ **Completado (2026-05-25)**: **Fix `_FechaCita` inválida en SOAP:** El LLM del agente RSVP emitía `HH:MM:-06:00` (sin segundos + con offset), lo que producía `2026-05-25T17:20:.000Z` — valor rechazado por el CRM. Regex reemplazada en nodo `Body` de `Sync_CRM.json`: ahora extrae siempre `YYYY-MM-DDTHH:MM` y añade `:00.000Z`, válido para cualquier variante del LLM.
+- ✅ **Completado (2026-05-26)**: **Resumen enriquecido para CRM:** Descripción del atributo `Resumen` en `Information Extractor` actualizada. El LLM ahora genera un resumen que incluye: (1) narrativa de la conversación, (2) nivel de interés ALTO/MEDIO/BAJO con criterios explícitos, (3) modelo o tipo de unidad de interés, (4) objeciones o frenos detectados. Sin cambios en el XML ni en el flujo.
 - ⏳ **Pendiente**: **QA Sincronización:** Validar con equipo CRM/Andy que el campo `_UTMCampaing` se está reflejando correctamente en la base de datos de producción con el nuevo formato estricto tras las siguientes ejecuciones.
 - 🔴 **Pendiente investigación**: **Protección de atribución para leads Fase 2:** Caso detectado (Gaby González, Mariscal) — el SOAP de Sync_CRM pisa campos de atribución que Tribal ya tiene en Dynamics 365. El fix requiere omitir los campos de atribución en el XML cuando `fase_2: true`. **Bloqueante: necesita investigar exactamente qué campos pone Tribal en el CRM** (cuáles tienen valor, cuáles están vacíos) antes de decidir qué omitir. Coordinar con Andy para obtener un dump de un registro Tribal en Dynamics 365 y comparar contra lo que envía nuestro SOAP. Los 3 opcionales a revisar: `_UTMCampaing`, `_MetodocontactoPref`, `_Comentarios`. Campo requerido `_OrigenCliente` (100000001) también podría pisar — pendiente verificar si Tribal usa un origen diferente.
 
@@ -193,7 +195,7 @@ Servidor MCP en Python que permite a cualquier IA (Claude Desktop/Code, Cursor, 
 
 ---
 
-## 🚀 Punto Actual del Proyecto (2026-05-25 — tarde)
+## 🚀 Punto Actual del Proyecto (2026-05-26)
 
 Tras el ciclo de fixes del 24-25 de mayo, el sistema presenta el siguiente estatus técnico:
 - **Infraestructura Multitenant:** 100% Funcional. Enrutamiento dinámico por canal activado.

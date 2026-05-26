@@ -538,7 +538,7 @@
             },
             {
               "name": "Resumen",
-              "description": "Resumen narrativo de la conversación, qué información se le dio y en qué punto quedó.",
+              "description": "Resumen narrativo de la conversación. Incluye: (1) qué información se le dio al lead y en qué punto quedó; (2) nivel de interés detectado (ALTO si mostró señales claras como 'sí', 'me interesa', pidió fecha o precio concreto — MEDIO si preguntó pero no comprometió — BAJO si solo exploró); (3) modelo o tipo de unidad que más le interesó si lo mencionó; (4) objeciones o frenos detectados (precio, ubicación, decisión familiar, timing) o 'Sin objeciones' si no hubo.",
               "required": true
             },
             {

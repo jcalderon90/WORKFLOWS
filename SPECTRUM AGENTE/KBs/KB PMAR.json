@@ -161,7 +161,7 @@
             "inversion"
         ],
         "pregunta": "¿Cómo es el modelo S-41? ¿Qué incluye?",
-        "respuesta": "El modelo S-41 tiene 41.14 m2 más 12.50 m2 de parqueo. Incluye 1 dormitorio principal, 1 baño completo, cocina con gabinetes aéreos de melanina, top de cuarzo y grifería monomando, sala-comedor, área de lavado y balcón. Viene con 1 parqueo de vehículo en configuración simple. Disponible en niveles 3 al 21. Precio desde Q889,000. Cuota bancaria estimada desde Q5,600 (15% enganche, 25 años). Cuota de mantenimiento: Q1,150 al mes. Ideal para jóvenes profesionales e inversores."
+        "respuesta": "El modelo S-41 tiene 41.14 m2 más 12.50 m2 de parqueo. Incluye 1 dormitorio principal, 1 baño completo, cocina con gabinetes aéreos de melanina, top de cuarzo y grifería monomando, sala-comedor, área de lavado y balcón. Viene con 1 parqueo de vehículo en configuración simple. Disponible en niveles 3 al 21. Precio desde Q899,000. Cuota bancaria estimada desde Q5,600 (15% enganche, 25 años). Cuota de mantenimiento: Q1,150 al mes. Ideal para jóvenes profesionales e inversores."
     },
     {
         "id": "pm_modelo_s58",
@@ -207,7 +207,7 @@
             "familia"
         ],
         "pregunta": "¿Cómo es el modelo S-71? ¿Qué incluye?",
-        "respuesta": "El modelo S-71 tiene 71.15 m2 más 25 m2 de parqueo. Incluye 3 dormitorios (1 principal + 2 secundarios), 2 baños completos, cocina con gabinetes aéreos de melanina, top de cuarzo y grifería monomando, sala-comedor, área de lavado y balcón. Viene con 2 parqueos de vehículo en configuración tándem. Disponible en niveles 3 al 21. Precio desde Q1,328,000. Cuota bancaria estimada desde Q8,600 (15% enganche, 25 años). Cuota de mantenimiento: Q1,200 al mes. Ideal para familias."
+        "respuesta": "El modelo S-71 tiene 71.15 m2 más 25 m2 de parqueo. Incluye 3 dormitorios (1 principal + 2 secundarios), 2 baños completos, cocina con gabinetes aéreos de melanina, top de cuarzo y grifería monomando, sala-comedor, área de lavado y balcón. Viene con 2 parqueos de vehículo en configuración tándem. Disponible en niveles 3 al 21. Precio desde Q1,327,000. Cuota bancaria estimada desde Q8,600 (15% enganche, 25 años). Cuota de mantenimiento: Q1,200 al mes. Ideal para familias."
     },
     {
         "id": "pm_modelo_s75",
@@ -255,7 +255,7 @@
             "todos los modelos"
         ],
         "pregunta": "¿Cuáles son los modelos disponibles en Parque Mariscal y sus diferencias?",
-        "respuesta": "Parque Mariscal tiene 6 modelos disponibles en niveles 3 al 21: S-41 (41.14 m2, 1 dorm, 1 baño, 1 parqueo simple, desde Q889,000), S-58 (58.31 m2, 2 dorm, 2 baños, 2 parqueos tándem, desde Q1,267,000), S-65 (66.40 m2, 2 dorm, 2 baños, 2 parqueos tándem, desde Q1,284,000), S-71 (71.15 m2, 3 dorm, 2 baños, 2 parqueos tándem, desde Q1,328,000), S-75 (74.94 m2, 3 dorm, 2 baños, 2 parqueos tándem, desde Q1,397,000), S-90 (90.10 m2, 3 dorm, 2 baños, 2 parqueos simple, desde Q1,674,000). Todos incluyen balcón, cocina, sala-comedor y área de lavado."
+        "respuesta": "Parque Mariscal tiene 6 modelos disponibles en niveles 3 al 21: S-41 (41.14 m2, 1 dorm, 1 baño, 1 parqueo simple, desde Q899,000), S-58 (58.31 m2, 2 dorm, 2 baños, 2 parqueos tándem, desde Q1,267,000), S-65 (66.40 m2, 2 dorm, 2 baños, 2 parqueos tándem, desde Q1,284,000), S-71 (71.15 m2, 3 dorm, 2 baños, 2 parqueos tándem, desde Q1,327,000), S-75 (74.94 m2, 3 dorm, 2 baños, 2 parqueos tándem, desde Q1,397,000), S-90 (90.10 m2, 3 dorm, 2 baños, 2 parqueos simple, desde Q1,674,000). Todos incluyen balcón, cocina, sala-comedor y área de lavado."
     },
     {
         "id": "pm_precio_general",
@@ -270,7 +270,7 @@
             "rango"
         ],
         "pregunta": "¿Cuánto cuesta un apartamento en Parque Mariscal?",
-        "respuesta": "Los precios en Parque Mariscal van desde Q889,000 (modelo S-41, 1 dormitorio) hasta Q1,750,000 (modelo S-90 premium, 3 dormitorios). Para conocer el precio exacto de una unidad específica según nivel y orientación, contactar al asesor al 59238760."
+        "respuesta": "Los precios en Parque Mariscal según número de habitaciones:\n\n🏠 1 habitación: desde 41 m² — desde Q899,000\n🏠 2 habitaciones: desde 58 m² — desde Q1,267,000\n🏠 3 habitaciones: desde 71 m² — desde Q1,327,000\n\nPara conocer el precio exacto de una unidad específica según nivel y orientación, contactar al asesor al 59238760."
     },
     {
         "id": "pm_precio_reserva",
