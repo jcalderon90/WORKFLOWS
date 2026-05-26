@@ -26,7 +26,12 @@
       "Bash(python3 -c ' *)",
       "Bash(python3 -)",
       "Bash(python3 -c \"import json; wf=json.load\\(open\\('Agente Unificado/RSVP.json'\\)\\); print\\(json.dumps\\(wf\\)\\)\")",
-      "Bash(python3 -c \"import json; wf=json.load\\(open\\('Agente Unificado/Sync_CRM.json'\\)\\); print\\(json.dumps\\(wf\\)\\)\")"
+      "Bash(python3 -c \"import json; wf=json.load\\(open\\('Agente Unificado/Sync_CRM.json'\\)\\); print\\(json.dumps\\(wf\\)\\)\")",
+      "Skill(update-config)",
+      "Bash(node -e ' *)",
+      "Bash(node *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }

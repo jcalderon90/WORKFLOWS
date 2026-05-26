@@ -100,6 +100,7 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ✅ **Completado**: Mejorar resúmenes para incluir presupuesto, tipo de unidad y requisitos del lead.
 - ✅ **Completado**: Poblar campo `_UTMCampaing` con formato `"Cliente atendido desde chatbot a través de [medio]"`.
 - ✅ **Completado**: Fix `_Nombre`/`_Apellido` — Body XML usa `primer_nombre`/`apellidos` con fallback al split de `nombre`.
+- ✅ **Completado (2026-05-25)**: **Fix `_FechaCita` inválida en SOAP:** El LLM del agente RSVP emitía `HH:MM:-06:00` (sin segundos + con offset), lo que producía `2026-05-25T17:20:.000Z` — valor rechazado por el CRM. Regex reemplazada en nodo `Body` de `Sync_CRM.json`: ahora extrae siempre `YYYY-MM-DDTHH:MM` y añade `:00.000Z`, válido para cualquier variante del LLM.
 - ⏳ **Pendiente**: **QA Sincronización:** Validar con equipo CRM/Andy que el campo `_UTMCampaing` se está reflejando correctamente en la base de datos de producción con el nuevo formato estricto tras las siguientes ejecuciones.
 
 ### 7. 📊 Analytics Centralizado — `Analytics Centralizado.json`
