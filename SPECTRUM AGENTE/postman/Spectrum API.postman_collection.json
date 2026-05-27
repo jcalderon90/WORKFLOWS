@@ -1,0 +1,177 @@
+{
+  "info": {
+    "_postman_id": "2ad26aa0-b63d-4f01-ae32-eecd98889ab4",
+    "name": "Spectrum API",
+    "description": "Collection para endpoints de leads (produccion y prueba), stats y health test.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "41827351"
+  },
+  "item": [
+    {
+      "name": "Health Test",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/test/",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "test",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Lead - Produccion",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "api-key",
+            "value": "{{API_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Jose Santisteban\",\n  \"telefono\": \"41610384\",\n  \"correo\": \"jose.santisteban@garooinc.com\",\n  \"proyecto\": \"PVV\",\n  \"observaciones\": \"Test Lead de produccion\"\n}"
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/leads/",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "leads",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Lead - Prueba",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "api-key",
+            "value": "{{API_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Jose Santisteban\",\n  \"telefono\": \"41610384\",\n  \"correo\": \"jose.santisteban@garooinc.com\",\n  \"proyecto\": \"PVV\",\n  \"observaciones\": \"Lead de prueba PVV\"\n}"
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/leads/test",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "leads",
+            "test"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Leads Stats",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "api-key",
+            "value": "{{API_KEY}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_URL}}/leads/stats",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "leads",
+            "stats"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Leads",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "api-key",
+            "value": "{{API_KEY}}"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_URL}}/logs/?from_date=2026-05-23T00:00:00-06:00&limit=200&to_date=2026-05-24T23:59:00-06:00",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "logs",
+            ""
+          ],
+          "query": [
+            {
+              "key": "from_date",
+              "value": "2026-05-23T00:00:00-06:00"
+            },
+            {
+              "key": "manychat_tag_applied",
+              "value": "true",
+              "disabled": true
+            },
+            {
+              "key": "ok",
+              "value": "true",
+              "disabled": true
+            },
+            {
+              "key": "limit",
+              "value": "200"
+            },
+            {
+              "key": "to_date",
+              "value": "2026-05-24T23:59:00-06:00"
+            }
+          ]
+        },
+        "description": "Generated from cURL: curl -X GET \"http://localhost:8000/api/v1/logs/?from_date=2026-05-15T00:00:00-06:00&manychat_tag_applied=true&ok=true&limit=200\" \\\r\n  -H \"api_key: TU_API_KEY\""
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000"
+    },
+    {
+      "key": "api_key",
+      "value": "REPLACE_ME"
+    }
+  ]
+}
