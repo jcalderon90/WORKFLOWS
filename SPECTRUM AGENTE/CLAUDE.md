@@ -112,9 +112,11 @@ Both `DATA to CREATE` and `DATA to UPDATE` (in `AGENT PRINCIPAL.json`) must popu
 
 **Sync_CRM.json SENDS these fields for Phase 2** (only if they have values):
 - **Required (always):** `_Proyecto`, `_Nombre`, `_Apellido`, `_TelefonoMovil`, `_CorreEletronico`
-- **Updates (if exist):** `_NumeroHabitaciones`, `_EstadoCivil`, `_MotivoInteres`, `_FechaCita`, `_TipoCita`
+- **Updates (if exist):** `_FechaCita`, `_TipoCita`
 - **New data (if exist):** `_ResumenConversacion`, `_DudasCliente`
 - **Optional (if exist):** `_CorreoSecundario`
+
+`_NumeroHabitaciones`, `_EstadoCivil` y `_MotivoInteres` **NO se envían como campos SOAP para fase_2** — Tribal ya los tiene en CRM desde la pauta. Se incluyen en el texto de `_ResumenConversacion`.
 
 **Prevent SOAP field duplication:**
 - `_Comentarios` is sent ONLY by `Lead Collector.json` (at registration). `Sync_CRM.json` does NOT send comments (removed 2026-05-27).

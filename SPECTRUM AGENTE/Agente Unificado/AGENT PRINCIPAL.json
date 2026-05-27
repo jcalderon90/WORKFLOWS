@@ -1140,7 +1140,7 @@
         "sessionKey": "={{ $json.manychat_id }}",
         "collectionName": "chat_histories",
         "databaseName": "Centralizado",
-        "contextWindowLength": 20
+        "contextWindowLength": 30
       },
       "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
       "typeVersion": 1,
@@ -1172,7 +1172,8 @@
         3968
       ],
       "id": "b2b5c051-1694-468e-9082-ce8b2005d8ac",
-      "name": "PRINCIPAL"
+      "name": "PRINCIPAL",
+      "retryOnFail": true
     },
     {
       "parameters": {
@@ -2591,7 +2592,7 @@
             {
               "id": "c162dc32-fe16-4730-a6e8-caa963e5a08c",
               "name": "proyecto",
-              "value": "={{ $('CONTEXT 1').first().json.proyecto }}",
+              "value": "={{ $('Find user by Phone').first().json.proyecto }}",
               "type": "string"
             },
             {
@@ -3636,7 +3637,73 @@
       ]
     }
   },
-  "pinData": {},
+  "pinData": {
+    "Webhook": [
+      {
+        "headers": {
+          "host": "agentsprod.redtec.ai",
+          "user-agent": "ManyChat",
+          "content-length": "956",
+          "content-type": "application/json; charset=utf-8",
+          "x-forwarded-for": "3.124.242.138",
+          "x-forwarded-host": "agentsprod.redtec.ai",
+          "x-forwarded-port": "443",
+          "x-forwarded-proto": "https",
+          "x-forwarded-server": "2a862d2f5b19",
+          "x-real-ip": "3.124.242.138",
+          "accept-encoding": "gzip"
+        },
+        "params": {},
+        "query": {},
+        "body": {
+          "key": "user:1243840693",
+          "id": "1243840693",
+          "page_id": "113631858496836",
+          "user_refs": [],
+          "status": "active",
+          "first_name": "Guayo",
+          "last_name": "Cordon",
+          "name": "Guayo Cordon",
+          "gender": null,
+          "profile_pic": null,
+          "locale": null,
+          "language": null,
+          "timezone": "UTC±00",
+          "live_chat_url": "https://app.manychat.com/fb113631858496836/chat/1243840693",
+          "last_input_text": "Tamaños precios",
+          "optin_phone": false,
+          "phone": null,
+          "optin_email": false,
+          "email": null,
+          "subscribed": "2026-05-27T07:52:43-06:00",
+          "last_interaction": null,
+          "ig_last_interaction": null,
+          "last_seen": null,
+          "ig_last_seen": null,
+          "is_followup_enabled": true,
+          "ig_username": null,
+          "ig_id": null,
+          "whatsapp_phone": "+50245054752",
+          "whatsapp_bsuid": null,
+          "whatsapp_username": null,
+          "optin_whatsapp": true,
+          "phone_country_code": null,
+          "last_growth_tool": null,
+          "custom_fields": {
+            "canal_ingreso": "WhatsApp",
+            "Input from Template": null,
+            "First_Name": null,
+            "whatsapp_id": "50245054752",
+            "proyecto_interes": null,
+            "proyecto_utm_source": null,
+            "proyecto": null
+          }
+        },
+        "webhookUrl": "https://agentsprod.redtec.ai/webhook/spectrum-agent",
+        "executionMode": "production"
+      }
+    ]
+  },
   "meta": {
     "aiBuilderAssisted": true,
     "builderVariant": "mcp",
