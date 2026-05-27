@@ -101,6 +101,26 @@ Full catalogs in `docs/spectrum-soap-api.md`.
 ### Attribution fields
 Both `DATA to CREATE` and `DATA to UPDATE` (in `AGENT PRINCIPAL.json`) must populate `atribucion_tag`, `atribucion_medio`, `atribucion_contacto`, `utm_source_crm` — the older `tag_medio` name is a renamed field, do not reintroduce it. On WhatsApp the auto-detected campaign is intentionally suppressed so the bot qualifies the lead manually.
 
+### Phase 2 Lead Protection (Tribal pre-loaded leads)
+**For leads where `fase_2: true`** (pre-loaded by Tribal campaigns with existing CRM records):
+
+**Sync_CRM.json OMITS these attribution fields** (Tribal has them already):
+- `_OrigenCliente` ← **Omitted entirely**
+- `_UTMSource` ← **Omitted entirely**
+- `_UTMCampaing` ← **Omitted entirely**
+- `_MetodocontactoPref` ← **Omitted entirely**
+
+**Sync_CRM.json SENDS these fields for Phase 2** (only if they have values):
+- **Required (always):** `_Proyecto`, `_Nombre`, `_Apellido`, `_TelefonoMovil`, `_CorreEletronico`
+- **Updates (if exist):** `_NumeroHabitaciones`, `_EstadoCivil`, `_MotivoInteres`, `_FechaCita`, `_TipoCita`
+- **New data (if exist):** `_ResumenConversacion`, `_DudasCliente`
+- **Optional (if exist):** `_CorreoSecundario`
+
+**Prevent SOAP field duplication:**
+- `_Comentarios` is sent ONLY by `Lead Collector.json` (at registration). `Sync_CRM.json` does NOT send comments (removed 2026-05-27).
+
+Implementation: All Phase 2 checks use `{{ !$('Loop Over Users').item.json.fase_2 ? ... : '' }}` pattern in the XML body of `Sync_CRM.json` nodo `Body`.
+
 ---
 
 ## Remote workflow IDs (for n8n MCP)

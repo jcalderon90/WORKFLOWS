@@ -33,7 +33,21 @@
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
       "mcp__n8n-mcp-server__get_workflow_details",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Bash(pip3 install *)",
+      "Bash(claude mcp *)",
+      "mcp__mongodb__list-collections",
+      "mcp__mongodb__list-databases",
+      "mcp__mongodb__find",
+      "mcp__mongodb__export",
+      "mcp__mongodb__aggregate",
+      "Bash(cp \"/Users/jorgecalderon/Desktop/SPECTRUM ENV.postman_environment.json\" \"/Users/jorgecalderon/Desktop/PROYECTOS/WORKFLOWS/SPECTRUM AGENTE/postman/\")",
+      "Bash(cp \"/Users/jorgecalderon/Desktop/Spectrum API.postman_collection.json\" \"/Users/jorgecalderon/Desktop/PROYECTOS/WORKFLOWS/SPECTRUM AGENTE/postman/\")",
+      "Bash(chmod +x *)",
+      "Bash(curl -s 'https://leads-form-garoo.koyeb.app/api/v1/logs/?from_date=2026-05-26&to_date=2026-05-26&limit=200' -H 'api-key: wErMF6s31zCFVtnFDeFH')",
+      "Bash(curl -s 'https://leads-form-garoo.koyeb.app/api/v1/logs/?from_date=2026-05-23T00:00:00-06:00&to_date=2026-05-24T23:59:00-06:00&limit=200' -H 'api-key: wErMF6s31zCFVtnFDeFH')",
+      "Bash(curl -s 'https://leads-form-garoo.koyeb.app/api/v1/logs/?from_date=2026-05-25T00:00:00-06:00&to_date=2026-05-26T23:59:59-06:00&limit=500' -H 'api-key: wErMF6s31zCFVtnFDeFH')",
+      "Bash(curl -s 'https://leads-form-garoo.koyeb.app/api/v1/logs/?from_date=2026-05-25T00:00:00-06:00&to_date=2026-05-26T23:59:59-06:00&limit=200' -H 'api-key: wErMF6s31zCFVtnFDeFH')"
     ]
   }
 }
