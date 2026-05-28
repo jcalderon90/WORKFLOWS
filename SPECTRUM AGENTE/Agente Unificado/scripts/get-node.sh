@@ -1,13 +1,19 @@
 #!/bin/bash
-# Extrae un nodo completo de un workflow n8n por nombre exacto.
-# Uso: ./scripts/get-node.sh <archivo.json> <nombre-nodo>
-# Ejemplo: ./scripts/get-node.sh "AGENT PRINCIPAL.json" "Prepare Update"
+# Extrae un nodo de un workflow n8n por nombre exacto.
+# Uso: ./scripts/get-node.sh [--slim] <archivo.json> <nombre-nodo>
+# --slim: omite position, id, typeVersion, credentials (salida compacta)
+
+SLIM=false
+if [[ "$1" == "--slim" ]]; then
+  SLIM=true
+  shift
+fi
 
 FILE="$1"
 NODE="$2"
 
 if [[ -z "$FILE" || -z "$NODE" ]]; then
-  echo "Uso: $0 <archivo.json> <nombre-nodo>" >&2
+  echo "Uso: $0 [--slim] <archivo.json> <nombre-nodo>" >&2
   exit 1
 fi
 
@@ -25,4 +31,8 @@ if [[ -z "$RESULT" ]]; then
   exit 1
 fi
 
-echo "$RESULT"
+if $SLIM; then
+  echo "$RESULT" | jq 'del(.position, .id, .typeVersion, .credentials, .retryOnFail, .alwaysOutputData, .onError)'
+else
+  echo "$RESULT"
+fi

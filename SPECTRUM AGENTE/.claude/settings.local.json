@@ -47,7 +47,11 @@
       "Bash(curl -s 'https://leads-form-garoo.koyeb.app/api/v1/logs/?from_date=2026-05-26&to_date=2026-05-26&limit=200' -H 'api-key: wErMF6s31zCFVtnFDeFH')",
       "Bash(curl -s 'https://leads-form-garoo.koyeb.app/api/v1/logs/?from_date=2026-05-23T00:00:00-06:00&to_date=2026-05-24T23:59:00-06:00&limit=200' -H 'api-key: wErMF6s31zCFVtnFDeFH')",
       "Bash(curl -s 'https://leads-form-garoo.koyeb.app/api/v1/logs/?from_date=2026-05-25T00:00:00-06:00&to_date=2026-05-26T23:59:59-06:00&limit=500' -H 'api-key: wErMF6s31zCFVtnFDeFH')",
-      "Bash(curl -s 'https://leads-form-garoo.koyeb.app/api/v1/logs/?from_date=2026-05-25T00:00:00-06:00&to_date=2026-05-26T23:59:59-06:00&limit=200' -H 'api-key: wErMF6s31zCFVtnFDeFH')"
+      "Bash(curl -s 'https://leads-form-garoo.koyeb.app/api/v1/logs/?from_date=2026-05-25T00:00:00-06:00&to_date=2026-05-26T23:59:59-06:00&limit=200' -H 'api-key: wErMF6s31zCFVtnFDeFH')",
+      "Bash(./scripts/search.sh fase_2)",
+      "Bash(./scripts/get-context.sh \"AGENT PRINCIPAL.json\" \"CONTEXT 1\")",
+      "Bash(./scripts/get-node-param.sh \"AGENT PRINCIPAL.json\" \"PRINCIPAL\" \"systemMessage\")",
+      "Bash(./scripts/get-context.sh \"AGENT PRINCIPAL.json\" \"Update Lead FASE 2\")"
     ]
   }
 }

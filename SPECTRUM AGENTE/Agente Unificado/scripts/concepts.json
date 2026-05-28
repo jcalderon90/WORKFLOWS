@@ -1,0 +1,198 @@
+{
+  "meta": {
+    "proyecto": "Spectrum Vivienda — Sof-IA",
+    "actualizado": "2026-05-28",
+    "descripcion": "Índice curado de conceptos del proyecto. Buscar con search.sh <término>"
+  },
+  "concepts": [
+    {
+      "id": "fase_2",
+      "titulo": "Leads Fase 2 (Tribal)",
+      "descripcion": "Leads pre-cargados por campaña Tribal. NO traen proyecto_interes en ManyChat; su proyecto viene del campo 'project' (inglés) en la colección users_fase_2. Se detectan por phone con filtro procesado:{$exists:false}. El flag fase_2:true se guarda en users.",
+      "workflows": [
+        {
+          "archivo": "AGENT PRINCIPAL.json",
+          "nodos": ["Find user by Phone", "If NOT EXIST", "DATA to CREATE FASE 2", "Insert User Fase 2", "ID - Lead en Fase 2", "Update Lead FASE 2", "UPDATE - Proyecto Interes FASE 2"]
+        },
+        {
+          "archivo": "Sync_CRM.json",
+          "nodos": ["Loop Over Users", "Body"],
+          "nota": "Omite _OrigenCliente, _UTMSource, _UTMCampaing, _MetodocontactoPref cuando fase_2:true"
+        }
+      ],
+      "docs": ["docs/estado_proyecto.md"],
+      "campos_clave": ["fase_2 (boolean)", "project (users_fase_2)", "procesado (flag post-sync)"]
+    },
+    {
+      "id": "routing_proyecto",
+      "titulo": "Resolución de proyecto activo (CONTEXT 1)",
+      "descripcion": "El nodo CONTEXT 1 resuelve el proyecto del lead. Para no-WhatsApp usa page_id → manychat_settings. Para WhatsApp usa proyecto_interes del custom field o el nodo Proyecto (Regla de Oro). Para fase_2 el proyecto viene de users_fase_2.project y queda en User Data.proyecto como fallback. PRINCIPAL usa: Insert User Fase 2.isExecuted ? Find User.proyecto : (CONTEXT 1.proyecto || User Data.proyecto || 'Ninguno').",
+      "workflows": [
+        {
+          "archivo": "AGENT PRINCIPAL.json",
+          "nodos": ["CONTEXT 1", "If NOT WHATSAPP", "Proyecto", "UPDATE - Proyecto Interes", "UPDATE - Proyecto Interes FASE 2", "PRINCIPAL"]
+        }
+      ],
+      "docs": ["CLAUDE.md (sección Channel routing)"]
+    },
+    {
+      "id": "soap_crm",
+      "titulo": "Integración SOAP Dynamics 365",
+      "descripcion": "Endpoint: https://crm.spectrum.com.gt:8055/Spectrum_WS_GeneracionLead/Service.asmx (capital S). SOAPAction: http://tempuri.org/CreacionClientePotencialBot. Typos intencionales: <_CorreEletronico>, <_UTMCampaing>. _OrigenCliente siempre 100000001. _TelefonoMovil debe incluir +502.",
+      "workflows": [
+        {
+          "archivo": "Sync_CRM.json",
+          "nodos": ["Loop Over Users", "Build Conversation Summary", "Body", "SOAP Request", "Mark as Synced"]
+        }
+      ],
+      "docs": ["docs/spectrum-soap-api.md"],
+      "campos_clave": ["_Proyecto", "_Nombre", "_Apellido", "_TelefonoMovil", "_CorreEletronico", "_UTMCampaing", "_OrigenCliente", "_UTMSource", "_MetodocontactoPref", "_FechaCita", "_TipoCita", "_ResumenConversacion", "_DudasCliente", "_Comentarios"]
+    },
+    {
+      "id": "atribucion",
+      "titulo": "Campos de atribución CRM",
+      "descripcion": "atribucion_tag, atribucion_medio, atribucion_contacto, utm_source_crm se setean en DATA to CREATE y DATA to UPDATE de AGENT PRINCIPAL. Para WhatsApp la campaña se suprime (el bot califica manualmente). Para fase_2 estos campos se omiten del SOAP (Tribal los tiene). El campo renombrado es atribucion_medio (antes tag_medio — no reintroducir).",
+      "workflows": [
+        {
+          "archivo": "AGENT PRINCIPAL.json",
+          "nodos": ["DATA to CREATE", "DATA to UPDATE", "Extraer CAMPAIGN DATA"]
+        },
+        {
+          "archivo": "Sync_CRM.json",
+          "nodos": ["Body"]
+        }
+      ],
+      "docs": ["CLAUDE.md (sección Attribution fields)"]
+    },
+    {
+      "id": "lead_collector",
+      "titulo": "Recolección de datos del lead",
+      "descripcion": "Herramienta obligatoria antes de kb_search, rsvp o send_media. Captura nombre+email+teléfono. Divide en primer_nombre/apellidos via LLM. Guarda en MongoDB users. Devuelve transferir_agente:1 cuando datos completos. PRINCIPAL no puede llamar otras tools hasta que este gate pase.",
+      "workflows": [
+        {
+          "archivo": "Lead Collector.json",
+          "nodos": ["COLLECTOR", "Save Lead", "Update Lead", "Split Name"]
+        },
+        {
+          "archivo": "AGENT PRINCIPAL.json",
+          "nodos": ["PRINCIPAL", "User Data", "If USER NOT EXIST"]
+        }
+      ],
+      "docs": ["CLAUDE.md (sección CRITICAL RULE)"]
+    },
+    {
+      "id": "kb_search",
+      "titulo": "Búsqueda en Knowledge Base (RAG)",
+      "descripcion": "RAG sobre MongoDB Atlas Vector Index 'spectrum_vector_index'. Filtra por campo 'proyecto' en UPPERCASE (PVV, PMAR, PPO, PPOL, PSB). Solo se llama cuando datos del lead completos Y proyecto activo. Los KBs fuente están en KBs/*.json; re-vectorizar con workflow LLiVnT0M6xvDKive.",
+      "workflows": [
+        {
+          "archivo": "KB SEARCH.json",
+          "nodos": ["Vector Search", "Format Results", "KB AGENT"]
+        }
+      ],
+      "docs": ["CLAUDE.md (sección KB → project code mapping)"],
+      "codigos_proyecto": {
+        "PVV": "KBs/KB PVV.json — Parque Vista Verde Zona 15 (entrega Oct 2026)",
+        "PMAR": "KBs/KB PMAR.json — Parque Mariscal Zona 11",
+        "PPO": "KBs/KB PPO.json — Parque Portales Zona 17 (entrega Dic 2026)",
+        "PPOL": "KBs/KB PPOL.json — Parque Polanco Zona 10",
+        "PSB": "KBs/KB PSB.json — Parque Sotobosque Zona 15"
+      }
+    },
+    {
+      "id": "rsvp",
+      "titulo": "Agendamiento de citas (RSVP)",
+      "descripcion": "Agenda citas presenciales, virtuales o llamadas. Escribe en colección appointments (query por manychat_id+proyecto). No valida horario de negocio. Llamada WhatsApp y telefónica son la misma categoría 'llamada'. El medio NO se pregunta al cliente; por defecto es teléfono.",
+      "workflows": [
+        {
+          "archivo": "RSVP.json",
+          "nodos": ["RSVP AGENT", "Save Appointment", "Update Appointment"]
+        }
+      ],
+      "docs": ["CLAUDE.md (sección RSVP)"]
+    },
+    {
+      "id": "mongodb_collections",
+      "titulo": "Colecciones MongoDB Atlas",
+      "descripcion": "Colecciones principales del sistema.",
+      "colecciones": {
+        "users": "Perfil del lead (manychat_id + page_id). Campos: nombre, correo, telefono, proyecto, fase_2, asesoria, consulta_pendiente, input_channel, conversation_analysis",
+        "users_fase_2": "Leads pre-cargados por Tribal. Campos: phone, project (inglés), procesado (se agrega post-primer contacto)",
+        "appointments": "Citas RSVP. Query siempre por manychat_id + proyecto (un lead puede tener citas en varios proyectos)",
+        "chat_histories": "Memoria del orquestador PRINCIPAL",
+        "chat_histories_rsvp": "Memoria del agente RSVP (separada)",
+        "manychat_settings": "Config por page_id: api_key, proyecto",
+        "documents": "Chunks vectorizados de KBs. Index: spectrum_vector_index. Filtrar por campo 'proyecto' en UPPERCASE",
+        "quality_logs": "Auditoría post-sync",
+        "analytics_logs": "Telemetría: latencia, herramientas llamadas"
+      }
+    },
+    {
+      "id": "workflow_ids",
+      "titulo": "IDs de workflows en n8n producción",
+      "descripcion": "IDs para llamadas MCP contra agentsprod.redtec.ai",
+      "ids": {
+        "AGENT PRINCIPAL.json": "iXaptKTUXaXrP7aF",
+        "Sync_CRM.json": "TTVNRX38pPoPmK2X",
+        "Lead Collector.json": "SHPFhvoal7k1Rqf9",
+        "KB SEARCH.json": "D3LKuNi6CmMIdvzg",
+        "RSVP.json": "TjFPzHs5aimxILH7",
+        "Send Media.json": "NtTiyrNy2LHimE7u",
+        "Notifications Master.json": "r1Jf5vwrkBrT4dEu",
+        "Vectorizar los KBs.json": "LLiVnT0M6xvDKive"
+      }
+    },
+    {
+      "id": "debounce_redis",
+      "titulo": "Debounce de mensajes (Redis)",
+      "descripcion": "Redis agrupa mensajes rápidos del mismo usuario con espera de 10s antes de pasar al orquestador. Por eso los tests necesitan timeout de ~35s por mensaje. El webhook espera en ese buffer antes de disparar AGENT PRINCIPAL.",
+      "workflows": [
+        {
+          "archivo": "AGENT PRINCIPAL.json",
+          "nodos": ["Webhook", "PARSE BODY"]
+        }
+      ]
+    },
+    {
+      "id": "sync_crm_schedule",
+      "titulo": "Sync CRM diferido (Sync_CRM.json)",
+      "descripcion": "Corre cada ~10-15 min. Recoge leads con conversation_analysis:false idle >10 min. Genera resumen con LLM, postea SOAP a Dynamics 365, marca conversation_analysis:true. _Comentarios solo lo envía Lead Collector (no Sync_CRM). Para fase_2 omite campos de atribución.",
+      "workflows": [
+        {
+          "archivo": "Sync_CRM.json",
+          "nodos": ["Schedule Trigger", "Find Pending Leads", "Loop Over Users", "Build Conversation Summary", "Body", "SOAP Request", "Mark as Synced"]
+        }
+      ],
+      "docs": ["docs/spectrum-soap-api.md", "CLAUDE.md (sección Deferred CRM sync)"]
+    },
+    {
+      "id": "manychat_routing",
+      "titulo": "Routing por canal (WhatsApp vs Instagram/Messenger)",
+      "descripcion": "No-WhatsApp: proyecto pre-asignado por page_id → manychat_settings. WhatsApp: usa proyecto_interes del custom field si existe (leads fase_2 lo reciben de UPDATE - Proyecto Interes FASE 2), si no dispara menú Regla de Oro. page_id → proyecto mapeado en manychat_settings MongoDB.",
+      "workflows": [
+        {
+          "archivo": "AGENT PRINCIPAL.json",
+          "nodos": ["PARSE BODY", "Get Account Credentials", "CONTEXT 1", "If NOT WHATSAPP", "Proyecto", "UPDATE - Proyecto Interes"]
+        }
+      ],
+      "docs": ["CLAUDE.md (sección Channel routing)", "docs/estrategia_captacion_whatsapp.md"]
+    },
+    {
+      "id": "expressions_n8n",
+      "titulo": "Expresiones n8n — reglas críticas",
+      "descripcion": "Usar .first().json (no .item.json). Referencias deben ser alcanzables desde toda ruta de ejecución. $json pierde contexto upstream en nodos Set/IF — usar $('NombreNodo').first().json.campo. isExecuted para verificar si un nodo corrió en esta ejecución.",
+      "docs": ["CLAUDE.md (sección Editing workflow JSON)", "Agente Unificado/.skills/n8n-expression-syntax/"]
+    },
+    {
+      "id": "notifications",
+      "titulo": "Notificaciones por email (Notifications Master)",
+      "descripcion": "Emails HTML para: nuevo lead, interés en precio, cita agendada, escalación. Destinatarios hardcodeados (no configurables por page). Se activa desde AGENT PRINCIPAL cuando corresponde.",
+      "workflows": [
+        {
+          "archivo": "Notifications Master.json",
+          "nodos": ["Switch Tipo", "Email Nuevo Lead", "Email Precio", "Email Cita", "Email Escalacion"]
+        }
+      ]
+    }
+  ]
+}
