@@ -20,11 +20,21 @@ Requerimientos:
 import json
 import urllib.request
 import urllib.error
+import ssl
 import time
 import uuid
 import sys
 import argparse
 from datetime import datetime
+
+# macOS: Python no carga los certificados del sistema por defecto
+_SSL_CTX = ssl.create_default_context()
+try:
+    import certifi
+    _SSL_CTX = ssl.create_default_context(cafile=certifi.where())
+except ImportError:
+    _SSL_CTX.check_hostname = False
+    _SSL_CTX.verify_mode = ssl.CERT_NONE
 
 # ============================================================================
 # CONFIGURACIÓN
@@ -150,20 +160,40 @@ TEST_SCENARIOS = {
     },
 
     "rsvp_flow": {
-        "description": "Usuario quiere agendar una visita (RSVP)",
+        "description": "RSVP completo: datos → proyecto → tipo → fecha → habitaciones → intención → confirmar (valida persistencia progresiva en appointments)",
         "canal": "WhatsApp",
         "messages": [
             {
-                "text": "Hola, me interesa agendar un tour",
-                "validate": []
+                "text": "Hola, quiero agendar una visita",
+                "validate": []  # Sin datos aún → bot debe pedir nombre/correo/teléfono
             },
             {
-                "text": "Quiero visitar Parque Vista Verde",
-                "validate": []
+                "text": "Mi nombre es Ana López, correo ana.lopez@example.com, teléfono +50255556666",
+                "validate": ["Ana"]  # Pasa el gate name+email+phone
             },
             {
-                "text": "Sí, quiero agendar para el sábado",
-                "validate": ["fecha", "hora", "cita"]
+                "text": "Me interesa Parque Vista Verde",
+                "validate": []  # Resuelve proyecto PVV
+            },
+            {
+                "text": "Quiero una cita presencial",
+                "validate": []  # tipo_agendamiento → CREA el appointment
+            },
+            {
+                "text": "El sábado a las 10 de la mañana",
+                "validate": []  # fecha_hora → update
+            },
+            {
+                "text": "Me interesan 2 habitaciones",
+                "validate": []  # numero_habitaciones → update
+            },
+            {
+                "text": "Es para vivir",
+                "validate": []  # intencion_compra → update
+            },
+            {
+                "text": "Sí, confirmo",
+                "validate": ["cita"]  # cita_confirmada:true → update + notificación
             },
         ]
     },
@@ -237,7 +267,7 @@ def send_message(user_id, message_text, canal="WhatsApp"):
 
     try:
         start_time = time.time()
-        response = urllib.request.urlopen(request, timeout=TIMEOUT_SECONDS)
+        response = urllib.request.urlopen(request, timeout=TIMEOUT_SECONDS, context=_SSL_CTX)
         elapsed = (time.time() - start_time) * 1000  # milisegundos
 
         response_data = response.read().decode('utf-8')
