@@ -51,7 +51,11 @@
       "Bash(./scripts/search.sh fase_2)",
       "Bash(./scripts/get-context.sh \"AGENT PRINCIPAL.json\" \"CONTEXT 1\")",
       "Bash(./scripts/get-node-param.sh \"AGENT PRINCIPAL.json\" \"PRINCIPAL\" \"systemMessage\")",
-      "Bash(./scripts/get-context.sh \"AGENT PRINCIPAL.json\" \"Update Lead FASE 2\")"
+      "Bash(./scripts/get-context.sh \"AGENT PRINCIPAL.json\" \"Update Lead FASE 2\")",
+      "Bash(./scripts/build_index.sh)",
+      "Bash(sed -n '/BEGIN AUTO-NODES/,/END AUTO-NODES/p' INDEX.md)",
+      "Bash(git push *)",
+      "Bash(git remote *)"
     ]
   }
 }
