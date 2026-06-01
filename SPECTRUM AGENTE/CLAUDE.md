@@ -4,6 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ---
 
+## 🧭 RULE 0 — Consult INDEX.md before searching
+
+**BEFORE using Grep / Glob / Explore (or any broad file search) to locate a workflow, node, script, doc, KB, or module, READ `INDEX.md` first.** It maps every file/node in the repo and is far cheaper than scanning. Only fall back to a real search when `INDEX.md` doesn't answer the question.
+
+After adding/removing nodes or workflows, run `./scripts/build_index.sh` to refresh the node inventory — a stale index is worse than none. If you notice `INDEX.md` disagrees with reality, fix it (or regenerate) before relying on it.
+
+---
+
 ## What this repo is
 
 n8n workflow source for **SPECTRUM VIVIENDA** — a multitenant real-estate conversational agent (*Sof-IA*) deployed on `https://agentsprod.redtec.ai`. The local `.json` files are the authoritative workflow definitions; they are pushed to the n8n server via MCP. The server is the runtime; this repo is the source of truth.
@@ -31,10 +39,14 @@ Agente Unificado/
 ├── Send Media.json            ← Brochures/renders. Always responds positively even when URL is null
 ├── Sync_CRM.json              ← Scheduled (~10–15 min). Posts to Dynamics 365 SOAP. Builds _UTMCampaing summary
 ├── Notifications Master.json  ← HTML email alerts (new lead, price interest, appointment, escalation). Recipients hardcoded; not configurable per-page.
-└── Vectorizar los KBs.json    ← Ingests KBs/*.json into the vector collection
+├── Vectorizar los KBs.json    ← Ingests KBs/*.json into the vector collection
+├── Analytics Centralizado.json ← 🆕 Scheduled. Aggregates daily per-user metrics via an LLM agent → updates MongoDB
+├── LEAD FASE 2.json           ← 🆕 Scaffold (single webhook). Inbound entrypoint for phase-2 (Tribal) leads — not yet built out
+└── WEB FORM.json              ← 🆕 Web-form webhook → inserts appointment + sends Gmail HTML confirmation
 
 KBs/                            ← Source-of-truth knowledge bases. Re-vectorize via the n8n workflow after editing
 docs/                           ← Project state and reference docs
+INDEX.md                        ← 🗺️ Navigation map of the whole repo (read first to locate files/nodes; regen with scripts/build_index.sh)
 scripts/                        ← Python comparators and JS workflow patchers (root-level scripts/)
 Agente Unificado/scripts/       ← Test runner + jq helpers (workflow-level scripts/)
 spectrum-sim-mcp/               ← MCP server (Python) — lets external AIs simulate ManyChat traffic and read n8n/Mongo state
@@ -139,6 +151,11 @@ When calling MCP tools against `agentsprod.redtec.ai`:
 | `Send Media.json` | `NtTiyrNy2LHimE7u` |
 | `Notifications Master.json` | `r1Jf5vwrkBrT4dEu` |
 | `Vectorizar los KBs.json` | `LLiVnT0M6xvDKive` |
+| `Analytics Centralizado.json` | _no registrado — verificar en server_ |
+| `LEAD FASE 2.json` | _no registrado — scaffold_ |
+| `WEB FORM.json` | _no registrado — verificar en server_ |
+
+> The last three are recent additions; their remote IDs aren't confirmed. Check the server (and mirror into `spectrum-sim-mcp/config.py` `WORKFLOW_IDS`) before assuming they're deployed.
 
 If you hit `ECONNREFUSED` connecting to MongoDB Atlas from a local script, override DNS in-process: `dns.setServers(['8.8.8.8', '8.8.4.4'])`.
 
@@ -201,8 +218,10 @@ Tools: `send_message`, `new_test_user_id`, `list_workflows`, `list_executions`, 
 
 ## Project state and skills
 
+- `INDEX.md` (repo root) — **navigation map: read first to locate any file/node/module without scanning the repo.** Per-workflow node inventory auto-regenerates via `./scripts/build_index.sh` (run it after adding/removing nodes or workflows).
 - `docs/estado_proyecto.md` is the living changelog — read it before making non-trivial changes; it explains *why* current quirks exist.
 - `docs/spectrum-soap-api.md` — full SOAP catalogs.
+- `docs/auditoria_workflows_2026-05-25.md`, `docs/comparativa_versiones.md`, `docs/estrategia_captacion_whatsapp.md`, `docs/reporte-fase2-mayo-2026.md` — audit, version comparison, WhatsApp capture strategy, and phase-2 May report.
 - `Agente Unificado/.skills/spectrum-agente-unificado/SKILL.md` — domain context skill (read first for any task).
 - `.skills_n8n/` and `Agente Unificado/.skills/` — n8n-specific skills (expression syntax, node configuration, validation, MCP tools, code nodes). Consult the matching skill when writing the corresponding kind of n8n content.
 - `flujos de muestra Version anterior/` — legacy monolithic workflows kept for pattern reference, NOT in production.
