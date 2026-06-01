@@ -1,5 +1,5 @@
 # 🏢 SPECTRUM VIVIENDA: Agente Unificado — Estado del Proyecto
-> Última actualización: 2026-06-01 (RSVP: persistencia progresiva de citas · Sync_CRM: guard tipo+fecha en _FechaCita/_TipoCita · test_agent.py: escenario rsvp_flow completo)
+> Última actualización: 2026-06-01 (Tester Web `tester/`: plan aprobado y documentado en `docs/plan_spectrum_tester.md`, pendiente de implementación · RSVP: persistencia progresiva de citas · Sync_CRM: guard tipo+fecha en _FechaCita/_TipoCita · test_agent.py: escenario rsvp_flow completo)
 
 ## 🎯 Objetivo General
 Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquestador central (*Sof-IA*) delega tareas a sub-workflows especializados (Tools), con persistencia centralizada en MongoDB y sincronización diferida al CRM Dynamics 365 vía SOAP.
@@ -180,6 +180,17 @@ Servidor MCP en Python que permite a cualquier IA (Claude Desktop/Code, Cursor, 
 - ⏳ **Pendiente**: Tests automatizados (carpeta `tests/` existe pero vacía).
 - ⚠️ **Riesgo**: La API key n8n y la URI de Mongo con password fueron pegadas en la conversación durante el setup. Rotar credenciales tras cerrar la fase de validación.
 - 📎 **Alternativa paralela**: Se registró también el `mongodb-mcp-server` oficial (npm) en Claude Code, pero falla al iniciar por un bug de npm 11.14.1 (`Invalid Version` al deduplicar `express-rate-limit → ip-address`). No bloquea al servidor custom; queda como vía de respaldo si se requiere acceso Mongo desde Claude Code sin pasar por este simulador.
+
+### 9. 🧪 Tester Web (Backend + Frontend) — `tester/` (PLANEADO)
+**Estado: 📝 Plan aprobado — PENDIENTE de implementación** | Plan: 2026-06-01
+
+App web full-stack (Node.js + Express + frontend estático vanilla) para que el **equipo de Spectrum (no técnico)** pruebe a Sof-IA por sí mismo: lanza una conversación (escenario predefinido o entrada manual), captura la conversación **y** las ejecuciones n8n correlacionadas, las envía a un LLM vía **OpenRouter** para análisis de calidad + técnico, y muestra todo en una UI en español.
+
+- 📄 **Plan completo**: `docs/plan_spectrum_tester.md` (arquitectura, endpoints, modelo `test_runs`, algoritmo de correlación, servicio OpenRouter, fases 0→5).
+- 🔁 **Reuso**: porta la lógica de `spectrum-sim-mcp/` (Python) a Node — `webhook.py` → `webhook.js`, `n8n_client.py` → `n8nClient.js`, `mongo_client.py` → `mongoStore.js` (incl. override DNS y guardrails de reset), y los 10 escenarios de `test_agent.py`.
+- 🗃️ **Persistencia**: nueva colección **`test_runs`** en el cluster Atlas (`Centralizado`).
+- 🌐 **Entorno**: golpea el webhook de **producción** con `manychat_id = test_<hex>` (limpiable con reset).
+- ⏳ **Pendiente**: todo (Fase 0 scaffold en adelante). No iniciar hasta confirmación.
 
 ---
 

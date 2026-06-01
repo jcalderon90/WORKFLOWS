@@ -4,7 +4,7 @@
 > sin escanear el repo. Reglas de negocio y gotchas viven en `CLAUDE.md`; este archivo dice
 > **dónde está cada cosa**. La sección de nodos se regenera con `./scripts/build_index.sh`.
 >
-> Última actualización manual: 2026-06-01
+> Última actualización manual: 2026-06-01 (+ plan Tester Web `docs/plan_spectrum_tester.md`)
 
 ---
 
@@ -19,6 +19,7 @@
 | `docs/` | Changelog vivo, catálogos SOAP, reportes, estrategia |
 | `scripts/` | Comparadores Python + patchers JS de workflows + este `build_index.sh` |
 | `spectrum-sim-mcp/` | Servidor MCP (Python) para simular tráfico ManyChat e inspeccionar n8n/Mongo |
+| `tester/` | 📝 **PLANEADO (no creado)** — App web Node+Express+frontend para que el equipo Spectrum pruebe Sof-IA + análisis IA. Plan: `docs/plan_spectrum_tester.md` |
 | `postman/` | Colección Postman + scripts fetch leads + reportes fase 2 (CSV) |
 | `flujos de muestra Version anterior/` | Workflows legacy monolíticos — referencia, NO en producción |
 
@@ -76,6 +77,7 @@
 | `docs/comparativa_versiones.md` | Comparativa entre versiones de workflows |
 | `docs/estrategia_captacion_whatsapp.md` | Estrategia de captación WhatsApp ("Regla de Oro") |
 | `docs/reporte-fase2-mayo-2026.md` | Reporte de leads fase 2, mayo 2026 |
+| `docs/plan_spectrum_tester.md` | 📝 **PLAN PENDIENTE** — Tester Web (Node+Express+frontend) para probar Sof-IA + análisis IA vía OpenRouter. Carpeta `tester/` aún no creada |
 | `docs/Source Links_ Spectrum - Nuevo.csv` | Links fuente |
 
 ---
