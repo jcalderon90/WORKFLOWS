@@ -105,6 +105,7 @@ After editing a KB, re-run the `Vectorizar los KBs` workflow on the server (ID `
 
 ### Catalog values (most-used)
 `_OrigenCliente` is **always** `100000001` (Chat).
+`_AtendidoPorIA` is **always** `1` — sent for both fase_1 and fase_2 leads (no conditional needed).
 `_UTMSource`: WhatsApp `100000004`, Instagram `100000012`, Facebook `100000005`.
 `_MetodocontactoPref` uses simple ints `2–5` (NOT the CRM's `100000xxx` catalog).
 

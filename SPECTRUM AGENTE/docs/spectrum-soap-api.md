@@ -154,6 +154,17 @@
 
 ---
 
+## _AtendidoPorIA *(campo nuevo — 2026-06-02)*
+
+> ⚠️ Valor **siempre fijo `1`** cuando el lead proviene del bot Sof-IA. Se envía para fase_1 y fase_2 por igual.
+
+| Label | Value |
+|---|---|
+| Sí (atendido por IA) | `1` |
+| No | `0` |
+
+---
+
 ## Notas de implementación
 
 - ⚠️ **Typo en tag XML:** el campo de email se envía como `<_CorreEletronico>` (sin "o" en *Correo* y sin "c" en *Electrónico*). Usar exactamente ese nombre.
