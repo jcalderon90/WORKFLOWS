@@ -55,7 +55,9 @@
       "Bash(./scripts/build_index.sh)",
       "Bash(sed -n '/BEGIN AUTO-NODES/,/END AUTO-NODES/p' INDEX.md)",
       "Bash(git push *)",
-      "Bash(git remote *)"
+      "Bash(git remote *)",
+      "mcp__n8n__search_executions",
+      "mcp__n8n__get_execution"
     ]
   }
 }
