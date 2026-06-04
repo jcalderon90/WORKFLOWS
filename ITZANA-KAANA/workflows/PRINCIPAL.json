@@ -568,7 +568,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n   \"subscriber_id\": \"={{ $('Set Propiedad').first().json.manychat_id }}\",\n   \"data\": {\n     \"version\": \"v2\",\n     \"content\": {\n       \"type\": \"={{ $('Parameter Type').first().json.type }}\",\n       \"messages\": [\n         {\n           \"type\": \"text\",\n           \"text\": \"={{ $('Parse Agent Output').first().json.response_text }}\"\n         }\n       ]\n     }\n   }\n }",
+        "jsonBody": "={{ JSON.stringify({ subscriber_id: $('Set Propiedad').first().json.manychat_id, data: { version: 'v2', content: { type: $('Parameter Type').first().json.type, messages: [{ type: 'text', text: $('Parse Agent Output').first().json.response_text }] } } }) }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -911,7 +911,7 @@
     },
     {
       "parameters": {
-        "description": "=Escalate to the hotel team. Use when user asks for a human, or inquiry is about weddings/events, PR/collaboration, or employment. Pass: {\"categoria\": \"<bodas_eventos|pr|empleo|escalamiento|reserva>\", \"resumen_conversacion\": \"<2-3 sentence summary of conversation>\"}.",
+        "description": "=Escala al equipo del hotel. Úsala cuando el usuario pida hablar con una persona, o la consulta sea sobre bodas/eventos, PR/colaboración o empleo. Pasa: {\"categoria\": \"<bodas_eventos|pr|empleo|escalamiento|reserva>\", \"resumen_conversacion\": \"<resumen de 2-3 oraciones de la conversación>\", \"entrada_usuario\": \"<último mensaje del usuario textual>\", \"nombre\": \"<nombre del usuario si se conoce, si no cadena vacía>\"}.",
         "workflowId": {
           "__rl": true,
           "value": "OApztbIN8Jhb4JHz",
@@ -969,7 +969,7 @@
     },
     {
       "parameters": {
-        "description": "=Search Itz'ana Resort knowledge base. Use for ANY question about the resort: accommodation, restaurants, activities, weddings, location, policies, prices. Pass the user query as {\"query\": \"<user question>\"}.",
+        "description": "=Busca en la base de conocimiento de Itz'ana Resort. Úsala para CUALQUIER pregunta sobre el resort: alojamiento, restaurantes, actividades, bodas, ubicación, políticas, precios. Pasa la consulta del usuario como {\"query\": \"<pregunta del usuario>\"}.",
         "workflowId": {
           "__rl": true,
           "value": "rofQe6ZGW3OpFqcb",

@@ -6,8 +6,8 @@
       },
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
-      "position": [-480, 0],
-      "id": "notif-start-001",
+      "position": [-528, 336],
+      "id": "fd505af0-6273-4f5f-9f86-ec9241221f37",
       "name": "START"
     },
     {
@@ -50,13 +50,12 @@
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [-240, 0],
-      "id": "notif-context-001",
+      "position": [-304, 336],
+      "id": "1e0da7b1-006d-4f3a-b493-846862f7f791",
       "name": "Set Context"
     },
     {
       "parameters": {
-        "mode": "rules",
         "rules": {
           "values": [
             {
@@ -76,8 +75,7 @@
                   }
                 ],
                 "combinator": "and"
-              },
-              "outputKey": "0"
+              }
             },
             {
               "conditions": {
@@ -96,8 +94,7 @@
                   }
                 ],
                 "combinator": "and"
-              },
-              "outputKey": "1"
+              }
             },
             {
               "conditions": {
@@ -116,8 +113,7 @@
                   }
                 ],
                 "combinator": "and"
-              },
-              "outputKey": "2"
+              }
             },
             {
               "conditions": {
@@ -136,8 +132,7 @@
                   }
                 ],
                 "combinator": "and"
-              },
-              "outputKey": "3"
+              }
             },
             {
               "conditions": {
@@ -156,8 +151,7 @@
                   }
                 ],
                 "combinator": "and"
-              },
-              "outputKey": "4"
+              }
             }
           ]
         },
@@ -165,107 +159,190 @@
       },
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
-      "position": [0, 0],
-      "id": "notif-switch-001",
+      "position": [-80, 288],
+      "id": "2ccc1f91-be36-45aa-8a6d-0eb8d7a24e5a",
       "name": "Switch Categoria"
     },
     {
       "parameters": {
-        "fromEmail": "bot@itzanabelize.com",
-        "toEmail": "reservations@itzanabelize.com",
-        "subject": "Consulta de bodas/eventos - Bot Itz'ana",
-        "emailType": "html",
-        "html": "=<html><body style=\"font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px\">\n<h2 style=\"color:#1a5f7a\">🌊 Nueva consulta de bodas/eventos — Itz'ana Bot</h2>\n<table style=\"width:100%;border-collapse:collapse;margin-bottom:20px\">\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold;width:140px\">ManyChat ID</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.manychat_id }}</td></tr>\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold\">Nombre</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.nombre }}</td></tr>\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold\">Categoría</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">bodas_eventos</td></tr>\n</table>\n<h3 style=\"color:#1a5f7a\">Último mensaje del usuario</h3>\n<blockquote style=\"border-left:4px solid #1a5f7a;margin:0;padding:10px 15px;background:#f9f9f9\">{{ $json.entrada_usuario }}</blockquote>\n<h3 style=\"color:#1a5f7a\">Resumen de conversación</h3>\n<div style=\"background:#f9f9f9;padding:15px;border-radius:4px\">{{ $json.resumen_conversacion }}</div>\n<hr style=\"margin:20px 0;border:none;border-top:1px solid #e0e0e0\">\n<p style=\"color:#888;font-size:12px\">Mensaje generado automáticamente por el bot de Itz'ana • <a href=\"https://www.itzanabelize.com\">itzanabelize.com</a></p>\n</body></html>"
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cb0b5fdb-ae4d-44ad-982a-a58db9b1be0c",
+              "name": "html",
+              "value": "=<html><body style=\"font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px\">\n<h2 style=\"color:#1a5f7a\">🌊 Nueva consulta de bodas/eventos — Itz'ana Bot</h2>\n<table style=\"width:100%;border-collapse:collapse;margin-bottom:20px\">\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold;width:140px\">ManyChat ID</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.manychat_id }}</td></tr>\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold\">Nombre</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.nombre }}</td></tr>\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold\">Categoría</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">bodas_eventos</td></tr>\n</table>\n<h3 style=\"color:#1a5f7a\">Último mensaje del usuario</h3>\n<blockquote style=\"border-left:4px solid #1a5f7a;margin:0;padding:10px 15px;background:#f9f9f9\">{{ $json.entrada_usuario }}</blockquote>\n<h3 style=\"color:#1a5f7a\">Resumen de conversación</h3>\n<div style=\"background:#f9f9f9;padding:15px;border-radius:4px\">{{ $json.resumen_conversacion }}</div>\n<hr style=\"margin:20px 0;border:none;border-top:1px solid #e0e0e0\">\n<p style=\"color:#888;font-size:12px\">Mensaje generado automáticamente por el bot de Itz'ana • <a href=\"https://www.itzanabelize.com\">itzanabelize.com</a></p>\n</body></html>",
+              "type": "string"
+            },
+            {
+              "id": "fc5abebb-63e9-4bf1-bffd-e578f4f9b5ac",
+              "name": "subject",
+              "value": "Consulta de bodas/eventos - Bot Itz'ana",
+              "type": "string"
+            },
+            {
+              "id": "654a4c70-52b5-45e2-864d-f9d1bf35deea",
+              "name": "sendTo",
+              "value": "jorge.calderon@garooinc.com",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
       },
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2.1,
-      "position": [280, -320],
-      "id": "notif-email-bodas",
-      "name": "Email Bodas/Eventos",
-      "credentials": {
-        "smtp": {
-          "id": "SMTP_CREDENTIAL_ID",
-          "name": "SMTP Itzana"
-        }
-      }
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [432, -48],
+      "id": "9f53cfef-bab1-4dbd-8e66-869d4aa30c44",
+      "name": "Email Bodas/Eventos"
     },
     {
       "parameters": {
-        "fromEmail": "bot@itzanabelize.com",
-        "toEmail": "partnerships@itzanabelize.com",
-        "subject": "Consulta PR/Colaboración - Bot Itz'ana",
-        "emailType": "html",
-        "html": "=<html><body style=\"font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px\">\n<h2 style=\"color:#1a5f7a\">📸 Nueva consulta PR/Colaboración — Itz'ana Bot</h2>\n<table style=\"width:100%;border-collapse:collapse;margin-bottom:20px\">\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold;width:140px\">ManyChat ID</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.manychat_id }}</td></tr>\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold\">Nombre</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.nombre }}</td></tr>\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold\">Categoría</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">pr / colaboración</td></tr>\n</table>\n<h3 style=\"color:#1a5f7a\">Último mensaje del usuario</h3>\n<blockquote style=\"border-left:4px solid #1a5f7a;margin:0;padding:10px 15px;background:#f9f9f9\">{{ $json.entrada_usuario }}</blockquote>\n<h3 style=\"color:#1a5f7a\">Resumen de conversación</h3>\n<div style=\"background:#f9f9f9;padding:15px;border-radius:4px\">{{ $json.resumen_conversacion }}</div>\n<hr style=\"margin:20px 0;border:none;border-top:1px solid #e0e0e0\">\n<p style=\"color:#888;font-size:12px\">Mensaje generado automáticamente por el bot de Itz'ana • <a href=\"https://www.itzanabelize.com\">itzanabelize.com</a></p>\n</body></html>"
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cb0b5fdb-ae4d-44ad-982a-a58db9b1be0c",
+              "name": "html",
+              "value": "=<html><body style=\"font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px\">\n<h2 style=\"color:#1a5f7a\">📸 Nueva consulta PR/Colaboración — Itz'ana Bot</h2>\n<table style=\"width:100%;border-collapse:collapse;margin-bottom:20px\">\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold;width:140px\">ManyChat ID</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.manychat_id }}</td></tr>\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold\">Nombre</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.nombre }}</td></tr>\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold\">Categoría</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">pr / colaboración</td></tr>\n</table>\n<h3 style=\"color:#1a5f7a\">Último mensaje del usuario</h3>\n<blockquote style=\"border-left:4px solid #1a5f7a;margin:0;padding:10px 15px;background:#f9f9f9\">{{ $json.entrada_usuario }}</blockquote>\n<h3 style=\"color:#1a5f7a\">Resumen de conversación</h3>\n<div style=\"background:#f9f9f9;padding:15px;border-radius:4px\">{{ $json.resumen_conversacion }}</div>\n<hr style=\"margin:20px 0;border:none;border-top:1px solid #e0e0e0\">\n<p style=\"color:#888;font-size:12px\">Mensaje generado automáticamente por el bot de Itz'ana • <a href=\"https://www.itzanabelize.com\">itzanabelize.com</a></p>\n</body></html>",
+              "type": "string"
+            },
+            {
+              "id": "fc5abebb-63e9-4bf1-bffd-e578f4f9b5ac",
+              "name": "subject",
+              "value": "Consulta PR/Colaboración - Bot Itz'ana",
+              "type": "string"
+            },
+            {
+              "id": "654a4c70-52b5-45e2-864d-f9d1bf35deea",
+              "name": "sendTo",
+              "value": "jorge.calderon@garooinc.com",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
       },
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2.1,
-      "position": [280, -160],
-      "id": "notif-email-pr",
-      "name": "Email PR",
-      "credentials": {
-        "smtp": {
-          "id": "SMTP_CREDENTIAL_ID",
-          "name": "SMTP Itzana"
-        }
-      }
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [432, 160],
+      "id": "b0235373-491d-41b8-9ae3-252a2d4f9440",
+      "name": "Email PR"
     },
     {
       "parameters": {
-        "fromEmail": "bot@itzanabelize.com",
-        "toEmail": "reservations@itzanabelize.com",
-        "subject": "Consulta de empleo - Bot Itz'ana",
-        "emailType": "html",
-        "html": "=<html><body style=\"font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px\">\n<h2 style=\"color:#1a5f7a\">💼 Nueva consulta de empleo — Itz'ana Bot</h2>\n<p style=\"color:#cc6600;font-size:13px\">⚠️ <strong>Nota:</strong> Reemplaza el destinatario de este correo con el email de RRHH cuando esté disponible.</p>\n<table style=\"width:100%;border-collapse:collapse;margin-bottom:20px\">\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold;width:140px\">ManyChat ID</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.manychat_id }}</td></tr>\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold\">Nombre</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.nombre }}</td></tr>\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold\">Categoría</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">empleo</td></tr>\n</table>\n<h3 style=\"color:#1a5f7a\">Último mensaje del usuario</h3>\n<blockquote style=\"border-left:4px solid #1a5f7a;margin:0;padding:10px 15px;background:#f9f9f9\">{{ $json.entrada_usuario }}</blockquote>\n<h3 style=\"color:#1a5f7a\">Resumen de conversación</h3>\n<div style=\"background:#f9f9f9;padding:15px;border-radius:4px\">{{ $json.resumen_conversacion }}</div>\n<hr style=\"margin:20px 0;border:none;border-top:1px solid #e0e0e0\">\n<p style=\"color:#888;font-size:12px\">Mensaje generado automáticamente por el bot de Itz'ana • <a href=\"https://www.itzanabelize.com\">itzanabelize.com</a></p>\n</body></html>"
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cb0b5fdb-ae4d-44ad-982a-a58db9b1be0c",
+              "name": "html",
+              "value": "=<html><body style=\"font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px\">\n<h2 style=\"color:#1a5f7a\">💼 Nueva consulta de empleo — Itz'ana Bot</h2>\n<p style=\"color:#cc6600;font-size:13px\">⚠️ <strong>Nota:</strong> Reemplaza el destinatario de este correo con el email de RRHH cuando esté disponible.</p>\n<table style=\"width:100%;border-collapse:collapse;margin-bottom:20px\">\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold;width:140px\">ManyChat ID</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.manychat_id }}</td></tr>\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold\">Nombre</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.nombre }}</td></tr>\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold\">Categoría</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">empleo</td></tr>\n</table>\n<h3 style=\"color:#1a5f7a\">Último mensaje del usuario</h3>\n<blockquote style=\"border-left:4px solid #1a5f7a;margin:0;padding:10px 15px;background:#f9f9f9\">{{ $json.entrada_usuario }}</blockquote>\n<h3 style=\"color:#1a5f7a\">Resumen de conversación</h3>\n<div style=\"background:#f9f9f9;padding:15px;border-radius:4px\">{{ $json.resumen_conversacion }}</div>\n<hr style=\"margin:20px 0;border:none;border-top:1px solid #e0e0e0\">\n<p style=\"color:#888;font-size:12px\">Mensaje generado automáticamente por el bot de Itz'ana • <a href=\"https://www.itzanabelize.com\">itzanabelize.com</a></p>\n</body></html>",
+              "type": "string"
+            },
+            {
+              "id": "fc5abebb-63e9-4bf1-bffd-e578f4f9b5ac",
+              "name": "subject",
+              "value": "Consulta de empleo - Bot Itz'ana",
+              "type": "string"
+            },
+            {
+              "id": "654a4c70-52b5-45e2-864d-f9d1bf35deea",
+              "name": "sendTo",
+              "value": "jorge.calderon@garooinc.com",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
       },
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2.1,
-      "position": [280, 0],
-      "id": "notif-email-empleo",
-      "name": "Email Empleo",
-      "credentials": {
-        "smtp": {
-          "id": "SMTP_CREDENTIAL_ID",
-          "name": "SMTP Itzana"
-        }
-      }
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [432, 352],
+      "id": "aa0412d1-ec48-42ce-a4fd-c4e8b7fabbe3",
+      "name": "Email Empleo"
     },
     {
       "parameters": {
-        "fromEmail": "bot@itzanabelize.com",
-        "toEmail": "concierge@itzanabelize.com",
-        "subject": "Escalamiento a humano - Bot Itz'ana",
-        "emailType": "html",
-        "html": "=<html><body style=\"font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px\">\n<h2 style=\"color:#c0392b\">🔔 Usuario solicita atención humana — Itz'ana Bot</h2>\n<table style=\"width:100%;border-collapse:collapse;margin-bottom:20px\">\n<tr><td style=\"padding:8px;background:#fdf0f0;font-weight:bold;width:140px\">ManyChat ID</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.manychat_id }}</td></tr>\n<tr><td style=\"padding:8px;background:#fdf0f0;font-weight:bold\">Nombre</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.nombre }}</td></tr>\n<tr><td style=\"padding:8px;background:#fdf0f0;font-weight:bold\">Categoría</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">escalamiento</td></tr>\n</table>\n<h3 style=\"color:#c0392b\">Último mensaje del usuario</h3>\n<blockquote style=\"border-left:4px solid #c0392b;margin:0;padding:10px 15px;background:#f9f9f9\">{{ $json.entrada_usuario }}</blockquote>\n<h3 style=\"color:#c0392b\">Resumen de conversación</h3>\n<div style=\"background:#f9f9f9;padding:15px;border-radius:4px\">{{ $json.resumen_conversacion }}</div>\n<hr style=\"margin:20px 0;border:none;border-top:1px solid #e0e0e0\">\n<p style=\"color:#888;font-size:12px\">Mensaje generado automáticamente por el bot de Itz'ana • <a href=\"https://www.itzanabelize.com\">itzanabelize.com</a></p>\n</body></html>"
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cb0b5fdb-ae4d-44ad-982a-a58db9b1be0c",
+              "name": "html",
+              "value": "=<html><body style=\"font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px\">\n<h2 style=\"color:#c0392b\">🔔 Usuario solicita atención humana — Itz'ana Bot</h2>\n<table style=\"width:100%;border-collapse:collapse;margin-bottom:20px\">\n<tr><td style=\"padding:8px;background:#fdf0f0;font-weight:bold;width:140px\">ManyChat ID</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.manychat_id }}</td></tr>\n<tr><td style=\"padding:8px;background:#fdf0f0;font-weight:bold\">Nombre</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.nombre }}</td></tr>\n<tr><td style=\"padding:8px;background:#fdf0f0;font-weight:bold\">Categoría</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">escalamiento</td></tr>\n</table>\n<h3 style=\"color:#c0392b\">Último mensaje del usuario</h3>\n<blockquote style=\"border-left:4px solid #c0392b;margin:0;padding:10px 15px;background:#f9f9f9\">{{ $json.entrada_usuario }}</blockquote>\n<h3 style=\"color:#c0392b\">Resumen de conversación</h3>\n<div style=\"background:#f9f9f9;padding:15px;border-radius:4px\">{{ $json.resumen_conversacion }}</div>\n<hr style=\"margin:20px 0;border:none;border-top:1px solid #e0e0e0\">\n<p style=\"color:#888;font-size:12px\">Mensaje generado automáticamente por el bot de Itz'ana • <a href=\"https://www.itzanabelize.com\">itzanabelize.com</a></p>\n</body></html>",
+              "type": "string"
+            },
+            {
+              "id": "fc5abebb-63e9-4bf1-bffd-e578f4f9b5ac",
+              "name": "subject",
+              "value": "Escalamiento a humano - Bot Itz'ana",
+              "type": "string"
+            },
+            {
+              "id": "654a4c70-52b5-45e2-864d-f9d1bf35deea",
+              "name": "sendTo",
+              "value": "jorge.calderon@garooinc.com",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
       },
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2.1,
-      "position": [280, 160],
-      "id": "notif-email-escalamiento",
-      "name": "Email Escalamiento",
-      "credentials": {
-        "smtp": {
-          "id": "SMTP_CREDENTIAL_ID",
-          "name": "SMTP Itzana"
-        }
-      }
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [448, 560],
+      "id": "f9e21fe0-7eee-452a-8f81-476c50436534",
+      "name": "Email Escalamiento"
     },
     {
       "parameters": {
-        "fromEmail": "bot@itzanabelize.com",
-        "toEmail": "reservations@itzanabelize.com",
-        "subject": "Consulta de reserva - Bot Itz'ana",
-        "emailType": "html",
-        "html": "=<html><body style=\"font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px\">\n<h2 style=\"color:#1a5f7a\">🏝️ Nueva consulta de reserva — Itz'ana Bot</h2>\n<table style=\"width:100%;border-collapse:collapse;margin-bottom:20px\">\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold;width:140px\">ManyChat ID</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.manychat_id }}</td></tr>\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold\">Nombre</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.nombre }}</td></tr>\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold\">Categoría</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">reserva</td></tr>\n</table>\n<h3 style=\"color:#1a5f7a\">Último mensaje del usuario</h3>\n<blockquote style=\"border-left:4px solid #1a5f7a;margin:0;padding:10px 15px;background:#f9f9f9\">{{ $json.entrada_usuario }}</blockquote>\n<h3 style=\"color:#1a5f7a\">Resumen de conversación</h3>\n<div style=\"background:#f9f9f9;padding:15px;border-radius:4px\">{{ $json.resumen_conversacion }}</div>\n<hr style=\"margin:20px 0;border:none;border-top:1px solid #e0e0e0\">\n<p style=\"color:#888;font-size:12px\">Mensaje generado automáticamente por el bot de Itz'ana • <a href=\"https://www.itzanabelize.com\">itzanabelize.com</a></p>\n</body></html>"
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cb0b5fdb-ae4d-44ad-982a-a58db9b1be0c",
+              "name": "html",
+              "value": "=<html><body style=\"font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px\">\n<h2 style=\"color:#1a5f7a\">🏝️ Nueva consulta de reserva — Itz'ana Bot</h2>\n<table style=\"width:100%;border-collapse:collapse;margin-bottom:20px\">\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold;width:140px\">ManyChat ID</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.manychat_id }}</td></tr>\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold\">Nombre</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">{{ $json.nombre }}</td></tr>\n<tr><td style=\"padding:8px;background:#f0f7fb;font-weight:bold\">Categoría</td><td style=\"padding:8px;border-bottom:1px solid #e0e0e0\">reserva</td></tr>\n</table>\n<h3 style=\"color:#1a5f7a\">Último mensaje del usuario</h3>\n<blockquote style=\"border-left:4px solid #1a5f7a;margin:0;padding:10px 15px;background:#f9f9f9\">{{ $json.entrada_usuario }}</blockquote>\n<h3 style=\"color:#1a5f7a\">Resumen de conversación</h3>\n<div style=\"background:#f9f9f9;padding:15px;border-radius:4px\">{{ $json.resumen_conversacion }}</div>\n<hr style=\"margin:20px 0;border:none;border-top:1px solid #e0e0e0\">\n<p style=\"color:#888;font-size:12px\">Mensaje generado automáticamente por el bot de Itz'ana • <a href=\"https://www.itzanabelize.com\">itzanabelize.com</a></p>\n</body></html>",
+              "type": "string"
+            },
+            {
+              "id": "fc5abebb-63e9-4bf1-bffd-e578f4f9b5ac",
+              "name": "subject",
+              "value": "Consulta de reserva - Bot Itz'ana",
+              "type": "string"
+            },
+            {
+              "id": "654a4c70-52b5-45e2-864d-f9d1bf35deea",
+              "name": "sendTo",
+              "value": "jorge.calderon@garooinc.com",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
       },
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2.1,
-      "position": [280, 320],
-      "id": "notif-email-reserva",
-      "name": "Email Reserva",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [448, 768],
+      "id": "f9411b8e-0a88-401d-a126-2f63a105e1df",
+      "name": "Email Reserva"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.sendTo }}",
+        "subject": "={{ $json.subject }}",
+        "emailType": "html",
+        "message": "={{ $json.html }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [896, 368],
+      "id": "7fb19e78-3af4-45b6-b5ae-9931f624a1c4",
+      "name": "Send a message",
+      "webhookId": "76bbf5a2-cc4e-4be0-89a6-c6f6360d6b34",
       "credentials": {
-        "smtp": {
-          "id": "SMTP_CREDENTIAL_ID",
-          "name": "SMTP Itzana"
+        "gmailOAuth2": {
+          "id": "H8Qx7NlrthXmHUiy",
+          "name": "Soporte Garoo"
         }
       }
     }
@@ -273,68 +350,52 @@
   "connections": {
     "START": {
       "main": [
-        [
-          {
-            "node": "Set Context",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        [{ "node": "Set Context", "type": "main", "index": 0 }]
       ]
     },
     "Set Context": {
       "main": [
-        [
-          {
-            "node": "Switch Categoria",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        [{ "node": "Switch Categoria", "type": "main", "index": 0 }]
       ]
     },
     "Switch Categoria": {
       "main": [
-        [
-          {
-            "node": "Email Bodas/Eventos",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Email PR",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Email Empleo",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Email Escalamiento",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Email Reserva",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        [{ "node": "Email Bodas/Eventos", "type": "main", "index": 0 }],
+        [{ "node": "Email PR", "type": "main", "index": 0 }],
+        [{ "node": "Email Empleo", "type": "main", "index": 0 }],
+        [{ "node": "Email Escalamiento", "type": "main", "index": 0 }],
+        [{ "node": "Email Reserva", "type": "main", "index": 0 }]
+      ]
+    },
+    "Email Bodas/Eventos": {
+      "main": [
+        [{ "node": "Send a message", "type": "main", "index": 0 }]
+      ]
+    },
+    "Email PR": {
+      "main": [
+        [{ "node": "Send a message", "type": "main", "index": 0 }]
+      ]
+    },
+    "Email Empleo": {
+      "main": [
+        [{ "node": "Send a message", "type": "main", "index": 0 }]
+      ]
+    },
+    "Email Escalamiento": {
+      "main": [
+        [{ "node": "Send a message", "type": "main", "index": 0 }]
+      ]
+    },
+    "Email Reserva": {
+      "main": [
+        [{ "node": "Send a message", "type": "main", "index": 0 }]
       ]
     }
   },
   "pinData": {},
   "meta": {
+    "templateCredsSetupCompleted": true,
     "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"
   }
 }

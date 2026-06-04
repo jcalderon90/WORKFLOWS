@@ -6,55 +6,39 @@
 
 ---
 
-## Estado general — actualizado 2026-06-04
+## Estado general — actualizado 2026-06-04 (sesión tarde)
 
 | # | Componente | Tipo | Estado |
 | :-- | :-- | :-- | :-- |
-| 1 | `KBs/KB_ITZANA.json` | Archivo de contenido | ✅ Listo — 31 chunks |
+| 1 | `KBs/KB_ITZANA.json` | Archivo de contenido | ✅ Listo — **36 chunks** (actualizado con horarios, WiFi, políticas, mascotas, equipos) |
 | 2 | MongoDB Atlas (DB + índice vectorial + credencial) | Infraestructura | ✅ Listo — credencial `HOTELS` (`Msw0gTK8f8b192VX`) |
-| 3 | `workflows/Itzana_Vectorizar_KB.json` | Workflow n8n | ✅ Listo — 31 docs vectorizados en colección `documents` |
+| 3 | `workflows/Itzana_Vectorizar_KB.json` | Workflow n8n | ✅ Listo — **36 docs** re-vectorizados en colección `documents` |
 | 4 | `workflows/Itzana_KB_Search.json` | Workflow n8n (herramienta RAG) | ✅ Importado en n8n — ID: `rofQe6ZGW3OpFqcb` |
-| 5 | `workflows/Itzana_Notifications.json` | Workflow n8n (herramienta email) | ✅ Importado en n8n — ID: `OApztbIN8Jhb4JHz` — ⚠️ requiere credencial SMTP |
-| 6 | `workflows/PRINCIPAL.json` | Workflow n8n (orquestador) | ✅ Completo — agente `AI Agent` typeVersion 3.1, OpenRouter, memoria 30 msgs |
-| 7 | Pruebas end-to-end | QA | 🔄 En progreso — pendiente ejecutar test con pinData |
+| 5 | `workflows/Itzana_Notifications.json` | Workflow n8n (herramienta email) | ✅ Listo — Gmail (Soporte Garoo), HTML dinámico, 5 categorías. Emails de prueba: jorge.calderon@garooinc.com |
+| 6 | `workflows/PRINCIPAL.json` | Workflow n8n (orquestador) | ✅ Completo — JSON.stringify fix, tool descriptions en español, inputs completos a Notifications |
+| 7 | Pruebas end-to-end | QA | ✅ Pasadas — flujo ManyChat → n8n → respuesta funcional |
 
 ---
 
-## RETOMAR AQUI — Paso 7: Pruebas end-to-end
+## RETOMAR AQUI — Siguiente fase
 
-**Estado al 2026-06-04:** El workflow PRINCIPAL está completo y listo para probar. El typo "Paramater Type" fue corregido a "Parameter Type".
+**Estado al 2026-06-04:** Sistema de Fase 1 (pre-booking / Kaan) **listo para producción** en cuanto lleguen los emails del hotel.
 
-**Prueba inmediata:**
-1. Abrir workflow PRINCIPAL en n8n
-2. Click derecho en nodo Webhook → Test step (usa pinData: Jorge Calderon, mensaje "Hola", canal whatsapp)
-3. Verificar: Find User → AI Agent → Parse Agent Output → Parameter Type → Send to ManyChat
-
-**Casos de prueba pendientes (BUILD.md Paso 7):**
-
-| # | Input | Resultado esperado |
-| :-- | :-- | :-- |
-| T1 | "how much for a night?" | Link reservas + tipos alojamiento |
-| T2 | "¿Tienen paquetes para dos personas?" | Link paquetes/promociones |
-| T3 | "Do you have shuttles to Placencia?" | Info shuttles, golf carts |
-| T4 | "Queremos hacer nuestra boda ahí" | Escalar: tool handoff → notifications workflow |
-| T5 | "Are you pet friendly?" | Respuesta con caveat ⚠️ |
-| T6 | "I'd love to work together as an influencer" | Escalar: partnerships@itzanabelize.com |
-| T7 | (audio/imagen) | Agente procesa transcripción y responde |
-| T8 | Conversación multi-turno | Agente recuerda contexto (MongoDB chat_histories) |
-
----
-
-## Pendientes antes de activar en producción
+### Pendientes de contenido (bloqueados por hotel)
 
 | # | Pendiente | Prioridad |
 | :-- | :-- | :-- |
-| P1 | Credencial SMTP en n8n para workflow Notifications | 🔴 Alta |
-| P2 | Email de Mr. Diego (bodas/eventos) — placeholder en Notifications | 🔴 Alta |
-| P3 | Email de RRHH (empleo) — placeholder en Notifications | 🟠 Media |
-| P4 | Confirmar política de mascotas con el hotel (chunk marcado ⚠️) | 🟠 Media |
-| P5 | Configurar webhook `hotels-agent` en flow de ManyChat de Itz'ana | 🔴 Alta |
-| P6 | Verificar que custom field `canal_ingreso` existe en ManyChat Itz'ana | 🟠 Media |
-| P7 | Horarios exactos spa y restaurantes (incompletos en KB) | 🟢 Baja |
+| P2 | Email de Mr. Diego (bodas/eventos) → actualizar `sendTo` en nodo "Email Bodas/Eventos" de Notifications | 🔴 Alta (pre-prod) |
+| P3 | Email de RRHH (empleo) → actualizar `sendTo` en nodo "Email Empleo" de Notifications | 🟠 Media (pre-prod) |
+
+### Próxima fase — E-Concierge in-stay
+Ver spec en `docs/E-Concierge Itzana.md`. Agente separado para huéspedes ya hospedados:
+- Crea tareas operativas (housekeeping, mantenimiento, F&B, recepción)
+- Routing por departamento
+- Estados: NEW → IN PROGRESS → ON THE WAY → COMPLETED
+- Notificaciones al equipo del hotel y feedback loop al huésped
+
+**Esto NO está construido aún.** Es la siguiente iteración después de estabilizar Kaan en producción.
 
 ---
 

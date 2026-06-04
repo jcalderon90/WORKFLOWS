@@ -109,7 +109,7 @@
     "categoria": "restaurantes",
     "tags": ["bar", "biblio", "luna", "pool bar", "rum room", "ron", "rum", "cocktails", "cocteles", "bebidas", "drinks", "lounge", "piscina"],
     "pregunta": "¿Qué bares y lounges tienen? / What bars and lounges do you have?",
-    "respuesta": "Itz'ana has several bars and lounges:\n• Biblio Bar — craft cocktails, wine, beer, and delicious snacks\n• Luna Bar — craft cocktails, wine, beer in a casual atmosphere. Menu: https://www.itzanabelize.com/es/ResourceFiles/restaurant-pdf-menus/luna-bar.pdf\n• Pool Bar — refreshing cocktails, tropical drinks, cold beers, wine. Menu: https://www.itzanabelize.com/es/ResourceFiles/restaurant-pdf-menus/lunch-menu.pdf\n• Rum Room — Caribbean and Central American rums curated by our sommelier in the Great House\n• Private Owner's Lounge — exclusive for residents and their guests"
+    "respuesta": "Itz'ana has several bars and lounges:\n• Biblio Bar — craft cocktails, wine, beer, and snacks. Open seasonally 5:00 PM–10:00 PM (or during special events like Rum Tasting).\n• Luna Bar — craft cocktails, wine, beer in a casual atmosphere. Menu: https://www.itzanabelize.com/es/ResourceFiles/restaurant-pdf-menus/luna-bar.pdf\n• Pool Bar — refreshing cocktails, tropical drinks, cold beers, wine. Menu: https://www.itzanabelize.com/es/ResourceFiles/restaurant-pdf-menus/lunch-menu.pdf\n• Rum Room — Caribbean and Central American rums curated by our sommelier in the Great House\n• Private Owner's Lounge — exclusive for residents and their guests"
   },
   {
     "id": "itz_actividades_overview",
@@ -203,9 +203,9 @@
     "id": "itz_transporte_local",
     "propiedad": "ITZ",
     "categoria": "ubicacion_logistica",
-    "tags": ["shuttle", "transporte", "transport", "golf cart", "taxi", "cab", "maya beach", "placencia village", "bicicleta", "bike", "movilidad", "getting around"],
+    "tags": ["shuttle", "transporte", "transport", "golf cart", "taxi", "cab", "maya beach", "placencia village", "bicicleta", "bike", "movilidad", "getting around", "aeropuerto", "airport", "vuelo", "flight", "maya island air"],
     "pregunta": "¿Tienen shuttles, golf carts o taxis? / Do you have shuttles, golf carts, or taxis?",
-    "respuesta": "• Shuttles to Maya Beach and Placencia Village — available (schedule may vary, confirm with our concierge upon arrival).\n• Golf carts — available for rent (pricing provided by our team).\n• Taxis — our concierge can arrange for you.\n• Complimentary bikes — free to use for exploring the peninsula.\n\nContact concierge@itzanabelize.com or +(501) 610-1329 to arrange transportation."
+    "respuesta": "• Shuttles — available to Maya Beach and Placencia Village. Cost: USD $10 per additional person + taxes, subject to availability.\n• Golf carts — available for rent (not complimentary). Pricing provided by our team.\n• Taxis — our concierge can arrange.\n• Complimentary bikes — free to use for exploring the peninsula.\n• Airport: approximately 8 minutes away. First flight departs around 7:00 AM with Maya Island Air.\n\nContact concierge@itzanabelize.com or +(501) 610-1329 to arrange transportation."
   },
   {
     "id": "itz_contacto_general",
@@ -213,7 +213,7 @@
     "categoria": "contacto",
     "tags": ["contacto", "contact", "telefono", "phone", "email", "whatsapp", "reservaciones", "reservations", "concierge", "reach us", "comunicarse"],
     "pregunta": "¿Cómo puedo contactar al resort? / How can I contact Itz'ana?",
-    "respuesta": "You can reach Itz'ana Resort & Residences through:\n\n📧 Reservations: reservations@itzanabelize.com\n📧 Concierge / Restaurant / Adventures: concierge@itzanabelize.com\n📧 Partnerships & PR: partnerships@itzanabelize.com\n📞 Main: +813-567-1059\n📱 WhatsApp: +(501) 615-0674\n📞 Belize local: +501-523-3250\n📞 Restaurant Limilia / Adventures: +(501) 610-1329\n🌐 Website: www.itzanabelize.com"
+    "respuesta": "You can reach Itz'ana Resort & Residences through:\n\n📧 General: info@itzanabelize.com\n📧 Reservations: reservations@itzanabelize.com\n📧 Concierge / Restaurant / Adventures: concierge@itzanabelize.com\n📧 Partnerships & PR: partnerships@itzanabelize.com\n📞 Toll-free: 1-800-591-3077\n📞 Main: +813-567-1059\n📱 WhatsApp: +(501) 615-0674\n📞 Belize local: +501-523-3250\n📞 Restaurant Limilia / Adventures: +(501) 610-1329\n🌐 Website: www.itzanabelize.com"
   },
   {
     "id": "itz_empleo",
@@ -237,7 +237,7 @@
     "categoria": "politicas_faq",
     "tags": ["mascotas", "pets", "perro", "dog", "gato", "cat", "animales", "animals", "pet friendly", "pet policy"],
     "pregunta": "¿Aceptan mascotas? / Are you pet friendly?",
-    "respuesta": "⚠️ DATO PENDIENTE — Our pet policy is currently being confirmed with the hotel team. For the most accurate information about bringing pets, please contact us directly:\n\n📧 reservations@itzanabelize.com\n📱 WhatsApp: +(501) 615-0674\n\nOur team will be happy to clarify the current policy for your stay."
+    "respuesta": "Itz'ana Resort & Residences is not a pet-friendly property. To ensure the comfort and safety of all our guests, we do not allow pets on the premises.\n\nFor further questions, contact: reservations@itzanabelize.com or WhatsApp +(501) 615-0674."
   },
   {
     "id": "itz_all_inclusive",
@@ -246,6 +246,46 @@
     "tags": ["all inclusive", "todo incluido", "incluye", "includes", "what is included", "que incluye"],
     "pregunta": "¿Son todo incluido? / Are you all-inclusive?",
     "respuesta": "No, Itz'ana Resort & Residences is not an all-inclusive property. Accommodation is booked separately, and dining, spa treatments, and activities are offered à la carte.\n\nHowever, we do offer curated packages that bundle accommodation with experiences. Check our promotions: https://www.itzanabelize.com/es/especiales-paquetes?sp=Promociones"
+  },
+  {
+    "id": "itz_horarios_fb",
+    "propiedad": "ITZ",
+    "categoria": "restaurantes",
+    "tags": ["horario", "hours", "schedule", "abre", "cierra", "open", "close", "desayuno", "breakfast", "room service", "biblio bar", "gift shop", "tienda", "limpia", "housekeeping"],
+    "pregunta": "¿Cuáles son los horarios de los restaurantes y servicios? / What are the hours for restaurants and services?",
+    "respuesta": "Itz'ana service hours:\n• Breakfast (Limilia): 6:30 AM – 11:00 AM\n• Room Service: 7:00 AM – 9:00 PM\n• Biblio Bar: 5:00 PM – 10:00 PM (seasonal / special events)\n• Gift Shop: 8:00 AM – 8:00 PM, Monday – Sunday\n• Housekeeping: daily service, 8:00 AM – 3:00 PM\n\nFor reservations at Limilia or spa treatments: concierge@itzanabelize.com or +(501) 610-1329"
+  },
+  {
+    "id": "itz_wifi",
+    "propiedad": "ITZ",
+    "categoria": "politicas_faq",
+    "tags": ["wifi", "internet", "contraseña", "password", "red", "network", "conexion", "connection", "itzanaguest", "lagoonside"],
+    "pregunta": "¿Hay WiFi? ¿Cuál es la contraseña? / Is there WiFi? What is the password?",
+    "respuesta": "Yes, complimentary WiFi is available throughout the resort:\n• Resort network: ItzanaGuest — Password: Itzana123\n• Marina network: LagooSide — Password: LagoonSide Villas\n\nFor connectivity issues, contact our team via WhatsApp +(501) 615-0674."
+  },
+  {
+    "id": "itz_politicas_generales",
+    "propiedad": "ITZ",
+    "categoria": "politicas_faq",
+    "tags": ["day pass", "late checkout", "salida tarde", "check out", "playa publica", "beach access", "service charge", "cargo servicio", "minibar", "alimentos externos"],
+    "pregunta": "¿Tienen day pass? ¿Late checkout? ¿La playa es pública? / Do you have day passes? Late checkout? Is the beach public?",
+    "respuesta": "Key policies at Itz'ana:\n• Day pass: Not available. Beach and facility access is for resort guests and F&B customers only.\n• Late checkout: Standard checkout at 11:00 AM. Late checkout is subject to availability at no extra charge.\n• Beach: Private — exclusive for resort guests and dining customers.\n• Minibar: Not included; additional charge, billed to room daily.\n• Outside food/drinks: Not permitted in common areas.\n• Service charge: Applied to all services (covers service and facility use).\n\nQuestions? Contact: reservations@itzanabelize.com"
+  },
+  {
+    "id": "itz_equipos_gratuitos",
+    "propiedad": "ITZ",
+    "categoria": "actividades",
+    "tags": ["kayak", "paddle board", "bicicleta", "bike", "gratuito", "complimentary", "free", "incluido", "included", "pesca muelle", "fishing dock", "yoga privado", "private yoga"],
+    "pregunta": "¿Qué equipos o actividades son gratuitos? / What equipment or activities are complimentary?",
+    "respuesta": "The following are complimentary for resort guests (subject to availability):\n• Kayaks\n• Paddle boards\n• Bicycles (great for exploring the Placencia Peninsula)\n• Recreational fishing from the dock is permitted in designated areas.\n\nAdditional options available for a fee:\n• Private yoga or wellness sessions (on request)\n• Golf cart rental\n• Guided fishing and water activity excursions\n\nContact concierge@itzanabelize.com to arrange."
+  },
+  {
+    "id": "itz_gimnasio_sostenibilidad",
+    "propiedad": "ITZ",
+    "categoria": "resort",
+    "tags": ["gimnasio", "gym", "fitness", "ejercicio", "exercise", "correr", "run", "sostenibilidad", "sustainability", "ecologico", "eco", "agua filtrada", "filtered water", "plastico", "plastic", "familia", "family", "adultos", "adults", "ninos", "kids"],
+    "pregunta": "¿Tienen gimnasio? ¿Es familiar? ¿Qué hacen en sostenibilidad? / Do you have a gym? Is it family-friendly? What about sustainability?",
+    "respuesta": "• Gym: No on-site gym. We can recommend nearby options in Sirenian Bay or Placencia Village.\n• Family-friendly: Yes! Itz'ana welcomes families with children while maintaining a relaxed, sophisticated atmosphere.\n• Running/walking: Safe paths and trails available within the property.\n• Sustainability: We use water filtration systems, minimize single-use plastics, and actively preserve local wildlife.\n• Drinking water: Our filtered water system is safe for consumption.\n• Medical services: Nearby clinics available; our team can assist in case of medical need."
   },
   {
     "id": "itz_amenidades_resort",
