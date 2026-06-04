@@ -6,21 +6,97 @@
 
 ---
 
-## Estado general
+## Estado general — actualizado 2026-06-04
 
 | # | Componente | Tipo | Estado |
 | :-- | :-- | :-- | :-- |
 | 1 | `KBs/KB_ITZANA.json` | Archivo de contenido | ✅ Listo — 31 chunks |
-| 2 | MongoDB Atlas (DB + índice vectorial + credencial) | Infraestructura | ✅ Listo |
-| 3 | `workflows/Itzana_Vectorizar_KB.json` | Workflow n8n | ✅ Listo — 31 docs en `documents` |
-| 4 | `workflows/Itzana_KB_Search.json` | Workflow n8n (herramienta RAG) | 🔄 **RETOMAR AQUÍ** |
-| 5 | `workflows/Itzana_Notifications.json` | Workflow n8n (herramienta email) | ⬜ Pendiente |
-| 6 | Orquestador (extender `PRINCIPAL.json`) | Workflow n8n | ⬜ Pendiente |
-| 7 | Pruebas end-to-end | QA | ⬜ Pendiente |
+| 2 | MongoDB Atlas (DB + índice vectorial + credencial) | Infraestructura | ✅ Listo — credencial `HOTELS` (`Msw0gTK8f8b192VX`) |
+| 3 | `workflows/Itzana_Vectorizar_KB.json` | Workflow n8n | ✅ Listo — 31 docs vectorizados en colección `documents` |
+| 4 | `workflows/Itzana_KB_Search.json` | Workflow n8n (herramienta RAG) | ✅ Importado en n8n — ID: `rofQe6ZGW3OpFqcb` |
+| 5 | `workflows/Itzana_Notifications.json` | Workflow n8n (herramienta email) | ✅ Importado en n8n — ID: `OApztbIN8Jhb4JHz` — ⚠️ requiere credencial SMTP |
+| 6 | `workflows/PRINCIPAL.json` | Workflow n8n (orquestador) | ✅ Completo — agente `AI Agent` typeVersion 3.1, OpenRouter, memoria 30 msgs |
+| 7 | Pruebas end-to-end | QA | 🔄 En progreso — pendiente ejecutar test con pinData |
 
 ---
 
-## 🔄 RETOMAR AQUÍ — Paso 4: `Itzana_KB_Search`
+## RETOMAR AQUI — Paso 7: Pruebas end-to-end
+
+**Estado al 2026-06-04:** El workflow PRINCIPAL está completo y listo para probar. El typo "Paramater Type" fue corregido a "Parameter Type".
+
+**Prueba inmediata:**
+1. Abrir workflow PRINCIPAL en n8n
+2. Click derecho en nodo Webhook → Test step (usa pinData: Jorge Calderon, mensaje "Hola", canal whatsapp)
+3. Verificar: Find User → AI Agent → Parse Agent Output → Parameter Type → Send to ManyChat
+
+**Casos de prueba pendientes (BUILD.md Paso 7):**
+
+| # | Input | Resultado esperado |
+| :-- | :-- | :-- |
+| T1 | "how much for a night?" | Link reservas + tipos alojamiento |
+| T2 | "¿Tienen paquetes para dos personas?" | Link paquetes/promociones |
+| T3 | "Do you have shuttles to Placencia?" | Info shuttles, golf carts |
+| T4 | "Queremos hacer nuestra boda ahí" | Escalar: tool handoff → notifications workflow |
+| T5 | "Are you pet friendly?" | Respuesta con caveat ⚠️ |
+| T6 | "I'd love to work together as an influencer" | Escalar: partnerships@itzanabelize.com |
+| T7 | (audio/imagen) | Agente procesa transcripción y responde |
+| T8 | Conversación multi-turno | Agente recuerda contexto (MongoDB chat_histories) |
+
+---
+
+## Pendientes antes de activar en producción
+
+| # | Pendiente | Prioridad |
+| :-- | :-- | :-- |
+| P1 | Credencial SMTP en n8n para workflow Notifications | 🔴 Alta |
+| P2 | Email de Mr. Diego (bodas/eventos) — placeholder en Notifications | 🔴 Alta |
+| P3 | Email de RRHH (empleo) — placeholder en Notifications | 🟠 Media |
+| P4 | Confirmar política de mascotas con el hotel (chunk marcado ⚠️) | 🟠 Media |
+| P5 | Configurar webhook `hotels-agent` en flow de ManyChat de Itz'ana | 🔴 Alta |
+| P6 | Verificar que custom field `canal_ingreso` existe en ManyChat Itz'ana | 🟠 Media |
+| P7 | Horarios exactos spa y restaurantes (incompletos en KB) | 🟢 Baja |
+
+---
+
+## Arquitectura de workflows en n8n (IDs reales)
+
+| Workflow | ID en n8n | Propósito |
+| :-- | :-- | :-- |
+| PRINCIPAL | (importar desde `workflows/PRINCIPAL.json`) | Orquestador principal — recibe webhook ManyChat |
+| ITZ KB_SEARCH | `rofQe6ZGW3OpFqcb` | Herramienta RAG — busca en KB vectorizado |
+| ITZ NOTIFICATIONS | `OApztbIN8Jhb4JHz` | Herramienta email — escalamiento al equipo del hotel |
+
+## Credenciales en n8n
+
+| Credencial | ID | Usada en |
+| :-- | :-- | :-- |
+| HOTELS (MongoDB Atlas) | `Msw0gTK8f8b192VX` | Find/Insert/Update users, chat_histories, KB vectors |
+| ITZANA (OpenAI) | `PjPavWO5j0jIFtSG` | Transcripción audio, análisis imagen |
+| ITZANA-KAANA (OpenRouter) | `J9zb84vhqsx182XW` | Modelo principal del agente (claude-opus-4.5) |
+| Redis GarooVPS | `8EUkwaZixjCH7szY` | Batching de mensajes |
+| ManyChat Garoo | `aEvHbFXnmwofChqs` | Enviar respuestas al usuario |
+| SMTP Itzana | ⚠️ PENDIENTE CREAR | Emails de escalamiento (Notifications workflow) |
+
+## Estructura MongoDB (colección `HOTELS`)
+
+| Colección | Propósito |
+| :-- | :-- |
+| `documents` | Chunks vectorizados del KB (31 docs, índice `itzana_vector_index`) |
+| `users` | Perfil de cada huésped por `manychat_id` |
+| `chat_histories` | Historial de conversación por `manychat_id` (ventana 30 msgs) |
+
+## Agente — parámetros clave
+
+- **Nombre en n8n**: `AI Agent`
+- **Tipo**: `@n8n/n8n-nodes-langchain.agent` typeVersion 3.1
+- **Modelo**: OpenRouter → `ITZANA-KAANA` (claude-opus-4.5)
+- **Temperatura**: 0.3
+- **Memoria**: MongoDB `chat_histories`, sessionKey = `manychat_id`, ventana 30 msgs
+- **Tools**: `Call 'ITZ KB_SEARCH'` (RAG) + `notifications` (escalamiento)
+- **Nombre del agente**: Kaan
+- **System prompt**: Ver nodo `AI Agent` en n8n (prompt completo con identidad, validación, tools, reglas, guardrails)
+
+---
 
 **Qué es:** Sub-workflow herramienta de RAG. El orquestador lo llama cuando necesita responder una pregunta del huésped.
 

@@ -1,0 +1,238 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [-480, 0],
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "START"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-sc-001",
+              "name": "manychat_id",
+              "value": "={{ $json.manychat_id }}",
+              "type": "string"
+            },
+            {
+              "id": "id-sc-002",
+              "name": "propiedad",
+              "value": "={{ $json.propiedad }}",
+              "type": "string"
+            },
+            {
+              "id": "id-sc-003",
+              "name": "entrada_usuario",
+              "value": "={{ $json.entrada_usuario }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-240, 0],
+      "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+      "name": "Search Context"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve",
+        "mongoCollection": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "embedding": "itzana_embedding",
+        "vectorIndexName": "itzana_vector_index",
+        "prompt": "={{ $('Search Context').item.json.entrada_usuario }}",
+        "topK": 5,
+        "options": {
+          "preFilter": "={{ JSON.stringify({ \"metadata.propiedad\": { \"$eq\": $('Search Context').item.json.propiedad } }) }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreMongoDBAtlas",
+      "typeVersion": 1.3,
+      "position": [0, 0],
+      "id": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+      "name": "Knowledge Base",
+      "credentials": {
+        "mongoDb": {
+          "id": "Msw0gTK8f8b192VX",
+          "name": "HOTELS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [-32, 200],
+      "id": "d4e5f6a7-b8c9-0123-defa-234567890123",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "LtzIKoi61tZvaeua",
+          "name": "Vectorizer Agent - Knowledge Bases"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "const items = $input.all();\nif (!items || items.length === 0) {\n  return [{ json: {\n    contexto: \"No se encontró información relevante.\",\n    propiedad: $('Search Context').item.json.propiedad,\n    entrada_usuario: $('Search Context').item.json.entrada_usuario\n  }}];\n}\nconst contexto = items.map((item, i) => {\n  const doc = item.json.document || {};\n  return `[${i+1}] ${doc.pageContent || ''}`;\n}).join('\\n\\n---\\n\\n');\nreturn [{ json: {\n  contexto,\n  propiedad: $('Search Context').item.json.propiedad,\n  entrada_usuario: $('Search Context').item.json.entrada_usuario\n}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [240, 0],
+      "id": "e5f6a7b8-c9d0-1234-efab-345678901234",
+      "name": "Format Context"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.entrada_usuario }}",
+        "options": {
+          "systemMessage": "## KNOWLEDGE BASE — INFORMACIÓN ENCONTRADA ##\n{{ $json.contexto }}\n\n---\n\n# CONCIERGE VIRTUAL — ITZ'ANA RESORT & RESIDENCES\n\n## REGLAS DE ORO\n1. Responde ÚNICAMENTE con información del KNOWLEDGE BASE de arriba.\n2. NUNCA inventes datos. Si no está en el KB, di que el equipo del resort puede ayudar.\n3. Responde en el idioma en que el usuario te habla (español o inglés).\n4. Texto plano. Sin markdown. Máximo 500 caracteres.\n   - Excepción: listas de amenidades/actividades usan bullet • en líneas separadas.\n5. Cuando corresponda, incluye el link exacto del KB (reservas, menús, paquetes).\n6. Si el usuario quiere reservar → link: https://reservations.itzanabelize.com/book/accommodations\n7. Si el usuario pregunta por bodas/eventos → escalar a Mr. Diego (mencionar que le pondremos en contacto).\n8. Si el usuario es de prensa/PR/influencer → escalar a partnerships@itzanabelize.com.\n\n## FORMATO DE SALIDA\nResponde ÚNICAMENTE con este JSON en una sola línea:\n{\"response\": \"<texto conversacional>\", \"escalate\": false, \"categoria\": \"info\"}\n\nescalate: true SOLO si el usuario pide hablar con una persona o el tema requiere cotización (bodas, grupos grandes, eventos).\ncategoria: \"info\" | \"reserva\" | \"bodas_eventos\" | \"pr\" | \"empleo\" | \"escalamiento\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [480, 0],
+      "id": "f6a7b8c9-d0e1-2345-fabc-456789012345",
+      "name": "GENERAL AGENT"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [448, 200],
+      "id": "a7b8c9d0-e1f2-3456-abcd-567890123456",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "PjPavWO5j0jIFtSG",
+          "name": "ITZANA"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-resp-001",
+              "name": "response",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [720, 0],
+      "id": "b8c9d0e1-f2a3-4567-bcde-678901234567",
+      "name": "RESPONSE"
+    }
+  ],
+  "connections": {
+    "START": {
+      "main": [
+        [
+          {
+            "node": "Search Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Context": {
+      "main": [
+        [
+          {
+            "node": "Knowledge Base",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Knowledge Base": {
+      "main": [
+        [
+          {
+            "node": "Format Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Knowledge Base",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Context": {
+      "main": [
+        [
+          {
+            "node": "GENERAL AGENT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "GENERAL AGENT",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GENERAL AGENT": {
+      "main": [
+        [
+          {
+            "node": "RESPONSE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"
+  }
+}

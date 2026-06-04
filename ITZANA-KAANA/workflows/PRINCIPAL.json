@@ -9,10 +9,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1664,
-        400
+        1936,
+        352
       ],
-      "id": "b240cd19-31ea-4a48-a13b-8455781991bb",
+      "id": "0f9ab6b2-6dd4-436f-bb65-b53e8b50b467",
       "name": "PARSE BODY"
     },
     {
@@ -32,10 +32,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1696,
-        400
+        5296,
+        352
       ],
-      "id": "a85a7745-1536-4af5-8d87-b625c309de33",
+      "id": "b2fa4240-ac93-4a1f-b98e-565c0e71eb12",
       "name": "JOINNING MESSAGE"
     },
     {
@@ -65,10 +65,10 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.3,
       "position": [
-        1472,
-        400
+        5072,
+        352
       ],
-      "id": "12441d94-fb3a-4bb9-aa96-0a1c0af8950a",
+      "id": "2be5c8b1-666d-4dd0-9dc1-d8172a4e9052",
       "name": "Filter1"
     },
     {
@@ -79,10 +79,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        1920,
-        400
+        5520,
+        352
       ],
-      "id": "e0d6bfde-c54a-457c-a364-08d801e943a3",
+      "id": "a332d9d1-af26-4594-a60f-d4cdc6f2a6fc",
       "name": "DELETE MESSAGES",
       "credentials": {
         "redis": {
@@ -98,10 +98,10 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1024,
-        400
+        4624,
+        352
       ],
-      "id": "5580b58b-a5ba-46b6-815b-e2c2093ca753",
+      "id": "bbce8de1-507a-4eae-8778-3ce5eec96518",
       "name": "Wait",
       "webhookId": "50ed2939-b8ec-48f7-8c6b-3bf14c2efc58"
     },
@@ -114,10 +114,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        1248,
-        400
+        4848,
+        352
       ],
-      "id": "0e16e1dd-8fed-4cc1-94fa-b613f9899dc7",
+      "id": "9c9d2f61-5e16-411a-80b4-9e6b8c1d1e8c",
       "name": "GET MESSAGE",
       "credentials": {
         "redis": {
@@ -136,10 +136,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        800,
-        400
+        4400,
+        352
       ],
-      "id": "1ce5165f-8d83-4377-90c3-2291d834f392",
+      "id": "7f01e024-24d6-4682-9e5b-3e0daf84c28e",
       "name": "SAVE MESSAGE",
       "credentials": {
         "redis": {
@@ -165,10 +165,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        576,
-        400
+        4176,
+        352
       ],
-      "id": "a0264fdb-5cdf-4c17-91ab-83ec10424dfc",
+      "id": "75804d99-3995-4b7d-b092-cce4985a3e3a",
       "name": "INPUT FINAL"
     },
     {
@@ -194,10 +194,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -320,
-        208
+        3280,
+        160
       ],
-      "id": "17395208-b589-4d3d-a447-e19e47da3b11",
+      "id": "d056c294-6629-4a56-ae3c-5ab980bef6ce",
       "name": "audio input"
     },
     {
@@ -223,10 +223,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -320,
-        400
+        3280,
+        352
       ],
-      "id": "a13e2119-d48c-4dad-ba4b-fda8327ec6ff",
+      "id": "809ad657-d6ca-4363-b280-a24f85886a9a",
       "name": "image input"
     },
     {
@@ -252,10 +252,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -320,
-        592
+        3280,
+        544
       ],
-      "id": "48834e7b-f49d-46d9-bf88-fd0cd863dbe2",
+      "id": "a689f162-a006-4e80-ae3b-f865ed15f53c",
       "name": "text input"
     },
     {
@@ -266,10 +266,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -768,
-        208
+        2832,
+        160
       ],
-      "id": "5eaa9642-eb0b-484b-9ab1-b679476dd9af",
+      "id": "f9cfd4b7-7479-4082-89db-4c336ec4895b",
       "name": "HTTP IF AUDIO"
     },
     {
@@ -286,10 +286,10 @@
       "type": "n8n-nodes-base.aggregate",
       "typeVersion": 1,
       "position": [
-        352,
-        400
+        3952,
+        352
       ],
-      "id": "1e1833cd-6cae-4985-836a-8798f7a0ec7f",
+      "id": "34274ab7-f306-496e-acb7-5ec02680ab77",
       "name": "Aggregate"
     },
     {
@@ -306,10 +306,10 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        128,
-        400
+        3728,
+        352
       ],
-      "id": "9f7844a9-6d48-4556-b4ef-3a1166da78dc",
+      "id": "c54e6f81-bde8-47c6-9a29-da2254bc3ba7",
       "name": "Sort"
     },
     {
@@ -319,10 +319,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -96,
-        384
+        3504,
+        336
       ],
-      "id": "d3732f45-4a35-46e6-9595-0a2cfe606526",
+      "id": "3784227f-1eee-4bf0-a5b6-5059962a5f3f",
       "name": "Merge"
     },
     {
@@ -334,10 +334,10 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        -544,
-        208
+        3056,
+        160
       ],
-      "id": "a77b9f13-97da-463a-b47a-fb8d523da6d9",
+      "id": "1d744397-9da5-4907-91a5-45d400327880",
       "name": "TRANSCRIBE AUDIO",
       "credentials": {
         "openAiApi": {
@@ -382,10 +382,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -992,
-        304
+        2608,
+        256
       ],
-      "id": "3204a8ec-b1b0-4cd5-b20c-1847ded5533b",
+      "id": "3092ce7c-4ed9-42d5-8d32-9b8963af0f8e",
       "name": "ES AUDIO / IMAGEN"
     },
     {
@@ -396,10 +396,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -1216,
-        304
+        2384,
+        256
       ],
-      "id": "566ebe51-2414-4e61-864c-ed11b6b0806e",
+      "id": "4b501e60-76e0-40a0-831a-cb315a969349",
       "name": "HTTP Request"
     },
     {
@@ -438,10 +438,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -1440,
-        400
+        2160,
+        352
       ],
-      "id": "a4383e55-1772-42fd-9c72-108721ee02e2",
+      "id": "b31e921f-821f-4197-888c-ac7163f81217",
       "name": "ES ARCHIVO"
     },
     {
@@ -451,10 +451,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1888,
-        400
+        1712,
+        352
       ],
-      "id": "ffbd16fa-f9a8-4bdf-ac2a-ce7bcac2f7ff",
+      "id": "71db7226-969b-4c73-893e-36ade5429138",
       "name": "Create Body"
     },
     {
@@ -468,10 +468,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -2112,
-        400
+        1488,
+        352
       ],
-      "id": "11868b46-f5ea-4e21-990c-a5c7d25d00b9",
+      "id": "d7be0553-4d90-4d1e-a7c3-b33148e4e5c8",
       "name": "Webhook",
       "webhookId": "bbe94977-7886-4071-a874-e370d3b20c97"
     },
@@ -492,10 +492,10 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        -544,
-        400
+        3056,
+        352
       ],
-      "id": "258f6bee-0fcd-4e17-a278-e0100d3f6841",
+      "id": "9b265d49-9684-4550-b2ff-465a133b6ac2",
       "name": "ANALIZA IMAGEN",
       "credentials": {
         "openAiApi": {
@@ -503,6 +503,520 @@
           "name": "ITZANA"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "sp-001",
+              "name": "propiedad",
+              "value": "ITZ",
+              "type": "string"
+            },
+            {
+              "id": "sp-002",
+              "name": "manychat_id",
+              "value": "={{ $('PARSE BODY').first().json.current_body.id }}",
+              "type": "string"
+            },
+            {
+              "id": "4b61b5a4-35ba-478d-bf51-69b4a83faa12",
+              "name": "page_id",
+              "value": "={{ $('PARSE BODY').first().json.current_body.page_id }}",
+              "type": "string"
+            },
+            {
+              "id": "sp-003",
+              "name": "entrada_usuario",
+              "value": "={{ $('JOINNING MESSAGE').first().json.message }}",
+              "type": "string"
+            },
+            {
+              "id": "ffb93e3d-90aa-4350-8c08-63772244385f",
+              "name": "canal_ingreso",
+              "value": "={{ $('PARSE BODY').item.json.current_body.custom_fields.canal_ingreso }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        5744,
+        352
+      ],
+      "id": "bd334db1-8b54-4f52-b243-262225064aac",
+      "name": "Set Propiedad"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.manychat.com/fb/sending/sendContent",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "manyChatApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"subscriber_id\": \"={{ $('Set Propiedad').first().json.manychat_id }}\",\n   \"data\": {\n     \"version\": \"v2\",\n     \"content\": {\n       \"type\": \"={{ $('Parameter Type').first().json.type }}\",\n       \"messages\": [\n         {\n           \"type\": \"text\",\n           \"text\": \"={{ $('Parse Agent Output').first().json.response_text }}\"\n         }\n       ]\n     }\n   }\n }",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        8128,
+        352
+      ],
+      "id": "3242102b-5ed3-46a0-b677-17956a0aa465",
+      "name": "Send to ManyChat",
+      "credentials": {
+        "manyChatApi": {
+          "id": "aEvHbFXnmwofChqs",
+          "name": "ManyChat Garoo"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ \n  $('Find User').first().json.isNotEmpty()\n  ? $('Find User').first().json\n  : $('Insert User').first().json\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        6864,
+        352
+      ],
+      "id": "d76fe918-ca23-4834-abb8-543b6491b37e",
+      "name": "User Data"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "collection": "users",
+        "updateKey": "_id",
+        "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(\",\") }}",
+        "options": {
+          "dateFields": "timestamp"
+        }
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        6640,
+        448
+      ],
+      "id": "a8a1b04d-db1b-41a6-9bd4-af84bbbd6f57",
+      "name": "Update User",
+      "credentials": {
+        "mongoDb": {
+          "id": "Msw0gTK8f8b192VX",
+          "name": "HOTELS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "collection": "users",
+        "fields": "={{ Object.keys($json).join(\",\") }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        6640,
+        256
+      ],
+      "id": "4c5133e2-a648-4b86-a5f6-450f9ac401e1",
+      "name": "Insert User",
+      "credentials": {
+        "mongoDb": {
+          "id": "Msw0gTK8f8b192VX",
+          "name": "HOTELS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "collection": "users",
+        "options": {},
+        "query": "={ \n  \"manychat_id\": \"{{ $json.manychat_id }}\"\n}"
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        5968,
+        352
+      ],
+      "id": "b62beabf-3bf7-4b33-b480-c904879a03e0",
+      "name": "Find User",
+      "alwaysOutputData": true,
+      "executeOnce": false,
+      "credentials": {
+        "mongoDb": {
+          "id": "Msw0gTK8f8b192VX",
+          "name": "HOTELS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9040d88b-dc99-47e3-a6e3-14b8264ae6cb",
+              "name": "manychat_id",
+              "value": "={{ $('PARSE BODY').first().json.current_body.id }}",
+              "type": "string"
+            },
+            {
+              "id": "1fca47c3-3150-4740-a3a3-aaeb55e0bd49",
+              "name": "page_id",
+              "value": "={{ $('PARSE BODY').first().json.current_body.page_id }}",
+              "type": "string"
+            },
+            {
+              "id": "689aa6e6-0e3f-4aba-8834-1b8f675acaf4",
+              "name": "propiedad",
+              "value": "={{ $('Set Propiedad').first().json.propiedad }}",
+              "type": "string"
+            },
+            {
+              "id": "d2233cfa-026f-400c-99a9-7f34bd8d58cc",
+              "name": "last_user_input",
+              "value": "={{ $('Set Propiedad').item.json.entrada_usuario }}",
+              "type": "string"
+            },
+            {
+              "id": "15532baf-1a9a-439a-9af2-bc6354c701e5",
+              "name": "input_channel",
+              "value": "={{ $('Set Propiedad').first().json.canal_ingreso }}",
+              "type": "string"
+            },
+            {
+              "id": "014d3381-ff7e-446b-a7ab-753ca46481ff",
+              "name": "timestamp",
+              "value": "={{ $('PARSE BODY').first().json.timestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "06aad59e-59d6-404b-a8f0-4b0c72f2c1c3",
+              "name": "first_interaction",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "7436bc68-ba4c-4c48-8ac0-bea988b3079d",
+              "name": "last_interaction",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "d424a476-8d63-449f-acc2-09a69f158a8f",
+              "name": "has_reservation",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "id": "c10d0b79-3d2d-4c63-b70f-9242d988e501",
+              "name": "datos_completos",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        6416,
+        256
+      ],
+      "id": "5481d2f7-c53c-47c7-9851-1929b6cb7a4d",
+      "name": "DATA to CREATE"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "13f396d4-0c8b-4099-b87a-4f98c96f9af1",
+              "leftValue": "={{ $('Find User').first().json.isEmpty() }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        6192,
+        352
+      ],
+      "id": "d7ab247a-c4e2-4625-ba45-e3139b506152",
+      "name": "If USER NOT EXIST"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e2b99084-0422-4ba4-973e-0fc03b22ba6e",
+              "name": "_id",
+              "value": "={{ $('Find User').first().json._id.toJsonString().replace(/^\"(.*)\"$/, '$1') }}",
+              "type": "string"
+            },
+            {
+              "id": "9040d88b-dc99-47e3-a6e3-14b8264ae6cb",
+              "name": "manychat_id",
+              "value": "={{ $('PARSE BODY').first().json.current_body.id }}",
+              "type": "string"
+            },
+            {
+              "id": "1fca47c3-3150-4740-a3a3-aaeb55e0bd49",
+              "name": "page_id",
+              "value": "={{ $('PARSE BODY').first().json.current_body.page_id }}",
+              "type": "string"
+            },
+            {
+              "id": "689aa6e6-0e3f-4aba-8834-1b8f675acaf4",
+              "name": "propiedad",
+              "value": "={{ $('Set Propiedad').first().json.propiedad }}",
+              "type": "string"
+            },
+            {
+              "id": "d2233cfa-026f-400c-99a9-7f34bd8d58cc",
+              "name": "last_user_input",
+              "value": "={{ $('Set Propiedad').first().json.entrada_usuario }}",
+              "type": "string"
+            },
+            {
+              "id": "15532baf-1a9a-439a-9af2-bc6354c701e5",
+              "name": "input_channel",
+              "value": "={{ $('Set Propiedad').first().json.canal_ingreso }}",
+              "type": "string"
+            },
+            {
+              "id": "014d3381-ff7e-446b-a7ab-753ca46481ff",
+              "name": "timestamp",
+              "value": "={{ $('PARSE BODY').first().json.timestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "06aad59e-59d6-404b-a8f0-4b0c72f2c1c3",
+              "name": "first_interaction",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "7436bc68-ba4c-4c48-8ac0-bea988b3079d",
+              "name": "last_interaction",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "d424a476-8d63-449f-acc2-09a69f158a8f",
+              "name": "has_reservation",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "id": "c10d0b79-3d2d-4c63-b70f-9242d988e501",
+              "name": "datos_completos",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        6416,
+        448
+      ],
+      "id": "ec5ddfea-e4ab-4d72-9f8a-72183d196dd0",
+      "name": "DATA to UPDATE"
+    },
+    {
+      "parameters": {
+        "options": {
+          "temperature": 0.3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        7088,
+        576
+      ],
+      "id": "ef202e0e-632b-4517-a7f8-51e19cc8a673",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "J9zb84vhqsx182XW",
+          "name": "ITZANA-KAANA"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.manychat_id }}",
+        "collectionName": "chat_histories",
+        "databaseName": "Database",
+        "contextWindowLength": 30
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1.1,
+      "position": [
+        7216,
+        576
+      ],
+      "id": "80691502-9cb9-4ee8-8fb3-3b198e9d7aaa",
+      "name": "MongoDB Chat Memory",
+      "credentials": {
+        "mongoDb": {
+          "id": "Msw0gTK8f8b192VX",
+          "name": "HOTELS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "description": "=Escalate to the hotel team. Use when user asks for a human, or inquiry is about weddings/events, PR/collaboration, or employment. Pass: {\"categoria\": \"<bodas_eventos|pr|empleo|escalamiento|reserva>\", \"resumen_conversacion\": \"<2-3 sentence summary of conversation>\"}.",
+        "workflowId": {
+          "__rl": true,
+          "value": "OApztbIN8Jhb4JHz",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/OApztbIN8Jhb4JHz",
+          "cachedResultName": "ITZ NOTIFICATIONS"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        7488,
+        592
+      ],
+      "id": "e45c557a-e8de-4fd2-92ca-166581c181df",
+      "name": "notifications"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Set Propiedad').first().json.entrada_usuario }}",
+        "options": {
+          "systemMessage": "=## IDENTIDAD ##\nEres Kaan, el concierge virtual oficial de Itz'ana Resort & Residences, un resort de lujo en Placencia, Belice (Mile 20 Placencia Road, Stann Creek District). Eres cálido, sofisticado y reflejas el espíritu del Caribe beliceño. Nunca te presentes como IA a menos que te lo pregunten directamente.\n\n---\n\n## VALIDACIÓN OBLIGATORIA — HAZ ESTO PRIMERO ##\nANTES de responder cualquier consulta sobre reservas, disponibilidad o precios, verifica que tienes los siguientes datos del huésped:\n- Nombre completo\n- Correo electrónico\n- Teléfono / WhatsApp\n\nEstos datos están disponibles en el contexto del usuario. Si alguno está vacío (null o \"\"):\n→ Solicita amablemente el dato faltante ANTES de continuar.\n→ Ejemplo: \"Para ayudarte mejor, ¿me podrías dar tu nombre y correo?\"\n\nNO omitas este paso si el usuario pregunta por precios o disponibilidad.\n\n---\n\n## IDIOMA ##\nDetecta el idioma del usuario en su primer mensaje y responde SIEMPRE en ese mismo idioma:\n- Si escribe en español → responde en español\n- Si escribe en inglés → responde en inglés\n- Si mezcla → usa el idioma predominante\nNunca cambies de idioma en mitad de la conversación.\n\n---\n\n## HERRAMIENTAS DISPONIBLES ##\n\n### kb_search\nCuándo usarla: Para responder CUALQUIER pregunta sobre el resort: alojamientos, restaurantes, bares, actividades, excursiones, bodas, eventos, spa, marina, políticas, ubicación, precios, paquetes, contacto.\nREGLA: SIEMPRE usa kb_search antes de responder sobre el resort. NUNCA inventes información.\nCómo llamarla: Pasa la pregunta del usuario como query.\nRespuesta: Usa la respuesta del KB tal como viene. Si el KB incluye un link, inclúyelo en tu respuesta.\n\n### handoff\nCuándo usarla:\n- El usuario pide hablar con una persona del equipo\n- Consulta de boda o evento especial → categoria: \"bodas_eventos\"\n- Consulta de PR, prensa, influencer o colaboración → categoria: \"pr\"\n- Pregunta sobre empleo o vacantes → categoria: \"empleo\"\n- Consulta de reserva que requiere atención personalizada → categoria: \"reserva\"\n- El usuario expresa frustración o urgencia → categoria: \"escalamiento\"\nCómo llamarla: Pasa categoria y resumen_conversacion (2-3 oraciones de contexto).\nDespués de llamarla: Informa al usuario que el equipo lo contactará pronto.\n\n---\n\n## REGLAS DE CONVERSACIÓN ##\n\n### Saludos puros (hola, hi, good morning)\nSaluda con calidez, preséntate como Kaan y pregunta en qué puedes ayudar.\nEjemplo: \"Hola, soy Kaan, tu concierge virtual de Itz'ana. ¿En qué puedo ayudarte hoy?\"\n\n### Preguntas sobre el resort\nSIEMPRE llama a kb_search primero.\nResponde con la información del KB, no con suposiciones.\nSi el KB no tiene la respuesta → \"Para esa consulta específica, nuestro equipo puede ayudarte mejor: concierge@itzanabelize.com\"\n\n### Preguntas sobre precios o reservas\nLlama a kb_search para obtener el link de reservas.\nSIEMPRE incluye: https://reservations.itzanabelize.com/book/accommodations\nMencióna que los precios varían por fecha y temporada.\n\n### Bodas y eventos\nLlama a kb_search para obtener info inicial de venues y capacidades.\nLuego llama a handoff con categoria: \"bodas_eventos\".\nMensaje al usuario: \"Nuestro equipo de eventos te enviará una propuesta personalizada.\"\n\n### PR y colaboraciones\nLlama a handoff con categoria: \"pr\".\nInforma que partnerships@itzanabelize.com revisará su propuesta.\n\n### Empleo\nLlama a handoff con categoria: \"empleo\".\nInforma que el equipo de RRHH se pondrá en contacto.\n\n### Temas fuera de contexto\nRedirige amablemente: \"Solo puedo ayudarte con consultas sobre Itz'ana Resort & Residences. ¿Hay algo sobre el resort en lo que pueda ayudarte?\"\nNO respondas preguntas sobre otros hoteles, política, entretenimiento u otros temas.\n\n---\n\n## ESTILO DE RESPUESTA ##\n- Texto plano. Sin markdown, sin asteriscos, sin hashtags.\n- Máximo 500 caracteres por mensaje.\n  - Excepción: listas de amenidades o actividades usan bullet • en líneas separadas.\n- Cálido pero profesional.\n- No repitas \"Itz'ana Resort\" en cada mensaje.\n- No uses frases genéricas como \"Claro que sí\" o \"Por supuesto\". Ve directo al punto.\n- Si incluyes un link, ponlo al final del mensaje.\n\n---\n\n## FORMATO DE SALIDA OBLIGATORIO ##\nResponde ÚNICAMENTE con este JSON en una sola línea, sin texto adicional antes ni después:\n\n{\"response\": \"<texto de respuesta al usuario>\", \"escalate\": false, \"categoria\": \"info\"}\n\nescalate: true SOLO cuando llames a handoff o cuando el usuario explícitamente pida hablar con alguien.\ncategoria: uno de estos valores exactos:\n- \"info\" — consulta general sobre el resort\n- \"reserva\" — pregunta sobre disponibilidad, precios, reservas\n- \"bodas_eventos\" — bodas, eventos, celebraciones\n- \"pr\" — prensa, influencers, colaboraciones\n- \"empleo\" — trabajo, vacantes\n- \"escalamiento\" — usuario pide humano o situación urgente\n- \"off_topic\" — tema fuera del resort\n\n---\n\n## GUARDRAILS ##\n- NUNCA inventes información sobre el resort (precios exactos, disponibilidad específica, políticas no documentadas).\n- NUNCA digas que eres ChatGPT, Claude, o cualquier IA específica.\n- NUNCA compartas información privada de otros huéspedes.\n- NUNCA prometas algo que el KB no confirme (descuentos, upgrades, excepciones a políticas).\n- Si no sabes algo → dirige al equipo: concierge@itzanabelize.com o +(501) 610-1329"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        7216,
+        352
+      ],
+      "id": "6da49ee8-4d15-4637-a7ca-094b5ade11bf",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "jsCode": "const agentOutput = $input.first().json.output || '';\n\n let parsed;\n try {\n   // Intentar parsear si el agente devolvió JSON\n   const jsonMatch = agentOutput.match(/\\{[\\s\\S]*\\}/);\n   parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : null;\n } catch(e) {\n   parsed = null;\n }\n\n return [{\n   json: {\n     response_text: parsed?.response || agentOutput,\n     escalate: parsed?.escalate || false,\n     categoria: parsed?.categoria || 'info',\n     raw_output: agentOutput\n   }\n }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        7680,
+        352
+      ],
+      "id": "c9255987-20cc-47be-866b-f68a617d832e",
+      "name": "Parse Agent Output"
+    },
+    {
+      "parameters": {
+        "description": "=Search Itz'ana Resort knowledge base. Use for ANY question about the resort: accommodation, restaurants, activities, weddings, location, policies, prices. Pass the user query as {\"query\": \"<user question>\"}.",
+        "workflowId": {
+          "__rl": true,
+          "value": "rofQe6ZGW3OpFqcb",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/rofQe6ZGW3OpFqcb",
+          "cachedResultName": "ITZ KB_SEARCH"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        7360,
+        576
+      ],
+      "id": "d075815d-182b-4a9d-8856-ff427c3e2e17",
+      "name": "Call 'ITZ KB_SEARCH'"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "36d12256-d1f9-49ba-80d0-a97080e0fe3e",
+              "name": "type",
+              "value": "={{\n   $('Set Propiedad').first().json.canal_ingreso.toLowerCase().includes('instagram')\n     ? 'instagram'\n     : $('Set Propiedad').first().json.canal_ingreso.toLowerCase().includes('messenger')\n       ? 'messenger'\n       : 'whatsapp'\n }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        7904,
+        352
+      ],
+      "id": "a28c040b-26a3-40df-877b-9bdb22caa7f4",
+      "name": "Parameter Type"
     }
   ],
   "connections": {
@@ -533,6 +1047,17 @@
         [
           {
             "node": "JOINNING MESSAGE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DELETE MESSAGES": {
+      "main": [
+        [
+          {
+            "node": "Set Propiedad",
             "type": "main",
             "index": 0
           }
@@ -750,9 +1275,276 @@
           }
         ]
       ]
+    },
+    "Set Propiedad": {
+      "main": [
+        [
+          {
+            "node": "Find User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "User Data": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update User": {
+      "main": [
+        [
+          {
+            "node": "User Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert User": {
+      "main": [
+        [
+          {
+            "node": "User Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find User": {
+      "main": [
+        [
+          {
+            "node": "If USER NOT EXIST",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DATA to CREATE": {
+      "main": [
+        [
+          {
+            "node": "Insert User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If USER NOT EXIST": {
+      "main": [
+        [
+          {
+            "node": "DATA to CREATE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "DATA to UPDATE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DATA to UPDATE": {
+      "main": [
+        [
+          {
+            "node": "Update User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MongoDB Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "notifications": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Parse Agent Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Agent Output": {
+      "main": [
+        [
+          {
+            "node": "Parameter Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'ITZ KB_SEARCH'": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parameter Type": {
+      "main": [
+        [
+          {
+            "node": "Send to ManyChat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "pinData": {},
+  "pinData": {
+    "Webhook": [
+      {
+        "headers": {
+          "host": "agentsprod.redtec.ai",
+          "user-agent": "ManyChat",
+          "content-length": "1766",
+          "content-type": "application/json; charset=utf-8",
+          "x-forwarded-for": "3.64.54.57",
+          "x-forwarded-host": "agentsprod.redtec.ai",
+          "x-forwarded-port": "443",
+          "x-forwarded-proto": "https",
+          "x-forwarded-server": "f5656a829cd5",
+          "x-real-ip": "3.64.54.57",
+          "accept-encoding": "gzip"
+        },
+        "params": {},
+        "query": {},
+        "body": {
+          "key": "user:1623941319",
+          "id": "1623941319",
+          "page_id": "962079940550460",
+          "user_refs": [],
+          "status": "active",
+          "first_name": "Jorge",
+          "last_name": "Calderon",
+          "name": "Jorge Calderon",
+          "gender": "unknown",
+          "profile_pic": null,
+          "locale": null,
+          "language": null,
+          "timezone": "UTC±00",
+          "live_chat_url": "https://app.manychat.com/fb962079940550460/chat/1623941319",
+          "last_input_text": "Hola",
+          "optin_phone": true,
+          "phone": "+13322311881",
+          "optin_email": false,
+          "email": null,
+          "subscribed": "2026-02-04T13:17:27-06:00",
+          "last_interaction": null,
+          "ig_last_interaction": null,
+          "last_seen": null,
+          "ig_last_seen": null,
+          "is_followup_enabled": true,
+          "ig_username": null,
+          "ig_id": null,
+          "whatsapp_phone": "+13322311881",
+          "whatsapp_bsuid": null,
+          "whatsapp_username": null,
+          "optin_whatsapp": true,
+          "phone_country_code": "US",
+          "last_growth_tool": null,
+          "custom_fields": {
+            "canal_ingreso": "whatsapp",
+            "Celular": null,
+            "ChatGPT's response": null,
+            "ChatGPT's response (2024-08-13 21:18:56)": null,
+            "Conversation": null,
+            "Conversation (2024-08-13 21:18:56)": null,
+            "conversation_id": null,
+            "debugging": null,
+            "Fecha Evento": null,
+            "Fecha Evento 2": null,
+            "Fecha Evento 3": null,
+            "Fecha Reserva": null,
+            "FicohsaResponse": null,
+            "First name for prompt": null,
+            "First name for prompt (2024-08-13 21:18:56)": null,
+            "image_descriptioin": null,
+            "Input from Template": null,
+            "Last Input": null,
+            "last_interaction_timestamp": null,
+            "Nombre Cotizacion": null,
+            "Nombre Reserva": null,
+            "Numero Personas": null,
+            "Ocasion": null,
+            "Panelista": null,
+            "Pregunta": null,
+            "proyecto": "PVV",
+            "proyecto_interes": "PMAR",
+            "proyecto_utm_source": null,
+            "Respuesta_Agente": null,
+            "Respuesta_Audio_URL": null,
+            "Respuesta de image-n8n via Webhook": null,
+            "Respuesta de n8n via Webhook": null,
+            "Respuesta_MVAgent": null,
+            "user's question fallback": null,
+            "user's question fallback (2024-08-13 21:18:56)": null,
+            "voice_note_transcription": null
+          }
+        },
+        "webhookUrl": "https://agentsprod.redtec.ai/webhook/hotels-agent",
+        "executionMode": "production"
+      }
+    ]
+  },
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"
