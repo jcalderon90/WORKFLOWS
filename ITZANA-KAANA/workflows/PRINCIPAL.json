@@ -1,0 +1,760 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ JSON.parse($('Create Body').first().json.body) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1664,
+        400
+      ],
+      "id": "b240cd19-31ea-4a48-a13b-8455781991bb",
+      "name": "PARSE BODY"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "df6dd35d-a8b7-4ecb-8ef8-5a19ed499cfc",
+              "name": "message",
+              "value": "={{ $json.propertyName.join(\", \") }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1696,
+        400
+      ],
+      "id": "a85a7745-1536-4af5-8d87-b625c309de33",
+      "name": "JOINNING MESSAGE"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "5b5ad242-c6c3-4f2a-9b67-edb92fa424be",
+              "leftValue": "={{ $json.propertyName?.last() || \"\" }}",
+              "rightValue": "={{ $('INPUT FINAL').first().json.input }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        1472,
+        400
+      ],
+      "id": "12441d94-fb3a-4bb9-aa96-0a1c0af8950a",
+      "name": "Filter1"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "=hotel:{{ $('PARSE BODY').first().json.current_body.id }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        400
+      ],
+      "id": "e0d6bfde-c54a-457c-a364-08d801e943a3",
+      "name": "DELETE MESSAGES",
+      "credentials": {
+        "redis": {
+          "id": "8EUkwaZixjCH7szY",
+          "name": "Redis GarooVPS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1024,
+        400
+      ],
+      "id": "5580b58b-a5ba-46b6-815b-e2c2093ca753",
+      "name": "Wait",
+      "webhookId": "50ed2939-b8ec-48f7-8c6b-3bf14c2efc58"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "key": "=hotel:{{ $('PARSE BODY').first().json.current_body.id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1248,
+        400
+      ],
+      "id": "0e16e1dd-8fed-4cc1-94fa-b613f9899dc7",
+      "name": "GET MESSAGE",
+      "credentials": {
+        "redis": {
+          "id": "8EUkwaZixjCH7szY",
+          "name": "Redis GarooVPS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "push",
+        "list": "=hotel:{{ $('PARSE BODY').first().json.current_body.id }}",
+        "messageData": "={{ $json.input }}",
+        "tail": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        800,
+        400
+      ],
+      "id": "1ce5165f-8d83-4377-90c3-2291d834f392",
+      "name": "SAVE MESSAGE",
+      "credentials": {
+        "redis": {
+          "id": "8EUkwaZixjCH7szY",
+          "name": "Redis GarooVPS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c1c4c388-e572-4502-9cf1-51d28b4d022d",
+              "name": "input",
+              "value": "={{ $json.mensaje.join(\" \") }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        576,
+        400
+      ],
+      "id": "a0264fdb-5cdf-4c17-91ab-83ec10424dfc",
+      "name": "INPUT FINAL"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ea8c9284-e11f-4e87-a742-4392a692da2a",
+              "name": "mensaje",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            },
+            {
+              "id": "1f2fe528-cff0-4713-9dcb-4221b508c597",
+              "name": "hora_llegada",
+              "value": "={{ $json.timestamp }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -320,
+        208
+      ],
+      "id": "17395208-b589-4d3d-a447-e19e47da3b11",
+      "name": "audio input"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ea8c9284-e11f-4e87-a742-4392a692da2a",
+              "name": "mensaje",
+              "value": "={{ $json.content }}",
+              "type": "string"
+            },
+            {
+              "id": "1f2fe528-cff0-4713-9dcb-4221b508c597",
+              "name": "hora_llegada",
+              "value": "={{ $json.timestamp }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -320,
+        400
+      ],
+      "id": "a13e2119-d48c-4dad-ba4b-fda8327ec6ff",
+      "name": "image input"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ea8c9284-e11f-4e87-a742-4392a692da2a",
+              "name": "mensaje",
+              "value": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
+              "type": "string"
+            },
+            {
+              "id": "1f2fe528-cff0-4713-9dcb-4221b508c597",
+              "name": "hora_llegada",
+              "value": "={{ $('PARSE BODY').first().json.timestamp }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -320,
+        592
+      ],
+      "id": "48834e7b-f49d-46d9-bf88-fd0cd863dbe2",
+      "name": "text input"
+    },
+    {
+      "parameters": {
+        "url": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -768,
+        208
+      ],
+      "id": "5eaa9642-eb0b-484b-9ab1-b679476dd9af",
+      "name": "HTTP IF AUDIO"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "mensaje"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        352,
+        400
+      ],
+      "id": "1e1833cd-6cae-4985-836a-8798f7a0ec7f",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "hora_llegada"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        128,
+        400
+      ],
+      "id": "9f7844a9-6d48-4556-b4ef-3a1166da78dc",
+      "name": "Sort"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -96,
+        384
+      ],
+      "id": "d3732f45-4a35-46e6-9595-0a2cfe606526",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -544,
+        208
+      ],
+      "id": "a77b9f13-97da-463a-b47a-fb8d523da6d9",
+      "name": "TRANSCRIBE AUDIO",
+      "credentials": {
+        "openAiApi": {
+          "id": "PjPavWO5j0jIFtSG",
+          "name": "ITZANA"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "92200249-f6e4-4f84-bd28-bc36de22beb3",
+              "leftValue": "={{ $('HTTP Request').first().binary.data.mimeType }}",
+              "rightValue": "audio/ogg",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "b5bd48d1-851e-43bc-a097-e16c0dcca59c",
+              "leftValue": "={{ $('HTTP Request').first().binary.data.mimeType }}",
+              "rightValue": "video/mp4",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -992,
+        304
+      ],
+      "id": "3204a8ec-b1b0-4cd5-b20c-1847ded5533b",
+      "name": "ES AUDIO / IMAGEN"
+    },
+    {
+      "parameters": {
+        "url": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1216,
+        304
+      ],
+      "id": "566ebe51-2414-4e61-864c-ed11b6b0806e",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "92200249-f6e4-4f84-bd28-bc36de22beb3",
+              "leftValue": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
+              "rightValue": "https://manybot-files",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "b5bd48d1-851e-43bc-a097-e16c0dcca59c",
+              "leftValue": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
+              "rightValue": "https://lookaside.fbsbx.com",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1440,
+        400
+      ],
+      "id": "a4383e55-1772-42fd-9c72-108721ee02e2",
+      "name": "ES ARCHIVO"
+    },
+    {
+      "parameters": {
+        "jsCode": "const current_key = $input.first().json.body.key;\n\nconst current_body = $input.first().json.body;\n\nconst timestamp = new Date().toISOString();\n\nconst start_time = Date.now();\n\nconst result_body = {\n current_body,\n  timestamp\n}\n\nreturn [{\n  key: current_key,\n  body: JSON.stringify(result_body),\n  timestamp,\n  start_time\n}]\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1888,
+        400
+      ],
+      "id": "ffbd16fa-f9a8-4bdf-ac2a-ce7bcac2f7ff",
+      "name": "Create Body"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "hotels-agent",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -2112,
+        400
+      ],
+      "id": "11868b46-f5ea-4e21-990c-a5c7d25d00b9",
+      "name": "Webhook",
+      "webhookId": "bbe94977-7886-4071-a874-e370d3b20c97"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "text": "Eres un experto en describir imagenes para un chatbot responde lo que ves en la imagen de esta manera. \"El usuario envió una imagen etc...\"",
+        "inputType": "base64",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -544,
+        400
+      ],
+      "id": "258f6bee-0fcd-4e17-a278-e0100d3f6841",
+      "name": "ANALIZA IMAGEN",
+      "credentials": {
+        "openAiApi": {
+          "id": "PjPavWO5j0jIFtSG",
+          "name": "ITZANA"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "PARSE BODY": {
+      "main": [
+        [
+          {
+            "node": "ES ARCHIVO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "JOINNING MESSAGE": {
+      "main": [
+        [
+          {
+            "node": "DELETE MESSAGES",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter1": {
+      "main": [
+        [
+          {
+            "node": "JOINNING MESSAGE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "GET MESSAGE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET MESSAGE": {
+      "main": [
+        [
+          {
+            "node": "Filter1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SAVE MESSAGE": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "INPUT FINAL": {
+      "main": [
+        [
+          {
+            "node": "SAVE MESSAGE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "audio input": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "image input": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "text input": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "HTTP IF AUDIO": {
+      "main": [
+        [
+          {
+            "node": "TRANSCRIBE AUDIO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "INPUT FINAL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Sort",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "TRANSCRIBE AUDIO": {
+      "main": [
+        [
+          {
+            "node": "audio input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ES AUDIO / IMAGEN": {
+      "main": [
+        [
+          {
+            "node": "HTTP IF AUDIO",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "ANALIZA IMAGEN",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "ES AUDIO / IMAGEN",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ES ARCHIVO": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "text input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Body": {
+      "main": [
+        [
+          {
+            "node": "PARSE BODY",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Create Body",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ANALIZA IMAGEN": {
+      "main": [
+        [
+          {
+            "node": "image input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"
+  }
+}

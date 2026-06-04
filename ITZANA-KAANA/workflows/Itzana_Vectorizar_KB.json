@@ -1,0 +1,204 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "352fa218-4b91-49ac-9a84-1501d98a396c",
+              "name": "chunks",
+              "value": "=[\n  {\n    \"id\": \"itz_resort_general\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"resort\",\n    \"tags\": [\"itzana\", \"resort\", \"belize\", \"placencia\", \"lujo\", \"caribe\", \"luxury\", \"overview\", \"que es\", \"what is\"],\n    \"pregunta\": \"¿Qué es Itz'ana Resort & Residences? / What is Itz'ana Resort?\",\n    \"respuesta\": \"Itz'ana Resort & Residences is a luxury resort in Placencia, Belize (Mile 20 Placencia Road, Stann Creek District), bordered by the Caribbean Sea and tropical jungle. It offers beachfront villas, suites, penthouses, a spa, pristine white-sand beach, outdoor pool, organic garden, yoga terrace, and a full-service marina. Just minutes from the world's second-largest barrier reef — perfect for diving, snorkeling, fishing, and sailing. Website: www.itzanabelize.com\"\n  },\n  {\n    \"id\": \"itz_alojamiento_overview\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"alojamientos\",\n    \"tags\": [\"habitaciones\", \"rooms\", \"alojamiento\", \"accommodation\", \"opciones\", \"tipos\", \"villa\", \"suite\", \"penthouse\", \"cuartos\", \"stay\"],\n    \"pregunta\": \"¿Qué tipos de alojamiento tienen? / What accommodation options do you have?\",\n    \"respuesta\": \"Itz'ana offers several accommodation types:\\n• Beachfront Villas (1, 2, and 3 bedrooms) — private terrace, plunge pool, steps from the beach\\n• Penthouses (2 and 3 bedrooms) — top-floor luxury with private plunge pool and sea views\\n• Beachfront Suite — king bed, living/dining area, private wrap-around terrace\\n• Deluxe Room — poolside retreat with private terrace and sofa bed\\n\\nPrices vary by date and season. Book here: https://reservations.itzanabelize.com/book/accommodations\"\n  },\n  {\n    \"id\": \"itz_villa_1dorm\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"alojamientos\",\n    \"tags\": [\"villa\", \"1 bedroom\", \"1 dormitorio\", \"una habitacion\", \"one bedroom\", \"plunge pool\", \"beachfront\", \"frente playa\", \"terraza privada\"],\n    \"pregunta\": \"¿Cómo es la villa de 1 dormitorio? / Tell me about the 1-bedroom villa\",\n    \"respuesta\": \"Our 1-bedroom beachfront villa is a secluded retreat with breathtaking Caribbean Sea views. It features a private terrace with plunge pool, a fully equipped kitchen, luxurious linens, and is just steps from the beach. Perfect for couples seeking a private paradise.\\n\\nBook: https://reservations.itzanabelize.com/book/accommodations\"\n  },\n  {\n    \"id\": \"itz_villa_2dorm\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"alojamientos\",\n    \"tags\": [\"villa\", \"2 bedroom\", \"2 dormitorios\", \"dos habitaciones\", \"two bedroom\", \"familia\", \"family\", \"grupo\", \"piscina interior\", \"plunge pool\"],\n    \"pregunta\": \"¿Cómo es la villa de 2 dormitorios? / Tell me about the 2-bedroom villa\",\n    \"respuesta\": \"Our 2-bedroom beachfront villa is surrounded by turquoise sea and white sand beach. It features a modern design, 2 bedrooms with en-suite bathrooms, open-concept living room and kitchen, and a sea-view terrace with plunge pool plus an interior courtyard pool. Ideal for families or small groups.\\n\\nBook: https://reservations.itzanabelize.com/book/accommodations\"\n  },\n  {\n    \"id\": \"itz_villa_3dorm\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"alojamientos\",\n    \"tags\": [\"villa\", \"3 bedroom\", \"3 dormitorios\", \"tres habitaciones\", \"three bedroom\", \"grande\", \"grupo grande\", \"1470 metros\", \"dos plunge pools\", \"lujo maximo\"],\n    \"pregunta\": \"¿Cómo es la villa de 3 dormitorios? / Tell me about the 3-bedroom villa\",\n    \"respuesta\": \"Our 3-bedroom villa opens directly onto Placencia Beach. With 1,470 sqm of living space designed in harmony with nature, it features a master bedroom with sea views, 2 plunge pools, an interior courtyard, and seamless indoor-outdoor flow. Services available include private chef, butler, spa in-villa, babysitter, and a stocked villa bar.\\n\\nBook: https://reservations.itzanabelize.com/book/accommodations\"\n  },\n  {\n    \"id\": \"itz_servicios_villa\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"alojamientos\",\n    \"tags\": [\"servicios villa\", \"villa services\", \"chef privado\", \"private chef\", \"mayordomo\", \"butler\", \"spa villa\", \"niñera\", \"babysitter\", \"villa bar\", \"extras\"],\n    \"pregunta\": \"¿Qué servicios adicionales hay para las villas? / What extra services are available for villas?\",\n    \"respuesta\": \"All villas can request these exclusive services:\\n• Private Chef — personalized Belizean cuisine with fresh, seasonal ingredients\\n• Butler Service — impeccable, professional attention for your entire stay\\n• In-Villa Spa — massages and body treatments with the sound of the sea\\n• Babysitter — so you can relax or explore while your children are cared for\\n• Villa Bar — stocked with premium spirits (vodka, gin, rum, tequila), beer, sodas, and water\\n\\nContact reservations@itzanabelize.com to arrange.\"\n  },\n  {\n    \"id\": \"itz_penthouse_2hab\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"alojamientos\",\n    \"tags\": [\"penthouse\", \"2 bedrooms\", \"2 habitaciones\", \"pool view\", \"vista piscina\", \"287 metros\", \"chef kitchen\", \"top floor\"],\n    \"pregunta\": \"¿Cómo es el penthouse de 2 habitaciones? / Tell me about the 2-bedroom penthouse\",\n    \"respuesta\": \"Located on the top floor of the Resort Suites building, this 2-bedroom penthouse offers 287 sqm of beautifully designed interior and exterior space, including a chef's kitchen, integrated living and dining room, and a spacious terrace with a private pool and stunning views of the pool and Caribbean Sea.\\n\\nBook: https://reservations.itzanabelize.com/book/accommodations\"\n  },\n  {\n    \"id\": \"itz_penthouse_3hab\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"alojamientos\",\n    \"tags\": [\"penthouse\", \"3 bedrooms\", \"3 habitaciones\", \"sea view\", \"vista mar\", \"grupos\", \"familias\", \"parejas\", \"3.5 baños\", \"plunge pool\"],\n    \"pregunta\": \"¿Cómo es el penthouse de 3 habitaciones? / Tell me about the 3-bedroom penthouse\",\n    \"respuesta\": \"Situated on the hotel's top floor with Caribbean Sea views, this 3-bedroom penthouse is a luxury retreat for groups, families, or couples. It features 3 bedrooms, 3.5 bathrooms, an inspiring design, and a large terrace with a plunge pool and sweeping ocean views.\\n\\nBook: https://reservations.itzanabelize.com/book/accommodations\"\n  },\n  {\n    \"id\": \"itz_beachfront_suite\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"alojamientos\",\n    \"tags\": [\"beachfront suite\", \"suite\", \"king\", \"terraza privada\", \"sunset\", \"puesta de sol\", \"lujo\", \"luxury\"],\n    \"pregunta\": \"¿Cómo es la Beachfront Suite? / Tell me about the Beachfront Suite\",\n    \"respuesta\": \"Our Beachfront Suite features elegant decor and luxury details, a king bed, living and dining area, and a private wrap-around terrace on one of Belize's most beautiful beaches. Watch the sunset from the comfort of your suite.\\n\\nBook: https://reservations.itzanabelize.com/book/accommodations\"\n  },\n  {\n    \"id\": \"itz_deluxe_room\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"alojamientos\",\n    \"tags\": [\"deluxe room\", \"habitacion\", \"piscina\", \"poolside\", \"terraza\", \"sofa bed\", \"tranquila\", \"quiet\"],\n    \"pregunta\": \"¿Cómo es la Deluxe Room? / Tell me about the Deluxe Room\",\n    \"respuesta\": \"The Deluxe Room is a poolside oasis for guests seeking tranquility. These thoughtfully designed rooms feature luxury amenities, a private terrace with a sofa bed, right next to the resort's sparkling pool.\\n\\nBook: https://reservations.itzanabelize.com/book/accommodations\"\n  },\n  {\n    \"id\": \"itz_precios_reservas\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"alojamientos\",\n    \"tags\": [\"precio\", \"price\", \"cuanto cuesta\", \"how much\", \"tarifa\", \"rate\", \"costo\", \"noche\", \"night\", \"reservar\", \"book\", \"disponibilidad\", \"availability\"],\n    \"pregunta\": \"¿Cuánto cuesta la noche? / How much does a night cost? / How do I make a reservation?\",\n    \"respuesta\": \"Prices vary depending on the date, season, and accommodation type. To check real-time rates and availability and make a reservation, use our booking link: https://reservations.itzanabelize.com/book/accommodations\\n\\nFor personalized assistance, contact reservations@itzanabelize.com or WhatsApp +(501) 615-0674.\"\n  },\n  {\n    \"id\": \"itz_restaurante_limilia\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"restaurantes\",\n    \"tags\": [\"limilia\", \"restaurante\", \"restaurant\", \"comida\", \"food\", \"cena\", \"dinner\", \"almuerzo\", \"lunch\", \"desayuno\", \"breakfast\", \"menu\", \"garifuna\", \"seafood\", \"mariscos\"],\n    \"pregunta\": \"¿Qué es Limilia Restaurant? / Tell me about Limilia Restaurant\",\n    \"respuesta\": \"Limilia Restaurant celebrates fresh Caribbean flavors with a nod to the Garifuna people of Belize. Seasonal, seafood-based cuisine highlights locally sourced ingredients — vegetables and herbs from our organic farm, fresh catch by our own fishermen. Dine with a relaxing view of the pool and beach.\\n\\n• Breakfast menu: https://www.itzanabelize.com/es/ResourceFiles/restaurant-pdf-menus/breakfast-menu-compressed.pdf\\n• Lunch menu: https://www.itzanabelize.com/es/ResourceFiles/restaurant-pdf-menus/lunch-menu.pdf\\n• Dinner menu: https://www.itzanabelize.com/es/ResourceFiles/restaurant-pdf-menus/limilia-dinner.pdf\\n• Wine & cocktail menu: https://www.itzanabelize.com/es/ResourceFiles/restaurant-pdf-menus/limilia-wine.pdf\\n\\nReservations: concierge@itzanabelize.com or +(501) 610-1329\"\n  },\n  {\n    \"id\": \"itz_restaurante_nadu\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"restaurantes\",\n    \"tags\": [\"nadu\", \"popup\", \"pop-up\", \"experiencia\", \"experience\", \"grupos\", \"groups\", \"arbol\", \"tree\", \"garifuna\", \"sostenible\", \"sustainable\", \"parrilla\", \"grill\", \"organico\"],\n    \"pregunta\": \"¿Qué es Nadu? / What is Nadu restaurant?\",\n    \"respuesta\": \"Nadu (meaning 'tree' in Garifuna) is our exclusive pop-up dining experience under the trees, beachside. Sustainable cuisine with fresh, organic, seasonal ingredients — a farm-to-table concept. The menu changes daily based on local produce.\\n\\nAvailable for groups of 15 or more. Advance reservation required.\\nContact: concierge@itzanabelize.com or +(501) 610-1329\"\n  },\n  {\n    \"id\": \"itz_bares_y_lounges\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"restaurantes\",\n    \"tags\": [\"bar\", \"biblio\", \"luna\", \"pool bar\", \"rum room\", \"ron\", \"rum\", \"cocktails\", \"cocteles\", \"bebidas\", \"drinks\", \"lounge\", \"piscina\"],\n    \"pregunta\": \"¿Qué bares y lounges tienen? / What bars and lounges do you have?\",\n    \"respuesta\": \"Itz'ana has several bars and lounges:\\n• Biblio Bar — craft cocktails, wine, beer, and delicious snacks\\n• Luna Bar — craft cocktails, wine, beer in a casual atmosphere. Menu: https://www.itzanabelize.com/es/ResourceFiles/restaurant-pdf-menus/luna-bar.pdf\\n• Pool Bar — refreshing cocktails, tropical drinks, cold beers, wine. Menu: https://www.itzanabelize.com/es/ResourceFiles/restaurant-pdf-menus/lunch-menu.pdf\\n• Rum Room — Caribbean and Central American rums curated by our sommelier in the Great House\\n• Private Owner's Lounge — exclusive for residents and their guests\"\n  },\n  {\n    \"id\": \"itz_actividades_overview\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"actividades\",\n    \"tags\": [\"actividades\", \"activities\", \"excursiones\", \"tours\", \"adventures\", \"aventuras\", \"que hacer\", \"things to do\", \"snorkel\", \"buceo\", \"diving\", \"pesca\", \"fishing\", \"jungle\", \"selva\", \"mayas\", \"tirolesa\"],\n    \"pregunta\": \"¿Qué actividades y excursiones ofrecen? / What activities and excursions do you offer?\",\n    \"respuesta\": \"Itz'ana is the perfect base for Belizean adventures:\\n• Snorkeling and diving at the world's second-largest barrier reef\\n• Deep-sea and fly fishing\\n• Wildlife sanctuary night walks (jaguar spotting)\\n• Zip-lining through the jungle canopy\\n• Ancient Maya site explorations\\n• Sunset cruise on the Placencia Lagoon\\n• Cacao farm tours\\n• Sailing on pristine Caribbean waters\\n\\nSee all beach adventures: https://www.itzanabelize.com/es/aventuras?adv=aventuras-y-excursiones-en-la-playa\\nPackages & promotions: https://www.itzanabelize.com/es/especiales-paquetes?sp=Promociones\"\n  },\n  {\n    \"id\": \"itz_marina\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"actividades\",\n    \"tags\": [\"marina\", \"boat\", \"bote\", \"muelle\", \"dock\", \"nautico\", \"water sports\", \"deportes acuaticos\", \"18 muelles\", \"18 docks\", \"combustible\", \"fuel\"],\n    \"pregunta\": \"¿Tienen marina? / Do you have a marina?\",\n    \"respuesta\": \"Yes! Itz'ana has a full-service marina with 18 boat slips, a water sports activity center, fuel station, and supply store. It's the perfect base for fishing trips, diving, snorkeling, and sailing excursions.\\n\\nContact concierge@itzanabelize.com or +(501) 610-1329 for marina and activity bookings.\"\n  },\n  {\n    \"id\": \"itz_spa\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"actividades\",\n    \"tags\": [\"spa\", \"masaje\", \"massage\", \"tratamiento\", \"treatment\", \"wellness\", \"bienestar\", \"relajacion\", \"relax\", \"yoga\", \"terraza yoga\"],\n    \"pregunta\": \"¿Qué servicios de spa y bienestar tienen? / What spa and wellness services do you offer?\",\n    \"respuesta\": \"Itz'ana Spa offers massages and body treatments by professional therapists — inside the spa or in your villa with the sound of the sea. We also have a yoga terrace with panoramic ocean and peninsula views.\\n\\nTo book spa treatments, contact: concierge@itzanabelize.com or +(501) 610-1329\"\n  },\n  {\n    \"id\": \"itz_paquetes_promociones\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"actividades\",\n    \"tags\": [\"paquetes\", \"packages\", \"promociones\", \"promotions\", \"ofertas\", \"deals\", \"especiales\", \"specials\", \"romance\", \"aventura\", \"adventure\", \"relajacion\"],\n    \"pregunta\": \"¿Tienen paquetes o promociones especiales? / Do you have special packages or promotions?\",\n    \"respuesta\": \"Yes! Itz'ana offers curated packages designed to inspire relaxation, romance, and adventure — from couples' escapes to family adventures.\\n\\nSee all current packages and promotions: https://www.itzanabelize.com/es/especiales-paquetes?sp=Promociones\\n\\nFor personalized quotes, contact reservations@itzanabelize.com\"\n  },\n  {\n    \"id\": \"itz_bodas_eventos_overview\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"bodas_eventos\",\n    \"tags\": [\"boda\", \"wedding\", \"evento\", \"event\", \"celebracion\", \"celebration\", \"reunion\", \"meeting\", \"venue\", \"espacios\", \"ceremony\"],\n    \"pregunta\": \"¿Hacen bodas y eventos especiales? / Do you host weddings and special events?\",\n    \"respuesta\": \"Itz'ana Resort & Residences is an exclusive, sophisticated setting for weddings and special events. We offer multiple stunning venues, personalized services, and even Mayan shaman ceremonies.\\n\\nVenues available:\\n• Limilia Deck — outdoor, garden & sea views, up to 122 guests\\n• The Great House — elegant indoor space, up to 150 guests\\n• Yoga Deck — elevated, panoramic ocean views, up to 70 guests (intimate ceremonies)\\n• Private Beach — Caribbean backdrop, up to 150 guests\\n\\nTo start planning: https://www.itzanabelize.com/es/bodas-eventos/empiece-a-planificar\\nEvents calendar: https://www.itzanabelize.com/events\\nFor quotes, contact: reservations@itzanabelize.com or +813-567-1059\"\n  },\n  {\n    \"id\": \"itz_bodas_espacios\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"bodas_eventos\",\n    \"tags\": [\"espacios\", \"venues\", \"limilia deck\", \"great house\", \"yoga deck\", \"playa privada\", \"private beach\", \"capacidad\", \"capacity\", \"invitados\", \"guests\", \"ceremonia\"],\n    \"pregunta\": \"¿Cuáles son los espacios para eventos y cuántas personas caben?\",\n    \"respuesta\": \"Itz'ana event venues:\\n• Limilia Deck — outdoor, garden/sea views, max 122 guests. Great for open-air dinners and receptions.\\n• The Great House — elegant indoor space, max 150 guests. Ideal for formal events and large receptions.\\n• Yoga Deck — elevated, panoramic ocean + peninsula views, max 70 guests. Perfect for intimate ceremonies.\\n• Private Beach — Caribbean Sea backdrop, max 150 guests. Unique open-air celebration on the sand.\\n\\nMost common spaces: Playa and Limilia area, capacity up to 160–200 guests combined.\\n\\nNote: The resort does not provide its own furniture/equipment — chairs, linens, sound systems must be rented from external suppliers (the resort can recommend trusted vendors).\"\n  },\n  {\n    \"id\": \"itz_bodas_catering\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"bodas_eventos\",\n    \"tags\": [\"catering\", \"buffet\", \"menu evento\", \"comida evento\", \"almuerzo\", \"cena\", \"lunch\", \"dinner\", \"mediterraneo\", \"american\", \"grill\", \"caribbean\", \"grupos\"],\n    \"pregunta\": \"¿Qué opciones de catering tienen para eventos? / What catering options do you have for events?\",\n    \"respuesta\": \"Itz'ana offers 4 buffet options for events (30–100 guests), priced per person (taxes and service charges not included):\\n\\n• Mediterranean Buffet — fresh salads, ceviches, soups, Mediterranean-inspired mains\\n• Classic American Buffet — salads, sushi, soups, quality American-style cuts\\n• Meet & Grill Buffet — grilled meats and seafood, bold flavors, asado style\\n• Caribbean Vibes Buffet — local Caribbean flavors, tropical fruits, fresh seafood\\n\\nFor pricing and availability, contact reservations@itzanabelize.com\"\n  },\n  {\n    \"id\": \"itz_bodas_open_bar\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"bodas_eventos\",\n    \"tags\": [\"open bar\", \"barra abierta\", \"bebidas evento\", \"event drinks\", \"licores\", \"spirits\", \"precio barra\", \"bar price\", \"relax\", \"deluxe\", \"premium\", \"por hora\", \"per hour\"],\n    \"pregunta\": \"¿Tienen servicio de barra abierta para eventos? / Do you offer open bar service for events?\",\n    \"respuesta\": \"Yes! Three open bar tiers available (priced per person per hour):\\n\\n• Relax Open Bar — Stolichnaya, Absolut, Beefeater Gin. Starting from USD $32/person/hour.\\n• Deluxe Open Bar — Ketel One, Titos Vodka, Bombay. Premium pricing per hours contracted.\\n• Premium Open Bar — Belvedere, Grey Goose, Zacapa 23. Luxury pricing.\\n\\nExtra hourly charges apply. Corkage fee available if you bring your own wine/champagne.\\n\\nFor a detailed quote, contact reservations@itzanabelize.com\"\n  },\n  {\n    \"id\": \"itz_bodas_contacto\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"bodas_eventos\",\n    \"tags\": [\"contacto eventos\", \"event contact\", \"cotizacion\", \"quote\", \"planificar boda\", \"plan wedding\", \"mr diego\", \"diego\", \"coordinador\", \"coordinator\", \"chamán\", \"mayan shaman\"],\n    \"pregunta\": \"¿Con quién contacto para organizar un evento o boda? / Who do I contact to plan a wedding or event?\",\n    \"respuesta\": \"To get a quote or start planning your event or wedding, contact our events team:\\n\\n📧 reservations@itzanabelize.com\\n📞 +813-567-1059\\n📱 WhatsApp: +(501) 615-0674\\n\\nStart planning online: https://www.itzanabelize.com/es/bodas-eventos/empiece-a-planificar\\n\\nWe also offer unique Mayan shaman ceremonies, customizable to your beliefs and preferences.\"\n  },\n  {\n    \"id\": \"itz_ubicacion\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"ubicacion_logistica\",\n    \"tags\": [\"ubicacion\", \"location\", \"donde estan\", \"where are you\", \"direccion\", \"address\", \"placencia\", \"belize\", \"stann creek\", \"mile 20\", \"peninsula\"],\n    \"pregunta\": \"¿Dónde están ubicados? / Where is Itz'ana located?\",\n    \"respuesta\": \"Itz'ana Resort & Residences is located on the Placencia Peninsula, Stann Creek District, southeast Belize.\\n\\nAddress: Mile 20 Placencia Road, Placencia, Stann Creek District, Belize\\n\\nThe resort is 20 minutes from Placencia Village and 3.5 hours by car from Belize City and Philip S.W. Goldson International Airport.\"\n  },\n  {\n    \"id\": \"itz_como_llegar\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"ubicacion_logistica\",\n    \"tags\": [\"como llegar\", \"how to get there\", \"vuelo\", \"flight\", \"bus\", \"tierra\", \"land\", \"barco\", \"boat\", \"sea\", \"aeropuerto\", \"airport\", \"goldson\", \"placencia airstrip\", \"shuttle\"],\n    \"pregunta\": \"¿Cómo llegar a Itz'ana? / How do I get to Itz'ana?\",\n    \"respuesta\": \"You can reach Itz'ana by land, air, or sea:\\n\\n• By Land: 3.5 hours drive from Belize City and Philip S.W. Goldson International Airport.\\n• By Air: Domestic flight to Placencia Airstrip (short drive to the resort). Several airlines offer connections from Belize City.\\n• By Sea: Scenic arrival by boat.\\n\\nComplimentary bikes are available for exploring the Placencia Peninsula once you arrive.\"\n  },\n  {\n    \"id\": \"itz_transporte_local\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"ubicacion_logistica\",\n    \"tags\": [\"shuttle\", \"transporte\", \"transport\", \"golf cart\", \"taxi\", \"cab\", \"maya beach\", \"placencia village\", \"bicicleta\", \"bike\", \"movilidad\", \"getting around\"],\n    \"pregunta\": \"¿Tienen shuttles, golf carts o taxis? / Do you have shuttles, golf carts, or taxis?\",\n    \"respuesta\": \"• Shuttles to Maya Beach and Placencia Village — available (schedule may vary, confirm with our concierge upon arrival).\\n• Golf carts — available for rent (pricing provided by our team).\\n• Taxis — our concierge can arrange for you.\\n• Complimentary bikes — free to use for exploring the peninsula.\\n\\nContact concierge@itzanabelize.com or +(501) 610-1329 to arrange transportation.\"\n  },\n  {\n    \"id\": \"itz_contacto_general\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"contacto\",\n    \"tags\": [\"contacto\", \"contact\", \"telefono\", \"phone\", \"email\", \"whatsapp\", \"reservaciones\", \"reservations\", \"concierge\", \"reach us\", \"comunicarse\"],\n    \"pregunta\": \"¿Cómo puedo contactar al resort? / How can I contact Itz'ana?\",\n    \"respuesta\": \"You can reach Itz'ana Resort & Residences through:\\n\\n📧 Reservations: reservations@itzanabelize.com\\n📧 Concierge / Restaurant / Adventures: concierge@itzanabelize.com\\n📧 Partnerships & PR: partnerships@itzanabelize.com\\n📞 Main: +813-567-1059\\n📱 WhatsApp: +(501) 615-0674\\n📞 Belize local: +501-523-3250\\n📞 Restaurant Limilia / Adventures: +(501) 610-1329\\n🌐 Website: www.itzanabelize.com\"\n  },\n  {\n    \"id\": \"itz_empleo\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"politicas_faq\",\n    \"tags\": [\"empleo\", \"employment\", \"trabajo\", \"job\", \"vacancy\", \"vacante\", \"bartender\", \"server\", \"housekeeping\", \"staff\", \"hiring\", \"contratar\"],\n    \"pregunta\": \"¿Tienen vacantes de trabajo? / Do you have job openings?\",\n    \"respuesta\": \"For current job openings at Itz'ana Resort & Residences, please check our official website at www.itzanabelize.com or contact our HR department directly at reservations@itzanabelize.com.\\n\\nOur team will be happy to share information about current opportunities.\"\n  },\n  {\n    \"id\": \"itz_colaboraciones_pr\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"politicas_faq\",\n    \"tags\": [\"colaboracion\", \"collaboration\", \"partnership\", \"influencer\", \"pr\", \"press\", \"prensa\", \"media\", \"content creator\", \"creador\", \"propuesta\", \"proposal\", \"redes sociales\"],\n    \"pregunta\": \"¿Trabajan con influencers o colaboraciones? / Do you work with influencers or collaborations?\",\n    \"respuesta\": \"Yes! Itz'ana is open to creative partnerships and media collaborations. Please send your proposal to our partnerships team:\\n\\n📧 partnerships@itzanabelize.com\\n\\nInclude details about your project and how you'd like to work together. Our team will review and get back to you.\"\n  },\n  {\n    \"id\": \"itz_mascotas\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"politicas_faq\",\n    \"tags\": [\"mascotas\", \"pets\", \"perro\", \"dog\", \"gato\", \"cat\", \"animales\", \"animals\", \"pet friendly\", \"pet policy\"],\n    \"pregunta\": \"¿Aceptan mascotas? / Are you pet friendly?\",\n    \"respuesta\": \"⚠️ DATO PENDIENTE — Our pet policy is currently being confirmed with the hotel team. For the most accurate information about bringing pets, please contact us directly:\\n\\n📧 reservations@itzanabelize.com\\n📱 WhatsApp: +(501) 615-0674\\n\\nOur team will be happy to clarify the current policy for your stay.\"\n  },\n  {\n    \"id\": \"itz_all_inclusive\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"politicas_faq\",\n    \"tags\": [\"all inclusive\", \"todo incluido\", \"incluye\", \"includes\", \"what is included\", \"que incluye\"],\n    \"pregunta\": \"¿Son todo incluido? / Are you all-inclusive?\",\n    \"respuesta\": \"No, Itz'ana Resort & Residences is not an all-inclusive property. Accommodation is booked separately, and dining, spa treatments, and activities are offered à la carte.\\n\\nHowever, we do offer curated packages that bundle accommodation with experiences. Check our promotions: https://www.itzanabelize.com/es/especiales-paquetes?sp=Promociones\"\n  },\n  {\n    \"id\": \"itz_amenidades_resort\",\n    \"propiedad\": \"ITZ\",\n    \"categoria\": \"resort\",\n    \"tags\": [\"amenidades\", \"amenities\", \"instalaciones\", \"facilities\", \"piscina\", \"pool\", \"playa\", \"beach\", \"jardín orgánico\", \"organic garden\", \"tienda\", \"shop\", \"que tiene\", \"what does it have\"],\n    \"pregunta\": \"¿Qué instalaciones y amenidades tiene el resort? / What facilities does the resort have?\",\n    \"respuesta\": \"Itz'ana Resort & Residences features:\\n• Private white-sand beach\\n• Outdoor swimming pool\\n• Full-service marina with 18 boat slips and water sports center\\n• Itz'ana Spa\\n• Yoga terrace with ocean views\\n• Organic garden (fresh herbs and vegetables for the kitchen)\\n• The Shop at Itz'ana — exclusive clothing and resort boutique\\n• Multiple restaurants and bars (Limilia, Nadu, Biblio Bar, Luna Bar, Pool Bar, Rum Room)\\n• Private Owner's Lounge\"\n  }\n]",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        32,
+        -16
+      ],
+      "id": "49c3c59c-50c9-4aa4-bdb2-e594f574e070",
+      "name": "LISTA de CHUNKS"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        -16
+      ],
+      "id": "3848e77b-d57a-482d-b8fd-f4bd7c67c95d",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "chunks",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        272,
+        -16
+      ],
+      "id": "1497a09c-590f-4894-a817-ca6749d10814",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "mongoCollection": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "embedding": "itzana_embedding",
+        "vectorIndexName": "itzana_vector_index",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreMongoDBAtlas",
+      "typeVersion": 1.3,
+      "position": [
+        544,
+        -16
+      ],
+      "id": "5ce78ed0-23aa-4c27-b48f-88e406675365",
+      "name": "MongoDB Atlas Vector Store CHUNKS",
+      "credentials": {
+        "mongoDb": {
+          "id": "Msw0gTK8f8b192VX",
+          "name": "HOTELS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.pregunta }}. {{ $json.respuesta }}",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "id",
+                "value": "={{ $json.id }}"
+              },
+              {
+                "name": "categoria",
+                "value": "={{ $json.categoria }}"
+              },
+              {
+                "name": "tags",
+                "value": "={{ $json.tags }}"
+              },
+              {
+                "name": "pregunta",
+                "value": "={{ $json.pregunta }}"
+              },
+              {
+                "name": "respuesta",
+                "value": "={{ $json.respuesta }}"
+              },
+              {
+                "name": "propiedad",
+                "value": "={{ $json.propiedad }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        688,
+        208
+      ],
+      "id": "31be386d-fcef-4d65-bd22-80e148d4c724",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        512,
+        208
+      ],
+      "id": "ea6548d5-2400-45b4-993c-e48080d4624a",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "LtzIKoi61tZvaeua",
+          "name": "Vectorizer Agent - Knowledge Bases"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "LISTA de CHUNKS": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "LISTA de CHUNKS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "MongoDB Atlas Vector Store CHUNKS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "MongoDB Atlas Vector Store CHUNKS",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "MongoDB Atlas Vector Store CHUNKS",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"
+  }
+}
