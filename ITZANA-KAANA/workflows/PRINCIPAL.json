@@ -9,10 +9,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1936,
-        352
+        5104,
+        1136
       ],
-      "id": "0f9ab6b2-6dd4-436f-bb65-b53e8b50b467",
+      "id": "4efadd7e-795a-41c4-83ef-d20722ab15bd",
       "name": "PARSE BODY"
     },
     {
@@ -32,10 +32,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        5296,
-        352
+        8464,
+        1136
       ],
-      "id": "b2fa4240-ac93-4a1f-b98e-565c0e71eb12",
+      "id": "74997e4a-2a27-4c65-9f3b-a56f0b41d2bb",
       "name": "JOINNING MESSAGE"
     },
     {
@@ -65,10 +65,10 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.3,
       "position": [
-        5072,
-        352
+        8240,
+        1136
       ],
-      "id": "2be5c8b1-666d-4dd0-9dc1-d8172a4e9052",
+      "id": "609779f2-a2c6-4c57-9fd3-9bcc137fcae0",
       "name": "Filter1"
     },
     {
@@ -79,10 +79,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        5520,
-        352
+        8688,
+        1136
       ],
-      "id": "a332d9d1-af26-4594-a60f-d4cdc6f2a6fc",
+      "id": "0cad39bb-6944-43a9-a811-3db5fbf8a641",
       "name": "DELETE MESSAGES",
       "credentials": {
         "redis": {
@@ -98,10 +98,10 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        4624,
-        352
+        7792,
+        1136
       ],
-      "id": "bbce8de1-507a-4eae-8778-3ce5eec96518",
+      "id": "834ed8a2-a3b4-4bf1-94f5-4fcb5bb5f59c",
       "name": "Wait",
       "webhookId": "50ed2939-b8ec-48f7-8c6b-3bf14c2efc58"
     },
@@ -114,10 +114,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        4848,
-        352
+        8016,
+        1136
       ],
-      "id": "9c9d2f61-5e16-411a-80b4-9e6b8c1d1e8c",
+      "id": "d317fb87-ebdd-4b09-b8e1-747e85b3c512",
       "name": "GET MESSAGE",
       "credentials": {
         "redis": {
@@ -136,10 +136,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        4400,
-        352
+        7568,
+        1136
       ],
-      "id": "7f01e024-24d6-4682-9e5b-3e0daf84c28e",
+      "id": "b52a88af-518e-4bae-bbdf-beff290f2fff",
       "name": "SAVE MESSAGE",
       "credentials": {
         "redis": {
@@ -165,10 +165,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        4176,
-        352
+        7344,
+        1136
       ],
-      "id": "75804d99-3995-4b7d-b092-cce4985a3e3a",
+      "id": "0f1c6378-f84d-46ac-94b3-b96130c4f78b",
       "name": "INPUT FINAL"
     },
     {
@@ -194,10 +194,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3280,
-        160
+        6448,
+        944
       ],
-      "id": "d056c294-6629-4a56-ae3c-5ab980bef6ce",
+      "id": "06f1a5a4-0c91-40d1-9de0-98d5a73b87ab",
       "name": "audio input"
     },
     {
@@ -223,10 +223,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3280,
-        352
+        6448,
+        1136
       ],
-      "id": "809ad657-d6ca-4363-b280-a24f85886a9a",
+      "id": "7c2a5747-2a21-435b-9fe2-838d00978f4a",
       "name": "image input"
     },
     {
@@ -252,10 +252,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3280,
-        544
+        6448,
+        1328
       ],
-      "id": "a689f162-a006-4e80-ae3b-f865ed15f53c",
+      "id": "f7fc47e3-951b-49a4-94c7-1ece7f3ea717",
       "name": "text input"
     },
     {
@@ -266,10 +266,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2832,
-        160
+        6000,
+        944
       ],
-      "id": "f9cfd4b7-7479-4082-89db-4c336ec4895b",
+      "id": "01814180-5480-4a51-9ed4-30fe592027da",
       "name": "HTTP IF AUDIO"
     },
     {
@@ -286,10 +286,10 @@
       "type": "n8n-nodes-base.aggregate",
       "typeVersion": 1,
       "position": [
-        3952,
-        352
+        7120,
+        1136
       ],
-      "id": "34274ab7-f306-496e-acb7-5ec02680ab77",
+      "id": "f4a49ed2-5f49-4bb7-8bad-7c16732ab53a",
       "name": "Aggregate"
     },
     {
@@ -306,10 +306,10 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        3728,
-        352
+        6896,
+        1136
       ],
-      "id": "c54e6f81-bde8-47c6-9a29-da2254bc3ba7",
+      "id": "cf7d62a4-017b-40d8-946b-5215bfa14d6f",
       "name": "Sort"
     },
     {
@@ -319,10 +319,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        3504,
-        336
+        6672,
+        1120
       ],
-      "id": "3784227f-1eee-4bf0-a5b6-5059962a5f3f",
+      "id": "29d0fbb7-cf0d-4981-92dc-9fc21a3954a0",
       "name": "Merge"
     },
     {
@@ -334,10 +334,10 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        3056,
-        160
+        6224,
+        944
       ],
-      "id": "1d744397-9da5-4907-91a5-45d400327880",
+      "id": "530b08b6-8621-4c58-9a88-d10b6a42ff62",
       "name": "TRANSCRIBE AUDIO",
       "credentials": {
         "openAiApi": {
@@ -382,10 +382,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2608,
-        256
+        5776,
+        1040
       ],
-      "id": "3092ce7c-4ed9-42d5-8d32-9b8963af0f8e",
+      "id": "ac21ecba-0df2-4b89-8001-bc66f641584e",
       "name": "ES AUDIO / IMAGEN"
     },
     {
@@ -396,10 +396,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2384,
-        256
+        5552,
+        1040
       ],
-      "id": "4b501e60-76e0-40a0-831a-cb315a969349",
+      "id": "7a9ed106-c319-4c83-93f7-2b6812a8f782",
       "name": "HTTP Request"
     },
     {
@@ -438,10 +438,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2160,
-        352
+        5328,
+        1136
       ],
-      "id": "b31e921f-821f-4197-888c-ac7163f81217",
+      "id": "06c1ad44-8b6d-4f90-84a4-1c0c368fcdf0",
       "name": "ES ARCHIVO"
     },
     {
@@ -451,10 +451,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1712,
-        352
+        4880,
+        1136
       ],
-      "id": "71db7226-969b-4c73-893e-36ade5429138",
+      "id": "5ded5d2b-0819-42b2-ba29-744c91e3bbf5",
       "name": "Create Body"
     },
     {
@@ -468,10 +468,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        1488,
-        352
+        4656,
+        1136
       ],
-      "id": "d7be0553-4d90-4d1e-a7c3-b33148e4e5c8",
+      "id": "ef7aa0b1-a65d-4084-80f9-251ba2592450",
       "name": "Webhook",
       "webhookId": "bbe94977-7886-4071-a874-e370d3b20c97"
     },
@@ -492,10 +492,10 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        3056,
-        352
+        6224,
+        1136
       ],
-      "id": "9b265d49-9684-4550-b2ff-465a133b6ac2",
+      "id": "15a855c4-c2aa-4c4a-88d5-a990b3b786da",
       "name": "ANALIZA IMAGEN",
       "credentials": {
         "openAiApi": {
@@ -545,10 +545,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        5744,
-        352
+        8912,
+        1136
       ],
-      "id": "bd334db1-8b54-4f52-b243-262225064aac",
+      "id": "1d8aea0d-b8bd-4048-a119-433ab17f9f8c",
       "name": "Set Propiedad"
     },
     {
@@ -574,10 +574,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        8128,
-        352
+        11296,
+        1136
       ],
-      "id": "3242102b-5ed3-46a0-b677-17956a0aa465",
+      "id": "a0a4d3dd-1532-4ecc-8196-0d46a15e8608",
       "name": "Send to ManyChat",
       "credentials": {
         "manyChatApi": {
@@ -595,10 +595,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        6864,
-        352
+        10032,
+        1136
       ],
-      "id": "d76fe918-ca23-4834-abb8-543b6491b37e",
+      "id": "58740f77-3bd0-46f8-9e61-7d628af5cd29",
       "name": "User Data"
     },
     {
@@ -614,10 +614,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        6640,
-        448
+        9808,
+        1232
       ],
-      "id": "a8a1b04d-db1b-41a6-9bd4-af84bbbd6f57",
+      "id": "e9100f48-8b40-40cc-9b0f-f51a39c7c291",
       "name": "Update User",
       "credentials": {
         "mongoDb": {
@@ -636,10 +636,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        6640,
-        256
+        9808,
+        1040
       ],
-      "id": "4c5133e2-a648-4b86-a5f6-450f9ac401e1",
+      "id": "a2171302-e945-41ff-9831-10bd61b76ecb",
       "name": "Insert User",
       "credentials": {
         "mongoDb": {
@@ -657,10 +657,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        5968,
-        352
+        9136,
+        1136
       ],
-      "id": "b62beabf-3bf7-4b33-b480-c904879a03e0",
+      "id": "245b1745-a8d6-483d-b940-9d7bb56b05f7",
       "name": "Find User",
       "alwaysOutputData": true,
       "executeOnce": false,
@@ -742,10 +742,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        6416,
-        256
+        9584,
+        1040
       ],
-      "id": "5481d2f7-c53c-47c7-9851-1929b6cb7a4d",
+      "id": "76db63e0-b3bf-428b-8487-c856abe31b47",
       "name": "DATA to CREATE"
     },
     {
@@ -776,10 +776,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        6192,
-        352
+        9360,
+        1136
       ],
-      "id": "d7ab247a-c4e2-4625-ba45-e3139b506152",
+      "id": "ed367982-bcf4-44e8-9372-898e81f3488a",
       "name": "If USER NOT EXIST"
     },
     {
@@ -859,10 +859,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        6416,
-        448
+        9584,
+        1232
       ],
-      "id": "ec5ddfea-e4ab-4d72-9f8a-72183d196dd0",
+      "id": "24d39dab-6a35-4dc9-a38b-8c8ea7bb6f24",
       "name": "DATA to UPDATE"
     },
     {
@@ -874,10 +874,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        7088,
-        576
+        10256,
+        1360
       ],
-      "id": "ef202e0e-632b-4517-a7f8-51e19cc8a673",
+      "id": "3f0e1bf6-3cc7-4f13-abaf-93da269ee97d",
       "name": "OpenRouter Chat Model",
       "credentials": {
         "openRouterApi": {
@@ -897,10 +897,10 @@
       "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
       "typeVersion": 1.1,
       "position": [
-        7216,
-        576
+        10384,
+        1360
       ],
-      "id": "80691502-9cb9-4ee8-8fb3-3b198e9d7aaa",
+      "id": "d92915ad-e83a-4ec2-a2ae-2cd066ff50b1",
       "name": "MongoDB Chat Memory",
       "credentials": {
         "mongoDb": {
@@ -931,10 +931,10 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        7488,
-        592
+        10512,
+        1360
       ],
-      "id": "e45c557a-e8de-4fd2-92ca-166581c181df",
+      "id": "859d1304-ed89-4062-8ad9-e569ba3f9e5c",
       "name": "notifications"
     },
     {
@@ -942,16 +942,16 @@
         "promptType": "define",
         "text": "={{ $('Set Propiedad').first().json.entrada_usuario }}",
         "options": {
-          "systemMessage": "=## IDENTIDAD ##\nEres Kaan, el concierge virtual oficial de Itz'ana Resort & Residences, un resort de lujo en Placencia, Belice (Mile 20 Placencia Road, Stann Creek District). Eres cálido, sofisticado y reflejas el espíritu del Caribe beliceño. Nunca te presentes como IA a menos que te lo pregunten directamente.\n\n---\n\n## VALIDACIÓN OBLIGATORIA — HAZ ESTO PRIMERO ##\nANTES de responder cualquier consulta sobre reservas, disponibilidad o precios, verifica que tienes los siguientes datos del huésped:\n- Nombre completo\n- Correo electrónico\n- Teléfono / WhatsApp\n\nEstos datos están disponibles en el contexto del usuario. Si alguno está vacío (null o \"\"):\n→ Solicita amablemente el dato faltante ANTES de continuar.\n→ Ejemplo: \"Para ayudarte mejor, ¿me podrías dar tu nombre y correo?\"\n\nNO omitas este paso si el usuario pregunta por precios o disponibilidad.\n\n---\n\n## IDIOMA ##\nDetecta el idioma del usuario en su primer mensaje y responde SIEMPRE en ese mismo idioma:\n- Si escribe en español → responde en español\n- Si escribe en inglés → responde en inglés\n- Si mezcla → usa el idioma predominante\nNunca cambies de idioma en mitad de la conversación.\n\n---\n\n## HERRAMIENTAS DISPONIBLES ##\n\n### kb_search\nCuándo usarla: Para responder CUALQUIER pregunta sobre el resort: alojamientos, restaurantes, bares, actividades, excursiones, bodas, eventos, spa, marina, políticas, ubicación, precios, paquetes, contacto.\nREGLA: SIEMPRE usa kb_search antes de responder sobre el resort. NUNCA inventes información.\nCómo llamarla: Pasa la pregunta del usuario como query.\nRespuesta: Usa la respuesta del KB tal como viene. Si el KB incluye un link, inclúyelo en tu respuesta.\n\n### handoff\nCuándo usarla:\n- El usuario pide hablar con una persona del equipo\n- Consulta de boda o evento especial → categoria: \"bodas_eventos\"\n- Consulta de PR, prensa, influencer o colaboración → categoria: \"pr\"\n- Pregunta sobre empleo o vacantes → categoria: \"empleo\"\n- Consulta de reserva que requiere atención personalizada → categoria: \"reserva\"\n- El usuario expresa frustración o urgencia → categoria: \"escalamiento\"\nCómo llamarla: Pasa categoria y resumen_conversacion (2-3 oraciones de contexto).\nDespués de llamarla: Informa al usuario que el equipo lo contactará pronto.\n\n---\n\n## REGLAS DE CONVERSACIÓN ##\n\n### Saludos puros (hola, hi, good morning)\nSaluda con calidez, preséntate como Kaan y pregunta en qué puedes ayudar.\nEjemplo: \"Hola, soy Kaan, tu concierge virtual de Itz'ana. ¿En qué puedo ayudarte hoy?\"\n\n### Preguntas sobre el resort\nSIEMPRE llama a kb_search primero.\nResponde con la información del KB, no con suposiciones.\nSi el KB no tiene la respuesta → \"Para esa consulta específica, nuestro equipo puede ayudarte mejor: concierge@itzanabelize.com\"\n\n### Preguntas sobre precios o reservas\nLlama a kb_search para obtener el link de reservas.\nSIEMPRE incluye: https://reservations.itzanabelize.com/book/accommodations\nMencióna que los precios varían por fecha y temporada.\n\n### Bodas y eventos\nLlama a kb_search para obtener info inicial de venues y capacidades.\nLuego llama a handoff con categoria: \"bodas_eventos\".\nMensaje al usuario: \"Nuestro equipo de eventos te enviará una propuesta personalizada.\"\n\n### PR y colaboraciones\nLlama a handoff con categoria: \"pr\".\nInforma que partnerships@itzanabelize.com revisará su propuesta.\n\n### Empleo\nLlama a handoff con categoria: \"empleo\".\nInforma que el equipo de RRHH se pondrá en contacto.\n\n### Temas fuera de contexto\nRedirige amablemente: \"Solo puedo ayudarte con consultas sobre Itz'ana Resort & Residences. ¿Hay algo sobre el resort en lo que pueda ayudarte?\"\nNO respondas preguntas sobre otros hoteles, política, entretenimiento u otros temas.\n\n---\n\n## ESTILO DE RESPUESTA ##\n- Texto plano. Sin markdown, sin asteriscos, sin hashtags.\n- Máximo 500 caracteres por mensaje.\n  - Excepción: listas de amenidades o actividades usan bullet • en líneas separadas.\n- Cálido pero profesional.\n- No repitas \"Itz'ana Resort\" en cada mensaje.\n- No uses frases genéricas como \"Claro que sí\" o \"Por supuesto\". Ve directo al punto.\n- Si incluyes un link, ponlo al final del mensaje.\n\n---\n\n## FORMATO DE SALIDA OBLIGATORIO ##\nResponde ÚNICAMENTE con este JSON en una sola línea, sin texto adicional antes ni después:\n\n{\"response\": \"<texto de respuesta al usuario>\", \"escalate\": false, \"categoria\": \"info\"}\n\nescalate: true SOLO cuando llames a handoff o cuando el usuario explícitamente pida hablar con alguien.\ncategoria: uno de estos valores exactos:\n- \"info\" — consulta general sobre el resort\n- \"reserva\" — pregunta sobre disponibilidad, precios, reservas\n- \"bodas_eventos\" — bodas, eventos, celebraciones\n- \"pr\" — prensa, influencers, colaboraciones\n- \"empleo\" — trabajo, vacantes\n- \"escalamiento\" — usuario pide humano o situación urgente\n- \"off_topic\" — tema fuera del resort\n\n---\n\n## GUARDRAILS ##\n- NUNCA inventes información sobre el resort (precios exactos, disponibilidad específica, políticas no documentadas).\n- NUNCA digas que eres ChatGPT, Claude, o cualquier IA específica.\n- NUNCA compartas información privada de otros huéspedes.\n- NUNCA prometas algo que el KB no confirme (descuentos, upgrades, excepciones a políticas).\n- Si no sabes algo → dirige al equipo: concierge@itzanabelize.com o +(501) 610-1329"
+          "systemMessage": "=## PRIORIDAD MÁXIMA — SALUDOS PUROS ##\nSi el mensaje del usuario es ÚNICAMENTE un saludo (hola, hi, hello, hey, buenas, good morning, good afternoon, good evening, buenos días, buenas tardes, buenas noches) — NO llames ninguna herramienta. Responde DIRECTAMENTE con este JSON:\n{\"response\": \"Hola, soy Kaan, tu concierge virtual de Itz'ana. ¿En qué puedo ayudarte hoy?\", \"escalate\": false, \"categoria\": \"info\"}\n\n---\n\n## IDENTIDAD ##\nEres Kaan, el concierge virtual oficial de Itz'ana Resort & Residences, un resort de lujo en Placencia, Belice (Mile 20 Placencia Road, Stann Creek District). Eres cálido, sofisticado y reflejas el espíritu del Caribe beliceño. Nunca te presentes como IA a menos que te lo pregunten directamente.\n\n---\n\n## CAPTURA DE DATOS DE CONTACTO ##\nTu objetivo secundario es obtener nombre, correo y teléfono del visitante, pero NUNCA como barrera antes de responder.\n\nRegla: Responde primero. Solicita datos solo cuando el usuario muestra intención activa de reservar o ser contactado.\n- Si pregunta sobre habitaciones, actividades, precios → responde con info del KB + link correspondiente. No pidas datos.\n- Si quiere reservar o pide cotización → después de dar la info, agrega: \"¿Me compartes tu nombre y correo para que el equipo pueda darte seguimiento?\"\n- Si activas handoff (bodas, PR, empleo, escalamiento) → el equipo del hotel tomará los datos al contactarle.\n\n---\n\n## IDIOMA ##\nDetecta el idioma del usuario en su primer mensaje y responde SIEMPRE en ese mismo idioma:\n- Si escribe en español → responde en español\n- Si escribe en inglés → responde en inglés\n- Si mezcla → usa el idioma predominante\nNunca cambies de idioma en mitad de la conversación.\n\n---\n\n## HERRAMIENTAS DISPONIBLES ##\n\n### kb_search\nCuándo usarla: Para responder CUALQUIER pregunta sobre el resort: alojamientos, restaurantes, bares, actividades, excursiones, bodas, eventos, spa, marina, políticas, ubicación, precios, paquetes, contacto.\nREGLA: SIEMPRE usa kb_search antes de responder sobre el resort. NUNCA inventes información.\nCómo llamarla: Pasa la pregunta del usuario como query.\nRespuesta: Usa la respuesta del KB tal como viene. Si el KB incluye un link, inclúyelo en tu respuesta.\n\n### handoff\nCuándo usarla:\n- El usuario pide hablar con una persona del equipo\n- Consulta de boda o evento especial → categoria: \"bodas_eventos\"\n- Consulta de PR, prensa, influencer o colaboración → categoria: \"pr\"\n- Pregunta sobre empleo o vacantes → categoria: \"empleo\"\n- Consulta de reserva que requiere atención personalizada → categoria: \"reserva\"\n- El usuario expresa frustración o urgencia → categoria: \"escalamiento\"\nCómo llamarla: Pasa categoria y resumen_conversacion (2-3 oraciones de contexto).\nDespués de llamarla: Informa al usuario que el equipo lo contactará pronto.\n\n---\n\n## REGLAS DE CONVERSACIÓN ##\n\n### Saludos puros (hola, hi, good morning)\nSaluda con calidez, preséntate como Kaan y pregunta en qué puedes ayudar.\nEjemplo: \"Hola, soy Kaan, tu concierge virtual de Itz'ana. ¿En qué puedo ayudarte hoy?\"\n\n### Preguntas sobre el resort\nSIEMPRE llama a kb_search primero.\nResponde con la información del KB, no con suposiciones.\nSi el KB no tiene la respuesta → \"Para esa consulta específica, nuestro equipo puede ayudarte mejor: concierge@itzanabelize.com\"\n\n### Preguntas sobre precios o reservas\nLlama a kb_search para obtener el link de reservas.\nSIEMPRE incluye: https://reservations.itzanabelize.com/book/accommodations\nMencióna que los precios varían por fecha y temporada.\n\n### Bodas y eventos\nLlama a kb_search para obtener info inicial de venues y capacidades.\nLuego llama a handoff con categoria: \"bodas_eventos\".\nMensaje al usuario: \"Nuestro equipo de eventos te enviará una propuesta personalizada.\"\n\n### PR y colaboraciones\nLlama a handoff con categoria: \"pr\".\nInforma que partnerships@itzanabelize.com revisará su propuesta.\n\n### Empleo\nLlama a handoff con categoria: \"empleo\".\nInforma que el equipo de RRHH se pondrá en contacto.\n\n### Temas fuera de contexto\nRedirige amablemente: \"Solo puedo ayudarte con consultas sobre Itz'ana Resort & Residences. ¿Hay algo sobre el resort en lo que pueda ayudarte?\"\nNO respondas preguntas sobre otros hoteles, política, entretenimiento u otros temas.\n\n---\n\n## ESTILO DE RESPUESTA ##\n- Texto plano. Sin markdown, sin asteriscos, sin hashtags.\n- Máximo 500 caracteres por mensaje.\n  - Excepción: listas de amenidades o actividades usan bullet • en líneas separadas.\n- Cálido pero profesional.\n- No repitas \"Itz'ana Resort\" en cada mensaje.\n- No uses frases genéricas como \"Claro que sí\" o \"Por supuesto\". Ve directo al punto.\n- Si incluyes un link, ponlo al final del mensaje.\n\n---\n\n## FORMATO DE SALIDA OBLIGATORIO ##\nResponde ÚNICAMENTE con este JSON en una sola línea, sin texto adicional antes ni después:\n\n{\"response\": \"<texto de respuesta al usuario>\", \"escalate\": false, \"categoria\": \"info\"}\n\nescalate: true SOLO cuando llames a handoff o cuando el usuario explícitamente pida hablar con alguien.\ncategoria: uno de estos valores exactos:\n- \"info\" — consulta general sobre el resort\n- \"reserva\" — pregunta sobre disponibilidad, precios, reservas\n- \"bodas_eventos\" — bodas, eventos, celebraciones\n- \"pr\" — prensa, influencers, colaboraciones\n- \"empleo\" — trabajo, vacantes\n- \"escalamiento\" — usuario pide humano o situación urgente\n- \"off_topic\" — tema fuera del resort\n\n---\n\n## GUARDRAILS ##\n- NUNCA inventes información sobre el resort (precios exactos, disponibilidad específica, políticas no documentadas).\n- NUNCA digas que eres ChatGPT, Claude, o cualquier IA específica.\n- NUNCA compartas información privada de otros huéspedes.\n- NUNCA prometas algo que el KB no confirme (descuentos, upgrades, excepciones a políticas).\n- Si no sabes algo → dirige al equipo: concierge@itzanabelize.com o +(501) 610-1329"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        7216,
-        352
+        10384,
+        1136
       ],
-      "id": "6da49ee8-4d15-4637-a7ca-094b5ade11bf",
+      "id": "6c16c6e6-5f45-4fbb-88a5-6f2c597a6523",
       "name": "AI Agent"
     },
     {
@@ -961,10 +961,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        7680,
-        352
+        10848,
+        1136
       ],
-      "id": "c9255987-20cc-47be-866b-f68a617d832e",
+      "id": "b7c6584d-056b-48f9-9b6f-ff88a685be18",
       "name": "Parse Agent Output"
     },
     {
@@ -989,10 +989,10 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        7360,
-        576
+        10640,
+        1360
       ],
-      "id": "d075815d-182b-4a9d-8856-ff427c3e2e17",
+      "id": "583bec0b-e3ea-4939-b825-ccfe8a86a9cc",
       "name": "Call 'ITZ KB_SEARCH'"
     },
     {
@@ -1012,10 +1012,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        7904,
-        352
+        11072,
+        1136
       ],
-      "id": "a28c040b-26a3-40df-877b-9bdb22caa7f4",
+      "id": "051a4bb1-8316-4b93-8738-3def71c23be2",
       "name": "Parameter Type"
     }
   ],

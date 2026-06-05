@@ -6,8 +6,11 @@
       },
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
-      "position": [-528, 336],
-      "id": "fd505af0-6273-4f5f-9f86-ec9241221f37",
+      "position": [
+        32,
+        1584
+      ],
+      "id": "fc8d1ff6-ab2f-446a-92e3-9b4e477b5606",
       "name": "START"
     },
     {
@@ -50,8 +53,11 @@
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [-304, 336],
-      "id": "1e0da7b1-006d-4f3a-b493-846862f7f791",
+      "position": [
+        256,
+        1584
+      ],
+      "id": "11f10e76-6046-4fc5-9210-576b65286d17",
       "name": "Set Context"
     },
     {
@@ -71,7 +77,10 @@
                     "id": "rule-bodas",
                     "leftValue": "={{ $json.categoria }}",
                     "rightValue": "bodas_eventos",
-                    "operator": { "type": "string", "operation": "equals" }
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
                   }
                 ],
                 "combinator": "and"
@@ -90,7 +99,10 @@
                     "id": "rule-pr",
                     "leftValue": "={{ $json.categoria }}",
                     "rightValue": "pr",
-                    "operator": { "type": "string", "operation": "equals" }
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
                   }
                 ],
                 "combinator": "and"
@@ -109,7 +121,10 @@
                     "id": "rule-empleo",
                     "leftValue": "={{ $json.categoria }}",
                     "rightValue": "empleo",
-                    "operator": { "type": "string", "operation": "equals" }
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
                   }
                 ],
                 "combinator": "and"
@@ -128,7 +143,10 @@
                     "id": "rule-escalamiento",
                     "leftValue": "={{ $json.categoria }}",
                     "rightValue": "escalamiento",
-                    "operator": { "type": "string", "operation": "equals" }
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
                   }
                 ],
                 "combinator": "and"
@@ -147,7 +165,10 @@
                     "id": "rule-reserva",
                     "leftValue": "={{ $json.categoria }}",
                     "rightValue": "reserva",
-                    "operator": { "type": "string", "operation": "equals" }
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
                   }
                 ],
                 "combinator": "and"
@@ -159,8 +180,11 @@
       },
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
-      "position": [-80, 288],
-      "id": "2ccc1f91-be36-45aa-8a6d-0eb8d7a24e5a",
+      "position": [
+        480,
+        1536
+      ],
+      "id": "11ea954d-3eba-4d13-8582-98885898bf6a",
       "name": "Switch Categoria"
     },
     {
@@ -191,8 +215,11 @@
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [432, -48],
-      "id": "9f53cfef-bab1-4dbd-8e66-869d4aa30c44",
+      "position": [
+        704,
+        1200
+      ],
+      "id": "0cb35fd6-effc-4abe-9688-acd24aa423bf",
       "name": "Email Bodas/Eventos"
     },
     {
@@ -223,8 +250,11 @@
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [432, 160],
-      "id": "b0235373-491d-41b8-9ae3-252a2d4f9440",
+      "position": [
+        704,
+        1392
+      ],
+      "id": "deb28436-a0a5-42c2-bae5-a613710d7153",
       "name": "Email PR"
     },
     {
@@ -255,8 +285,11 @@
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [432, 352],
-      "id": "aa0412d1-ec48-42ce-a4fd-c4e8b7fabbe3",
+      "position": [
+        704,
+        1584
+      ],
+      "id": "2f370a72-0b05-49e4-afed-ed56fd315c71",
       "name": "Email Empleo"
     },
     {
@@ -287,8 +320,11 @@
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [448, 560],
-      "id": "f9e21fe0-7eee-452a-8f81-476c50436534",
+      "position": [
+        704,
+        1776
+      ],
+      "id": "76de135d-56cf-48ef-87ee-cc38ff7cd4d4",
       "name": "Email Escalamiento"
     },
     {
@@ -319,15 +355,17 @@
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [448, 768],
-      "id": "f9411b8e-0a88-401d-a126-2f63a105e1df",
+      "position": [
+        704,
+        1968
+      ],
+      "id": "34e6a4f1-c064-46c7-adab-ceaeb730bb25",
       "name": "Email Reserva"
     },
     {
       "parameters": {
         "sendTo": "={{ $json.sendTo }}",
         "subject": "={{ $json.subject }}",
-        "emailType": "html",
         "message": "={{ $json.html }}",
         "options": {
           "appendAttribution": false
@@ -335,8 +373,11 @@
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
-      "position": [896, 368],
-      "id": "7fb19e78-3af4-45b6-b5ae-9931f624a1c4",
+      "position": [
+        928,
+        1584
+      ],
+      "id": "8b086bcc-d45f-4f16-a29f-ceb109b9b55e",
       "name": "Send a message",
       "webhookId": "76bbf5a2-cc4e-4be0-89a6-c6f6360d6b34",
       "credentials": {
@@ -350,46 +391,118 @@
   "connections": {
     "START": {
       "main": [
-        [{ "node": "Set Context", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Set Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Set Context": {
       "main": [
-        [{ "node": "Switch Categoria", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Switch Categoria",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Switch Categoria": {
       "main": [
-        [{ "node": "Email Bodas/Eventos", "type": "main", "index": 0 }],
-        [{ "node": "Email PR", "type": "main", "index": 0 }],
-        [{ "node": "Email Empleo", "type": "main", "index": 0 }],
-        [{ "node": "Email Escalamiento", "type": "main", "index": 0 }],
-        [{ "node": "Email Reserva", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Email Bodas/Eventos",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email PR",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email Empleo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email Escalamiento",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email Reserva",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Email Bodas/Eventos": {
       "main": [
-        [{ "node": "Send a message", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Email PR": {
       "main": [
-        [{ "node": "Send a message", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Email Empleo": {
       "main": [
-        [{ "node": "Send a message", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Email Escalamiento": {
       "main": [
-        [{ "node": "Send a message", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Email Reserva": {
       "main": [
-        [{ "node": "Send a message", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
