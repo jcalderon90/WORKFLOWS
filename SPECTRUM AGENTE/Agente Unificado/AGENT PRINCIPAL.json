@@ -2696,6 +2696,12 @@
               "name": "fase_2",
               "value": true,
               "type": "boolean"
+            },
+            {
+              "id": "l5028nmn-h588-19l4-ik05-965hk48919l0",
+              "name": "page_id",
+              "value": "={{ $('PARSE BODY').first().json.current_body.page_id }}",
+              "type": "string"
             }
           ]
         },

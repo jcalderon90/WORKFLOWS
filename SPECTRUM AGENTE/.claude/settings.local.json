@@ -57,7 +57,12 @@
       "Bash(git push *)",
       "Bash(git remote *)",
       "mcp__n8n__search_executions",
-      "mcp__n8n__get_execution"
+      "mcp__n8n__get_execution",
+      "Bash(python postman/gen_report_04jun.py)",
+      "Bash(python postman/gen_pdf_04jun.py)",
+      "Bash(pip install *)",
+      "mcp__n8n__get_workflow_details",
+      "mcp__n8n__update_workflow"
     ]
   }
 }
