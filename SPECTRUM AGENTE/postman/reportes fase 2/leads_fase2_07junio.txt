@@ -1,0 +1,97 @@
+REPORTE LEADS FASE 2 — 7 DE JUNIO 2026
+Fuente: MongoDB users_fase_2 x users (cruce por telefono)
+Generado: 2026-06-08
+
+Total leads contactados : 46
+Contestaron al bot      :  6  (13.0%)
+No contestaron          : 40  (87.0%)
+
+[C] = contesto al bot   [ ] = no contesto   [!] = fuera de horario
+
+================================================================================
+PMAR — 18 leads | 2 contestaron | 16 no contestaron
+================================================================================
+
+  [C] [!] Luis Enrique Pereira Ramazzini  +50247682124   pereiraramazzini@gmail.com         20:22 GT   ultima: 20:26 GT
+  [C]     Pablo Palacios                  +50247694625   pablacios9@gmail.com               22:28 GT   ultima: 23:01 GT
+
+  [ ]     Nora Pavon                   +50259518898   npavon19@gmail.com                     08:25 GT
+  [ ]     Sofia Sarti                  +50258402456   sofiasarti5@gmail.com                  09:39 GT
+  [ ] [!] Hugo Flores                 +50252139158   Paco1609@gmail.com                     10:00 GT
+  [ ] [!] Delmi XR Xitumul de Lepe   +50230321360   delmixr@hotmail.com                    10:11 GT
+  [ ] [!] Cindy Salvador              +50258592151   cindysalvadoroliva@gmail.com           10:14 GT
+  [ ] [!] Diego Lopez Lopez           +50249292411   diegolopeztellez@hotmail.com           10:52 GT
+  [ ] [!] Keny Godoy                  +50251124308   krosplatino4@gmail.com                 11:21 GT
+  [ ] [!] Diana Quan Haeussler        +50231188113   diana.quan1.nh@gmail.com               11:39 GT
+  [ ] [!] Irene Hernandez             +50233002198   irenehernandezee@gmail.com             12:01 GT
+  [ ] [!] Jose Guerra                 +50245786398   joseguerra.marroquin90@gmail.com       13:59 GT
+  [ ] [!] Silvia Sanchez              +50259180228   ssancheza88@gmail.com                  14:59 GT
+  [ ] [!] Moises Solares              +50240112316   moises.solaresfranco@yahoo.com         19:51 GT
+  [ ] [!] Ivan Martinez               +50255123456   musicaserviciosgt@gmail.com            20:05 GT
+  [ ] [!] Jeronimo Tzoc               +50239051528   importadorageronimo@hotmail.com        20:21 GT
+  [ ]     Leah Alvarez                +50247040243   alvarezleah27@gmail.com                22:12 GT
+  [ ]     Andrea Cancinos Kestler     +50250173406   recursoshumanos@aguamariscal.com       23:25 GT
+
+================================================================================
+PPO — 12 leads | 0 contestaron
+================================================================================
+
+  [ ]     Sheyla Mateo                +50222542676   sheyla_mateo@yahoo.com                 00:12 GT
+  [ ]     Leslie Nova                 +50258434064   leslienova32@gmail.com                 01:59 GT
+  [ ]     Rodolfo Mendoza Mendoza     +50235660898   rodolfo.mendoza13@icloud.com           05:51 GT
+  [ ]     Samanda Recinos Corado      +50222890686   noyurko26@gmail.com                    06:41 GT
+  [ ]     Henry Lopez                 +50237352021   Piscinasyuacuzzysdeguatemala@gmail.com 08:18 GT
+  [ ]     Miguel Marquez              +50241505777   migmar_311@hotmail.com                 09:34 GT
+  [ ] [!] Isaura Marroquin            +50254136626   khris21059@gmail.com                   12:37 GT
+  [ ] [!] Edwin Ffdf                  +50256526292   Winparedez@gmail.com                   14:25 GT
+  [ ] [!] Karla Castro de Duarte      +50240098780   offimaxxguatemala@gmail.com            16:21 GT
+  [ ] [!] Sandy Alvarado              +50244142998   stantlyramirez8@gmail.com              20:22 GT
+  [ ] [!] Cristian Perez              +50247575588   alexalexapp2019@gmail.com              20:30 GT
+  [ ]     Carlos Donis                +50237560142   karlos.4991@gmail.com                  21:48 GT
+
+================================================================================
+PPOL — 4 leads | 1 contesto | 3 no contestaron
+================================================================================
+
+  [C]     Eliza A. Alvarado           +50245142184   brendis1983@gmail.com                  09:37 GT   ultima: 09:55 GT
+
+  [ ]     Johnatan Solorzano Carrillo  +50241545601   johnatan.alfredo@hotmail.com          08:17 GT
+  [ ] [!] Erick Estuardo Galindo      +50255117229   galindorck@yahoo.com                   11:45 GT
+  [ ] [!] Rene Vasquez                +50241980620   Gerencia@grupovasiu.com                17:48 GT
+
+================================================================================
+PSB — 8 leads | 2 contestaron | 6 no contestaron
+================================================================================
+
+  [C]     Lorena Ventura              +50259679760   lorenadeduran8@gmail.com               02:08 GT   ultima: 09:20 GT
+  [C]     Gabriela Monzon Paiz        +50234901485   Gabriela.monzon18@gmail.com            22:54 GT   ultima: 23:04 GT
+
+  [ ]     E. Anna                     +50255683538   anapalenciacaballeros02@gmail.com      01:32 GT
+  [ ] [!] Elena Bracamonte            +50241515148   Elena.olivabracamonte@gmail.com        10:02 GT
+  [ ] [!] Claudia Lorena Rivera       +50259185704   claudiarivera@agrosemillas.com.gt      13:33 GT
+  [ ] [!] Mario Lux                   +50240886183   Marioluxmls@hotmail.com                17:44 GT
+  [ ] [!] Gina Ferrari                +50253082211   gmferrari1@gmail.com                   19:06 GT
+  [ ]     Kari Custodio               +50255666566   casanetgt@gmail.com                    22:14 GT
+
+================================================================================
+PVV — 4 leads | 1 contesto | 3 no contestaron
+================================================================================
+
+  [C]     Otto Florian                +50248149620   barreraotto86@gmail.com                06:28 GT   ultima: 06:38 GT
+
+  [ ]     Ribelino Santos             +50255144488   ribelino.santos@yahoo.com              06:40 GT
+  [ ] [!] Antonio Vega                +50233567770   anlevengyt15@gmail.com                 14:35 GT
+  [ ] [!] Luis Alvarez                +50242194624   lalvarez@hotmail.com                   16:25 GT
+
+================================================================================
+RESUMEN
+================================================================================
+
+  Proyecto   Total   Contestaron   No contest.   % respuesta
+  PMAR         18         2            16           11.1%
+  PPO          12         0            12            0.0%
+  PPOL          4         1             3           25.0%
+  PSB           8         2             6           25.0%
+  PVV           4         1             3           25.0%
+  TOTAL        46         6            40           13.0%
+

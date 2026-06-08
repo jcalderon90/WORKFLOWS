@@ -1,5 +1,5 @@
 # 🏢 SPECTRUM VIVIENDA: Agente Unificado — Estado del Proyecto
-> Última actualización: 2026-06-01 (Tester Web `tester/`: plan aprobado y documentado en `docs/plan_spectrum_tester.md`, pendiente de implementación · RSVP: persistencia progresiva de citas · Sync_CRM: guard tipo+fecha en _FechaCita/_TipoCita · test_agent.py: escenario rsvp_flow completo)
+> Última actualización: 2026-06-08 (Tester Web `tester/`: plan aprobado y documentado en `docs/plan_spectrum_tester.md`, pendiente de implementación · RSVP: persistencia progresiva de citas · Sync_CRM: guard tipo+fecha en _FechaCita/_TipoCita · test_agent.py: escenario rsvp_flow completo)
 
 ## 🎯 Objetivo General
 Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquestador central (*Sof-IA*) delega tareas a sub-workflows especializados (Tools), con persistencia centralizada en MongoDB y sincronización diferida al CRM Dynamics 365 vía SOAP.
@@ -58,7 +58,7 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ✅ **Completado (2026-05-22)**: **Fix URL SOAP:** Nodo `GENERAR LEAD CONTACT` corregido de `service.asmx` → `Service.asmx` para consistencia con `Sync_CRM.json` y la especificación del endpoint.
 
 ### 3. 📚 Experto en Proyectos — `KB SEARCH.json` + KBs
-**Estado: ✅ Activo** | Última mod: 2026-05-22
+**Estado: ✅ Activo** | Última mod: 2026-06-08
 
 - ✅ **Completado**: Inclusión de todos los proyectos activos (PVV, PMAR, PPO, PPOL, PSB).
 - ✅ **Completado (2026-05-21)**: **SerViPagos condicional (PSB, PPOL):** SerViPagos eliminado de las respuestas generales de mantenimiento. Ahora solo aparece cuando el cliente pregunta explícitamente por métodos de pago. Creadas entradas dedicadas `sb_mantenimiento_pago` y `pl_mantenimiento_pago` con tags específicos (`servipagos`, `donde pagar`).
@@ -68,6 +68,7 @@ Arquitectura de agente conversacional modular para SPECTRUM VIVIENDA. Un orquest
 - ✅ **Completado (2026-05-22)**: **Precio de reserva PSB y PPOL:** `sb_precio_reserva` y `pl_precio_reserva` actualizados con monto Q15,000. Agregados tags de búsqueda semántica. KBs re-vectorizados.
 - ✅ **Completado (2026-05-22)**: **Validación Imperativa de Datos del Lead:** Reforzada regla 🔴 VALIDACIÓN OBLIGATORIA PRIMERO en systemMessage de PRINCIPAL. Lead DEBE compartir nombre + correo + teléfono ANTES de cualquier respuesta, sin excepciones. Bloqueado: kb_search, rsvp, material visual. SOLO lead_collector hasta que datos completos. Incidente: Lead respondió consulta sobre Portales sin datos compartidos.
 - ✅ **Completado (2026-05-26)**: **Precios reales en todos los KBs:** `pl_precio_general` (PPOL), `pvv_precio_general` (PVV) y `pp_precio_general` (PPO) actualizados con precios reales por 1/2/3 habitaciones (antes solo decían "consulta con asesor" o tenían rango genérico). PSB: S-79 corregido a Q1,707,002 y `sb_precio_general` actualizado. PMAR: S-41 corregido a Q899,000, S-71 a Q1,327,000, comparativo y `pm_precio_general` actualizados. Todos los KBs re-vectorizados en n8n (`LLiVnT0M6xvDKive`).
+- ✅ **Completado (2026-06-08)**: **KB PVV — Inventario jardín agotado + fecha entrega:** Eliminadas unidades con jardín privado (S112-101, S70-105, S91A-106) de `pvv_unidades_especiales_nivel1` — ya no hay inventario disponible. Quedan solo unidades con terraza (S113-102, S54-104). Fecha de entrega actualizada de Octubre → Noviembre 2026 en todo el KB. ⚠️ Pendiente re-vectorizar PVV en n8n (`LLiVnT0M6xvDKive`).
 
 ### 4. 🔔 Notificaciones y Citas — `Notifications Master.json` & `RSVP.json`
 **Estado: ✅ Activo — Fix bug llamada + zona horaria + categoría unificada** | Última mod: 2026-05-24
