@@ -66,13 +66,13 @@
         "promptType": "define",
         "text": "={{ $json.entrada_usuario }}",
         "options": {
-          "systemMessage": "=## KNOWLEDGE BASE — INFORMACIÓN ENCONTRADA ##\n{{ $json.contexto }}\n\n---\n\n# CONCIERGE VIRTUAL — ITZ'ANA RESORT & RESIDENCES\n\n## REGLAS DE ORO\n1. Responde ÚNICAMENTE con información del KNOWLEDGE BASE de arriba.\n2. NUNCA inventes datos. Si no está en el KB, di que el equipo del resort puede ayudar.\n3. Responde en el idioma en que el usuario te habla (español o inglés).\n4. Texto plano. Sin markdown. Máximo 500 caracteres.\n   - Excepción: listas de amenidades/actividades usan bullet • en líneas separadas.\n5. Cuando corresponda, incluye el link exacto del KB (reservas, menús, paquetes).\n6. Si el usuario quiere reservar → link: https://reservations.itzanabelize.com/book/accommodations\n7. Si el usuario pregunta por bodas/eventos → escalar a Mr. Diego (mencionar que le pondremos en contacto).\n8. Si el usuario es de prensa/PR/influencer → escalar a partnerships@itzanabelize.com.\n\n## FORMATO DE SALIDA\nResponde ÚNICAMENTE con este JSON en una sola línea:\n{\"response\": \"<texto conversacional>\", \"escalate\": false, \"categoria\": \"info\"}\n\nescalate: true SOLO si el usuario pide hablar con una persona o el tema requiere cotización (bodas, grupos grandes, eventos).\ncategoria: \"info\" | \"reserva\" | \"bodas_eventos\" | \"pr\" | \"empleo\" | \"escalamiento\""
+          "systemMessage": "=## KNOWLEDGE BASE — INFORMACIÓN ENCONTRADA ##\n{{ $json.contexto }}\n\n---\n\n# CONCIERGE VIRTUAL — {{ $json.resort_nombre }}\n\n## REGLAS DE ORO\n1. Responde ÚNICAMENTE con información del KNOWLEDGE BASE de arriba.\n2. NUNCA inventes datos. Si no está en el KB, di que el equipo del resort puede ayudar.\n3. Responde en el idioma en que el usuario te habla (español o inglés).\n4. Texto plano. Sin markdown. Máximo 500 caracteres.\n   - Excepción: listas de amenidades/actividades usan bullet • en líneas separadas.\n5. Cuando corresponda, incluye el link exacto del KB (reservas, menús, paquetes).\n6. Si el usuario quiere reservar → link: {{ $json.booking_link }}\n7. Si el usuario pregunta por bodas/eventos → escalar al equipo de eventos (mencionar que le pondremos en contacto).\n8. Si el usuario es de prensa/PR/influencer → escalar a {{ $json.pr_email }}.\n\n## FORMATO DE SALIDA\nResponde ÚNICAMENTE con este JSON en una sola línea:\n{\"response\": \"<texto conversacional>\", \"escalate\": false, \"categoria\": \"info\"}\n\nescalate: true SOLO si el usuario pide hablar con una persona o el tema requiere cotización (bodas, grupos grandes, eventos).\ncategoria: \"info\" | \"reserva\" | \"bodas_eventos\" | \"pr\" | \"empleo\" | \"escalamiento\""
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 1.7,
       "position": [
-        1232,
+        1344,
         48
       ],
       "id": "14c872bb-4167-40d4-8baa-99fac635dc73",
@@ -95,7 +95,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1584,
+        1696,
         48
       ],
       "id": "3cfd9e3b-1158-43a6-95ac-a1962a5aeb1a",
@@ -114,7 +114,9 @@
         "metadata_field": "respuesta",
         "vectorIndexName": "itzana_vector_index",
         "prompt": "={{ $('Search Context').item.json.entrada_usuario }}",
-        "options": {}
+        "options": {
+          "filter": "={{ JSON.stringify({ \"propiedad\": { \"$eq\": $('Search Context').item.json.propiedad } }) }}"
+        }
       },
       "type": "@n8n/n8n-nodes-langchain.vectorStoreMongoDBAtlas",
       "typeVersion": 1.3,
@@ -160,7 +162,7 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        1312,
+        1424,
         272
       ],
       "id": "5c664094-ae7e-4c8b-9536-e1ee8cd87164",
@@ -171,6 +173,53 @@
           "name": "ITZANA-KAANA"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fd0a7311-e6c4-4ea4-ad8c-bb90712a1854",
+              "name": "contexto",
+              "value": "={{ $json.contexto }}",
+              "type": "string"
+            },
+            {
+              "id": "64aa258b-5711-43c5-adad-c05c6ae5f5d6",
+              "name": "resort_nombre",
+              "value": "={{ $('Search Context').item.json.propiedad === 'KAA' ? \"Ka'ana Resort\" : \"Itz'ana Resort & Residences\" }}",
+              "type": "string"
+            },
+            {
+              "id": "8e4718d1-f69f-496a-8b4c-7234cd079dd9",
+              "name": "booking_link",
+              "value": "={{ $('Search Context').item.json.propiedad === 'KAA' ? 'https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms' : 'https://reservations.itzanabelize.com/book/accommodations' }}",
+              "type": "string"
+            },
+            {
+              "id": "ca772ea2-05e0-43ee-884b-0a51935bbbb8",
+              "name": "contacto_email",
+              "value": "={{ $('Search Context').item.json.propiedad === 'KAA' ? 'info@kaanabelize.com' : 'concierge@itzanabelize.com' }}",
+              "type": "string"
+            },
+            {
+              "id": "cae57345-9dbd-4700-9a9c-f5f76b7b0e76",
+              "name": "pr_email",
+              "value": "={{ $('Search Context').item.json.propiedad === 'KAA' ? 'info@kaanabelize.com' : 'partnerships@itzanabelize.com' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1120,
+        48
+      ],
+      "id": "5a5b895c-b0a0-4e47-9df5-77fc44c50225",
+      "name": "Property Config"
     }
   ],
   "connections": {
@@ -200,7 +249,7 @@
       "main": [
         [
           {
-            "node": "GENERAL AGENT",
+            "node": "Property Config",
             "type": "main",
             "index": 0
           }
@@ -246,6 +295,17 @@
           {
             "node": "GENERAL AGENT",
             "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Property Config": {
+      "main": [
+        [
+          {
+            "node": "GENERAL AGENT",
+            "type": "main",
             "index": 0
           }
         ]

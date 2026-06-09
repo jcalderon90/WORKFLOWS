@@ -1,0 +1,170 @@
+[
+  {
+    "id": "kaa_resort_general",
+    "propiedad": "KAA",
+    "categoria": "resort",
+    "tags": ["kaana", "ka'ana", "resort", "belize", "san ignacio", "cayo", "jungla", "jungle", "luxury", "boutique", "overview", "que es", "what is", "maya", "heavenly place"],
+    "pregunta": "¿Qué es Ka'ana Resort? / What is Ka'ana Resort?",
+    "respuesta": "Ka'ana Resort is a 5-star boutique resort in San Ignacio, Belize (Mile 69 1/4 George Price Highway, San Ignacio, Cayo District), nestled in the heart of the tropical jungle of western Belize at the doorstep of an ancient Maya city. Inspired by its name — Ka'ana means 'heavenly place' — it's a nature-inspired luxury oasis for well-seasoned adventurers and tastemakers. The resort offers luxury suites and villas, adventure tours, and all-inclusive packages.\n\nWebsite: www.kaanabelize.com | Phone: +501 824 3350 | Email: info@kaanabelize.com"
+  },
+  {
+    "id": "kaa_alojamiento_overview",
+    "propiedad": "KAA",
+    "categoria": "alojamientos",
+    "tags": ["habitaciones", "rooms", "alojamiento", "accommodation", "opciones", "tipos", "villa", "suite", "cuartos", "stay", "suites", "villas"],
+    "pregunta": "¿Qué tipos de alojamiento tienen? / What accommodation options do you have?",
+    "respuesta": "Ka'ana offers suites and villas surrounded by the tropical jungle:\n\nSuites:\n• Balam Suite — hacienda-style, private entrance, outdoor sitting area overlooking pool or gardens\n• Casita Suite — private garden with outdoor shower, soaking tub, lounge chairs; 400 sq ft living space, private terrace and balcony\n• Master Suite — 700 sq ft, king bed, front and back decks, private plunge pool in the garden, outdoor shower\n\nVillas:\n• 1-Bedroom Private Pool Villa (2 guests) — 1,250 sq ft, romantic, secluded garden pathway, open-concept indoor/outdoor\n• 2-Bedroom Private Pool Villa (4 guests) — 2,500 sq ft, perfect for friends and family, private garden, pool and outdoor dining\n\nPrices vary by date and season. Book: https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms"
+  },
+  {
+    "id": "kaa_suite_balam",
+    "propiedad": "KAA",
+    "categoria": "alojamientos",
+    "tags": ["balam", "suite", "hacienda", "pool view", "garden view", "single occupancy", "double occupancy", "private entrance"],
+    "pregunta": "¿Cómo es la Balam Suite? / Tell me about the Balam Suite",
+    "respuesta": "The Balam Suite is nestled in a hacienda-style home — perfect for guests looking to feel revitalized and ready for jungle adventures. It features a private entrance and a beautiful outdoor sitting area overlooking the pool or tropical gardens. Available in single and double occupancy.\n\nBook: https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms"
+  },
+  {
+    "id": "kaa_suite_casita",
+    "propiedad": "KAA",
+    "categoria": "alojamientos",
+    "tags": ["casita", "suite", "soaking tub", "outdoor shower", "private garden", "terrace", "balcony", "400 sq ft"],
+    "pregunta": "¿Cómo es la Casita Suite? / Tell me about the Casita Suite",
+    "respuesta": "The Casita Suite strikes the perfect balance between privacy and modern luxury. It includes a private garden with outdoor shower, soaking tub, and lounge chairs, plus a spacious 400 sq ft living space with a private outdoor terrace and balcony.\n\nBook: https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms"
+  },
+  {
+    "id": "kaa_suite_master",
+    "propiedad": "KAA",
+    "categoria": "alojamientos",
+    "tags": ["master suite", "plunge pool", "king bed", "private deck", "outdoor shower", "700 sq ft", "luxury"],
+    "pregunta": "¿Cómo es la Master Suite? / Tell me about the Master Suite",
+    "respuesta": "The Master Suite is a 700 sq ft home suite with locally inspired décor. It features a comfortable king-size bed, individual front and back decks, a private plunge pool in the garden, and a private outdoor shower. Ka'ana's most complete suite for those seeking ultimate comfort.\n\nBook: https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms"
+  },
+  {
+    "id": "kaa_villa_1br",
+    "propiedad": "KAA",
+    "categoria": "alojamientos",
+    "tags": ["villa", "1 bedroom", "1 dormitorio", "one bedroom", "pool villa", "romantic", "pareja", "couple", "1250 sq ft", "private pool"],
+    "pregunta": "¿Cómo es la villa de 1 dormitorio? / Tell me about the 1-Bedroom Villa",
+    "respuesta": "The 1-Bedroom Private Pool Villa is perfect for a romantic getaway (capacity: 2 guests). Positioned off a secluded garden pathway, this 1,250 sq ft villa offers unmatched luxury and comfort with a thoughtfully designed open-concept indoor and outdoor space and private pool.\n\nBook: https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms"
+  },
+  {
+    "id": "kaa_villa_2br",
+    "propiedad": "KAA",
+    "categoria": "alojamientos",
+    "tags": ["villa", "2 bedrooms", "2 dormitorios", "two bedroom", "pool villa", "family", "familia", "friends", "amigos", "2500 sq ft", "private pool", "4 guests"],
+    "pregunta": "¿Cómo es la villa de 2 dormitorios? / Tell me about the 2-Bedroom Villa",
+    "respuesta": "The 2-Bedroom Private Pool Villa is perfect for friends and family traveling together (capacity: 4 guests). This 2,500 sq ft plush jungle villa features elegantly designed, luxuriously appointed interiors that open to outdoor entertainment, a private pool, garden dining, and an outdoor lounge.\n\nBook: https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms"
+  },
+  {
+    "id": "kaa_restaurante_la_ceiba",
+    "propiedad": "KAA",
+    "categoria": "restaurantes",
+    "tags": ["la ceiba", "restaurant", "restaurante", "food", "comida", "menu", "dining", "organic", "farm to table", "chef"],
+    "pregunta": "¿Qué restaurantes tienen? / Tell me about La Ceiba Restaurant",
+    "respuesta": "La Ceiba Restaurant is Ka'ana's main dining experience, celebrated for its farmhouse design and chef-driven menu. It serves local and international cuisine with a focus on seasonal ingredients, most of which are sourced from our own organic garden. Full-service dining room with breakfast, lunch, and dinner.\n\nFull menu: https://www.kaanabelize.com/resourcefiles/restaurant-pdf-menus/la-ceiba-lunch-and-dinner-menu.pdf\nReservations & info: +501 824 3350 | info@kaanabelize.com"
+  },
+  {
+    "id": "kaa_bar_wallace",
+    "propiedad": "KAA",
+    "categoria": "restaurantes",
+    "tags": ["the wallace", "bar", "cocktails", "cocteles", "drinks", "bebidas", "bites", "snacks", "jungle bar", "casual"],
+    "pregunta": "¿Tienen bar? / Do you have a bar?",
+    "respuesta": "Yes! The Wallace is Ka'ana's signature bar, offering craft cocktails with delectable bites in a jungle-casual atmosphere. Perfect for unwinding after a day of adventures.\n\nBar menu: https://www.kaanabelize.com/resourcefiles/restaurant-pdf-menus/wallace-menu-may-2022.pdf"
+  },
+  {
+    "id": "kaa_cena_privada",
+    "propiedad": "KAA",
+    "categoria": "restaurantes",
+    "tags": ["private dining", "cena privada", "special occasion", "occasion", "wine cellar", "poolside dining", "custom menu", "anniversary", "aniversario", "romantic dinner"],
+    "pregunta": "¿Ofrecen cenas privadas o experiencias especiales? / Do you offer private dining or special experiences?",
+    "respuesta": "Ka'ana creates custom private dining experiences for special occasions. Whether dining al fresco poolside, in our cozy wine cellar, or in a lush jungle setting, we design menus and wine pairings exclusively for your event.\n\nTo plan your private experience, contact us: info@kaanabelize.com | +501 824 3350 | www.kaanabelize.com"
+  },
+  {
+    "id": "kaa_bodas_eventos",
+    "propiedad": "KAA",
+    "categoria": "bodas_eventos",
+    "tags": ["boda", "wedding", "evento", "event", "celebracion", "celebration", "grupo", "group", "privado", "special occasion", "reunión"],
+    "pregunta": "¿Hacen bodas o eventos especiales? / Do you host weddings or special events?",
+    "respuesta": "Ka'ana Resort is the perfect backdrop for weddings, celebrations, and private events — surrounded by the tropical jungle with a unique, intimate atmosphere. We offer fine dining in the jungle setting and can create fully custom experiences.\n\nTo share your ideas and get a personalized proposal, contact us: info@kaanabelize.com | +501 824 3350 | www.kaanabelize.com\n\nOur team will be in touch within one business day."
+  },
+  {
+    "id": "kaa_amenidades",
+    "propiedad": "KAA",
+    "categoria": "resort",
+    "tags": ["amenities", "amenidades", "servicios", "services", "pool", "piscina", "spa", "wifi", "parking", "yoga", "babysitting", "concierge", "fireplace"],
+    "pregunta": "¿Qué amenidades y servicios tienen? / What amenities and services do you offer?",
+    "respuesta": "Ka'ana Resort amenities include:\n• Swimming pool\n• Spa\n• Free parking\n• Complimentary Wi-Fi\n• On-site restaurant (La Ceiba) and bar (The Wallace)\n• Yoga classes (additional charge)\n• Babysitting (additional charge)\n• Outdoor fireplace\n• 24-hour front desk and concierge\n\nFor more info: www.kaanabelize.com | +501 824 3350"
+  },
+  {
+    "id": "kaa_actividades_overview",
+    "propiedad": "KAA",
+    "categoria": "actividades",
+    "tags": ["activities", "actividades", "tours", "adventure", "aventura", "maya ruins", "ruinas mayas", "caves", "cuevas", "jungle", "selva", "wildlife", "naturaleza"],
+    "pregunta": "¿Qué actividades y tours ofrecen? / What activities and tours do you offer?",
+    "respuesta": "Ka'ana is surrounded by ancient history, rainforest, and wildlife — one of the richest adventure destinations in Belize:\n• Mayan ruins exploration (Ka'ana is at the doorstep of an ancient Maya city)\n• Cave systems exploration\n• Jungle and rainforest hikes\n• Wildlife spotting (jaguar preserve nearby)\n• Adventure tours (various packages available)\n• Yoga classes on-site\n\nFor a full list of tours and packages, visit: www.kaanabelize.com or contact concierge at +501 824 3350"
+  },
+  {
+    "id": "kaa_ubicacion",
+    "propiedad": "KAA",
+    "categoria": "ubicacion_logistica",
+    "tags": ["ubicacion", "location", "address", "direccion", "san ignacio", "cayo", "como llegar", "how to get there", "mile 69", "george price highway", "western belize"],
+    "pregunta": "¿Dónde están ubicados? / Where are you located?",
+    "respuesta": "Ka'ana Resort is located in San Ignacio, Cayo District, western Belize.\n\nAddress: Mile 69 1/4 George Price Highway, San Ignacio, Cayo District, Belize\n\nSan Ignacio is the heart of the Cayo District — the base for exploring Mayan ruins, cave systems, and the lush jungle and rainforest. It's approximately a 2-hour drive from Philip Goldson International Airport (BZE) in Belize City."
+  },
+  {
+    "id": "kaa_transporte_aeropuerto",
+    "propiedad": "KAA",
+    "categoria": "ubicacion_logistica",
+    "tags": ["airport", "aeropuerto", "philip goldson", "BZE", "belize city", "vuelos", "flights", "como llegar", "transfer"],
+    "pregunta": "¿Cuál es el aeropuerto más cercano? / What's the nearest airport?",
+    "respuesta": "The Philip Goldson International Airport (BZE / PGIA) is the main international airport serving Belize, located 10 miles from Belize City. From there, Ka'ana Resort in San Ignacio is approximately a 2-hour drive west along the George Price Highway.\n\nDirect international flights are available from: Miami (2h15), Houston (2h25), Dallas (3h), Charlotte (3h25), Atlanta (3h5), Fort Lauderdale (2h15), Chicago (4h20), Denver (4h20), Los Angeles (5h), Toronto (7h5), Cancun (1h30), San Salvador (1h)."
+  },
+  {
+    "id": "kaa_clima",
+    "propiedad": "KAA",
+    "categoria": "ubicacion_logistica",
+    "tags": ["weather", "clima", "temperatura", "temperature", "rainy season", "dry season", "temporada", "lluvia", "belize weather"],
+    "pregunta": "¿Cómo es el clima en Belize? / What is the weather like in Belize?",
+    "respuesta": "Belize has a subtropical climate with a cooling breeze from the Caribbean Sea. Annual average temperature: 79°F (26°C).\n\n• Rainy season: June to October — the rainforest truly comes to life, short mid-afternoon bursts of rain that cool the air. Summer highs above 94°F (34°C).\n• Dry season: November through May — ideal for exploring outdoors. Winter lows rarely drop below 60°F (16°C) even at night.\n\nFor current conditions, feel free to contact us: info@kaanabelize.com | +501 824 3350"
+  },
+  {
+    "id": "kaa_planificacion_viaje",
+    "propiedad": "KAA",
+    "categoria": "ubicacion_logistica",
+    "tags": ["trip planning", "planificar viaje", "belize travel", "recursos", "resources", "reading", "maya", "jaguar", "rainforest", "before arrival"],
+    "pregunta": "¿Cómo puedo prepararme para mi viaje a Belize? / How can I plan for my trip to Belize?",
+    "respuesta": "Ka'ana is surrounded by ancient history, rainforest, and wildlife. To prepare for your visit, we recommend exploring:\n• Birds of Belize\n• The Ancient Maya\n• Jaguar Field Study and Creation of Jaguar Preserve\n• Home Remedies of the Rainforest\n\nFor a personalized pre-arrival concierge experience, contact us at info@kaanabelize.com or +501 824 3350."
+  },
+  {
+    "id": "kaa_propiedad_hermana",
+    "propiedad": "KAA",
+    "categoria": "resort",
+    "tags": ["sister property", "propiedad hermana", "itzana", "itz'ana", "placencia", "belize hotels", "grupo", "beach", "playa"],
+    "pregunta": "¿Tienen alguna propiedad hermana? / Do you have a sister property?",
+    "respuesta": "Yes! Ka'ana's sister property is Itz'ana Resort & Residences — a luxury beachfront resort on the Placencia Peninsula in southern Belize. While Ka'ana is nestled in the tropical jungle of western Belize, Itz'ana sits on the shores of the Caribbean Sea. Two distinct experiences, both under the Belize Hotels family.\n\nMore about Itz'ana: www.itzanabelize.com"
+  },
+  {
+    "id": "kaa_contacto_general",
+    "propiedad": "KAA",
+    "categoria": "contacto",
+    "tags": ["contact", "contacto", "email", "phone", "telefono", "reservations", "reservaciones", "website", "sitio web", "info"],
+    "pregunta": "¿Cómo los contacto? / How can I contact Ka'ana?",
+    "respuesta": "You can reach Ka'ana Resort through:\n\n📧 General & Reservations: info@kaanabelize.com\n📞 Phone: +501 824 3350\n🌐 Website: www.kaanabelize.com\n🔗 Book online: https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms\n\nOur team is available 24 hours at the front desk."
+  },
+  {
+    "id": "kaa_empleo",
+    "propiedad": "KAA",
+    "categoria": "politicas_faq",
+    "tags": ["empleo", "trabajo", "vacantes", "job", "work", "career", "hiring", "rrhh", "hr", "employment"],
+    "pregunta": "¿Tienen vacantes disponibles? / Do you have job openings?",
+    "respuesta": "For information about current job openings at Ka'ana Resort, please visit our website at www.kaanabelize.com or contact us directly at info@kaanabelize.com. Our HR team will be happy to guide you through available opportunities."
+  },
+  {
+    "id": "kaa_reservaciones",
+    "propiedad": "KAA",
+    "categoria": "alojamientos",
+    "tags": ["reservar", "book", "booking", "reservation", "reservacion", "como reservar", "how to book", "precio", "price", "disponibilidad", "availability"],
+    "pregunta": "¿Cómo hago una reservación? / How do I make a reservation?",
+    "respuesta": "You can book your stay at Ka'ana Resort in two ways:\n\n🔗 Book online: https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms\n📞 By phone: +501 824 3350\n\nPrices vary by date and season. For personalized booking assistance, contact info@kaanabelize.com."
+  }
+]

@@ -46,6 +46,12 @@
               "name": "entrada_usuario",
               "value": "={{ $json.entrada_usuario }}",
               "type": "string"
+            },
+            {
+              "id": "6e647f6d-08c0-4054-b1ef-7f49b9b669f4",
+              "name": "propiedad",
+              "value": "={{ $json.propiedad || 'ITZ' }}",
+              "type": "string"
             }
           ]
         },
@@ -200,13 +206,13 @@
             {
               "id": "fc5abebb-63e9-4bf1-bffd-e578f4f9b5ac",
               "name": "subject",
-              "value": "Consulta de bodas/eventos - Bot Itz'ana",
+              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? \"Nueva consulta bodas/eventos — Ka'ana Bot\" : \"Nueva consulta bodas/eventos — Itz'ana Bot\" }}",
               "type": "string"
             },
             {
               "id": "654a4c70-52b5-45e2-864d-f9d1bf35deea",
               "name": "sendTo",
-              "value": "jorge.calderon@garooinc.com",
+              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? 'info@kaanabelize.com' : 'jorge.calderon@garooinc.com' }}",
               "type": "string"
             }
           ]
@@ -235,13 +241,13 @@
             {
               "id": "fc5abebb-63e9-4bf1-bffd-e578f4f9b5ac",
               "name": "subject",
-              "value": "Consulta PR/Colaboración - Bot Itz'ana",
+              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? \"Nueva consulta PR/Colaboración — Ka'ana Bot\" : \"Nueva consulta PR/Colaboración — Itz'ana Bot\" }}",
               "type": "string"
             },
             {
               "id": "654a4c70-52b5-45e2-864d-f9d1bf35deea",
               "name": "sendTo",
-              "value": "jorge.calderon@garooinc.com",
+              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? 'info@kaanabelize.com' : 'jorge.calderon@garooinc.com' }}",
               "type": "string"
             }
           ]
@@ -270,13 +276,13 @@
             {
               "id": "fc5abebb-63e9-4bf1-bffd-e578f4f9b5ac",
               "name": "subject",
-              "value": "Consulta de empleo - Bot Itz'ana",
+              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? \"Nueva consulta empleo — Ka'ana Bot\" : \"Nueva consulta empleo — Itz'ana Bot\" }}",
               "type": "string"
             },
             {
               "id": "654a4c70-52b5-45e2-864d-f9d1bf35deea",
               "name": "sendTo",
-              "value": "jorge.calderon@garooinc.com",
+              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? 'info@kaanabelize.com' : 'jorge.calderon@garooinc.com' }}",
               "type": "string"
             }
           ]
@@ -305,13 +311,13 @@
             {
               "id": "fc5abebb-63e9-4bf1-bffd-e578f4f9b5ac",
               "name": "subject",
-              "value": "Escalamiento a humano - Bot Itz'ana",
+              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? \"Atención urgente requerida — Ka'ana Bot\" : \"Atención urgente requerida — Itz'ana Bot\" }}",
               "type": "string"
             },
             {
               "id": "654a4c70-52b5-45e2-864d-f9d1bf35deea",
               "name": "sendTo",
-              "value": "jorge.calderon@garooinc.com",
+              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? 'info@kaanabelize.com' : 'jorge.calderon@garooinc.com' }}",
               "type": "string"
             }
           ]
@@ -340,13 +346,13 @@
             {
               "id": "fc5abebb-63e9-4bf1-bffd-e578f4f9b5ac",
               "name": "subject",
-              "value": "Consulta de reserva - Bot Itz'ana",
+              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? \"Nueva consulta de reserva — Ka'ana Bot\" : \"Nueva consulta de reserva — Itz'ana Bot\" }}",
               "type": "string"
             },
             {
               "id": "654a4c70-52b5-45e2-864d-f9d1bf35deea",
               "name": "sendTo",
-              "value": "jorge.calderon@garooinc.com",
+              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? 'info@kaanabelize.com' : 'jorge.calderon@garooinc.com' }}",
               "type": "string"
             }
           ]

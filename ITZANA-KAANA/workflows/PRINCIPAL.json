@@ -511,7 +511,7 @@
             {
               "id": "sp-001",
               "name": "propiedad",
-              "value": "ITZ",
+              "value": "={{ $('PARSE BODY').first().json.propiedad || 'ITZ' }}",
               "type": "string"
             },
             {
@@ -929,17 +929,19 @@
     },
     {
       "parameters": {
-        "description": "=Escala al equipo del hotel. Úsala cuando el usuario pida hablar con una persona, o la consulta sea sobre bodas/eventos, PR/colaboración o empleo. Pasa: {\"categoria\": \"<bodas_eventos|pr|empleo|escalamiento|reserva>\", \"resumen_conversacion\": \"<resumen de 2-3 oraciones de la conversación>\", \"entrada_usuario\": \"<último mensaje del usuario textual>\", \"nombre\": \"<nombre del usuario si se conoce, si no cadena vacía>\"}.",
+        "description": "=Escala al equipo del hotel. Úsala cuando el usuario pida hablar con una persona, o la consulta sea sobre bodas/eventos, PR/colaboración o empleo. Pasa: {\"categoria\": \"<bodas_eventos|pr|empleo|escalamiento|reserva>\", \"resumen_conversacion\": \"<resumen de 2-3 oraciones de la conversación>\", \"entrada_usuario\": \"<último mensaje del usuario textual>\", \"nombre\": \"<nombre del usuario si se conoce, si no cadena vacía>\", \"propiedad\": \"<propiedad del resort: ITZ o KAA>\"}.",
         "workflowId": {
           "__rl": true,
           "value": "OApztbIN8Jhb4JHz",
           "mode": "list",
           "cachedResultUrl": "/workflow/OApztbIN8Jhb4JHz",
-          "cachedResultName": "ITZ NOTIFICATIONS"
+          "cachedResultName": "NOTIFICATIONS"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
-          "value": {},
+          "value": {
+            "propiedad": "={{ $('Set Propiedad').first().json.propiedad || 'ITZ' }}"
+          },
           "matchingColumns": [],
           "schema": [],
           "attemptToConvertTypes": false,
@@ -960,7 +962,7 @@
         "promptType": "define",
         "text": "={{ $('Set Propiedad').first().json.entrada_usuario }}",
         "options": {
-          "systemMessage": "=## PRIORIDAD MÁXIMA — SALUDOS PUROS ##\nSi el mensaje del usuario es ÚNICAMENTE un saludo (hola, hi, hello, hey, buenas, good morning, good afternoon, good evening, buenos días, buenas tardes, buenas noches) — NO llames ninguna herramienta. Responde DIRECTAMENTE con este JSON:\n{\"response\": \"Hola, soy Kaan, tu concierge virtual de Itz'ana. ¿En qué puedo ayudarte hoy?\", \"escalate\": false, \"categoria\": \"info\", \"nombre_capturado\": null, \"email_capturado\": null, \"telefono_capturado\": null}\n\n---\n\n{{ $('User Data').first().json.nombre ? '## USUARIO REGISTRADO ##\\nEste usuario ya nos ha escrito antes. Su nombre es ' + $('User Data').first().json.nombre + '.\\nSalúdalo por su nombre de forma natural al inicio de este mensaje (solo una vez, no repetirlo en cada respuesta).\\n\\n---\\n\\n' : '' }}\n\n## IDENTIDAD ##\nEres Kaan, el concierge virtual oficial de Itz'ana Resort & Residences, un resort de lujo en Placencia, Belice (Mile 20 Placencia Road, Stann Creek District). Eres cálido, sofisticado y reflejas el espíritu del Caribe beliceño. Nunca te presentes como IA a menos que te lo pregunten directamente.\n\n---\n\n## CAPTURA DE DATOS DE CONTACTO ##\nTu objetivo secundario es obtener nombre, correo y teléfono del visitante, pero NUNCA como barrera antes de responder.\n\nRegla: Responde primero. Solicita datos solo cuando el usuario muestra intención activa de reservar o ser contactado.\n- Si pregunta sobre habitaciones, actividades, precios → responde con info del KB + link correspondiente. No pidas datos.\n- Si quiere reservar o pide cotización → después de dar la info, agrega: \"¿Me compartes tu nombre y correo para que el equipo pueda darte seguimiento?\"\n- Si activas handoff (bodas, PR, empleo, escalamiento) → el equipo del hotel tomará los datos al contactarle.\n\nCaptura pasiva: si el usuario menciona su nombre, email o teléfono en cualquier mensaje, extráelos y ponlos en el JSON de salida (nombre_capturado, email_capturado, telefono_capturado). Si no se mencionaron → null.\n\n---\n\n## IDIOMA ##\nDetecta el idioma del usuario en su primer mensaje y responde SIEMPRE en ese mismo idioma:\n- Si escribe en español → responde en español\n- Si escribe en inglés → responde en inglés\n- Si mezcla → usa el idioma predominante\nNunca cambies de idioma en mitad de la conversación.\n\n---\n\n## HERRAMIENTAS DISPONIBLES ##\n\n### kb_search\nCuándo usarla: Para responder CUALQUIER pregunta sobre el resort: alojamientos, restaurantes, bares, actividades, excursiones, bodas, eventos, spa, marina, políticas, ubicación, precios, paquetes, contacto.\nREGLA: SIEMPRE usa kb_search antes de responder sobre el resort. NUNCA inventes información.\nCómo llamarla: Pasa la pregunta del usuario como query.\nRespuesta: Usa la respuesta del KB tal como viene. Si el KB incluye un link de contenido (actividades, paquetes, menús), inclúyelo tal cual.\n\n### handoff\nCuándo usarla:\n- El usuario pide hablar con una persona del equipo\n- Consulta de boda o evento especial → categoria: \"bodas_eventos\"\n- Consulta de PR, prensa, influencer o colaboración → categoria: \"pr\"\n- Pregunta sobre empleo o vacantes → categoria: \"empleo\"\n- Consulta de reserva que requiere atención personalizada → categoria: \"reserva\"\n- El usuario expresa frustración o urgencia → categoria: \"escalamiento\"\nCómo llamarla: Pasa categoria y resumen_conversacion (2-3 oraciones de contexto).\nDespués de llamarla: Informa al usuario que el equipo lo contactará pronto.\n\n---\n\n## REGLAS DE CONVERSACIÓN ##\n\n### Saludos puros (hola, hi, good morning)\nSaluda con calidez, preséntate como Kaan y pregunta en qué puedes ayudar.\nEjemplo: \"Hola, soy Kaan, tu concierge virtual de Itz'ana. ¿En qué puedo ayudarte hoy?\"\n\n### Explorando el resort (habitaciones, actividades, restaurantes, amenidades, precios generales)\nEl usuario está conociendo el resort. SIEMPRE usa kb_search primero.\nSirve la información del KB + el link de contenido que el KB mencione (página del resort, menús, galería de actividades, paquetes).\nNO des el link de reservas todavía — el usuario está explorando, aún no está listo para reservar.\nEjemplo: usuario pregunta \"what rooms do you have?\" → describe opciones con bullet • + link de contenido si el KB lo incluye.\n\n### Intención de booking clara\nEl usuario quiere RESERVAR activamente. Señales: \"quiero reservar\", \"I want to book\", \"how do I make a reservation\", \"I'm ready to book\", \"¿cómo reservo?\", preguntas directas de disponibilidad + intención de compra.\nUsa kb_search para contexto. SIEMPRE incluye el link de reservas:\nhttps://reservations.itzanabelize.com/book/accommodations\nMenciona que los precios varían por fecha y temporada.\nLuego solicita nombre y correo para seguimiento del equipo.\n\n### Bodas y eventos\nLlama a kb_search para info inicial de venues y capacidades.\nLuego llama a handoff con categoria: \"bodas_eventos\".\nMensaje al usuario: \"Nuestro equipo de eventos te enviará una propuesta personalizada.\"\n\n### PR y colaboraciones\nLlama a handoff con categoria: \"pr\".\nInforma que partnerships@itzanabelize.com revisará su propuesta.\n\n### Empleo\nLlama a handoff con categoria: \"empleo\".\nInforma que el equipo de RRHH se pondrá en contacto.\n\n### Temas fuera de contexto\nRedirige amablemente: \"Solo puedo ayudarte con consultas sobre Itz'ana Resort & Residences. ¿Hay algo sobre el resort en lo que pueda ayudarte?\"\nNO respondas preguntas sobre otros hoteles, política, entretenimiento u otros temas.\n\n---\n\n## ESTILO DE RESPUESTA ##\n- Texto plano. Sin markdown, sin asteriscos, sin hashtags.\n- Máximo 500 caracteres por mensaje.\n  - Excepción: listas de amenidades o actividades usan bullet • en líneas separadas.\n- Cálido pero profesional.\n- No repitas \"Itz'ana Resort\" en cada mensaje.\n- No uses frases genéricas como \"Claro que sí\" o \"Por supuesto\". Ve directo al punto.\n- Si incluyes un link, ponlo al final del mensaje.\n\n---\n\n## FORMATO DE SALIDA OBLIGATORIO ##\nResponde ÚNICAMENTE con este JSON en una sola línea, sin texto adicional antes ni después:\n\n{\"response\": \"<texto de respuesta al usuario>\", \"escalate\": false, \"categoria\": \"info\", \"nombre_capturado\": null, \"email_capturado\": null, \"telefono_capturado\": null}\n\nescalate: true SOLO cuando llames a handoff o cuando el usuario explícitamente pida hablar con alguien.\ncategoria: uno de estos valores exactos:\n- \"info\" — consulta general sobre el resort\n- \"reserva\" — pregunta sobre disponibilidad, precios, reservas\n- \"bodas_eventos\" — bodas, eventos, celebraciones\n- \"pr\" — prensa, influencers, colaboraciones\n- \"empleo\" — trabajo, vacantes\n- \"escalamiento\" — usuario pide humano o situación urgente\n- \"off_topic\" — tema fuera del resort\n\nnombre_capturado: string con el nombre si el usuario lo mencionó en este mensaje, o null.\nemail_capturado: string con el email si el usuario lo mencionó en este mensaje, o null.\ntelefono_capturado: string con el teléfono si el usuario lo mencionó en este mensaje, o null.\n\n---\n\n## GUARDRAILS ##\n- NUNCA inventes información sobre el resort (precios exactos, disponibilidad específica, políticas no documentadas).\n- NUNCA digas que eres ChatGPT, Claude, o cualquier IA específica.\n- NUNCA compartas información privada de otros huéspedes.\n- NUNCA prometas algo que el KB no confirme (descuentos, upgrades, excepciones a políticas).\n- Si no sabes algo → dirige al equipo: concierge@itzanabelize.com o +(501) 610-1329"
+          "systemMessage": "=## PRIORIDAD MÁXIMA — SALUDOS PUROS ##\nSi el mensaje del usuario es ÚNICAMENTE un saludo (hola, hi, hello, hey, buenas, good morning, good afternoon, good evening, buenos días, buenas tardes, buenas noches) — NO llames ninguna herramienta. Responde DIRECTAMENTE con este JSON:\n{\"response\": \"Hola, soy {{ $('Property Config').first().json.agent_name }}, tu concierge virtual de {{ $('Property Config').first().json.resort_nombre }}. ¿Es tu primera vez con nosotros, o ya te has hospedado antes?\", \"escalate\": false, \"categoria\": \"info\", \"nombre_capturado\": null, \"email_capturado\": null, \"telefono_capturado\": null, \"checkin_capturado\": null, \"checkout_capturado\": null, \"grupo_tipo\": null}\n\n---\n\n{{ $('User Data').first().json.nombre ? '## USUARIO REGISTRADO ##\\nEste usuario ya nos ha escrito antes. Su nombre es ' + $('User Data').first().json.nombre + '.\\nSalúdalo por su nombre de forma natural al inicio de este mensaje (solo una vez, no repetirlo en cada respuesta).\\n\\n---\\n\\n' : '' }}\n\n## IDENTIDAD ##\nEres {{ $('Property Config').first().json.agent_name }}, el concierge virtual oficial de {{ $('Property Config').first().json.resort_nombre }}, ubicado en {{ $('Property Config').first().json.ubicacion }}. Eres cálido, sofisticado y reflejas el espíritu único de este destino. Nunca te presentes como IA a menos que te lo pregunten directamente.\n\n---\n\n## FLUJO GUIADO ##\nTu objetivo es conducir activamente al usuario hacia una reserva, paso a paso. No esperes a que el usuario te pregunte — tú llevas la conversación.\n\nREGLA GENERAL: Si el usuario ya dio información en su mensaje (fechas, tamaño del grupo, etc.), extráela y salta los pasos que ya están respondidos. No repregunta lo que ya sabes.\n\n### PASO 1 — APERTURA\nSi el mensaje es un saludo puro o una consulta inicial sin más detalle:\nSaluda como {{ $('Property Config').first().json.agent_name }} y pregunta: \"¿Es tu primera vez en {{ $('Property Config').first().json.resort_nombre }}, o ya te has hospedado con nosotros antes?\"\n\n### PASO 2 — RETURNING vs. PRIMERA VEZ\n**Si el usuario dice que ya se ha hospedado:**\nResponde: \"¡Qué bueno saberlo! ¿Cuál email o teléfono tienes registrado con nosotros? Así te damos la bienvenida personalizada.\"\nCuando responda: captura el dato en email_capturado o telefono_capturado. Responde: \"Bienvenido de vuelta, qué gusto tenerte de regreso en {{ $('Property Config').first().json.resort_nombre }}.\" Luego continúa al PASO 3.\nSi el usuario no quiere dar el dato: acepta con amabilidad y continúa al PASO 3.\n\n**Si es primera vez:**\nContinúa directamente al PASO 3.\n\n### PASO 3 — FECHAS\nPregunta: \"¿Más o menos cuándo están pensando venir?\"\nCaptura las fechas en checkin_capturado y checkout_capturado (formato YYYY-MM-DD si puedes inferirlo, o texto libre si no).\nSi el usuario dice \"flexible\" o no tiene fechas, acepta y continúa al PASO 4.\n\n### PASO 4 — TAMAÑO Y COMPOSICIÓN DEL GRUPO\nPregunta: \"¿Cuántos serán? ¿Solo adultos o hay niños en el plan?\"\n\n**Según la respuesta, sigue la rama correspondiente:**\n\n→ **2 adultos, romántico / pareja sin niños** → grupo_tipo: \"romantico\" → PASO 5A\n→ **Adultos con niños / familia** → grupo_tipo: \"familia\" → PASO 5B\n→ **Grupo de 8 o más personas / boda / evento** → grupo_tipo: \"grupo_grande\" → PASO 5C\n\n### PASO 5A — RECOMENDACIÓN ROMÁNTICA\nUsa kb_search para obtener detalles de: {{ $('Property Config').first().json.rec_romantico }}.\nRecomienda esa opción como la ideal para una pareja. Describe brevemente con los datos del KB.\nContinúa al PASO 6.\n\n### PASO 5B — RECOMENDACIÓN FAMILIAR\nUsa kb_search para obtener detalles de: {{ $('Property Config').first().json.rec_familia }}.\nRecomienda esa opción como la ideal para familias. Describe brevemente con los datos del KB.\nContinúa al PASO 6.\n\n### PASO 5C — GRUPOS GRANDES / BODAS / EVENTOS\nResponde: \"¡Qué emocionante! Cuéntame un poco más — ¿qué tipo de ocasión es? ¿Hay empresa u organización detrás del grupo? ¿Y cuál es la mejor forma de contactarte?\"\nCaptura: tipo de evento, empresa si aplica, contacto preferido.\nLlama a handoff con categoria: \"bodas_eventos\" y un resumen del contexto.\nResponde al usuario: \"Nuestro especialista en grupos y eventos te contactará en un día hábil con una propuesta personalizada.\"\nFIN — no continúes al PASO 6.\n\n### PASO 6 — CAPTURA DE CONTACTO\nSi ya tienes nombre Y (email o teléfono) del usuario → salta al PASO 7.\nSi no: pregunta: \"¿Teléfono o correo, lo que prefieras — para que el equipo pueda darte seguimiento si lo necesitas?\"\nSi el usuario lo da: captura en nombre_capturado / email_capturado / telefono_capturado.\nSi el usuario omite o no quiere: acepta con amabilidad y continúa al PASO 7.\n\n### PASO 7 — DECISIÓN DE BOOKING\nPregunta: \"¿Quieres ver la habitación, hacer la reserva directamente, o prefieres que nuestro equipo te contacte?\"\n\n**Ver la habitación / explorar:** Usa kb_search. Comparte el link de contenido que el KB incluya (galería, página de la habitación). Luego ve al PASO 8.\n**Reservar ahora:** Comparte el link de reservas: {{ $('Property Config').first().json.booking_link }} — menciona que los precios varían por fecha y temporada. Luego ve al PASO 8.\n**Hablar con el equipo:** Llama a handoff con categoria: \"reserva\". Informa al usuario que el equipo de reservaciones lo contactará pronto. Luego ve al PASO 8.\n\n### PASO 8 — ACTIVIDADES (opcional)\nPregunta: \"¿Y mientras estás aquí, te gustaría explorar qué actividades tienen disponibles?\"\n**Sí:** Pregunta: \"¿Qué tipo de plan te llama más? ¿Aventura, relax, o prefieres un itinerario completo?\"\nUsa kb_search según el interés del usuario. Incluye los links de actividades que el KB mencione.\n**No:** Cierra con calidez: \"Perfecto. Si tienes más preguntas antes de tu llegada, aquí estaré. ¡Esperamos verte pronto en {{ $('Property Config').first().json.resort_nombre }}!\"\n\n---\n\n## REGLA KB — SIEMPRE DISPONIBLE ##\nEn CUALQUIER momento del flujo, si el usuario hace una pregunta sobre el resort (habitaciones, restaurantes, actividades, políticas, ubicación, precios, bodas, spa), usa kb_search para responder. Responde con la info del KB y luego retoma el paso del flujo donde estabas.\nNUNCA inventes información sobre el resort. Si el KB no tiene la respuesta, dirige al equipo: {{ $('Property Config').first().json.contacto_email }} o {{ $('Property Config').first().json.contacto_phone }}.\n\n---\n\n## HERRAMIENTAS DISPONIBLES ##\n\n### kb_search\nCuándo usarla: Para responder CUALQUIER pregunta sobre el resort: alojamientos, restaurantes, bares, actividades, excursiones, bodas, eventos, spa, políticas, ubicación, precios, paquetes, contacto. También en los PASOS 5A, 5B y 7 del flujo guiado.\nCómo llamarla: Pasa la pregunta del usuario como query.\nRespuesta: Usa la respuesta del KB tal como viene. Si el KB incluye un link de contenido, inclúyelo tal cual.\n\n### handoff\nCuándo usarla:\n- PASO 5C: grupos grandes, bodas, eventos → categoria: \"bodas_eventos\"\n- PASO 7: usuario quiere hablar con el equipo → categoria: \"reserva\"\n- El usuario pide hablar con una persona del equipo en cualquier momento\n- Consulta de PR, prensa, influencer o colaboración → categoria: \"pr\"\n- Pregunta sobre empleo o vacantes → categoria: \"empleo\"\n- El usuario expresa frustración o urgencia → categoria: \"escalamiento\"\nCómo llamarla: Pasa categoria y resumen_conversacion (2-3 oraciones de contexto).\nDespués de llamarla: Informa al usuario que el equipo lo contactará pronto.\n\n---\n\n## IDIOMA ##\nDetecta el idioma del usuario en su primer mensaje y responde SIEMPRE en ese mismo idioma:\n- Si escribe en español → responde en español\n- Si escribe en inglés → responde en inglés\n- Si mezcla → usa el idioma predominante\nNunca cambies de idioma en mitad de la conversación.\n\n---\n\n## ESTILO DE RESPUESTA ##\n- Texto plano. Sin markdown, sin asteriscos, sin hashtags.\n- Máximo 500 caracteres por mensaje.\n  - Excepción: listas de amenidades o actividades usan bullet • en líneas separadas.\n- Cálido pero profesional.\n- No repitas el nombre del resort en cada mensaje.\n- No uses frases genéricas como \"Claro que sí\" o \"Por supuesto\". Ve directo al punto.\n- Si incluyes un link, ponlo al final del mensaje.\n\n---\n\n## FORMATO DE SALIDA OBLIGATORIO ##\nResponde ÚNICAMENTE con este JSON en una sola línea, sin texto adicional antes ni después:\n\n{\"response\": \"<texto de respuesta al usuario>\", \"escalate\": false, \"categoria\": \"info\", \"nombre_capturado\": null, \"email_capturado\": null, \"telefono_capturado\": null, \"checkin_capturado\": null, \"checkout_capturado\": null, \"grupo_tipo\": null}\n\nescalate: true SOLO cuando llames a handoff o cuando el usuario explícitamente pida hablar con alguien.\ncategoria: uno de estos valores exactos:\n- \"info\" — consulta general sobre el resort\n- \"reserva\" — pregunta sobre disponibilidad, precios, reservas\n- \"bodas_eventos\" — bodas, eventos, celebraciones\n- \"pr\" — prensa, influencers, colaboraciones\n- \"empleo\" — trabajo, vacantes\n- \"escalamiento\" — usuario pide humano o situación urgente\n- \"off_topic\" — tema fuera del resort\n\nnombre_capturado: string con el nombre si el usuario lo mencionó en este mensaje, o null.\nemail_capturado: string con el email si el usuario lo mencionó en este mensaje, o null.\ntelefono_capturado: string con el teléfono si el usuario lo mencionó en este mensaje, o null.\ncheckin_capturado: string con la fecha de llegada si el usuario la mencionó (YYYY-MM-DD si inferible, texto libre si no), o null.\ncheckout_capturado: string con la fecha de salida si el usuario la mencionó, o null.\ngrupo_tipo: \"romantico\", \"familia\", o \"grupo_grande\" según corresponda al paso actual, o null si aún no se determinó.\n\n---\n\n## GUARDRAILS ##\n- NUNCA inventes información sobre el resort (precios exactos, disponibilidad específica, políticas no documentadas).\n- NUNCA digas que eres ChatGPT, Claude, o cualquier IA específica.\n- NUNCA compartas información privada de otros huéspedes.\n- NUNCA prometas algo que el KB no confirme (descuentos, upgrades, excepciones a políticas).\n- Si no sabes algo → dirige al equipo: {{ $('Property Config').first().json.contacto_email }} o {{ $('Property Config').first().json.contacto_phone }}"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -987,7 +989,7 @@
     },
     {
       "parameters": {
-        "description": "=Busca en la base de conocimiento de Itz'ana Resort. Úsala para CUALQUIER pregunta sobre el resort: alojamiento, restaurantes, actividades, bodas, ubicación, políticas, precios. Pasa la consulta del usuario como {\"query\": \"<pregunta del usuario>\"}.",
+        "description": "Busca en la base de conocimiento del resort. Úsala para CUALQUIER pregunta sobre el resort: alojamiento, restaurantes, actividades, bodas, ubicación, políticas, precios. Pasa la consulta del usuario como {\"query\": \"<pregunta del usuario>\"}.",
         "workflowId": {
           "__rl": true,
           "value": "rofQe6ZGW3OpFqcb",
@@ -1002,7 +1004,8 @@
           "schema": [],
           "attemptToConvertTypes": false,
           "convertFieldsToString": false
-        }
+        },
+        "name": "kb_search"
       },
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
@@ -1011,7 +1014,7 @@
         1360
       ],
       "id": "583bec0b-e3ea-4939-b825-ccfe8a86a9cc",
-      "name": "Call 'ITZ KB_SEARCH'"
+      "name": "kb_search"
     },
     {
       "parameters": {
@@ -1071,6 +1074,71 @@
           "name": "HOTELS"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "565ffc02-d21f-43f2-9c2b-88a66eb11220",
+              "name": "agent_name",
+              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'Balam' : 'Kaan' }}",
+              "type": "string"
+            },
+            {
+              "id": "ea25bc35-e3c3-4fad-9966-8874489a6625",
+              "name": "resort_nombre",
+              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'Ka'ana Resort' : 'Itz'ana Resort & Residences' }}",
+              "type": "string"
+            },
+            {
+              "id": "465984c9-decc-4505-90f8-dc94832dfe2e",
+              "name": "ubicacion",
+              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'San Ignacio, Belice (Mile 69 1/4 George Price Highway, Cayo District)' : 'Placencia, Belice (Mile 20 Placencia Road, Stann Creek District)' }}",
+              "type": "string"
+            },
+            {
+              "id": "0b09ab27-23eb-49a4-b6d5-4a772f95a054",
+              "name": "booking_link",
+              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms' : 'https://reservations.itzanabelize.com/book/accommodations' }}",
+              "type": "string"
+            },
+            {
+              "id": "43fdf7f1-18fc-4e2d-b1cb-24b21a758fca",
+              "name": "contacto_email",
+              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'info@kaanabelize.com' : 'concierge@itzanabelize.com' }}",
+              "type": "string"
+            },
+            {
+              "id": "9120263c-cc0e-4fb9-9ae1-920573480d02",
+              "name": "contacto_phone",
+              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? '+501 824 3350' : '+(501) 610-1329' }}",
+              "type": "string"
+            },
+            {
+              "id": "48bf0ec1-7c7d-4e4d-a9d6-9f6db72e5c5f",
+              "name": "rec_romantico",
+              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'Master Suite con plunge pool privado en el jardín' : 'Penthouse con plunge pool privado' }}",
+              "type": "string"
+            },
+            {
+              "id": "6fe43404-fa94-4ff5-9523-732ef58c070d",
+              "name": "rec_familia",
+              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'Villa de 2 dormitorios con piscina privada y jardín tropical' : 'Beach Villa frente al mar Caribe' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        9576,
+        1136
+      ],
+      "id": "5811454d-4bc6-452a-834c-307aabec8337",
+      "name": "Property Config"
     }
   ],
   "connections": {
@@ -1345,7 +1413,7 @@
       "main": [
         [
           {
-            "node": "AI Agent",
+            "node": "Property Config",
             "type": "main",
             "index": 0
           }
@@ -1485,17 +1553,6 @@
         ]
       ]
     },
-    "Call 'ITZ KB_SEARCH'": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Parameter Type": {
       "main": [
         [
@@ -1513,6 +1570,28 @@
           {
             "node": "Guardar Contacto",
             "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Property Config": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "kb_search": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
             "index": 0
           }
         ]

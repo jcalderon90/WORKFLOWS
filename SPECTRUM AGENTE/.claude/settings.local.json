@@ -73,7 +73,8 @@
       "PowerShell(py *)",
       "WebFetch(domain:api.manychat.com)",
       "Bash(py scripts/fill_plano_urls.py)",
-      "Bash(py scripts/fix_plano_detection.py)"
+      "Bash(py scripts/fix_plano_detection.py)",
+      "mcp__mongodb__collection-schema"
     ]
   },
   "enabledPlugins": {
