@@ -69,25 +69,25 @@ grep -n "<TEXTO>" "workflows/AGENT PRINCIPAL.json"
 
 **`DATA to UPDATE` — campo `proyecto`**
 ```js
-{{ $('CONTEXT 1').item.json.proyecto || $('Find User').item.json.proyecto }}
+{{ $('CONTEXT 1').first().json.proyecto || $('Find User').first().json.proyecto }}
 ```
 > Prioriza extractor fresco; fallback al valor ya guardado en MongoDB.
 
 **`PRINCIPAL` — campo `text`**
 ```js
-Proyecto activo en sesión: {{ $('CONTEXT 1').item.json.proyecto || $('User Data').item.json.proyecto || "Ninguno" }}
+Proyecto activo en sesión: {{ $('CONTEXT 1').first().json.proyecto || $('User Data').first().json.proyecto || "Ninguno" }}
 ```
 > `User Data` es snapshot PRE-Update. No refleja cambios de la ejecución actual.
 
 **`Prepare Update` — campo `proyecto`**
 ```js
-{{ $('Parse response').item.json.proyecto || $('User Data').item.json.proyecto || undefined }}
+{{ $('Parse response').first().json.proyecto || $('User Data').first().json.proyecto || undefined }}
 ```
 > `undefined` = no sobreescribir el campo en MongoDB.
 
 **`Prepare Update` — campo `consulta_pendiente`**
 ```js
-{{ $json.consulta_pendiente_limpiar ? null : ($json.consulta_pendiente_guardar || $('User Data').item.json.consulta_pendiente || undefined) }}
+{{ $json.consulta_pendiente_limpiar ? null : ($json.consulta_pendiente_guardar || $('User Data').first().json.consulta_pendiente || undefined) }}
 ```
 
 **`Hay Cambios?` — campo `FIELDS`**
@@ -144,4 +144,3 @@ Webhook → PARSE BODY → ES ARCHIVO → text input → SAVE MESSAGE → Wait (
 | Webhook timeout en test local | Redis debounce de 10s | Usar timeout de 35s en test runner (ya configurado en `test_agent.py`) |
 | `.item.json` falla con múltiples items | `.item` no es robusto con multi-output | Reemplazar `.item.json` → `.first().json` en todas las expresiones |
 | Ejecución n8n no actualiza MongoDB | `FIELDS` vacío en `Hay Cambios?` | Verificar que `Prepare Update` produce al menos un campo no-null |
-```
