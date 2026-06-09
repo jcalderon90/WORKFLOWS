@@ -37,12 +37,12 @@ grep -n "<TEXTO>" "workflows/AGENT PRINCIPAL.json"
 | `AGENT PRINCIPAL.json` | `PRINCIPAL` | `systemMessage`, `text` |
 | `AGENT PRINCIPAL.json` | `CONTEXT 1` | `assignments` |
 | `AGENT PRINCIPAL.json` | `DATA to CREATE`, `DATA to UPDATE` | `assignments` |
-| `Lead Collector.json` | `Lead Agent` | `systemMessage` |
+| `Lead Collector.json` | `Lead Agent` | `options` (systemMessage anidado en options) |
 | `Lead Collector.json` | `SET CONTEXT` | `assignments` |
-| `RSVP.json` | `RSVP Agent` | `systemMessage` |
+| `RSVP.json` | `RSVP Agent` | `options` (systemMessage anidado en options) |
 | `RSVP.json` | `CONTEXT` | `assignments` |
-| `KB SEARCH.json` | `GENERAL AGENT` | `systemMessage` |
-| `Sync_CRM.json` | `Body` | `jsCode` (XML SOAP) |
+| `KB SEARCH.json` | `GENERAL AGENT` | `options` (systemMessage anidado en options) |
+| `Sync_CRM.json` | `Body` | `assignments` (XML SOAP en campo `body`) |
 | `Sync_CRM.json` | `Information Extractor` | `systemMessage` |
 
 **Comandos rápidos para los nodos más editados:**
@@ -51,7 +51,7 @@ grep -n "<TEXTO>" "workflows/AGENT PRINCIPAL.json"
 ./workflows/scripts/get-node-param.sh "workflows/AGENT PRINCIPAL.json" "PRINCIPAL" "systemMessage"
 
 # XML SOAP de Sync_CRM
-./workflows/scripts/get-node-param.sh "workflows/Sync_CRM.json" "Body" "jsCode"
+./workflows/scripts/get-node-param.sh "workflows/Sync_CRM.json" "Body" "assignments"
 
 # Contexto del Lead Collector
 ./workflows/scripts/get-node-param.sh "workflows/Lead Collector.json" "SET CONTEXT" "assignments"
@@ -75,9 +75,9 @@ grep -n "<TEXTO>" "workflows/AGENT PRINCIPAL.json"
 
 **`PRINCIPAL` — campo `text`**
 ```js
-Proyecto activo en sesión: {{ $('CONTEXT 1').first().json.proyecto || $('User Data').first().json.proyecto || "Ninguno" }}
+Proyecto activo en sesión: {{ $('Insert User Fase 2').isExecuted ? $('Find User').first().json.proyecto : ($('CONTEXT 1').first().json.proyecto || $('User Data').first().json.proyecto || 'Ninguno' ) }}
 ```
-> `User Data` es snapshot PRE-Update. No refleja cambios de la ejecución actual.
+> Guard `isExecuted`: si el lead es Fase 2 (pre-cargado por pauta), toma el `proyecto` directo de `Find User` (ya tiene uno asignado). En el flujo normal usa el extractor fresco (`CONTEXT 1`) con fallback al snapshot `User Data`.
 
 **`Prepare Update` — campo `proyecto`**
 ```js
