@@ -25,6 +25,17 @@
 
 ---
 
+## 🎯 Task Lookup — ¿qué skill cargar?
+
+| Si vas a... | Skill a invocar |
+|---|---|
+| Editar un nodo (system prompt, JS, expresión) | `spectrum-edit-debug` |
+| Depurar una ejecución fallida o comportamiento inesperado | `spectrum-edit-debug` |
+| Agregar un nuevo tool, workflow o canal | `spectrum-agente-unificado` |
+| Consultar reglas SOAP, CRM, catálogos, MongoDB o atribución | `spectrum-business-rules` |
+
+---
+
 ## ⚙️ Workflows — propósito · ID remoto n8n
 
 | Archivo | Propósito (1 línea) | ID n8n | Nodos |
