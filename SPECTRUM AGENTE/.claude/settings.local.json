@@ -62,7 +62,21 @@
       "Bash(python postman/gen_pdf_04jun.py)",
       "Bash(pip install *)",
       "mcp__n8n__get_workflow_details",
-      "mcp__n8n__update_workflow"
+      "mcp__n8n__update_workflow",
+      "PowerShell($env:N8N_API_KEY; $env:N8N_BASE_URL)",
+      "Bash(npm list *)",
+      "Bash(npx --yes n8n-mcp-server --help)",
+      "Bash(curl *)",
+      "mcp__n8n__search_workflows",
+      "Bash(python -c ' *)",
+      "Bash(..venvScriptspython.exe -c ' *)",
+      "PowerShell(py *)",
+      "WebFetch(domain:api.manychat.com)",
+      "Bash(py scripts/fill_plano_urls.py)",
+      "Bash(py scripts/fix_plano_detection.py)"
     ]
+  },
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true
   }
 }

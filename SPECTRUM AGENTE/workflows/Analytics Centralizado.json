@@ -37,7 +37,7 @@
       "typeVersion": 3.4,
       "position": [
         -1168,
-        328
+        336
       ],
       "id": "d4268a65-5ab7-4469-9af8-932846033d0c",
       "name": "Edit Fields2"
@@ -62,7 +62,7 @@
       "typeVersion": 1,
       "position": [
         976,
-        328
+        336
       ],
       "id": "bc9d5155-575d-4c26-9219-bf9b0efa162f"
     },
@@ -127,7 +127,7 @@
       "typeVersion": 3.4,
       "position": [
         -1840,
-        132
+        144
       ],
       "id": "2b0d07bc-db2b-4b43-ba28-be7674b8ea71",
       "name": "USUARIO Y KEY"
@@ -142,7 +142,7 @@
       "typeVersion": 1.2,
       "position": [
         -1616,
-        204
+        208
       ],
       "id": "8d72d5c9-1701-40e8-9321-5ef99b5d8ac0",
       "name": "ENCONTRAR USUARIOS",
@@ -167,7 +167,7 @@
       "typeVersion": 3,
       "position": [
         -944,
-        328
+        336
       ],
       "id": "8f93e96d-3838-45dd-8648-41647a5f5598",
       "name": "AGENTE RESPUESTA"
@@ -180,7 +180,7 @@
       "typeVersion": 2,
       "position": [
         -592,
-        328
+        336
       ],
       "id": "cfd72919-139c-4d74-b304-89f087a3d112",
       "name": "PARSEAR RESPUESTA"
@@ -215,7 +215,7 @@
       "typeVersion": 3.4,
       "position": [
         -368,
-        328
+        336
       ],
       "id": "cff9435b-e9f9-4237-88a4-826a7822999c",
       "name": "RESPUESTA AGENTE"
@@ -334,7 +334,7 @@
       "typeVersion": 2.3,
       "position": [
         -1392,
-        204
+        208
       ],
       "id": "2e7d119a-2c13-4aa5-b976-2f377e7af124",
       "name": "If"
@@ -395,8 +395,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        -872,
-        552
+        -880,
+        560
       ],
       "id": "0a8e3cb5-fffd-40fe-b15d-80ff3e135a0d",
       "name": "OpenRouter Chat Model",

@@ -32,10 +32,10 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        -448,
-        1616
+        -1904,
+        1488
       ],
-      "id": "581d7f36-78a5-482e-8c2d-391232a66887",
+      "id": "0378830d-82e1-4432-8af4-316f936ffa44",
       "name": "START"
     },
     {
@@ -97,10 +97,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -224,
-        1616
+        -1680,
+        1488
       ],
-      "id": "b867549e-15ad-44f7-8944-bdad0faa52f5",
+      "id": "1715b84a-9148-4088-bd58-f8bf193e46cc",
       "name": "CONTEXT"
     },
     {
@@ -114,10 +114,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        0,
-        1616
+        -1456,
+        1488
       ],
-      "id": "919c62c1-00e4-4522-909d-e961a16a7eb3",
+      "id": "168b31d6-a7ea-4531-b750-421a88e4ca33",
       "name": "RSVP Agent"
     },
     {
@@ -131,10 +131,10 @@
       "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
       "typeVersion": 1,
       "position": [
-        144,
-        1840
+        -1312,
+        1712
       ],
-      "id": "29d51381-18ec-4d5e-93a6-e63959ed80d4",
+      "id": "b3e6159d-280c-4ea7-a9c6-729d31cd0cd8",
       "name": "MongoDB Chat Memory",
       "credentials": {
         "mongoDb": {
@@ -171,10 +171,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        576,
-        1616
+        -880,
+        1488
       ],
-      "id": "c0a9f6df-36f7-48a8-9fc2-f3ed1f2c1e6e",
+      "id": "249e76a3-e209-4b8e-acfa-0ad5199ea317",
       "name": "If TIENE FECHA"
     },
     {
@@ -205,10 +205,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1024,
-        1520
+        -432,
+        1392
       ],
-      "id": "678aad0b-5013-4430-b6aa-ac7f32db891f",
+      "id": "ab39b2ce-6b66-4f02-94b8-668348be0604",
       "name": "IF APPOINTMENT EXIST"
     },
     {
@@ -218,10 +218,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1248,
-        1424
+        -208,
+        1296
       ],
-      "id": "f4ecb5a7-df2c-4318-a6ff-e71d934acc4d",
+      "id": "e7c4fb1f-4ac1-4df5-8e42-daadb43cdc4a",
       "name": "Update Appointment Data"
     },
     {
@@ -231,10 +231,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1248,
-        1648
+        -208,
+        1520
       ],
-      "id": "271ca0f3-6ae6-4fd5-b65e-44b4fe5921b3",
+      "id": "3f0af54c-25c7-4ef0-99e4-f60c50938ee5",
       "name": "Insert Appointment Data"
     },
     {
@@ -250,10 +250,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        1472,
-        1424
+        16,
+        1296
       ],
-      "id": "d97a294b-0ace-4363-8ecd-acc1446d24ba",
+      "id": "5e8c2f9b-c241-451b-9162-977bb08f8eba",
       "name": "Update Appointment",
       "credentials": {
         "mongoDb": {
@@ -274,10 +274,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        1472,
-        1648
+        16,
+        1520
       ],
-      "id": "7c63d057-2b11-492c-8bfc-bfbc92c071bb",
+      "id": "122199f8-886f-477b-8d3f-2bb6d5bf6f5b",
       "name": "Insert Appointment",
       "credentials": {
         "mongoDb": {
@@ -330,10 +330,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        2368,
-        1424
+        912,
+        1296
       ],
-      "id": "028bd579-caee-4eff-ac22-2b6793fa84ad",
+      "id": "11ff2e5c-7e1c-4e77-9f18-a286683728e7",
       "name": "'Notifications Master' Cita"
     },
     {
@@ -374,10 +374,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1696,
-        1520
+        240,
+        1392
       ],
-      "id": "29f390e7-8026-4c11-8d12-9ff08c4d6127",
+      "id": "c9295804-6f0e-46ee-a179-00bb7bc22acb",
       "name": "IF CONFIRMADA"
     },
     {
@@ -397,10 +397,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3040,
-        1808
+        1584,
+        1680
       ],
-      "id": "1932e92c-939e-4756-acd3-1065c040c56a",
+      "id": "1dee85db-cde8-4c20-ba3b-14b42e427228",
       "name": "RESPONSE 1"
     },
     {
@@ -408,10 +408,10 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        3040,
-        1616
+        1584,
+        1488
       ],
-      "id": "c7adc182-7d34-4218-a71c-6a35fe70fe03",
+      "id": "000506ce-b51b-421c-ac79-f77759d9f894",
       "name": "NADA"
     },
     {
@@ -431,10 +431,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3264,
-        1616
+        1808,
+        1488
       ],
-      "id": "2160bfb5-abdf-42a7-a10d-2143d94b0fa1",
+      "id": "59c28793-dc35-4c9a-acef-51525ae146bf",
       "name": "RESPONSE FINAL"
     },
     {
@@ -444,10 +444,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1920,
-        1424
+        464,
+        1296
       ],
-      "id": "9745a79a-a9b6-4a8c-9f32-027c783d96fc",
+      "id": "4bb5a763-b43a-477a-8a64-993e0a89014e",
       "name": "HTML"
     },
     {
@@ -457,10 +457,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        352,
-        1616
+        -1104,
+        1488
       ],
-      "id": "208fc0dd-09e3-4c7c-b5a9-b09f1e2f369c",
+      "id": "1c1aeb09-d5d6-471d-8728-29625627a5ee",
       "name": "Parse RSVP Output"
     },
     {
@@ -470,10 +470,10 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1.2,
       "position": [
-        2144,
-        1424
+        688,
+        1296
       ],
-      "id": "050abed4-882f-47d8-8e29-cd41c04199f3",
+      "id": "52b05910-fa6b-4836-9f88-72424f5a4137",
       "name": "HTML PURO"
     },
     {
@@ -487,10 +487,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        3040,
-        1424
+        1584,
+        1296
       ],
-      "id": "6ba8cd7f-2ec0-4acc-af44-0bc80085f706",
+      "id": "66e69eea-abae-479b-9ebe-5a41903684be",
       "name": "Update User",
       "credentials": {
         "mongoDb": {
@@ -522,10 +522,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        2816,
-        1424
+        1360,
+        1296
       ],
-      "id": "b3dc9e78-3271-43ba-9cc7-89d25c3fca52",
+      "id": "58bd6cb6-ab0c-4547-b931-b58960176ae2",
       "name": "reservation update"
     },
     {
@@ -537,10 +537,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        0,
-        1840
+        -1440,
+        1712
       ],
-      "id": "73ffabd1-c516-48ba-b9b7-61c21cef3aff",
+      "id": "85de75b6-5d8a-483b-80cc-39489aa509ce",
       "name": "OpenRouter Chat Model",
       "credentials": {
         "openRouterApi": {
@@ -558,10 +558,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        800,
-        1520
+        -656,
+        1392
       ],
-      "id": "db2fcb55-ad02-4522-9991-4bdff8e9d78c",
+      "id": "d3b3ad04-8ba1-45ae-a8ad-3b947ef6c657",
       "name": "Find Appointment",
       "alwaysOutputData": true,
       "credentials": {
@@ -580,10 +580,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        2592,
-        1424
+        1136,
+        1296
       ],
-      "id": "2180f640-77f7-4f59-a95e-5ca2b83c4d0e",
+      "id": "1debc88d-e0fc-407d-a4dc-78e34f4d3657",
       "name": "Find User",
       "alwaysOutputData": true,
       "credentials": {
@@ -862,6 +862,8 @@
   "pinData": {},
   "meta": {
     "templateCredsSetupCompleted": true,
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp",
     "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"
   }
 }

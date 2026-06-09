@@ -250,46 +250,7 @@
       ]
     }
   },
-  "pinData": {
-    "Webhook": [
-      {
-        "headers": {
-          "host": "agentsprod.redtec.ai",
-          "user-agent": "WordPress/6.8.1; https://polanco.dev.tww.gt",
-          "content-length": "368",
-          "accept": "*/*",
-          "accept-encoding": "deflate, gzip, br, zstd",
-          "content-type": "application/json; charset=utf-8",
-          "x-forwarded-for": "122.8.180.230",
-          "x-forwarded-host": "agentsprod.redtec.ai",
-          "x-forwarded-port": "443",
-          "x-forwarded-proto": "https",
-          "x-forwarded-server": "2a862d2f5b19",
-          "x-real-ip": "122.8.180.230"
-        },
-        "params": {},
-        "query": {},
-        "body": {
-          "name": "test",
-          "lastname": "polanco",
-          "email": "",
-          "phone": "123456789",
-          "fecha_cita": "2026-05-27",
-          "hora_cita": "10:00 AM",
-          "comment": "Cita agendada desde sitio web",
-          "utm_source": "",
-          "utm_campaign": "Citas Polanco Parque Boutique",
-          "proyecto": "PVV",
-          "origen": "100000011",
-          "site": "Parque Polanco",
-          "site_url": "https://polanco.dev.tww.gt",
-          "submitted_at": "2026-05-26T21:47:20+00:00"
-        },
-        "webhookUrl": "https://agentsprod.redtec.ai/webhook/webform",
-        "executionMode": "production"
-      }
-    ]
-  },
+  "pinData": {},
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"

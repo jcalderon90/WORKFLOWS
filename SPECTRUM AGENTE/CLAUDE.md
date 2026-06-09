@@ -14,7 +14,7 @@ After adding/removing nodes or workflows, run `./scripts/build_index.sh` to refr
 
 ## What this repo is
 
-n8n workflow source for **SPECTRUM VIVIENDA** — a multitenant real-estate conversational agent (*Sof-IA*) deployed on `https://agentsprod.redtec.ai`. The local `.json` files are the authoritative workflow definitions; they are pushed to the n8n server via MCP. The server is the runtime; this repo is the source of truth.
+n8n workflow source for **SPECTRUM VIVIENDA** — a multitenant real-estate conversational agent (*Sof-IA*) deployed on `https://agentsprod.redtec.ai`. **El servidor n8n es la fuente de verdad.** Los archivos `.json` locales son copias manuales que Jorge actualiza copiando desde la UI de n8n — pueden estar desactualizados. Nunca asumir que local > remoto; ante divergencias, el remoto tiene razón.
 
 The agent receives ManyChat traffic from 6 pages (WhatsApp / Instagram / Messenger across 5 real-estate projects + GAROO internal). A central orchestrator (`AGENT PRINCIPAL.json`) classifies intent and delegates to sub-workflows (tools). Persistence is MongoDB Atlas; CRM sync is deferred via SOAP.
 
@@ -67,7 +67,8 @@ spectrum-sim-mcp/               ← MCP server (Python) — lets external AIs si
 | `users` | Lead profile (one doc per `manychat_id` + `page_id`) |
 | `appointments` | RSVP bookings. **Query by `manychat_id` + `proyecto`** — a user can have appointments across multiple projects |
 | `chat_histories` | Orchestrator memory |
-| `chat_histories_rsvp` | RSVP agent memory (separate from above) |
+| `chat_histories_lead` | Lead Collector agent memory |
+| `chat_histories_rsvp` | RSVP agent memory |
 | `manychat_settings` | Per-page config: `page_id`, `api_key`, `proyecto` |
 | `quality_logs` | Post-sync audit |
 | `analytics_logs` | Latency + tool-call telemetry |
@@ -152,13 +153,25 @@ When calling MCP tools against `agentsprod.redtec.ai`:
 | `Send Media.json` | `NtTiyrNy2LHimE7u` |
 | `Notifications Master.json` | `r1Jf5vwrkBrT4dEu` |
 | `Vectorizar los KBs.json` | `LLiVnT0M6xvDKive` |
-| `Analytics Centralizado.json` | _no registrado — verificar en server_ |
+| `Analytics Centralizado.json` | `0QfOxWdE9m07laqd` |
 | `LEAD FASE 2.json` | _no registrado — scaffold_ |
 | `WEB FORM.json` | _no registrado — verificar en server_ |
 
-> The last three are recent additions; their remote IDs aren't confirmed. Check the server (and mirror into `spectrum-sim-mcp/config.py` `WORKFLOW_IDS`) before assuming they're deployed.
+> `LEAD FASE 2` y `WEB FORM` no están desplegados en producción aún.
 
 If you hit `ECONNREFUSED` connecting to MongoDB Atlas from a local script, override DNS in-process: `dns.setServers(['8.8.8.8', '8.8.4.4'])`.
+
+---
+
+## MCP Server (n8n)
+
+El servidor MCP nativo de n8n está registrado en Claude Code (user scope):
+- **URL:** `https://agentsprod.redtec.ai/mcp-server/http`
+- **Token:** JWT en `~/.claude.json` bajo el servidor `n8n`
+- **Tools disponibles:** `search_workflows`, `get_workflow_details`, `execute_workflow`, `search_executions`, `get_execution`, `update_workflow`, `publish_workflow`, entre otros
+- **Comparación local vs remoto:** `node scripts/compare_remote.js` (requiere descargar cache primero — ver script)
+
+> ⚠️ Los tools MCP de n8n solo están disponibles en nuevas sesiones de Claude Code (no en la sesión donde se registró el servidor).
 
 ---
 

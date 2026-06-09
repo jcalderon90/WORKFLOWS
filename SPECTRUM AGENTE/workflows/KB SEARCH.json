@@ -152,7 +152,7 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
       "position": [
-        496,
+        416,
         192
       ],
       "id": "79739b0d-b695-4be9-8a37-756c01a8f689",
@@ -173,7 +173,7 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        1072,
+        992,
         192
       ],
       "id": "1a6c1711-a052-4514-93cf-2b585cb4cc36",

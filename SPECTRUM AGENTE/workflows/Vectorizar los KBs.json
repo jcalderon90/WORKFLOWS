@@ -1,0 +1,205 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        144,
+        -384
+      ],
+      "id": "abc8face-44f6-44fc-aeff-089459429e78",
+      "name": "Embeddings OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "LtzIKoi61tZvaeua",
+          "name": "Vectorizer Agent - Knowledge Bases"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.pregunta }}. {{ $json.respuesta }}",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "id",
+                "value": "={{ $json.id }}"
+              },
+              {
+                "name": "categoria",
+                "value": "={{ $json.categoria }}"
+              },
+              {
+                "name": "tags",
+                "value": "={{ $json.tags }}"
+              },
+              {
+                "name": "pregunta",
+                "value": "={{ $json.pregunta }}"
+              },
+              {
+                "name": "respuesta",
+                "value": "={{ $json.respuesta }}"
+              },
+              {
+                "name": "proyecto",
+                "value": "={{ $json.proyecto }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        320,
+        -384
+      ],
+      "id": "8e8ac53a-3212-442f-abbd-16b1a266b02a",
+      "name": "Default Data Loader1"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "chunks",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        -608
+      ],
+      "id": "bf196608-e15b-454b-87ea-993c85e74caf",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "352fa218-4b91-49ac-9a84-1501d98a396c",
+              "name": "chunks",
+              "value": "=[\n  {\n    \"id\": \"pvv_medidas_balcon\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"modelos\",\n    \"tags\": [\n      \"balcón\",\n      \"balcon\",\n      \"medidas\",\n      \"tamaño\",\n      \"dimensiones\",\n      \"cuanto mide\",\n      \"grande\"\n    ],\n    \"pregunta\": \"¿Qué medidas tiene el balcón?\",\n    \"respuesta\": \"🏡 Todos nuestros modelos cuentan con balcón, pensado para brindarte un espacio adicional de confort y conexión con el exterior.\\n\\n📐 Las medidas exactas pueden variar según el modelo y se te comparten con total detalle durante la visita, donde además podrás apreciarlo directamente.\\n\\n📅 Si te parece bien, puedo ayudarte a agendar una visita presencial o virtual con un asesor, para que revises este y otros atributos del apartamento 🤝✨\"\n  },\n  {\n    \"id\": \"pvv_resumen_general\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"proyecto\",\n    \"tags\": [\n      \"resumen\",\n      \"general\",\n      \"spectrum\",\n      \"zona15\",\n      \"torre\",\n      \"apartamentos\",\n      \"parque vista verde\"\n    ],\n    \"pregunta\": \"¿Qué es Parque Vista Verde?\",\n    \"respuesta\": \"Parque Vista Verde es un proyecto residencial desarrollado por Spectrum, ubicado en Zona 15 de la Ciudad de Guatemala (Colonia Independencia). Con 377 apartamentos distribuidos en 18 niveles, ofrece modelos de 1, 2 y 3 habitaciones, incluyendo unidades especiales de nivel 1 con terraza privada. Cuenta con 2 lobbys de ingreso, 6 elevadores, 8 sótanos de estacionamiento, 32 parqueos de visita y más de 10 amenidades. Fecha estimada de entrega: Noviembre 2026. Sitio web: https://parquevistaverde.com.gt/\\n\\n⭐ ENTREGA ESTE AÑO — Es uno de los proyectos más próximos a entregarse de Spectrum. Ideal para quienes buscan mudarse pronto.\"\n  },\n  {\n    \"id\": \"pvv_diferenciadores\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"proyecto\",\n    \"tags\": [\n      \"diferenciadores\",\n      \"ventajas\",\n      \"por que elegir\",\n      \"valor agregado\",\n      \"entrega 2026\",\n      \"mudarse pronto\",\n      \"este año\"\n    ],\n    \"pregunta\": \"¿Por qué elegir Parque Vista Verde sobre otros proyectos?\",\n    \"respuesta\": \"Parque Vista Verde destaca por:\\n- ⭐ Entrega Noviembre 2026 — el proyecto más próximo a entregarse de Spectrum en Zona 15. Si buscas mudarte este año, es la mejor opción.\\n- Ubicación privilegiada en Zona 15 (Colonia Independencia), área residencial consolidada y tranquila.\\n- Modelos únicos de nivel 1 con terraza privada — difíciles de encontrar en proyectos verticales.\\n- Aval FHA — enganche desde el 5%, la opción más accesible de financiamiento.\\n- Más de 10 amenidades premium.\\n- Respaldo de Spectrum: desarrolladora con amplia trayectoria en Guatemala.\"\n  },\n  {\n    \"id\": \"pvv_ubicacion_direccion\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"ubicacion\",\n    \"tags\": [\n      \"ubicacion\",\n      \"direccion\",\n      \"zona15\",\n      \"como llegar\",\n      \"donde queda\",\n      \"colonia independencia\"\n    ],\n    \"pregunta\": \"¿Dónde está ubicado Parque Vista Verde? ¿Cuál es la dirección?\",\n    \"respuesta\": \"Parque Vista Verde está ubicado en 15 AVENIDA 03-09, COLONIA INDEPENDENCIA, ZONA 15, Guatemala. Es una zona residencial consolidada con acceso fluido a los principales puntos de la ciudad. Sitio web: https://parquevistaverde.com.gt/\"\n  },\n  {\n    \"id\": \"pvv_ubicacion_accesos\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"ubicacion\",\n    \"tags\": [\n      \"accesos\",\n      \"rutas\",\n      \"15 avenida\",\n      \"valle verde\",\n      \"zona10\",\n      \"zona13\",\n      \"zona14\",\n      \"zona15\"\n    ],\n    \"pregunta\": \"¿Cómo se llega a Parque Vista Verde? ¿Qué accesos tiene?\",\n    \"respuesta\": \"Parque Vista Verde se ubica en Colonia Independencia, Zona 15. Los accesos principales son: acceso por 15 avenida (Colonia Independencia), frente a 3ra Calle, frente a Valle Verde, y conectividad con zonas 10, 13 y 14.\"\n  },\n  {\n    \"id\": \"pvv_desarrollador_spectrum\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"desarrollador\",\n    \"tags\": [\n      \"spectrum\",\n      \"desarrollador\",\n      \"trayectoria\",\n      \"proyectos\",\n      \"confianza\",\n      \"experiencia\"\n    ],\n    \"pregunta\": \"¿Quién desarrolla Parque Vista Verde? ¿Qué experiencia tiene Spectrum?\",\n    \"respuesta\": \"Spectrum es el desarrollador de Parque Vista Verde. Tiene amplia trayectoria en el mercado inmobiliario guatemalteco con múltiples proyectos en diferentes categorías.\"\n  },\n  {\n    \"id\": \"pvv_desarrollador_avales\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"desarrollador\",\n    \"tags\": [\n      \"aval\",\n      \"garantia\",\n      \"bancos\",\n      \"confianza\",\n      \"inspeccion\",\n      \"seguro\",\n      \"normativas\"\n    ],\n    \"pregunta\": \"¿Parque Vista Verde tiene avales o garantías? ¿Es un proyecto seguro?\",\n    \"respuesta\": \"Sí. Parque Vista Verde cumple con normativas vigentes establecidas por las Instituciones de Gobierno de Guatemala. Cuenta con el aval de las principales entidades bancarias del país, incluye certificado de garantía para las unidades de vivienda por un plazo establecido, y tiene proceso de atención a solicitudes de servicio post-entrega a través de distintos canales de comunicación.\"\n  },\n  {\n    \"id\": \"pvv_programa_conviviendo\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"desarrollador\",\n    \"tags\": [\n      \"conviviendo\",\n      \"comunidad\",\n      \"valor propiedad\",\n      \"areas comunes\",\n      \"gestion social\"\n    ],\n    \"pregunta\": \"¿Qué es Conviviendo by Spectrum?\",\n    \"respuesta\": \"Conviviendo by Spectrum es un programa de gestión social que impulsa comunidades organizadas, funcionales y sostenibles. Fortalece la convivencia y el buen uso de áreas comunes, mejora la estabilidad operativa del proyecto y contribuye a que el valor de la propiedad crezca con el tiempo.\"\n  },\n  {\n    \"id\": \"pvv_programa_sostenible\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"desarrollador\",\n    \"tags\": [\n      \"sostenible\",\n      \"medio ambiente\",\n      \"energia\",\n      \"agua\",\n      \"desechos\"\n    ],\n    \"pregunta\": \"¿Parque Vista Verde tiene algún programa de sostenibilidad?\",\n    \"respuesta\": \"Sí. Spectrum Sostenible es un programa de gestión responsable de desechos para una Guatemala más limpia y sostenible.\"\n  },\n  {\n    \"id\": \"pvv_modelos_general\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"modelos\",\n    \"tags\": [\n      \"modelos\",\n      \"tipologias\",\n      \"habitaciones\",\n      \"metrajes\",\n      \"resumen\",\n      \"cual elegir\"\n    ],\n    \"pregunta\": \"¿Cuáles son los modelos disponibles en Parque Vista Verde?\",\n    \"respuesta\": \"Parque Vista Verde ofrece modelos estándar (niveles 2-18) y unidades especiales de nivel 1 con terraza privada.\\n\\nModelos estándar:\\n- S40: 1 habitación (1 parqueo carro + 1 moto)\\n- S54: 2 habitaciones (2 parqueos tándem)\\n- S56: 2 habitaciones (2 parqueos tándem)\\n- S70: 3 habitaciones (2 parqueos tándem)\\n- S72: 3 habitaciones (2 parqueos tándem)\\n- S74: 3 habitaciones (2 parqueos tándem)\\n- S91A: 3 habitaciones (2 parqueos tándem)\\n- S91B: 3 habitaciones (2 parqueos tándem)\\n- S92: 3 habitaciones (2 parqueos tándem)\\n- S93: 3 habitaciones (2 parqueos tándem)\\n\\nUnidades especiales nivel 1: S113 (3 hab + terraza 37 m²), S54 Apto 104 (2 hab + terraza 23.4 m²).\"\n  },\n  {\n    \"id\": \"pvv_modelo_1hab\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"modelos\",\n    \"tags\": [\n      \"1 habitacion\",\n      \"1 dormitorio\",\n      \"s40\",\n      \"modelo pequeño\",\n      \"profesionales\",\n      \"inversion\"\n    ],\n    \"pregunta\": \"¿Tienen apartamentos de 1 habitación en Parque Vista Verde?\",\n    \"respuesta\": \"Sí. El modelo S40 es de 1 habitación. Incluye: dormitorio master con closet, 1 baño completo, sala, cocina-comedor, balcón, closet de lavandería, 1 parqueo de carro y 1 parqueo de moto. Ideal para jóvenes profesionales o como inversión.\"\n  },\n  {\n    \"id\": \"pvv_modelo_2hab\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"modelos\",\n    \"tags\": [\n      \"2 habitaciones\",\n      \"2 dormitorios\",\n      \"s54\",\n      \"s56\",\n      \"modelo mediano\",\n      \"parejas\"\n    ],\n    \"pregunta\": \"¿Tienen apartamentos de 2 habitaciones en Parque Vista Verde?\",\n    \"respuesta\": \"Sí. Parque Vista Verde ofrece 2 modelos de 2 habitaciones:\\n\\n- S54: Dormitorio principal con walk-in closet, 1 dormitorio secundario, 2 baños completos, sala, cocina-comedor, balcón, closet de lavandería. 2 parqueos en tándem.\\n- S56: 2 dormitorios, 2 baños completos, sala-comedor, cocina. 2 parqueos en tándem.\\n\\nIdeales para parejas o familias pequeñas.\"\n  },\n  {\n    \"id\": \"pvv_modelo_3hab\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"modelos\",\n    \"tags\": [\n      \"3 habitaciones\",\n      \"3 dormitorios\",\n      \"s70\",\n      \"s72\",\n      \"s74\",\n      \"s91\",\n      \"s92\",\n      \"s93\",\n      \"modelo grande\",\n      \"familia\"\n    ],\n    \"pregunta\": \"¿Tienen apartamentos de 3 habitaciones en Parque Vista Verde?\",\n    \"respuesta\": \"Sí. Parque Vista Verde ofrece múltiples modelos de 3 habitaciones:\\n\\n- S70: Dormitorio principal con walk-in closet, 2 secundarios, 2 baños, sala, cocina-comedor, balcón, lavandería. 2 parqueos tándem.\\n- S72: Dormitorio principal con walk-in closet, 2 secundarios, 2 baños, sala-comedor, cocina. 2 parqueos tándem.\\n- S74: 3 dormitorios, sala-comedor, cocina. 2 parqueos tándem.\\n- S91A: Dormitorio principal con walk-in closet, 2 secundarios, 2 baños, sala, sala familiar, cocina-comedor, lavandería. 2 parqueos tándem.\\n- S91B: Similar al S91A con sala-comedor y sala familiar.\\n- S92: Dormitorio principal con walk-in closet + baño privado, 2 secundarios, baño compartido, sala-comedor, sala familiar, cocina+comedor separados, balcón. 2 parqueos tándem.\\n- S93: 3 dormitorios, sala-comedor. 2 parqueos tándem.\"\n  },\n  {\n    \"id\": \"pvv_unidades_especiales_nivel1\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"modelos\",\n    \"tags\": [\n      \"nivel 1\",\n      \"terraza\",\n      \"especial\",\n      \"s113\",\n      \"exclusivo\"\n    ],\n    \"pregunta\": \"¿Qué unidades especiales de nivel 1 tiene Parque Vista Verde?\",\n    \"respuesta\": \"Parque Vista Verde tiene unidades especiales en el nivel 1 con terraza privada:\\n\\n- S113 (Apto 102): 3 habitaciones + dormitorio de servicio, 3 baños, cocina, comedor, sala, escritorio, terraza privada (37 m²), lavandería. 2 parqueos de carro.\\n- S54 (Apto 104): 2 habitaciones, 2 baños, cocina, comedor, sala, terraza privada (23.4 m²), lavandería. 2 parqueos de carro.\"\n  },\n  {\n    \"id\": \"pvv_precio_general\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"precios\",\n    \"tags\": [\n      \"precio\",\n      \"costo\",\n      \"cuanto cuesta\",\n      \"valor\",\n      \"quetzales\",\n      \"rango\"\n    ],\n    \"pregunta\": \"¿Cuánto cuesta un apartamento en Parque Vista Verde?\",\n    \"respuesta\": \"Los precios en Parque Vista Verde según número de habitaciones:\\n\\n🏠 1 habitación: desde 40 m² — desde Q1,105,000\\n🏠 2 habitaciones: desde 54 m² — desde Q1,488,000\\n🏠 3 habitaciones: desde 70 m² — desde Q1,538,000\\n\\nPara conocer disponibilidad específica y opciones de financiamiento, contacta con un asesor comercial de Spectrum.\"\n  },\n  {\n    \"id\": \"pvv_precio_reserva\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"precios\",\n    \"tags\": [\n      \"reserva\",\n      \"costo reserva\",\n      \"apartar\",\n      \"bloquear\",\n      \"como reservar\"\n    ],\n    \"pregunta\": \"¿Cómo puedo reservar un apartamento en Parque Vista Verde?\",\n    \"respuesta\": \"La reserva puede realizarse de dos formas:\\n1. A través del portal web oficial: https://parquevistaverde.com.gt/\\n2. Directamente con un asesor comercial de Spectrum.\\n\\nUna vez formalizada la reserva, la unidad queda bloqueada. Requiere formulario de reserva debidamente llenado y firmado.\"\n  },\n  {\n    \"id\": \"pvv_financiamiento_general\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"precios\",\n    \"tags\": [\n      \"financiamiento\",\n      \"credito\",\n      \"banco\",\n      \"hipoteca\",\n      \"enganche\",\n      \"mensualidad\",\n      \"cuota\",\n      \"bac\",\n      \"gyt\",\n      \"chn\",\n      \"banrural\",\n      \"industrial\"\n    ],\n    \"pregunta\": \"¿Con qué bancos se puede financiar un apartamento en Parque Vista Verde?\",\n    \"respuesta\": \"Parque Vista Verde cuenta con respaldo de las principales instituciones financieras de Guatemala:\\n- BAC Credomatic — Crédito hipotecario. Enganche desde el 10%.\\n- GyT Continental — Crédito hipotecario. Enganche desde el 10%.\\n- CHN — Crédito Hipotecario Nacional. Enganche desde el 10%.\\n- Banrural — Crédito hipotecario. Enganche desde el 10%.\\n- Banco Industrial — Crédito hipotecario. Enganche desde el 10%.\\n\\nUn asesor puede orientarte sobre el esquema más conveniente para tu caso.\"\n  },\n  {\n    \"id\": \"pvv_proceso_compra\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"proceso_compra\",\n    \"tags\": [\n      \"proceso compra\",\n      \"pasos\",\n      \"como comprar\",\n      \"compraventa\",\n      \"escritura\",\n      \"promesa\"\n    ],\n    \"pregunta\": \"¿Cuál es el proceso para comprar un apartamento en Parque Vista Verde?\",\n    \"respuesta\": \"El proceso de compra sigue estos pasos en orden:\\n1) Reserva — Bloquea la unidad elegida. Requiere formulario de reserva debidamente llenado y firmado.\\n2) Acuerdo de Compraventa — Documento que inicia formalmente el proceso de venta.\\n3) Formulario de Autorización de Referencias — Autoriza investigaciones en InforNet, EQUIFAX, TransUnion y WORLDCHECKONE.\\n4) Promesa de Compraventa — Contrato legal privado que establece derechos y obligaciones del comprador y vendedor.\\n5) Escritura Pública de Compraventa — Instrumento final que formaliza la transferencia de propiedad.\\n\\nAspectos legales importantes: Factura y escrituras deben coincidir en nombre del comprador. No se puede vender el derecho antes de escriturar. El IUSI es un pago obligatorio en Guatemala por bienes inmuebles.\"\n  },\n  {\n    \"id\": \"pvv_edificio_estructura\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"proyecto\",\n    \"tags\": [\n      \"torre\",\n      \"niveles\",\n      \"pisos\",\n      \"sotanos\",\n      \"estructura\",\n      \"cuantos apartamentos\",\n      \"elevadores\",\n      \"lobby\"\n    ],\n    \"pregunta\": \"¿Cuántas torres tiene Parque Vista Verde? ¿Cuántos niveles y apartamentos?\",\n    \"respuesta\": \"Parque Vista Verde cuenta con: 377 apartamentos, 18 niveles, 22 apartamentos por nivel típico, 2 lobbys de ingreso, 6 elevadores, 8 sótanos de estacionamiento y 32 parqueos de visita.\"\n  },\n  {\n    \"id\": \"pvv_fecha_entrega\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"proyecto\",\n    \"tags\": [\n      \"entrega\",\n      \"cuando\",\n      \"fecha\",\n      \"listo\",\n      \"mudarse\",\n      \"construccion\",\n      \"noviembre 2026\"\n    ],\n    \"pregunta\": \"¿Cuándo es la fecha de entrega de Parque Vista Verde?\",\n    \"respuesta\": \"La fecha estimada de entrega de Parque Vista Verde es Noviembre 2026.\"\n  },\n  {\n    \"id\": \"pvv_amenidades_lista\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"amenidades\",\n    \"tags\": [\n      \"amenidades\",\n      \"que tiene\",\n      \"servicios\",\n      \"comodidades\",\n      \"lista\",\n      \"10 amenidades\",\n      \"piscina\",\n      \"gimnasio\"\n    ],\n    \"pregunta\": \"¿Qué amenidades tiene Parque Vista Verde?\",\n    \"respuesta\": \"Parque Vista Verde cuenta con más de 10 amenidades:\\n- Pool (Piscina) — Nivel 1\\n- Chef's Kitchen\\n- Sky Lounge\\n- Área de playground / juegos infantiles\\n- Gimnasio / Workout Area\\n- Área social\"\n  },\n  {\n    \"id\": \"pvv_amenidades_piscina\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"amenidades\",\n    \"tags\": [\n      \"piscina\",\n      \"nadar\",\n      \"agua\",\n      \"descanso\",\n      \"pool\"\n    ],\n    \"pregunta\": \"¿Parque Vista Verde tiene piscina?\",\n    \"respuesta\": \"Sí. Parque Vista Verde cuenta con piscina (Pool) ubicada en el Nivel 1 del proyecto.\"\n  },\n  {\n    \"id\": \"pvv_amenidades_gimnasio\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"amenidades\",\n    \"tags\": [\n      \"gimnasio\",\n      \"ejercicio\",\n      \"fitness\",\n      \"gym\",\n      \"workout\"\n    ],\n    \"pregunta\": \"¿Parque Vista Verde tiene gimnasio?\",\n    \"respuesta\": \"Sí. Parque Vista Verde cuenta con Workout Area (gimnasio) como amenidad incluida para los residentes.\"\n  },\n  {\n    \"id\": \"pvv_amenidades_skylounge\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"amenidades\",\n    \"tags\": [\n      \"sky lounge\",\n      \"rooftop\",\n      \"vistas\",\n      \"terraza\",\n      \"lounge\"\n    ],\n    \"pregunta\": \"¿Parque Vista Verde tiene Sky Lounge?\",\n    \"respuesta\": \"Sí. Parque Vista Verde tiene Sky Lounge, un espacio de descanso con vistas panorámicas.\"\n  },\n  {\n    \"id\": \"pvv_acabados\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"especificaciones\",\n    \"tags\": [\n      \"acabados\",\n      \"piso\",\n      \"cocina\",\n      \"cuarzo\",\n      \"ventanas\",\n      \"cerradura\",\n      \"materiales\"\n    ],\n    \"pregunta\": \"¿Qué acabados tienen los apartamentos de Parque Vista Verde?\",\n    \"respuesta\": \"Los apartamentos de Parque Vista Verde incluyen los siguientes acabados:\\n- Piso cerámico color gris en áreas sociales\\n- Piso laminado en sala\\n- Ventanería de aluminio negro con vidrio de cámara (habitaciones) y simple (áreas comunes)\\n- Muros y cielos con acabado alisado\\n- Closets de melamina con puertas\\n- Puertas MDF texturizadas color café o similar\\n- Cerradura digital (chapa electrónica) en puerta principal\\n- Gabinetes aéreos y de base de melamina en cocina\\n- Top de cuarzo en cocina\\n- Salpicadera en cocina\\n- Grifería de monomando cromada\\n- Iluminación con ojos de buey\\n- Zócalo de piso\\n- Ductos secos para aire acondicionado en dormitorios\\n- Cabeza de ducha redonda o similar\\n- Lavamanos rectangular de submontar color blanco\\n- Muros interiores de tablayeso\"\n  },\n  {\n    \"id\": \"pvv_parqueos\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"proyecto\",\n    \"tags\": [\n      \"parqueo\",\n      \"estacionamiento\",\n      \"sotano\",\n      \"visita\",\n      \"moto\",\n      \"tandem\"\n    ],\n    \"pregunta\": \"¿Cómo son los parqueos en Parque Vista Verde?\",\n    \"respuesta\": \"Parque Vista Verde cuenta con 8 sótanos de estacionamiento y 32 parqueos de visita. La distribución por modelo es:\\n- Modelos de 1 hab (S40): 1 parqueo de carro + 1 parqueo de moto\\n- Modelos de 2 y 3 hab: 2 parqueos en tándem\\n- Unidad S112 (Apto 101): 3 parqueos de carro\"\n  },\n  {\n    \"id\": \"pvv_mantenimiento_monto\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"mantenimiento\",\n    \"tags\": [\n      \"cuota mantenimiento\",\n      \"monto\",\n      \"cuanto cuesta\",\n      \"mensualidad\",\n      \"cuanto pago\",\n      \"1.90\"\n    ],\n    \"pregunta\": \"¿Cuánto es la cuota de mantenimiento en Parque Vista Verde?\",\n    \"respuesta\": \"La cuota de mantenimiento en Parque Vista Verde es de $1.90 por metro cuadrado mensual.\"\n  },\n  {\n    \"id\": \"pvv_mantenimiento_que_cubre\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"mantenimiento\",\n    \"tags\": [\n      \"cuota mantenimiento\",\n      \"que incluye\",\n      \"que cubre\",\n      \"areas comunes\",\n      \"servicios incluidos\"\n    ],\n    \"pregunta\": \"¿Qué cubre la cuota de mantenimiento en Parque Vista Verde?\",\n    \"respuesta\": \"La cuota de mantenimiento cubre:\\n- Energía eléctrica de torres y áreas comunes\\n- Extracción de basura\\n- Agua\\n- Servicio de comunicaciones electrónicas\\n- Fumigación y aromaterapia en áreas comunes\\n- Mantenimiento de planta de tratamiento\\n- Extintores y elevadores\\n- Mantenimiento de amenidades (incluyendo piscina)\\n- Cámaras de seguridad\\n- Sistema de bombeo\\n- Personal: administración, recepción, guardias, mantenimiento, jardinería, limpieza\\n- Seguro contra incendio y responsabilidad civil\"\n  },\n  {\n    \"id\": \"pvv_mantenimiento_pago\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"mantenimiento\",\n    \"tags\": [\n      \"donde pagar\",\n      \"pago mantenimiento\",\n      \"portal web\",\n      \"servipagos\"\n    ],\n    \"pregunta\": \"¿Dónde puedo pagar la cuota de mantenimiento de Parque Vista Verde?\",\n    \"respuesta\": \"La cuota de mantenimiento se puede pagar en:\\n- Portal web oficial: https://parquevistaverde.com.gt/\\n- SerViPagos\"\n  },\n  {\n    \"id\": \"pvv_cerraduras\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"especificaciones\",\n    \"tags\": [\n      \"cerradura\",\n      \"chapa\",\n      \"electronica\",\n      \"digital\",\n      \"seguridad puerta\"\n    ],\n    \"pregunta\": \"¿Parque Vista Verde tiene cerraduras eléctricas?\",\n    \"respuesta\": \"Sí. Todos los apartamentos de Parque Vista Verde incluyen cerradura digital (chapa electrónica) en la puerta principal.\"\n  },\n  {\n    \"id\": \"pvv_faq_fha\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"precios\",\n    \"tags\": [\n      \"fha\",\n      \"hipoteca asegurada\",\n      \"primera vivienda\"\n    ],\n    \"pregunta\": \"¿El proyecto acepta FHA?\",\n    \"respuesta\": \"Consultar con el equipo comercial de Spectrum disponibilidad de FHA para este proyecto.\"\n  },\n  {\n    \"id\": \"pvv_contacto\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"contacto\",\n    \"tags\": [\n      \"contacto\",\n      \"telefono\",\n      \"whatsapp\",\n      \"web\",\n      \"asesor\",\n      \"comunicacion\",\n      \"agendar cita\"\n    ],\n    \"pregunta\": \"¿Cómo puedo contactar a Parque Vista Verde o agendar una cita?\",\n    \"respuesta\": \"Para reservar tu apartamento, agendar una cita o resolver cualquier duda, visita https://parquevistaverde.com.gt/ o contacta directamente a un asesor comercial de Spectrum.\"\n  },\n  {\n    \"id\": \"pvv_apartamento_modelo\",\n    \"proyecto\": \"PVV\",\n    \"categoria\": \"contacto\",\n    \"tags\": [\n      \"apartamento modelo\",\n      \"showroom\",\n      \"sala de ventas\",\n      \"centro de experiencia\",\n      \"donde ver\",\n      \"visitar\",\n      \"oakland mall\",\n      \"como llegar sala ventas\",\n      \"direccion sala ventas\"\n    ],\n    \"pregunta\": \"¿Dónde puedo ver el apartamento modelo de Parque Vista Verde? ¿Tienen showroom o sala de ventas?\",\n    \"respuesta\": \"Contamos con un apartamento modelo en nuestro Centro de Experiencia, ubicado en Oakland Place, sótano 2, isla norte, Ciudad de Guatemala. 📍\\nSerá un gusto recibirte y brindarte una asesoría personalizada para que conozcas cada detalle del proyecto. ¡Estamos para servirte!\"\n  }\n]",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -272,
+        -608
+      ],
+      "id": "6315e50f-b459-4b1e-b93a-40fd2f036fc2",
+      "name": "LISTA de CHUNKS"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "mongoCollection": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "embedding": "spectrum_embedding",
+        "vectorIndexName": "spectrum_vector_index",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreMongoDBAtlas",
+      "typeVersion": 1.3,
+      "position": [
+        176,
+        -608
+      ],
+      "id": "310477ca-75df-4b6b-a51e-80f78ce14cf4",
+      "name": "MongoDB Atlas Vector Store CHUNKS",
+      "credentials": {
+        "mongoDb": {
+          "id": "UzcANqeDFO1QLbfd",
+          "name": "SPECTRUM - CENTRALIZADO"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -496,
+        -608
+      ],
+      "id": "e5075db2-8f3e-4d98-85e0-7a61298c6f20",
+      "name": "When clicking ‘Execute workflow’"
+    }
+  ],
+  "connections": {
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "MongoDB Atlas Vector Store CHUNKS",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader1": {
+      "ai_document": [
+        [
+          {
+            "node": "MongoDB Atlas Vector Store CHUNKS",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "MongoDB Atlas Vector Store CHUNKS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LISTA de CHUNKS": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "LISTA de CHUNKS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"
+  }
+}
