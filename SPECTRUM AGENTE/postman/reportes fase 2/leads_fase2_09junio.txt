@@ -1,0 +1,83 @@
+REPORTE LEADS FASE 2 — 9 DE JUNIO 2026
+Fuente: MongoDB users_fase_2 x users (cruce por telefono)
+Generado: 2026-06-10
+
+Total leads contactados : 33
+Contestaron al bot      :  5  (15.2%)
+No contestaron          : 28  (84.8%)
+
+[C] = contesto al bot   [ ] = no contesto   [!] = fuera de horario
+
+================================================================================
+PMAR — 15 leads | 3 contestaron | 12 no contestaron
+================================================================================
+
+  [C]     José García                         +50232343600     josepagavw@gmail.com                     06:58 GT   ultima: 07:37 GT
+  [C]     Rocio Salazar                       +50257153015     rociosalazar1510@gmail.com               21:19 GT   ultima: 21:24 GT
+  [C]     Mriko Asturias                      +50231348020     mirkoa.9@hotmail.com                     22:26 GT   ultima: 22:39 GT
+
+  [ ]     Nancy Leal                          +50230285641     nanlwug21@hotmail.com                    03:16 GT
+  [ ]     Sonia Crz                           +50256988124     soniacruz1504@gmail.com                  07:15 GT
+  [ ] [!] Jenniffer Montenegro                +50259266114     montenegrojenniffer010@gmail.com         10:39 GT
+  [ ] [!] Jasmin Perez                        +50251105879     nidiacont115@gmail.com                   17:25 GT
+  [ ] [!] Hugo Gonzalez                       +50239054111     hugo.gonzalez191063@gmail.com            17:43 GT
+  [ ] [!] Julio Garcia Velasquez              +50255134824     juliogv85@gmail.com                      19:20 GT
+  [ ]     Luis Enrique Matute Torres          +50230283378     le.matute@gmail.com                      21:07 GT
+  [ ]     Paola Cristina                      +50234339598     paolacristinavil@gmail.com               22:08 GT
+  [ ]     Juan Carlos Montepeque              +50254181592     juankamontepeque@gmail.com               22:17 GT
+  [ ]     Manuel Carrillo                     +50242121986     blacknightawake@gmail.com                22:42 GT
+  [ ]     Milton Rivas                        +50250186223     milton.riari06@gmail.com                 23:09 GT
+  [ ]     Lu González                         +50242153774     analuhcia@icloud.com                     23:21 GT
+
+================================================================================
+PPO — 5 leads | 1 contestaron | 4 no contestaron
+================================================================================
+
+  [C] [!] Douglas Balcárcel                   +50240289292     dbbalcarcel@gmail.com                    20:31 GT   ultima: 20:35 GT
+
+  [ ] [!] Evelyn Samayoa                      +50255544108     evelyn.samayoa@gmail.com                 16:46 GT
+  [ ] [!] Fredy Ramirez                       +50259514192     fredyramirezoro@gmail.com                19:42 GT
+  [ ]     Emilio Toc                          +50255608881     emiliotoc24@gmail.com                    21:46 GT
+  [ ]     Luis Duarte                         +50250717963     luiduartero@gmail.com                    23:20 GT
+
+================================================================================
+PPOL — 6 leads | 1 contestaron | 5 no contestaron
+================================================================================
+
+  [C] [!] Jorge Mario Toc Bol                 +50254597796     jmariotocbol@outlook.com                 18:19 GT   ultima: 16:51 GT
+
+  [ ]     Lucia Godoy De Fahsen               +50259053185     algodoy@icloud.com                       05:20 GT
+  [ ] [!] Estuardo Sazo Marroquin             +50254444391     estusazo@gmail.com                       10:02 GT
+  [ ] [!] Cindy Veliz                         +50251276007     cindy_pao123@hotmail.com                 10:21 GT
+  [ ] [!] Gladys Soto                         +50257094076     gnsg16@gmail.com                         14:12 GT
+  [ ] [!] Teresa Zapeta                       +50235698780     silviamoraleszapeta@gmail.com            14:21 GT
+
+================================================================================
+PSB — 2 leads | 0 contestaron
+================================================================================
+
+  [ ] [!] Katherine Barrientos                +50258657548     kathybarrientos46@gmail.com              13:57 GT
+  [ ] [!] Kevin Galvez                        +50240460007     anthony97.alcantara@gmail.com            14:39 GT
+
+================================================================================
+PVV — 5 leads | 0 contestaron
+================================================================================
+
+  [ ]     Diego Enrique Serrano               +50249401111     diiegomar97@gmail.com                    00:31 GT
+  [ ]     Alfredo Trejo                       +50241549218     edwintrejo361@gmail.com                  04:38 GT
+  [ ] [!] Blanca Alicia Vásquez               +50232653245     alisvasquez@hotmail.es                   17:55 GT
+  [ ]     Mario Antonio Galindo               +50231019986     maitogalindo@gmail.com                   21:42 GT
+  [ ]     Oscar-Cuy Guillen                   +16095787800     oscarguillen3@msn.com                    22:53 GT
+
+================================================================================
+RESUMEN
+================================================================================
+
+  Proyecto   Total   Contestaron   No contest.   % respuesta
+  PMAR          15            3              12          20.0%
+  PPO            5            1               4          20.0%
+  PPOL           6            1               5          16.7%
+  PSB            2            0               2          0.0%
+  PVV            5            0               5          0.0%
+  TOTAL         33            5              28          15.2%
+

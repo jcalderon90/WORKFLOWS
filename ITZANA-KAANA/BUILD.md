@@ -9,11 +9,11 @@
 | Propiedad | Property ID | Sistema | Booking URL |
 | :-- | :-- | :-- | :-- |
 | Itz'ana | `115719` | Booking engine propio | `https://reservations.itzanabelize.com/book/accommodations` |
-| Ka'ana | `115718` | TravelClick | `https://bookings.travelclick.com/115718#/guestsandrooms` |
+| Ka'ana | `115718` | Booking engine propio | `https://reservations.kaanabelize.com/book/accommodations` |
 
 ---
 
-## Estado general — actualizado 2026-06-10
+## Estado general — actualizado 2026-06-10 (deep links ✅)
 
 ### Itz'ana (Kaan) — Fase 1
 
@@ -24,7 +24,7 @@
 | 3 | `workflows/Itzana_Vectorizar_KB.json` | Workflow n8n | ✅ Listo — **36 docs** vectorizados en colección `documents` |
 | 4 | `workflows/KB_SEARCH.json` | Workflow n8n (herramienta RAG) | ✅ Multi-propiedad — ID: `rofQe6ZGW3OpFqcb`, renombrado de "ITZ KB_SEARCH" a "KB_SEARCH" |
 | 5 | `workflows/Itzana_Notifications.json` | Workflow n8n (herramienta email) | ✅ Listo — Gmail (Soporte Garoo), HTML dinámico, 5 categorías. Emails de prueba: jorge.calderon@garooinc.com |
-| 6 | `workflows/PRINCIPAL.json` | Workflow n8n (orquestador) | ✅ Multi-propiedad — `Property Config` + `Set Propiedad` (lee `hoteles_propiedad` de ManyChat) + `kb_search` tool dinámico |
+| 6 | `workflows/PRINCIPAL.json` | Workflow n8n (orquestador) | ✅ Multi-propiedad — `Property Config` + `Set Propiedad` (lee `hoteles_propiedad` de ManyChat) + `kb_search` tool dinámico + deep links dinámicos (2026-06-10) |
 | 7 | Pruebas end-to-end | QA | ✅ Pasadas — flujo ManyChat → n8n → respuesta funcional |
 
 #### Gaps KB Itz'ana — room types faltantes (contenido pendiente del hotel)
@@ -93,27 +93,26 @@ Una sola cuenta ManyChat (`fb807994325905660`). El campo `hoteles_propiedad` en 
 
 Webhook URL n8n: `https://agentsprod.redtec.ai/webhook/hotels-agent`
 
-### Deep links — funcionalidad pendiente de implementar
+### Deep links — ✅ Implementado 2026-06-10
 
-**Spec:** `docs/belize-hotels-chat-unified-flow.mmd` — marcado como **PRIMARY** en Fase 1.
+El agente genera deep links pre-llenados cuando el usuario elige "Reservar ahora" (PASO 7).
 
-El objetivo es construir un URL de reserva pre-llenado con los datos capturados en la conversación:
+**Formato generado:**
 ```
-https://reservations.itzanabelize.com/book/accommodations
-  ?hotel_id=115719
-  &room_type=<código>
-  &checkin=<checkin_capturado>
-  &checkout=<checkout_capturado>
-  &adults=<inferido de grupo_tipo>
-  &utm_source=kaan-chat
-  &utm_medium=manychat
-  &utm_campaign=itzana-f1   (o kaana-f1)
+https://reservations.{propiedad}belize.com/book/accommodations
+  ?HotelID={115719|115718}
+  &LanguageID=1
+  &Rooms=1
+  &DateIn=MM%2FDD%2FYYYY
+  &DateOut=MM%2FDD%2FYYYY
+  &Adults={adultos_capturado}
+  &Children={ninos_capturado}
 ```
 
-El agente ya captura `checkin_capturado`, `checkout_capturado` y `grupo_tipo`. **Lo que falta:**
-1. Confirmar que los booking engines aceptan estos parámetros en el URL
-2. Mapeo de room types a códigos URL (ej. "Villa 1BR" → `VIL1BR`)
-3. Construir la lógica en `Parse Agent Output` que arme el link dinámico
+**Implementación:**
+- `Property Config` node: `hotel_id` (115719/115718) + `booking_link` base URL
+- Sistema prompt: captura `adultos_capturado` y `ninos_capturado` en PASO 4; usa `[BOOKING_LINK]` como placeholder en PASO 7
+- `Parse Agent Output`: construye URL desde campos capturados; reemplaza `[BOOKING_LINK]`; fallback a link base si no hay fechas
 
 ### Próxima fase — E-Concierge in-stay
 Ver spec en `docs/E-Concierge Itzana.md`. Agente separado para huéspedes ya hospedados:

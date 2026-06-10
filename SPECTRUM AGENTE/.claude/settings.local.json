@@ -75,7 +75,8 @@
       "Bash(py scripts/fill_plano_urls.py)",
       "Bash(py scripts/fix_plano_detection.py)",
       "mcp__mongodb__collection-schema",
-      "PowerShell(grep *)"
+      "PowerShell(grep *)",
+      "mcp__mongodb__count"
     ]
   },
   "enabledPlugins": {
