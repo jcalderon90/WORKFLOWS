@@ -374,6 +374,25 @@
     "respuesta": "Parque Portales cuenta con: Punto Central (lobby), Estudio Urbano (coworking), Piscina, Zona Infantil (interior), Juegos para niños (exterior), Sala Social, Espacio de Cine, Zona Familiar, Zona Activa (gimnasio), Cocina Abierta, Zona Café, Salones Sociales, Parrillas (nivel 24) y Terraza Mirador (nivel 24). También es pet friendly."
   },
   {
+    "id": "pp_amenidades_cobro",
+    "proyecto": "PPO",
+    "categoria": "amenidades",
+    "tags": [
+      "amenidades",
+      "cobro",
+      "costo",
+      "precio",
+      "pago",
+      "gratis",
+      "por separado",
+      "cuota",
+      "se pagan",
+      "cuanto cuesta usar"
+    ],
+    "pregunta": "¿Las amenidades tienen costo adicional o se cobran por separado?",
+    "respuesta": "Hay amenidades que todos los residentes pueden disfrutar incluidas en la cuota de mantenimiento. Sin embargo, hay algunas que tienen un costo adicional. Para conocer exactamente cuáles son y sus tarifas, un asesor puede orientarte mejor en tu cita."
+  },
+  {
     "id": "pp_amenidades_nivel1",
     "proyecto": "PPO",
     "categoria": "amenidades",

@@ -332,6 +332,25 @@
     "respuesta": "Parque Vista Verde cuenta con más de 10 amenidades:\n- Pool (Piscina) — Nivel 1\n- Chef's Kitchen\n- Sky Lounge\n- Área de playground / juegos infantiles\n- Gimnasio / Workout Area\n- Área social"
   },
   {
+    "id": "pvv_amenidades_cobro",
+    "proyecto": "PVV",
+    "categoria": "amenidades",
+    "tags": [
+      "amenidades",
+      "cobro",
+      "costo",
+      "precio",
+      "pago",
+      "gratis",
+      "por separado",
+      "cuota",
+      "se pagan",
+      "cuanto cuesta usar"
+    ],
+    "pregunta": "¿Las amenidades tienen costo adicional o se cobran por separado?",
+    "respuesta": "Hay amenidades que todos los residentes pueden disfrutar incluidas en la cuota de mantenimiento. Sin embargo, hay algunas que tienen un costo adicional. Para conocer exactamente cuáles son y sus tarifas, un asesor puede orientarte mejor en tu cita."
+  },
+  {
     "id": "pvv_amenidades_piscina",
     "proyecto": "PVV",
     "categoria": "amenidades",

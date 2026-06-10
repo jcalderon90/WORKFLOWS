@@ -49,11 +49,11 @@ RAG sobre Atlas Vector Index. Filtra por `proyecto` (UPPERCASE). Retornado actua
 
 | Archivo | Código | Estado |
 |---|---|---|
-| `KBs/KB PVV.json` | `PVV` | Entrega Nov 2026. Jardín agotado. ⚠️ **Pendiente re-vectorizar** (cambios 2026-06-08) |
-| `KBs/KB PMAR.json` | `PMAR` | Único proyecto con tráfico aprobado |
-| `KBs/KB PPO.json` | `PPO` | Entrega Dic 2026 |
-| `KBs/KB PPOL.json` | `PPOL` | Sin tráfico activo |
-| `KBs/KB PSB.json` | `PSB` | Sin tráfico activo |
+| `KBs/KB PVV.json` | `PVV` | Entrega Nov 2026. Jardín agotado. ⚠️ **Pendiente re-vectorizar** (cambios 2026-06-08 + 2026-06-09) |
+| `KBs/KB PMAR.json` | `PMAR` | Único proyecto con tráfico aprobado. ⚠️ **Pendiente re-vectorizar** (cambios 2026-06-09) |
+| `KBs/KB PPO.json` | `PPO` | Entrega Dic 2026. ⚠️ **Pendiente re-vectorizar** (cambios 2026-06-09) |
+| `KBs/KB PPOL.json` | `PPOL` | Sin tráfico activo. ⚠️ **Pendiente re-vectorizar** (cambios 2026-06-09) |
+| `KBs/KB PSB.json` | `PSB` | Sin tráfico activo. ⚠️ **Pendiente re-vectorizar** (cambios 2026-06-09) |
 
 > ⚠️ Después de editar un KB, correr workflow `LLiVnT0M6xvDKive` en n8n para re-vectorizar.
 

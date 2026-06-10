@@ -419,6 +419,25 @@
     "respuesta": "Sotobosque Parque Boutique cuenta con más de 10 amenidades distribuidas en el edificio:\n\nNivel 01:\n- Drop Off\n- Entrance Hall (Lobby de ingreso)\n- Gourmet Kitchen\n- Coworking Space / Biblioteca\n- Private Meeting Room (Sala de reuniones privada)\n- Workout Area (Gimnasio)\n- Event Room (Salón de eventos)\n- Social Lounge\n- Garden Terrace (Terraza jardín)\n- Sports Lounge\n\nNivel 02:\n- Elevated Pool Deck (Piscina elevada con deck)\n\nNivel Superior:\n- Panoramic Lounge (Lounge con vista panorámica)"
   },
   {
+    "id": "sb_amenidades_cobro",
+    "proyecto": "PSB",
+    "categoria": "amenidades",
+    "tags": [
+      "amenidades",
+      "cobro",
+      "costo",
+      "precio",
+      "pago",
+      "gratis",
+      "por separado",
+      "cuota",
+      "se pagan",
+      "cuanto cuesta usar"
+    ],
+    "pregunta": "¿Las amenidades tienen costo adicional o se cobran por separado?",
+    "respuesta": "Hay amenidades que todos los residentes pueden disfrutar incluidas en la cuota de mantenimiento. Sin embargo, hay algunas que tienen un costo adicional. Para conocer exactamente cuáles son y sus tarifas, un asesor puede orientarte mejor en tu cita."
+  },
+  {
     "id": "sb_acabados",
     "proyecto": "PSB",
     "categoria": "especificaciones",

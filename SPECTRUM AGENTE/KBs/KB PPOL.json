@@ -323,6 +323,25 @@
     "respuesta": "Polanco Parque Boutique cuenta con 16 amenidades de primer nivel distribuidas en Nivel 01 y Nivel 21:\n\nNivel 01:\n- Drop Off\n- Lobby de ingreso\n- Private Dining (Comedor privado)\n- Grill Cabanas (Área de churrasqueras)\n- Children's Playground (Área infantil)\n- Lounge social\n- Pool (Piscina)\n- Spa\n- Coworking\n- Meeting Rooms (Salas de reuniones)\n- Gourmet Kitchen\n- Sports Lounge\n- Workout Area (Gimnasio)\n\nNivel 21 (Rooftop):\n- Panoramic Lounge con vistas panorámicas a la ciudad\n- Fire Pit"
   },
   {
+    "id": "pl_amenidades_cobro",
+    "proyecto": "PPOL",
+    "categoria": "amenidades",
+    "tags": [
+      "amenidades",
+      "cobro",
+      "costo",
+      "precio",
+      "pago",
+      "gratis",
+      "por separado",
+      "cuota",
+      "se pagan",
+      "cuanto cuesta usar"
+    ],
+    "pregunta": "¿Las amenidades tienen costo adicional o se cobran por separado?",
+    "respuesta": "Hay amenidades que todos los residentes pueden disfrutar incluidas en la cuota de mantenimiento. Sin embargo, hay algunas que tienen un costo adicional. Para conocer exactamente cuáles son y sus tarifas, un asesor puede orientarte mejor en tu cita."
+  },
+  {
     "id": "pl_acabados",
     "proyecto": "PPOL",
     "categoria": "especificaciones",

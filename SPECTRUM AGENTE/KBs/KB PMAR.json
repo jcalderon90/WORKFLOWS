@@ -434,6 +434,25 @@
         "respuesta": "Parque Mariscal cuenta con 16 amenidades en dos niveles. Nivel 01: Lobby/sala de espera, Business Center con Coworking, Sala de reuniones, Salón social interior y exterior, Chef's kitchen, Gimnasio, Área de yoga, Área de lectura, Garden park, Juegos para niños y Pet park. Nivel 22 Rooftop: Piscina climatizada con vistas a volcanes (Pacaya, Fuego y Agua), Deck de piscina, Panoramic Lounge, Sport Lounge, Grill Cabaña y Vestidores/baños exclusivos."
     },
     {
+        "id": "pm_amenidades_cobro",
+        "proyecto": "PMAR",
+        "categoria": "amenidades",
+        "tags": [
+            "amenidades",
+            "cobro",
+            "costo",
+            "precio",
+            "pago",
+            "gratis",
+            "por separado",
+            "cuota",
+            "se pagan",
+            "cuanto cuesta usar"
+        ],
+        "pregunta": "¿Las amenidades tienen costo adicional o se cobran por separado?",
+        "respuesta": "Hay amenidades que todos los residentes pueden disfrutar incluidas en la cuota de mantenimiento. Sin embargo, hay algunas que tienen un costo adicional. Para conocer exactamente cuáles son y sus tarifas, un asesor puede orientarte mejor en tu cita."
+    },
+    {
         "id": "pm_amenidades_nivel01",
         "proyecto": "PMAR",
         "categoria": "amenidades",

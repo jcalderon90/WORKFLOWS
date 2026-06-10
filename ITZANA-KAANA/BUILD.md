@@ -1,35 +1,119 @@
-# Itz'ana — Guía de construcción del Agente de IA
+# Itz'ana + Ka'ana — Guía de construcción del Agente de IA
 
 **Bot:** Concierge pre-reserva en ManyChat (Instagram + Facebook + WhatsApp)  
-**Cuenta ManyChat:** `fb807994325905660` (una sola cuenta, una sola propiedad por ahora)  
+**Cuenta ManyChat:** `fb807994325905660` (una sola cuenta, multi-propiedad — diferenciación por campo `propiedad` en el payload)  
 **Arquitectura base:** SPECTRUM AGENTE (`n8n-workflows/SPECTRUM AGENTE/Agente Unificado/`)
+
+## Property IDs
+
+| Propiedad | Property ID | Sistema | Booking URL |
+| :-- | :-- | :-- | :-- |
+| Itz'ana | `115719` | Booking engine propio | `https://reservations.itzanabelize.com/book/accommodations` |
+| Ka'ana | `115718` | TravelClick | `https://bookings.travelclick.com/115718#/guestsandrooms` |
 
 ---
 
-## Estado general — actualizado 2026-06-04 (sesión tarde)
+## Estado general — actualizado 2026-06-10
+
+### Itz'ana (Kaan) — Fase 1
 
 | # | Componente | Tipo | Estado |
 | :-- | :-- | :-- | :-- |
-| 1 | `KBs/KB_ITZANA.json` | Archivo de contenido | ✅ Listo — **36 chunks** (actualizado con horarios, WiFi, políticas, mascotas, equipos) |
+| 1 | `KBs/KB_ITZANA.json` | Archivo de contenido | ✅ Listo — **36 chunks** ⚠️ Faltan 5 room types (ver gaps abajo) |
 | 2 | MongoDB Atlas (DB + índice vectorial + credencial) | Infraestructura | ✅ Listo — credencial `HOTELS` (`Msw0gTK8f8b192VX`) |
-| 3 | `workflows/Itzana_Vectorizar_KB.json` | Workflow n8n | ✅ Listo — **36 docs** re-vectorizados en colección `documents` |
-| 4 | `workflows/Itzana_KB_Search.json` | Workflow n8n (herramienta RAG) | ✅ Importado en n8n — ID: `rofQe6ZGW3OpFqcb` |
+| 3 | `workflows/Itzana_Vectorizar_KB.json` | Workflow n8n | ✅ Listo — **36 docs** vectorizados en colección `documents` |
+| 4 | `workflows/KB_SEARCH.json` | Workflow n8n (herramienta RAG) | ✅ Multi-propiedad — ID: `rofQe6ZGW3OpFqcb`, renombrado de "ITZ KB_SEARCH" a "KB_SEARCH" |
 | 5 | `workflows/Itzana_Notifications.json` | Workflow n8n (herramienta email) | ✅ Listo — Gmail (Soporte Garoo), HTML dinámico, 5 categorías. Emails de prueba: jorge.calderon@garooinc.com |
-| 6 | `workflows/PRINCIPAL.json` | Workflow n8n (orquestador) | ✅ Completo — JSON.stringify fix, tool descriptions en español, inputs completos a Notifications |
+| 6 | `workflows/PRINCIPAL.json` | Workflow n8n (orquestador) | ✅ Multi-propiedad — `Property Config` + `Set Propiedad` (lee `hoteles_propiedad` de ManyChat) + `kb_search` tool dinámico |
 | 7 | Pruebas end-to-end | QA | ✅ Pasadas — flujo ManyChat → n8n → respuesta funcional |
+
+#### Gaps KB Itz'ana — room types faltantes (contenido pendiente del hotel)
+
+| Room Name | Código PMS | Estado |
+| :-- | :-- | :-- |
+| Coral Caye - Private Island | CORAL | ❌ Falta chunk en KB |
+| One Bedroom Marina Villa | NA1B | ❌ Falta chunk en KB |
+| Two Bedroom Marina Villa | NA2B | ❌ Falta chunk en KB |
+| Three Bedroom Marina Villa | NA3B | ❌ Falta chunk en KB |
+| Four Bedroom Marina Villa | NA4B | ❌ Falta chunk en KB |
+| One Bedroom Oceanfront Villa | BDV | ⚠️ Aclarar si es distinta a la 1BR actual |
+| ~~Deluxe Oceanfront~~ | ~~DLXOF~~ | — Fuera del pool de rentas, no incluir |
+| ~~Five-Bedroom Marina Villa~~ | ~~NA5B~~ | — Fuera del pool de rentas, no incluir |
+
+### Ka'ana — Fase 1
+
+| # | Componente | Tipo | Estado |
+| :-- | :-- | :-- | :-- |
+| 1 | `KBs/KB_KAANA.json` | Archivo de contenido | ✅ Estructurado — **21 chunks** ⚠️ Faltan 4 Signature Villas (ver gaps abajo) |
+| 2 | MongoDB Atlas (vectorización) | Infraestructura | ✅ Vectorizado — chunks con `propiedad: "KAA"` en colección `documents` |
+| 3 | `workflows/Kaana_Vectorizar_KB.json` | Workflow n8n | — No necesario (se usó el workflow existente) |
+| 4 | PRINCIPAL multi-propiedad | Configuración n8n | ✅ Listo — `Property Config`, `Set Propiedad` (lee `hoteles_propiedad`), `kb_search` tool dinámico |
+| 5 | Agregar emails Ka'ana a Notifications | Configuración n8n | ⬜ Pendiente — emails bodas, empleo, escalamiento |
+| 6 | Configurar flow Ka'ana en ManyChat | ManyChat | ⬜ Pendiente — custom field `hoteles_propiedad: "KAA"` en el flow |
+
+#### Gaps KB Ka'ana — room types faltantes (contenido pendiente del hotel)
+
+| Room Name | Código PMS | Estado |
+| :-- | :-- | :-- |
+| One Bedroom Signature Villa | VILLA 3 | ❌ Falta chunk en KB |
+| Two Bedroom Signature Villa | 2BR VILLA | ❌ Falta chunk en KB |
+| Three Bedroom Signature Villa | VILLA 6 | ❌ Falta chunk en KB |
+| Villa Signature Suite - Shared Pool & Garden | 3BR COMP | ❌ Falta chunk en KB |
 
 ---
 
 ## RETOMAR AQUI — Siguiente fase
 
-**Estado al 2026-06-04:** Sistema de Fase 1 (pre-booking / Kaan) **listo para producción** en cuanto lleguen los emails del hotel.
+**Estado al 2026-06-10:** Ambas propiedades técnicamente listas. Solo faltan configuraciones externas (ManyChat + emails del hotel).
 
-### Pendientes de contenido (bloqueados por hotel)
+### Para salir a producción — Itz'ana
 
 | # | Pendiente | Prioridad |
 | :-- | :-- | :-- |
-| P2 | Email de Mr. Diego (bodas/eventos) → actualizar `sendTo` en nodo "Email Bodas/Eventos" de Notifications | 🔴 Alta (pre-prod) |
-| P3 | Email de RRHH (empleo) → actualizar `sendTo` en nodo "Email Empleo" de Notifications | 🟠 Media (pre-prod) |
+| P1 | Email de Mr. Diego (bodas/eventos) → actualizar `sendTo` en nodo "Email Bodas/Eventos" de Notifications | 🔴 Alta |
+| P2 | Email de RRHH (empleo) → actualizar `sendTo` en nodo "Email Empleo" de Notifications | 🔴 Alta |
+| P3 | Configurar webhook de ManyChat → n8n (flow Itz'ana con `"propiedad": "ITZ"` en el body) | 🔴 Alta |
+
+### Para activar Ka'ana en el sistema
+
+El sistema es multi-propiedad. No se duplican workflows. **Todo el trabajo técnico de n8n está hecho.**
+
+| # | Tarea | Detalle | Estado |
+| :-- | :-- | :-- | :-- |
+| K1 | Completar KB_KAANA.json | Agregar 4 Signature Villas (contenido pendiente del hotel) | ⬜ Bloqueado por hotel |
+| K2 | Re-vectorizar KB_KAANA.json | Ejecutar workflow Vectorizar cuando KB esté completo | ⬜ Bloqueado por K1 |
+| K3 | Agregar emails Ka'ana a Notifications | Emails de bodas, empleo, escalamiento de Ka'ana | ⬜ Bloqueado por hotel |
+| K4 | Configurar flow Ka'ana en ManyChat | Custom field `hoteles_propiedad: "KAA"` en el flow | ⬜ Pendiente nuestro |
+
+### ManyChat — arquitectura multi-propiedad
+
+Una sola cuenta ManyChat (`fb807994325905660`). El campo `hoteles_propiedad` en los custom fields del usuario define la propiedad. PRINCIPAL lo lee en `Set Propiedad`:
+- Flow Itz'ana → `hoteles_propiedad: "ITZ"` (actualmente vacío → fallback a "ITZ" ✅)
+- Flow Ka'ana → `hoteles_propiedad: "KAA"`
+
+Webhook URL n8n: `https://agentsprod.redtec.ai/webhook/hotels-agent`
+
+### Deep links — funcionalidad pendiente de implementar
+
+**Spec:** `docs/belize-hotels-chat-unified-flow.mmd` — marcado como **PRIMARY** en Fase 1.
+
+El objetivo es construir un URL de reserva pre-llenado con los datos capturados en la conversación:
+```
+https://reservations.itzanabelize.com/book/accommodations
+  ?hotel_id=115719
+  &room_type=<código>
+  &checkin=<checkin_capturado>
+  &checkout=<checkout_capturado>
+  &adults=<inferido de grupo_tipo>
+  &utm_source=kaan-chat
+  &utm_medium=manychat
+  &utm_campaign=itzana-f1   (o kaana-f1)
+```
+
+El agente ya captura `checkin_capturado`, `checkout_capturado` y `grupo_tipo`. **Lo que falta:**
+1. Confirmar que los booking engines aceptan estos parámetros en el URL
+2. Mapeo de room types a códigos URL (ej. "Villa 1BR" → `VIL1BR`)
+3. Construir la lógica en `Parse Agent Output` que arme el link dinámico
 
 ### Próxima fase — E-Concierge in-stay
 Ver spec en `docs/E-Concierge Itzana.md`. Agente separado para huéspedes ya hospedados:
@@ -506,14 +590,51 @@ Texto de respuesta directamente (no JSON). El agente estructura la respuesta par
 
 ---
 
-## Notas y pendientes de contenido
+## Información pendiente de solicitar
 
-| # | Pendiente | Prioridad |
-| :-- | :-- | :-- |
-| P1 | Confirmar política de mascotas (contradictoria en transcripts) | Alta |
-| P2 | Email de Mr. Diego (bodas/eventos) — usando jorge.calderon@garooinc.com para pruebas | Alta |
-| P3 | Email de HR (empleo) | Media |
-| P4 | Confirmar campos exactos del payload de ManyChat que envía el bot actual | Alta |
-| P5 | Decidir modelo del agente: OpenAI `ITZANA` (gpt-4o) u OpenRouter (Claude) | Alta |
-| P6 | Contenido KB de Ka'ana (para 2ª propiedad, futuro) | Baja |
-| P7 | Horarios exactos del spa, restaurantes, piscinas (están como ejemplo en E-Concierge pero no en el Prompt) | Media |
+### Del hotel Itz'ana — urgente para salir al aire
+
+**1. 🔴 Email de la persona encargada de bodas y eventos**
+El bot ya detecta cuando un usuario pregunta por bodas o eventos y sabe que debe escalar esa consulta al equipo del resort. Para hacerlo, necesita saber a qué correo enviar esa notificación. Actualmente está configurado con un email de prueba. En cuanto tengamos el correo real, el bot queda listo.
+
+**2. 🔴 Email del área de Recursos Humanos (RRHH)**
+Mismo caso: cuando alguien le pregunta al bot sobre vacantes o empleo en el resort, el bot reenvía esa consulta por correo. Necesitamos el email donde el equipo de RRHH quiere recibir esas notificaciones.
+
+---
+
+### Del hotel Itz'ana — para mejorar las respuestas del bot
+
+**3. 🟠 Descripción de Coral Caye - Private Island**
+Este es probablemente el producto más premium del resort y actualmente no está en la base de conocimiento del bot. Si alguien pregunta por él, el bot no sabrá qué responder. Necesitamos una descripción del producto: qué incluye, capacidad, cómo se reserva, precio aproximado o link directo.
+
+**4. 🟠 Descripción de las 4 villas tipo Marina**
+Hay cuatro tipos de villa frente a la marina (1, 2, 3 y 4 dormitorios) que tampoco están en la base de conocimiento. Necesitamos descripción, capacidad y qué las diferencia de las villas frente al mar.
+
+**5. 🟡 Aclaración sobre One Bedroom Oceanfront Villa**
+En el sistema del hotel aparece este tipo de villa con un código distinto al de la Villa de 1 dormitorio que sí está documentada. ¿Son el mismo producto con nombres distintos, o son dos opciones diferentes? Esto para evitar que el bot dé información incorrecta o confusa.
+
+---
+
+### Del hotel Ka'ana — para activar el bot
+
+**6. 🔴 Emails de contacto del equipo Ka'ana**
+Al igual que Itz'ana, el bot de Ka'ana necesita saber a dónde enviar las consultas de bodas/eventos, empleo y escalamientos a humano. Con esos 3 correos, Ka'ana queda lista para activarse.
+
+**7. 🟠 Descripción de las 4 Signature Villas**
+Hay cuatro tipos de villa (1BR Signature, 2BR Signature, 3BR Signature y Villa Suite con jardín compartido) que no están en la base de conocimiento del bot. Necesitamos descripción, capacidad y diferencias entre ellas.
+
+---
+
+### Del equipo de tecnología del hotel — para una función clave del bot
+
+**8. 🔴 ¿El motor de reservas acepta parámetros en el link?**
+El bot está diseñado para enviarle al usuario un link de reserva personalizado que llegue pre-llenado con las fechas que el usuario mencionó durante la conversación, el tipo de habitación recomendada y el número de personas. Esto reduce la fricción: el usuario hace clic y la reserva ya tiene sus datos.
+
+Para que esto funcione, necesitamos que el equipo de IT o el proveedor del motor de reservas confirme si el sistema acepta links del tipo:
+```
+.../book/accommodations?room_type=VIL1BR&checkin=2026-07-15&checkout=2026-07-20&adults=2
+```
+Y si es así, cuáles son exactamente los nombres de esos parámetros y el formato correcto. Aplica tanto para el booking engine de Itz'ana como para TravelClick (Ka'ana).
+
+**9. 🟠 Códigos de habitación para los links de reserva**
+Si el punto anterior se confirma, necesitamos saber el código exacto que el motor de reservas usa internamente para cada tipo de habitación (por ejemplo: ¿la Villa de 1 dormitorio se llama `VIL1BR`, `VILLA1`, `1BV` u otro código?). Aplica para ambas propiedades.
