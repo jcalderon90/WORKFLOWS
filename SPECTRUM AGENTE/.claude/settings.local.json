@@ -76,7 +76,22 @@
       "Bash(py scripts/fix_plano_detection.py)",
       "mcp__mongodb__collection-schema",
       "PowerShell(grep *)",
-      "mcp__mongodb__count"
+      "Read(//c/Users/Georgie/Desktop/**)",
+      "Bash(py -3 --version)",
+      "Bash(py -3 -m pip install --quiet pymupdf)",
+      "Bash(py -3 -c \"import fitz; print\\('PyMuPDF', fitz.version[0]\\)\")",
+      "PowerShell(python --version; python -m pip install --quiet pymupdf 2>&1 | Select-Object -Last 3; python -c \"import fitz; print\\('PyMuPDF', fitz.version[0]\\)\")",
+      "PowerShell(python -c \"import fitz; print\\('PyMuPDF', fitz.version[0]\\)\")",
+      "PowerShell(python -m pip install pymupdf 2>&1 | Select-Object -Last 5)",
+      "Bash(python -c \"import fitz\")",
+      "Bash(python -c \"import fitz; print\\('PyMuPDF READY', fitz.version[0]\\)\")",
+      "Bash(python -c \"import fitz; print\\('OK', fitz.version[0]\\)\")",
+      "PowerShell(Get-Process *)",
+      "PowerShell(Stop-Process *)",
+      "Bash(timeout 120 python -m pip install --no-cache-dir --only-binary=:all: pymupdf)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(python -c \"import fitz; print\\('PyMuPDF OK', fitz.version[0]\\)\")",
+      "Bash(python *)"
     ]
   },
   "enabledPlugins": {

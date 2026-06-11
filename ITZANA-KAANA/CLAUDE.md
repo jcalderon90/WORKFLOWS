@@ -36,12 +36,12 @@ ManyChat → Webhook → PRINCIPAL.json
 
 ### Sub-workflows
 
-| File | n8n ID | Purpose |
-|---|---|---|
-| `workflows/PRINCIPAL.json` | (main) | Orchestrator — receives ManyChat webhook |
-| `workflows/Itzana_KB_Search.json` | `rofQe6ZGW3OpFqcb` | RAG tool: MongoDB vector search → AI response |
-| `workflows/Itzana_Notifications.json` | `OApztbIN8Jhb4JHz` | Email escalation by category (bodas, PR, empleo, escalamiento) |
-| `workflows/Itzana_Vectorizar_KB.json` | — | One-time script: load KB_ITZANA.json → MongoDB vectors |
+| File | n8n ID | n8n Name | Purpose |
+|---|---|---|---|
+| `workflows/PRINCIPAL.json` | `We7Lt1VxU6um9oRF` | ITZ PRINCIPAL AGENT | Orchestrator — receives ManyChat webhook |
+| `workflows/Itzana_KB_Search.json` | `rofQe6ZGW3OpFqcb` | KB_SEARCH | RAG tool: MongoDB vector search → AI response |
+| `workflows/Itzana_Notifications.json` | `OApztbIN8Jhb4JHz` | ITZ NOTIFICATIONS | Email escalation by category (bodas, PR, empleo, escalamiento) |
+| `workflows/Itzana_Vectorizar_KB.json` | `x876WMi4ro9ZjInW` | ITZ VECTORIZAR - KB | One-time script: load KB_ITZANA.json → MongoDB vectors (inactive) |
 
 ### Knowledge Base
 

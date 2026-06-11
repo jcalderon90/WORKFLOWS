@@ -9,11 +9,11 @@
 | Propiedad | Property ID | Sistema | Booking URL |
 | :-- | :-- | :-- | :-- |
 | Itz'ana | `115719` | Booking engine propio | `https://reservations.itzanabelize.com/book/accommodations` |
-| Ka'ana | `115718` | Booking engine propio | `https://reservations.kaanabelize.com/book/accommodations` |
+| Ka'ana | `115718` | TravelClick | `https://bookings.travelclick.com/115718#/guestsandrooms` |
 
 ---
 
-## Estado general — actualizado 2026-06-10 (deep links ✅)
+## Estado general — actualizado 2026-06-11
 
 ### Itz'ana (Kaan) — Fase 1
 
@@ -24,7 +24,7 @@
 | 3 | `workflows/Itzana_Vectorizar_KB.json` | Workflow n8n | ✅ Listo — **36 docs** vectorizados en colección `documents` |
 | 4 | `workflows/KB_SEARCH.json` | Workflow n8n (herramienta RAG) | ✅ Multi-propiedad — ID: `rofQe6ZGW3OpFqcb`, renombrado de "ITZ KB_SEARCH" a "KB_SEARCH" |
 | 5 | `workflows/Itzana_Notifications.json` | Workflow n8n (herramienta email) | ✅ Listo — Gmail (Soporte Garoo), HTML dinámico, 5 categorías. Emails de prueba: jorge.calderon@garooinc.com |
-| 6 | `workflows/PRINCIPAL.json` | Workflow n8n (orquestador) | ✅ Multi-propiedad — `Property Config` + `Set Propiedad` (lee `hoteles_propiedad` de ManyChat) + `kb_search` tool dinámico + deep links dinámicos (2026-06-10) |
+| 6 | `workflows/PRINCIPAL.json` | Workflow n8n (orquestador) | ✅ Multi-propiedad — `Property Config` + `Set Propiedad` (lee `hoteles_propiedad` de ManyChat) + `kb_search` tool dinámico |
 | 7 | Pruebas end-to-end | QA | ✅ Pasadas — flujo ManyChat → n8n → respuesta funcional |
 
 #### Gaps KB Itz'ana — room types faltantes (contenido pendiente del hotel)
@@ -64,7 +64,40 @@
 
 ## RETOMAR AQUI — Siguiente fase
 
-**Estado al 2026-06-10:** Ambas propiedades técnicamente listas. Solo faltan configuraciones externas (ManyChat + emails del hotel).
+**Estado al 2026-06-11:** Este proyecto = **Fase 1** del PRD `docs/belize-hotels-chat-prd-phases-1-3.docx`
+(BH-CHAT-PRD-001). Deep links implementados y en vivo. Ambas propiedades técnicamente listas;
+faltan configs externas (ManyChat + emails del hotel) y los items bloqueados de abajo.
+
+### Mapeo contra el PRD (requisitos Fase 1)
+
+| ID | Requisito | Prioridad | Estado |
+| :-- | :-- | :-- | :-- |
+| F1.1 | Servir el link correcto (content / iHotelier pre-llenado) | Must | 🟢 Casi listo — falta `RoomType` (bloqueado, #9) |
+| F1.2 | Responder desde KB por propiedad | Must | ✅ Listo (`kb_search` RAG multi-propiedad) |
+| F1.3 | Reconocer huésped recurrente (nombre/año/room type) | Should | 🟡 Parcial — saluda por nombre si ya escribió; falta soft-auth por email/tel y año/room type (bloqueado por fuente de guest profile) |
+| F1.4 | Capturar/enriquecer leads en CRM; escalar | Must | 🟡 Parcial — captura a MongoDB + escalamiento por email; **falta push al CRM Monday.com** |
+| F1.5 | Pronóstico de clima para itinerarios | Could | ⬜ No implementado |
+
+### Pendientes para retomar (por bloqueo)
+
+**🔴 Bloqueado por el hotel / IT:**
+- **Códigos de habitación** para `RoomType` en deep links (pregunta #9). Scaffolding listo en `Parse Agent Output`.
+- **Email Mr. Diego** (bodas) y **email RRHH** (empleo) Itz'ana → `Itzana_Notifications` (P1/P2).
+- **Fuente de guest profile** (CRM/Opera) para F1.3 completo (año de visita + room type).
+- **Ka'ana:** 4 Signature Villas faltantes en `KB_KAANA.json` (K1) + re-vectorizar (K2) + emails (K3).
+
+**🟡 Nuestro / decisión interna (no bloqueado):**
+- **F1.4 — push de leads a Monday.com CRM:** hoy solo escribimos a MongoDB `users`. El PRD marca
+  el CRM como integrado a nivel grupo y pide 3 "fires" (returning, first-time qualified, transcript
+  final) + 1 prioridad alta para bodas/grupos. **No estaba en la selección de Jorge; confirmar antes de construir.**
+- **F1.3 versión Fase-1:** lookup en MongoDB `users` por email/teléfono y saludar por nombre (sin año/room type).
+- **F1.5 — clima:** Weather API para sugerencias de itinerario (Could).
+- **Ka'ana K4:** configurar flow en ManyChat con `hoteles_propiedad: "KAA"` (consola ManyChat, no n8n).
+
+**⏭️ Track separado (NO es parte de las 3 fases del PRD):**
+- **E-Concierge in-stay** (`docs/E-Concierge Itzana.md`): agente de operaciones para huéspedes
+  hospedados (tareas housekeeping/mantenimiento/F&B, routing, estados, feedback loop). Producto
+  nuevo y grande; posponer hasta estabilizar Kaan en producción y planear con su propio PRD.
 
 ### Para salir a producción — Itz'ana
 
@@ -93,26 +126,36 @@ Una sola cuenta ManyChat (`fb807994325905660`). El campo `hoteles_propiedad` en 
 
 Webhook URL n8n: `https://agentsprod.redtec.ai/webhook/hotels-agent`
 
-### Deep links — ✅ Implementado 2026-06-10
+### Deep links — ✅ implementado (2026-06-11), 1 punto bloqueado
 
-El agente genera deep links pre-llenados cuando el usuario elige "Reservar ahora" (PASO 7).
+**Spec:** `docs/belize-hotels-chat-unified-flow.mmd` — marcado como **PRIMARY** en Fase 1.
 
-**Formato generado:**
+El nodo `Parse Agent Output` arma el URL de reserva pre-llenado con los datos capturados.
+Formato real confirmado por el hotel (iHotelier), fechas en `MM/DD/YYYY` URL-encoded:
 ```
-https://reservations.{propiedad}belize.com/book/accommodations
-  ?HotelID={115719|115718}
+https://reservations.itzanabelize.com/book/accommodations   (KAA: reservations.kaanabelize.com)
+  ?HotelID=115719            (KAA: 115718)
   &LanguageID=1
   &Rooms=1
-  &DateIn=MM%2FDD%2FYYYY
-  &DateOut=MM%2FDD%2FYYYY
-  &Adults={adultos_capturado}
-  &Children={ninos_capturado}
+  &DateIn=<checkin MM/DD/YYYY>
+  &DateOut=<checkout MM/DD/YYYY>
+  &Adults=<inferido de grupo_tipo>
+  &Children=<inferido de grupo_tipo>
+  &utm_source=kaan-chat&utm_medium=manychat&utm_campaign=itzana-f1   (o kaana-f1)
 ```
 
-**Implementación:**
-- `Property Config` node: `hotel_id` (115719/115718) + `booking_link` base URL
-- Sistema prompt: captura `adultos_capturado` y `ninos_capturado` en PASO 4; usa `[BOOKING_LINK]` como placeholder en PASO 7
-- `Parse Agent Output`: construye URL desde campos capturados; reemplaza `[BOOKING_LINK]`; fallback a link base si no hay fechas
+**✅ Hecho y en vivo en `ITZ PRINCIPAL AGENT` (`We7Lt1VxU6um9oRF`):**
+- `Parse Agent Output` arma el link dinámico cuando hay fechas; si no, conserva el `booking_link` estático.
+- UTMs agregados (habilita la métrica "chat-attributed booking" del PRD).
+- `Adults/Children` mapeados desde `grupo_tipo` (romantico 2/0, familia 2/1, grupo_grande 4/0).
+- Regex de reemplazo cubre iHotelier (ambas propiedades) y TravelClick (defensivo).
+- Ka'ana ya apunta a iHotelier (`reservations.kaanabelize.com`) en `Property Config`.
+- `Preparar Datos Contacto` persiste `checkin`, `checkout` y `grupo_tipo` en MongoDB `users`.
+
+**🔴 Pendiente (bloqueado por hotel) — pregunta abierta #9:**
+- `RoomType` en el link: falta que IT/booking engine confirme el **nombre exacto del parámetro**
+  y los **códigos por habitación**. El scaffolding ya está en `Parse Agent Output` (`roomCodeMap`
+  por propiedad/grupo_tipo); solo hay que llenar los códigos y descomentar el append de `RoomType`.
 
 ### Próxima fase — E-Concierge in-stay
 Ver spec en `docs/E-Concierge Itzana.md`. Agente separado para huéspedes ya hospedados:

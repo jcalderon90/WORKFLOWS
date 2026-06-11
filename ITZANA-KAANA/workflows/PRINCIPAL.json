@@ -1,4 +1,5 @@
 {
+  "name": "ITZ PRINCIPAL AGENT",
   "nodes": [
     {
       "parameters": {
@@ -9,10 +10,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        5104,
-        1136
+        13904,
+        256
       ],
-      "id": "4efadd7e-795a-41c4-83ef-d20722ab15bd",
+      "id": "469c7355-882c-40f3-bf18-8abcfcc0808b",
       "name": "PARSE BODY"
     },
     {
@@ -32,10 +33,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        8464,
-        1136
+        17264,
+        256
       ],
-      "id": "74997e4a-2a27-4c65-9f3b-a56f0b41d2bb",
+      "id": "77e4e252-6271-43d1-8077-a599397e92a4",
       "name": "JOINNING MESSAGE"
     },
     {
@@ -65,10 +66,10 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.3,
       "position": [
-        8240,
-        1136
+        17040,
+        256
       ],
-      "id": "609779f2-a2c6-4c57-9fd3-9bcc137fcae0",
+      "id": "32eeb7ab-e563-4d35-a1a7-b0ff75ff9bf1",
       "name": "Filter1"
     },
     {
@@ -79,17 +80,11 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        8688,
-        1136
+        17488,
+        256
       ],
-      "id": "0cad39bb-6944-43a9-a811-3db5fbf8a641",
-      "name": "DELETE MESSAGES",
-      "credentials": {
-        "redis": {
-          "id": "8EUkwaZixjCH7szY",
-          "name": "Redis GarooVPS"
-        }
-      }
+      "id": "18a12a6b-d2cd-4c1a-9c95-257440cce8ff",
+      "name": "DELETE MESSAGES"
     },
     {
       "parameters": {
@@ -98,10 +93,10 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        7792,
-        1136
+        16592,
+        256
       ],
-      "id": "834ed8a2-a3b4-4bf1-94f5-4fcb5bb5f59c",
+      "id": "585d40f8-13aa-4014-a666-7bdb82110bb3",
       "name": "Wait",
       "webhookId": "50ed2939-b8ec-48f7-8c6b-3bf14c2efc58"
     },
@@ -114,17 +109,11 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        8016,
-        1136
+        16816,
+        256
       ],
-      "id": "d317fb87-ebdd-4b09-b8e1-747e85b3c512",
-      "name": "GET MESSAGE",
-      "credentials": {
-        "redis": {
-          "id": "8EUkwaZixjCH7szY",
-          "name": "Redis GarooVPS"
-        }
-      }
+      "id": "be0e8a6d-210c-4417-88fb-897069a66e9a",
+      "name": "GET MESSAGE"
     },
     {
       "parameters": {
@@ -136,17 +125,11 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        7568,
-        1136
+        16368,
+        256
       ],
-      "id": "b52a88af-518e-4bae-bbdf-beff290f2fff",
-      "name": "SAVE MESSAGE",
-      "credentials": {
-        "redis": {
-          "id": "8EUkwaZixjCH7szY",
-          "name": "Redis GarooVPS"
-        }
-      }
+      "id": "69d3bef9-ffd2-4c39-9605-5ce0d3c39013",
+      "name": "SAVE MESSAGE"
     },
     {
       "parameters": {
@@ -165,10 +148,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        7344,
-        1136
+        16144,
+        256
       ],
-      "id": "0f1c6378-f84d-46ac-94b3-b96130c4f78b",
+      "id": "a1fa70fe-09e9-449c-9b32-f3d939f8cc6d",
       "name": "INPUT FINAL"
     },
     {
@@ -194,10 +177,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        6448,
-        944
+        15248,
+        64
       ],
-      "id": "06f1a5a4-0c91-40d1-9de0-98d5a73b87ab",
+      "id": "114c2b23-761b-4f8f-89d3-c8fe63f4010f",
       "name": "audio input"
     },
     {
@@ -223,10 +206,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        6448,
-        1136
+        15248,
+        256
       ],
-      "id": "7c2a5747-2a21-435b-9fe2-838d00978f4a",
+      "id": "eaac4771-8efd-461e-b494-cb35555b0bbb",
       "name": "image input"
     },
     {
@@ -252,10 +235,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        6448,
-        1328
+        15248,
+        448
       ],
-      "id": "f7fc47e3-951b-49a4-94c7-1ece7f3ea717",
+      "id": "7bfe6830-b7d7-4ff5-a7a8-f7580a80753b",
       "name": "text input"
     },
     {
@@ -266,10 +249,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        6000,
-        944
+        14800,
+        64
       ],
-      "id": "01814180-5480-4a51-9ed4-30fe592027da",
+      "id": "0de3f107-9bfd-4896-a152-246736323ccf",
       "name": "HTTP IF AUDIO"
     },
     {
@@ -286,10 +269,10 @@
       "type": "n8n-nodes-base.aggregate",
       "typeVersion": 1,
       "position": [
-        7120,
-        1136
+        15920,
+        256
       ],
-      "id": "f4a49ed2-5f49-4bb7-8bad-7c16732ab53a",
+      "id": "b34558ad-fe60-47f0-95c1-d5d3d0d6a082",
       "name": "Aggregate"
     },
     {
@@ -306,10 +289,10 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        6896,
-        1136
+        15696,
+        256
       ],
-      "id": "cf7d62a4-017b-40d8-946b-5215bfa14d6f",
+      "id": "c919806c-ace2-4107-9b13-1b5448ef2755",
       "name": "Sort"
     },
     {
@@ -319,10 +302,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        6672,
-        1120
+        15472,
+        240
       ],
-      "id": "29d0fbb7-cf0d-4981-92dc-9fc21a3954a0",
+      "id": "917a3491-9c27-44aa-8f15-2dc32e518245",
       "name": "Merge"
     },
     {
@@ -334,17 +317,11 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        6224,
-        944
+        15024,
+        64
       ],
-      "id": "530b08b6-8621-4c58-9a88-d10b6a42ff62",
-      "name": "TRANSCRIBE AUDIO",
-      "credentials": {
-        "openAiApi": {
-          "id": "PjPavWO5j0jIFtSG",
-          "name": "ITZANA"
-        }
-      }
+      "id": "16354718-a381-423b-92c8-3e42aa907080",
+      "name": "TRANSCRIBE AUDIO"
     },
     {
       "parameters": {
@@ -382,10 +359,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        5776,
-        1040
+        14576,
+        160
       ],
-      "id": "ac21ecba-0df2-4b89-8001-bc66f641584e",
+      "id": "162ddc64-9777-4203-9aa1-63a92d393d8c",
       "name": "ES AUDIO / IMAGEN"
     },
     {
@@ -396,10 +373,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        5552,
-        1040
+        14352,
+        160
       ],
-      "id": "7a9ed106-c319-4c83-93f7-2b6812a8f782",
+      "id": "0284fa95-9e02-4a44-ac2c-2f29681dbe5c",
       "name": "HTTP Request"
     },
     {
@@ -438,10 +415,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        5328,
-        1136
+        14128,
+        256
       ],
-      "id": "06c1ad44-8b6d-4f90-84a4-1c0c368fcdf0",
+      "id": "aebc02d8-91f5-4e22-9826-1c3f7198b9e7",
       "name": "ES ARCHIVO"
     },
     {
@@ -451,10 +428,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        4880,
-        1136
+        13680,
+        256
       ],
-      "id": "5ded5d2b-0819-42b2-ba29-744c91e3bbf5",
+      "id": "b46a4ea0-016c-462d-8e13-b9e09eeb47ef",
       "name": "Create Body"
     },
     {
@@ -468,10 +445,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        4656,
-        1136
+        13456,
+        256
       ],
-      "id": "ef7aa0b1-a65d-4084-80f9-251ba2592450",
+      "id": "54c9b93c-7e17-4d48-8103-f43b0d71242a",
       "name": "Webhook",
       "webhookId": "bbe94977-7886-4071-a874-e370d3b20c97"
     },
@@ -492,17 +469,11 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        6224,
-        1136
+        15024,
+        256
       ],
-      "id": "15a855c4-c2aa-4c4a-88d5-a990b3b786da",
-      "name": "ANALIZA IMAGEN",
-      "credentials": {
-        "openAiApi": {
-          "id": "PjPavWO5j0jIFtSG",
-          "name": "ITZANA"
-        }
-      }
+      "id": "f66dd164-111d-4517-9c5b-edca2bfc4354",
+      "name": "ANALIZA IMAGEN"
     },
     {
       "parameters": {
@@ -545,10 +516,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        8912,
-        1136
+        17712,
+        256
       ],
-      "id": "1d8aea0d-b8bd-4048-a119-433ab17f9f8c",
+      "id": "005336e9-159c-40e0-bc8b-302edb5d4b6b",
       "name": "Set Propiedad"
     },
     {
@@ -574,17 +545,11 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        11296,
-        1136
+        20320,
+        160
       ],
-      "id": "a0a4d3dd-1532-4ecc-8196-0d46a15e8608",
-      "name": "Send to ManyChat",
-      "credentials": {
-        "manyChatApi": {
-          "id": "aEvHbFXnmwofChqs",
-          "name": "ManyChat Garoo"
-        }
-      }
+      "id": "3bc2ee6e-448a-46bc-9e0a-ec93ece5a8a6",
+      "name": "Send to ManyChat"
     },
     {
       "parameters": {
@@ -595,10 +560,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        10032,
-        1136
+        18832,
+        256
       ],
-      "id": "58740f77-3bd0-46f8-9e61-7d628af5cd29",
+      "id": "fdd9bd4d-cde8-4444-bfa9-75f6638ceabe",
       "name": "User Data"
     },
     {
@@ -614,17 +579,11 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        9808,
-        1232
+        18608,
+        352
       ],
-      "id": "e9100f48-8b40-40cc-9b0f-f51a39c7c291",
-      "name": "Update User",
-      "credentials": {
-        "mongoDb": {
-          "id": "Msw0gTK8f8b192VX",
-          "name": "HOTELS"
-        }
-      }
+      "id": "c9b968e9-71a8-438e-b89b-6a7345f00b32",
+      "name": "Update User"
     },
     {
       "parameters": {
@@ -636,17 +595,11 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        9808,
-        1040
+        18608,
+        160
       ],
-      "id": "a2171302-e945-41ff-9831-10bd61b76ecb",
-      "name": "Insert User",
-      "credentials": {
-        "mongoDb": {
-          "id": "Msw0gTK8f8b192VX",
-          "name": "HOTELS"
-        }
-      }
+      "id": "fd88db49-dc67-4a3a-9579-05926738fdf7",
+      "name": "Insert User"
     },
     {
       "parameters": {
@@ -657,19 +610,13 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        9136,
-        1136
+        17936,
+        256
       ],
-      "id": "245b1745-a8d6-483d-b940-9d7bb56b05f7",
+      "id": "f6d28aaa-e77b-49c5-946e-d179d22dc624",
       "name": "Find User",
       "alwaysOutputData": true,
-      "executeOnce": false,
-      "credentials": {
-        "mongoDb": {
-          "id": "Msw0gTK8f8b192VX",
-          "name": "HOTELS"
-        }
-      }
+      "executeOnce": false
     },
     {
       "parameters": {
@@ -760,10 +707,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        9584,
-        1040
+        18384,
+        160
       ],
-      "id": "76db63e0-b3bf-428b-8487-c856abe31b47",
+      "id": "2243729d-1946-4db1-9bc1-33ed16fd8cb6",
       "name": "DATA to CREATE"
     },
     {
@@ -794,10 +741,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        9360,
-        1136
+        18160,
+        256
       ],
-      "id": "ed367982-bcf4-44e8-9372-898e81f3488a",
+      "id": "910dafe2-4987-48be-aa61-a7ea3977ffd6",
       "name": "If USER NOT EXIST"
     },
     {
@@ -877,10 +824,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        9584,
-        1232
+        18384,
+        352
       ],
-      "id": "24d39dab-6a35-4dc9-a38b-8c8ea7bb6f24",
+      "id": "75e379a3-78ad-4c4b-80f1-ae183d53e675",
       "name": "DATA to UPDATE"
     },
     {
@@ -892,17 +839,11 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        10256,
-        1360
+        19280,
+        480
       ],
-      "id": "3f0e1bf6-3cc7-4f13-abaf-93da269ee97d",
-      "name": "OpenRouter Chat Model",
-      "credentials": {
-        "openRouterApi": {
-          "id": "J9zb84vhqsx182XW",
-          "name": "ITZANA-KAANA"
-        }
-      }
+      "id": "79f6397b-3587-4165-b38d-544e6f096082",
+      "name": "OpenRouter Chat Model"
     },
     {
       "parameters": {
@@ -915,17 +856,11 @@
       "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
       "typeVersion": 1.1,
       "position": [
-        10384,
-        1360
+        19408,
+        480
       ],
-      "id": "d92915ad-e83a-4ec2-a2ae-2cd066ff50b1",
-      "name": "MongoDB Chat Memory",
-      "credentials": {
-        "mongoDb": {
-          "id": "Msw0gTK8f8b192VX",
-          "name": "HOTELS"
-        }
-      }
+      "id": "c6476ac3-ecfe-4f68-91de-12fa1fa4dc16",
+      "name": "MongoDB Chat Memory"
     },
     {
       "parameters": {
@@ -951,10 +886,10 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        10512,
-        1360
+        19536,
+        480
       ],
-      "id": "859d1304-ed89-4062-8ad9-e569ba3f9e5c",
+      "id": "00e88e4c-3f71-4f6b-8e68-0ab46b4f9438",
       "name": "notifications"
     },
     {
@@ -968,23 +903,23 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        10384,
-        1136
+        19408,
+        256
       ],
-      "id": "6c16c6e6-5f45-4fbb-88a5-6f2c597a6523",
+      "id": "698a8936-3485-405d-a875-b83bd4573454",
       "name": "AI Agent"
     },
     {
       "parameters": {
-        "jsCode": "const agentOutput = $input.first().json.output || '';\n\nlet parsed;\ntry {\n  const jsonMatch = agentOutput.match(/\\{[\\s\\S]*\\}/);\n  parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : null;\n} catch(e) {\n  parsed = null;\n}\n\nconst checkin   = parsed?.checkin_capturado   || null;\nconst checkout  = parsed?.checkout_capturado  || null;\nconst adultos   = parsed?.adultos_capturado   || null;\nconst ninos     = parsed?.ninos_capturado     || 0;\nconst grupoTipo = parsed?.grupo_tipo          || null;\n\n// Build pre-filled deep link if both dates are YYYY-MM-DD\nlet deeplink = null;\nif (checkin && checkout) {\n  const fmt = (s) => {\n    if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(s)) return null;\n    const [y, m, d] = s.split('-');\n    return encodeURIComponent(`${m}/${d}/${y}`);\n  };\n  const dateIn  = fmt(checkin);\n  const dateOut = fmt(checkout);\n  if (dateIn && dateOut) {\n    const baseUrl  = $('Property Config').first().json.booking_link;\n    const hotelId  = $('Property Config').first().json.hotel_id;\n    const adults   = adultos ?? (grupoTipo === 'romantico' ? 2 : 2);\n    const children = ninos   ?? 0;\n    deeplink = `${baseUrl}?HotelID=${hotelId}&LanguageID=1&Rooms=1&DateIn=${dateIn}&DateOut=${dateOut}&Adults=${adults}&Children=${children}`;\n  }\n}\n\n// Replace [BOOKING_LINK] placeholder; fallback to static link\nlet responseText = parsed?.response || agentOutput;\nconst linkFallback = $('Property Config').first().json.booking_link;\nresponseText = responseText.replace('[BOOKING_LINK]', deeplink || linkFallback);\n\nreturn [{\n  json: {\n    response_text:       responseText,\n    escalate:            parsed?.escalate           || false,\n    categoria:           parsed?.categoria          || 'info',\n    nombre_capturado:    parsed?.nombre_capturado   || null,\n    email_capturado:     parsed?.email_capturado    || null,\n    telefono_capturado:  parsed?.telefono_capturado || null,\n    checkin_capturado:   checkin,\n    checkout_capturado:  checkout,\n    adultos_capturado:   adultos,\n    ninos_capturado:     ninos,\n    grupo_tipo:          grupoTipo,\n    deeplink:            deeplink,\n    raw_output:          agentOutput\n  }\n}];"
+        "jsCode": "const agentOutput = $input.first().json.output || '';\n\nlet parsed;\ntry {\n  const jsonMatch = agentOutput.match(/\\{[\\s\\S]*\\}/);\n  parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : null;\n} catch(e) {\n  parsed = null;\n}\n\n// Extract all captured fields\nconst checkin   = parsed?.checkin_capturado  || null;\nconst checkout  = parsed?.checkout_capturado || null;\nconst grupoTipo = parsed?.grupo_tipo         || null;\nconst propiedad = $('Set Propiedad').first().json.propiedad;\n\n// Convert YYYY-MM-DD -> MM/DD/YYYY for booking engine\nfunction toBookingDate(dateStr) {\n  if (!dateStr) return null;\n  const m = dateStr.match(/^(\\d{4})-(\\d{2})-(\\d{2})$/);\n  return m ? `${m[2]}/${m[3]}/${m[1]}` : null;\n}\n\nconst dateIn  = toBookingDate(checkin);\nconst dateOut = toBookingDate(checkout);\n\n// Guest counts by group type\nconst guestMap = {\n  romantico:    { adults: 2, children: 0 },\n  familia:      { adults: 2, children: 1 },\n  grupo_grande: { adults: 4, children: 0 },\n};\nconst guests = guestMap[grupoTipo] || { adults: 1, children: 0 };\n\n// Room type code by group type (SCAFFOLDING - pendiente confirmar codigos PMS con el hotel, pregunta #9 BUILD.md)\n// Cuando IT confirme nombre de parametro y codigos, llenar aqui y descomentar el append abajo.\nconst roomCodeMap = {\n  ITZ: { romantico: null /* Penthouse */, familia: null /* Beach Villa */ },\n  KAA: { romantico: null /* Master Suite */, familia: null /* Villa 2BR */ },\n};\nconst roomCode = (roomCodeMap[propiedad] || {})[grupoTipo] || null;\n\n// Build deep link if dates available\nconst hotelId = propiedad === 'KAA' ? '115718' : '115719';\nconst baseUrl = propiedad === 'KAA'\n  ? 'https://reservations.kaanabelize.com/book/accommodations'\n  : 'https://reservations.itzanabelize.com/book/accommodations';\nconst utmCampaign = propiedad === 'KAA' ? 'kaana-f1' : 'itzana-f1';\n\nlet deepLink = null;\nif (dateIn && dateOut) {\n  const enc = encodeURIComponent;\n  deepLink = `${baseUrl}?HotelID=${hotelId}&LanguageID=1&Rooms=1&DateIn=${enc(dateIn)}&DateOut=${enc(dateOut)}&Adults=${guests.adults}&Children=${guests.children}`;\n  // room_type - descomentar cuando el hotel confirme el nombre del parametro y los codigos\n  // if (roomCode) deepLink += `&RoomType=${enc(roomCode)}`;\n  deepLink += `&utm_source=kaan-chat&utm_medium=manychat&utm_campaign=${utmCampaign}`;\n}\n\n// Replace static booking URL in response with deep link.\n// Matchea iHotelier (reservations.<prop>belize.com) y TravelClick (bookings.travelclick.com) por si el agente emite cualquiera.\nlet responseText = parsed?.response || agentOutput;\nif (deepLink) {\n  responseText = responseText.replace(\n    /https?:\\/\\/(?:reservations\\.(?:itzanabelize|kaanabelize)\\.com\\/book\\/accommodations|bookings\\.travelclick\\.com\\/\\d+)[^\\s]*/g,\n    deepLink\n  );\n}\n\nreturn [{\n  json: {\n    response_text:       responseText,\n    escalate:            parsed?.escalate           || false,\n    categoria:           parsed?.categoria          || 'info',\n    nombre_capturado:    parsed?.nombre_capturado   || null,\n    email_capturado:     parsed?.email_capturado    || null,\n    telefono_capturado:  parsed?.telefono_capturado || null,\n    checkin_capturado:   checkin,\n    checkout_capturado:  checkout,\n    grupo_tipo:          grupoTipo,\n    deep_link:           deepLink,\n    raw_output:          agentOutput\n  }\n}];\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        10848,
-        1136
+        19872,
+        256
       ],
-      "id": "b7c6584d-056b-48f9-9b6f-ff88a685be18",
+      "id": "e269245f-6e0b-4916-9f47-724d8d8b81d8",
       "name": "Parse Agent Output"
     },
     {
@@ -1004,16 +939,15 @@
           "schema": [],
           "attemptToConvertTypes": false,
           "convertFieldsToString": false
-        },
-        "name": "kb_search"
+        }
       },
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        10640,
-        1360
+        19664,
+        480
       ],
-      "id": "583bec0b-e3ea-4939-b825-ccfe8a86a9cc",
+      "id": "084b2da5-a984-4b72-876f-11199e5341d8",
       "name": "kb_search"
     },
     {
@@ -1033,23 +967,23 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        11072,
-        1136
+        20096,
+        160
       ],
-      "id": "051a4bb1-8316-4b93-8738-3def71c23be2",
+      "id": "c1261739-74d1-4379-8d6c-2fe2b4934a6c",
       "name": "Parameter Type"
     },
     {
       "parameters": {
-        "jsCode": "const captured = $json;\nconst userDoc = $('User Data').first().json;\n\n// Solo proceder si hay algo nuevo que guardar\nconst update = {};\nif (captured.nombre_capturado)   update.nombre   = captured.nombre_capturado;\nif (captured.email_capturado)     update.email    = captured.email_capturado;\nif (captured.telefono_capturado)  update.telefono = captured.telefono_capturado;\n\nif (Object.keys(update).length === 0) return [];\n\n// Incluir _id para que MongoDB Update sepa qué documento actualizar\nconst idStr = JSON.stringify(userDoc._id).replace(/^\"|\"$/g, '');\nreturn [{ json: { _id: idStr, ...update } }];"
+        "jsCode": "const captured = $json;\nconst userDoc = $('User Data').first().json;\n\n// Solo proceder si hay algo nuevo que guardar\nconst update = {};\nif (captured.nombre_capturado)    update.nombre    = captured.nombre_capturado;\nif (captured.email_capturado)     update.email     = captured.email_capturado;\nif (captured.telefono_capturado)  update.telefono  = captured.telefono_capturado;\nif (captured.checkin_capturado)   update.checkin   = captured.checkin_capturado;\nif (captured.checkout_capturado)  update.checkout  = captured.checkout_capturado;\nif (captured.grupo_tipo)          update.grupo_tipo = captured.grupo_tipo;\n\nif (Object.keys(update).length === 0) return [];\n\n// Incluir _id para que MongoDB Update sepa que documento actualizar\nconst idStr = JSON.stringify(userDoc._id).replace(/^\"|\"$/g, '');\nreturn [{ json: { _id: idStr, ...update } }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        10848,
-        1380
+        20096,
+        352
       ],
-      "id": "c5beaa84-fcf2-43c0-a2d8-f981a8f811fd",
+      "id": "84a475be-445a-483c-8c62-48ffb303e7c3",
       "name": "Preparar Datos Contacto"
     },
     {
@@ -1063,17 +997,11 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        11072,
-        1380
+        20320,
+        352
       ],
-      "id": "28b57b36-8af2-43b1-b62e-2a5183fe7aa7",
-      "name": "Guardar Contacto",
-      "credentials": {
-        "mongoDb": {
-          "id": "Msw0gTK8f8b192VX",
-          "name": "HOTELS"
-        }
-      }
+      "id": "99966e8d-2eb2-45ff-963a-bcc81db915b4",
+      "name": "Guardar Contacto"
     },
     {
       "parameters": {
@@ -1140,10 +1068,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        9576,
-        1136
+        19056,
+        256
       ],
-      "id": "5811454d-4bc6-452a-834c-307aabec8337",
+      "id": "5fe7bb7c-d7ae-4cb7-a3db-cfa4d3ddb13e",
       "name": "Property Config"
     }
   ],
@@ -1604,6 +1532,16 @@
       ]
     }
   },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp"
+  },
   "pinData": {
     "Webhook": [
       {
@@ -1699,9 +1637,5 @@
         "executionMode": "production"
       }
     ]
-  },
-  "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"
   }
 }

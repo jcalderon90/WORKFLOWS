@@ -1,5 +1,5 @@
 # SPECTRUM VIVIENDA: Agente Unificado — Estado del Proyecto
-> Última actualización: 2026-06-08 · Fuente de verdad: servidor n8n `agentsprod.redtec.ai`. Los JSON locales son copias manuales.
+> Última actualización: 2026-06-11 · Fuente de verdad: servidor n8n `agentsprod.redtec.ai`. Los JSON locales son copias manuales.
 
 ## Stack Tecnológico
 
@@ -81,8 +81,29 @@ Agenda citas (presencial/virtual/llamada). Actualizado en servidor: 2026-06-06.
 
 Brochures/renders. Responde positivamente aunque URL sea `null` (siempre ofrece asesor).
 
-**Pendiente:**
-- ⏳ Reemplazar `null` con URLs reales cuando Dayrin entregue archivos por proyecto (solo PVV/amenidades tiene URL activa)
+**Estado actual del tipo `plano` por proyecto:**
+
+| Proyecto | `bienvenida` | `amenidad` | `plano` | `avance_obra` |
+|---|---|---|---|---|
+| PVV | ✅ Cloudinary | ✅ Cloudinary | Google Drive PDF | ✅ Cloudinary |
+| PMAR | ✅ Cloudinary | ✅ Cloudinary | Google Drive PDF | null |
+| PPO | ✅ Cloudinary | ✅ Cloudinary | Google Drive PDF | ✅ Cloudinary |
+| PPOL | ✅ Cloudinary | ✅ Cloudinary | Google Drive PDF | null |
+| PSB | ✅ Cloudinary | ✅ Cloudinary | Google Drive PDF | null |
+
+**Modelos de apartamentos por proyecto (para planos):**
+
+| Proyecto | 1 hab | 2 hab | 3 hab | Total |
+|---|---|---|---|---|
+| PVV | S40 | S54, S56 | S70, S72, S74, S91A, S91B, S92, S93 (+S113 nivel 1) | 10 |
+| PMAR | S-41 | S-58, S-65 | S-71, S-75, S-90 | 6 |
+| PPO | — | S40, S52 | S70, S80 | 4 |
+| PPOL | S-39, S-42 | S-58, S-67 | S-86, S-87A, S-87B, S-91, S-92 | 9 |
+| PSB | S-40 | S-56, S-61, S-64 | S-79, S-80, S-84, S-106 | 8 |
+
+**Pendientes:**
+- ⏳ **Planos como imágenes** — reemplazar `plano` (PDF Google Drive) por imágenes de planta por modelo. Iniciando con PVV. Pendiente definir granularidad: por número de hab vs. por modelo específico. Pendiente subir imágenes a Cloudinary.
+- ⏳ El tool `send_media` está **`disabled: true`** en AGENT PRINCIPAL — reactivar una vez haya URLs de imágenes listas.
 
 ---
 
@@ -172,7 +193,7 @@ _(Sin pendientes urgentes al 2026-06-08)_
 
 | # | Tarea | Bloqueante |
 |---|---|---|
-| 1 | **URLs media** en `Send Media.json` — llenar `null` con URLs reales | Dayrin entregue archivos |
+| 1 | **Planos como imágenes** en `Send Media.json` — reemplazar PDF Google Drive por imágenes de planta por modelo (iniciando PVV). Pendiente definir granularidad y subir a Cloudinary | Jorge + Dayrin |
 | 2 | **WEB FORM** — deploy + destinatarios finales | Tribal entregue form actualizado |
 | 3 | **Templates prellenados por fuente** (QR/web/anuncios) | Dayrin embebe URLs; Normita genera QRs |
 
