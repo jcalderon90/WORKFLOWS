@@ -1,5 +1,5 @@
 # SPECTRUM VIVIENDA: Agente Unificado — Estado del Proyecto
-> Última actualización: 2026-06-11 · Fuente de verdad: servidor n8n `agentsprod.redtec.ai`. Los JSON locales son copias manuales.
+> Última actualización: 2026-06-12 · Fuente de verdad: servidor n8n `agentsprod.redtec.ai`. Los JSON locales son copias manuales.
 
 ## Stack Tecnológico
 
@@ -167,6 +167,20 @@ Solo webhook. Sin lógica.
 
 - ⏳ Definir alcance (nutrición/retargeting)
 - ⏳ Implementar y subir a n8n
+
+---
+
+### 12. LEADS FASE 2 - RESUMEN en CRM (`NVNwhoCg4UtokeR6`) — 4 nodos ✅ Activo
+
+Webhook `POST /leads-fase2` → envía `_ResumenConversacion` al CRM de Spectrum para leads Fase 2. Desplegado en servidor: 2026-06-12.
+
+**Comportamiento:**
+- Recibe: `project`, `name`, `phone`, `email`, `resumen`
+- Envía SOAP con solo campos requeridos: `_Proyecto`, `_Nombre`, `_Apellido`, `_TelefonoMovil`, `_CorreEletronico`, `_ResumenConversacion`
+- Sin campos de atribución (fase 2 — Tribal ya los tiene en CRM)
+
+**Pendientes:**
+- ⏳ Script Python para llamar el webhook desde los reportes de fase 2
 
 ---
 

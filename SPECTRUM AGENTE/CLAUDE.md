@@ -155,6 +155,7 @@ When calling MCP tools against `agentsprod.redtec.ai`:
 | `Vectorizar los KBs.json` | `LLiVnT0M6xvDKive` |
 | `Analytics Centralizado.json` | `0QfOxWdE9m07laqd` |
 | `LEAD FASE 2.json` | _no registrado — scaffold_ |
+| `LEADS FASE 2 - RESUMEN en CRM.json` | `NVNwhoCg4UtokeR6` |
 | `WEB FORM.json` | _no registrado — verificar en server_ |
 
 > `LEAD FASE 2` y `WEB FORM` no están desplegados en producción aún.

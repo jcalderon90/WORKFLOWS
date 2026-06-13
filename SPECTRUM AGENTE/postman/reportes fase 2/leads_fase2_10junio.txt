@@ -1,0 +1,85 @@
+REPORTE LEADS FASE 2 — 10 DE JUNIO 2026
+Fuente: MongoDB users_fase_2 x users (cruce por telefono)
+Generado: 2026-06-11
+
+Total leads contactados : 36
+Contestaron al bot      :  3  (8.3%)
+No contestaron          : 33  (91.7%)
+
+[C] = contesto al bot   [ ] = no contesto   [!] = fuera de horario
+
+================================================================================
+PMAR — 11 leads | 0 contestaron
+================================================================================
+
+  [ ]     Edson Villatoro                     +50259455401     e.dson89@hotmail.com                     08:16 GT
+  [ ]     Ana Aragon                          +50253332972     anapahola@gmail.com                      09:33 GT
+  [ ] [!] Bagner Alvarado                     +50235692697     bagner.alvarado@gmail.com                13:00 GT
+  [ ] [!] Magdalena Salazar Rilley            +50240827012     titiarilley@hotmail.com                  13:03 GT
+  [ ] [!] Daniel Lopez                        +50256973451     jdlopeme@gmail.com                       13:34 GT
+  [ ] [!] Amandys Lopez                       +50257534112     amandys77@hotmail.com                    13:36 GT
+  [ ] [!] Kimberly Girón                      +50232813565     kimiiign@gmail.com                       13:38 GT
+  [ ] [!] Dennis Orantes                      +50251659103     dennis.orantes@hospigen.gob.gt           17:29 GT
+  [ ] [!] Fredy Escobar                       +50247708306     escobar.fredy_5@hotmail.com              19:30 GT
+  [ ] [!] Verónica López - Majano             +50258246284     vlmajano@gmail.com                       20:18 GT
+  [ ]     Maynor Monroy                       +50241367989     Monroymaynor@gmail.com                   22:49 GT
+
+================================================================================
+PPO — 9 leads | 1 contestaron | 8 no contestaron
+================================================================================
+
+  [C]     Ronald Cifuentes                    +50235688895     ronaldcifuentesm18@gmail.com             23:31 GT   ultima: 23:38 GT
+
+  [ ] [!] Hanna Osorio                        +50254518822     hannabalcarcelosorio@gmail.com           16:22 GT
+  [ ] [!] Susan Martinez                      +50257274620     rodassam628@gmail.com                    16:24 GT
+  [ ] [!] Jose Bravo                          +50237056659     bravojose387@gmail.com                   17:12 GT
+  [ ] [!] Mike Lander                         +50236771121     none@nkne.com                            18:06 GT
+  [ ] [!] Leonel Salazar                      +50258935343     leosalazar@gmail.com                     19:15 GT
+  [ ]     David Juárez                        +50258238014     josedavidjuarez01@gmail.com              21:49 GT
+  [ ]     Seth Mazariegos                     +50258409089     j.sethmazariegos@gmail.com               21:50 GT
+  [ ]     Carmenregina González               +50241965899     reginaadmon24@gmail.com                  23:03 GT
+
+================================================================================
+PPOL — 4 leads | 0 contestaron
+================================================================================
+
+  [ ] [!] Mario Galindo                       +50256304977     mjgalindo@ufm.edu                        10:39 GT
+  [ ]     Dina Armas                          +50256247964     dgrarmas31@gmail.com                     22:33 GT
+  [ ]     Rubén Orozco                        +50255533359     licrorozco@gmail.com                     22:54 GT
+  [ ]     Иван España                         +50259236075     Respana@ufm.edu                          23:30 GT
+
+================================================================================
+PSB — 5 leads | 2 contestaron | 3 no contestaron
+================================================================================
+
+  [C]     Christopher Vleeming                +50234626826     Chrisvle12@hotmail.com                   08:16 GT   ultima: 09:59 GT
+  [C] [!] Amilcar Villeda                     +50232660934     decorvi@hotmail.es                       20:22 GT   ultima: 20:36 GT
+
+  [ ] [!] Navia Roldan                        +50254429834     navia.roldanpaz@gmail.com                12:16 GT
+  [ ] [!] Roxana Guzman                       +50256334676     roxi.aruiz@gmail.com                     18:52 GT
+  [ ] [!] Roberto Zetina Zetina               +502541926464    totozetina@yahoo.com                     19:00 GT
+
+================================================================================
+PVV — 7 leads | 0 contestaron
+================================================================================
+
+  [ ]     Villela Jorge                       +50256957579     villela66@hotmail.com                    05:52 GT
+  [ ] [!] Pedro Novales                       +50252014977     pedronovales@hotmail.com                 13:11 GT
+  [ ] [!] Adriana E. López                    +50252323028     aelm0613@yahoo.es                        14:27 GT
+  [ ] [!] Marco Antonio Vidal Vasquez         +50257151821     marcosvidal77@gmail.com                  16:05 GT
+  [ ] [!] Juan Aldana                         +50235008663     alegriajl.1977@gmail.com                 17:19 GT
+  [ ] [!] Jessica Mendez                      +50242186498     Jessicasandovalgt@gmail.com              19:32 GT
+  [ ]     Diego Gerardo                       +50233414600     Diegopappa@outlook.com                   23:56 GT
+
+================================================================================
+RESUMEN
+================================================================================
+
+  Proyecto   Total   Contestaron   No contest.   % respuesta
+  PMAR          11            0              11          0.0%
+  PPO            9            1               8          11.1%
+  PPOL           4            0               4          0.0%
+  PSB            5            2               3          40.0%
+  PVV            7            0               7          0.0%
+  TOTAL         36            3              33          8.3%
+

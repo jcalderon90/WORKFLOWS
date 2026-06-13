@@ -13,7 +13,7 @@
 
 ---
 
-## Estado general — actualizado 2026-06-11
+## Estado general — actualizado 2026-06-12
 
 ### Itz'ana (Kaan) — Fase 1
 
@@ -44,79 +44,95 @@
 
 | # | Componente | Tipo | Estado |
 | :-- | :-- | :-- | :-- |
-| 1 | `KBs/KB_KAANA.json` | Archivo de contenido | ✅ Estructurado — **21 chunks** ⚠️ Faltan 4 Signature Villas (ver gaps abajo) |
-| 2 | MongoDB Atlas (vectorización) | Infraestructura | ✅ Vectorizado — chunks con `propiedad: "KAA"` en colección `documents` |
+| 1 | `KBs/KB_KAANA.json` | Archivo de contenido | ✅ Completo — **25 chunks** (4 Signature Villas + links directos por habitación) |
+| 2 | MongoDB Atlas (vectorización) | Infraestructura | ✅ Vectorizado — 25 docs re-vectorizados 2026-06-12 |
 | 3 | `workflows/Kaana_Vectorizar_KB.json` | Workflow n8n | — No necesario (se usó el workflow existente) |
-| 4 | PRINCIPAL multi-propiedad | Configuración n8n | ✅ Listo — `Property Config`, `Set Propiedad` (lee `hoteles_propiedad`), `kb_search` tool dinámico |
-| 5 | Agregar emails Ka'ana a Notifications | Configuración n8n | ⬜ Pendiente — emails bodas, empleo, escalamiento |
+| 4 | PRINCIPAL multi-propiedad | Configuración n8n | ✅ Listo — deeplinks Ka'ana con `RoomTypeID` implementados (romantico: 555466, familia: 532468, grupo_grande: 555465) |
+| 5 | Emails Ka'ana en Notifications | Configuración n8n | ✅ Modo prueba — `jorge.calderon@garooinc.com`. Emails producción documentados en tabla abajo |
 | 6 | Configurar flow Ka'ana en ManyChat | ManyChat | ⬜ Pendiente — custom field `hoteles_propiedad: "KAA"` en el flow |
 
-#### Gaps KB Ka'ana — room types faltantes (contenido pendiente del hotel)
+#### Gaps KB Ka'ana — resueltos 2026-06-12
 
-| Room Name | Código PMS | Estado |
-| :-- | :-- | :-- |
-| One Bedroom Signature Villa | VILLA 3 | ❌ Falta chunk en KB |
-| Two Bedroom Signature Villa | 2BR VILLA | ❌ Falta chunk en KB |
-| Three Bedroom Signature Villa | VILLA 6 | ❌ Falta chunk en KB |
-| Villa Signature Suite - Shared Pool & Garden | 3BR COMP | ❌ Falta chunk en KB |
+| Room Name | Código iHotelier | RoomTypeID | Estado |
+| :-- | :-- | :-- | :-- |
+| Villa Signature Suite - Shared Pool & Garden | PRV1COM | 555467 | ✅ En KB + vectorizado |
+| One Bedroom Signature Villa | PRV1 | 555466 | ✅ En KB + vectorizado |
+| Two Bedroom Signature Villa | PRV2 | 555464 | ✅ En KB + vectorizado |
+| Three Bedroom Signature Villa | PRV3 | 555465 | ✅ En KB + vectorizado |
 
 ---
 
 ## RETOMAR AQUI — Siguiente fase
 
-**Estado al 2026-06-11:** Este proyecto = **Fase 1** del PRD `docs/belize-hotels-chat-prd-phases-1-3.docx`
-(BH-CHAT-PRD-001). Deep links implementados y en vivo. Ambas propiedades técnicamente listas;
-faltan configs externas (ManyChat + emails del hotel) y los items bloqueados de abajo.
+**Estado al 2026-06-12:** Todo el trabajo técnico de n8n está completo y sincronizado. Ambas propiedades listas para pruebas. Bloqueantes restantes son externos (hotel + ManyChat).
 
 ### Mapeo contra el PRD (requisitos Fase 1)
 
 | ID | Requisito | Prioridad | Estado |
 | :-- | :-- | :-- | :-- |
-| F1.1 | Servir el link correcto (content / iHotelier pre-llenado) | Must | 🟢 Casi listo — falta `RoomType` (bloqueado, #9) |
-| F1.2 | Responder desde KB por propiedad | Must | ✅ Listo (`kb_search` RAG multi-propiedad) |
-| F1.3 | Reconocer huésped recurrente (nombre/año/room type) | Should | 🟡 Parcial — saluda por nombre si ya escribió; falta soft-auth por email/tel y año/room type (bloqueado por fuente de guest profile) |
-| F1.4 | Capturar/enriquecer leads en CRM; escalar | Must | 🟡 Parcial — captura a MongoDB + escalamiento por email; **falta push al CRM Monday.com** |
+| F1.1 | Servir el link correcto (iHotelier pre-llenado) | Must | 🟢 Ka'ana ✅ con RoomTypeID — Itz'ana ⏳ bloqueado IT hotel |
+| F1.2 | Responder desde KB por propiedad | Must | ✅ RAG multi-propiedad activo |
+| F1.3 | Reconocer huésped recurrente | Should | 🟡 Parcial — saluda por nombre; falta soft-auth por email/tel |
+| F1.4 | Capturar leads en CRM; escalar | Must | 🟡 Parcial — MongoDB ✅ + email ✅; falta push Monday.com |
 | F1.5 | Pronóstico de clima para itinerarios | Could | ⬜ No implementado |
 
-### Pendientes para retomar (por bloqueo)
+---
 
-**🔴 Bloqueado por el hotel / IT:**
-- **Códigos de habitación** para `RoomType` en deep links (pregunta #9). Scaffolding listo en `Parse Agent Output`.
-- **Email Mr. Diego** (bodas) y **email RRHH** (empleo) Itz'ana → `Itzana_Notifications` (P1/P2).
-- **Fuente de guest profile** (CRM/Opera) para F1.3 completo (año de visita + room type).
-- **Ka'ana:** 4 Signature Villas faltantes en `KB_KAANA.json` (K1) + re-vectorizar (K2) + emails (K3).
+### ▶ PRÓXIMO PASO — Test Ka'ana (Balam)
 
-**🟡 Nuestro / decisión interna (no bloqueado):**
-- **F1.4 — push de leads a Monday.com CRM:** hoy solo escribimos a MongoDB `users`. El PRD marca
-  el CRM como integrado a nivel grupo y pide 3 "fires" (returning, first-time qualified, transcript
-  final) + 1 prioridad alta para bodas/grupos. **No estaba en la selección de Jorge; confirmar antes de construir.**
-- **F1.3 versión Fase-1:** lookup en MongoDB `users` por email/teléfono y saludar por nombre (sin año/room type).
-- **F1.5 — clima:** Weather API para sugerencias de itinerario (Could).
-- **Ka'ana K4:** configurar flow en ManyChat con `hoteles_propiedad: "KAA"` (consola ManyChat, no n8n).
+Enviar webhook con `propiedad: "KAA"` y verificar:
+- [ ] Balam responde con identidad Ka'ana (no Itz'ana)
+- [ ] KB_SEARCH devuelve chunks KAA (Signature Villas, restaurantes, etc.)
+- [ ] Deep link generado con `/book/dates-of-stay?RoomTypeID=XXXXX` cuando hay fechas + grupo
+- [ ] Escalamiento envía correo a `jorge.calderon@garooinc.com`
 
-**⏭️ Track separado (NO es parte de las 3 fases del PRD):**
-- **E-Concierge in-stay** (`docs/E-Concierge Itzana.md`): agente de operaciones para huéspedes
-  hospedados (tareas housekeeping/mantenimiento/F&B, routing, estados, feedback loop). Producto
-  nuevo y grande; posponer hasta estabilizar Kaan en producción y planear con su propio PRD.
+Payload de prueba:
+```json
+{
+  "manychat_id": "5773977619441792",
+  "nombre": "Jorge Calderon",
+  "canal_ingreso": "instagram",
+  "propiedad": "KAA",
+  "page_id": "page_kaa_test",
+  "mensajes": [{ "type": "text", "text": "Hola" }],
+  "custom_fields": {}
+}
+```
 
-### Para salir a producción — Itz'ana
+---
 
-| # | Pendiente | Prioridad |
-| :-- | :-- | :-- |
-| P1 | Email de Mr. Diego (bodas/eventos) → actualizar `sendTo` en nodo "Email Bodas/Eventos" de Notifications | 🔴 Alta |
-| P2 | Email de RRHH (empleo) → actualizar `sendTo` en nodo "Email Empleo" de Notifications | 🔴 Alta |
-| P3 | Configurar webhook de ManyChat → n8n (flow Itz'ana con `"propiedad": "ITZ"` en el body) | 🔴 Alta |
+### Para salir a producción — Itz'ana (Kaan)
 
-### Para activar Ka'ana en el sistema
+| # | Pendiente | Quién | Prioridad |
+| :-- | :-- | :-- | :-- |
+| P1 | Email Mr. Diego (bodas/eventos) → nodo "Email Bodas/Eventos", rama ITZ | Hotel | 🔴 Alta |
+| P2 | Email RRHH (empleo) → nodo "Email Empleo", rama ITZ | Hotel | 🔴 Alta |
+| P3 | Configurar webhook ManyChat → n8n (flow ITZ con `hoteles_propiedad: "ITZ"`) | Garoo + Hotel | 🔴 Alta |
+| P4 | Habilitar nodo "Send to ManyChat" en PRINCIPAL (actualmente deshabilitado) | Garoo | 🔴 Alta |
+| P5 | Borrar datos de prueba en MongoDB `users` y `chat_histories` antes de salir al aire | Garoo | 🟠 Media |
+| P6 | RoomTypeIDs Itz'ana para deeplinks → confirmar con IT/TravelClick | Hotel IT | 🟠 Media |
 
-El sistema es multi-propiedad. No se duplican workflows. **Todo el trabajo técnico de n8n está hecho.**
+### Para activar Ka'ana (Balam)
 
 | # | Tarea | Detalle | Estado |
 | :-- | :-- | :-- | :-- |
-| K1 | Completar KB_KAANA.json | Agregar 4 Signature Villas (contenido pendiente del hotel) | ⬜ Bloqueado por hotel |
-| K2 | Re-vectorizar KB_KAANA.json | Ejecutar workflow Vectorizar cuando KB esté completo | ⬜ Bloqueado por K1 |
-| K3 | Agregar emails Ka'ana a Notifications | Emails de bodas, empleo, escalamiento de Ka'ana | ⬜ Bloqueado por hotel |
-| K4 | Configurar flow Ka'ana en ManyChat | Custom field `hoteles_propiedad: "KAA"` en el flow | ⬜ Pendiente nuestro |
+| K1 | KB_KAANA.json completo | 25 chunks, 4 Signature Villas, 9 rooms con RoomTypeID | ✅ 2026-06-12 |
+| K2 | Re-vectorizar KB Ka'ana | 25 chunks en MongoDB | ✅ 2026-06-12 |
+| K3 | Emails Ka'ana en Notifications | Modo prueba activo; emails producción documentados | ✅ 2026-06-12 |
+| K4 | RoomTypeIDs Ka'ana en deeplinks | romantico:555466, familia:532468, grupo_grande:555465 | ✅ 2026-06-12 |
+| K5 | Test end-to-end Balam | Verificar KB, deeplinks, escalamientos | ⬜ Pendiente |
+| K6 | Configurar flow Ka'ana en ManyChat | Custom field `hoteles_propiedad: "KAA"` en el flow | ⬜ Pendiente |
+| K7 | Emails Ka'ana producción → Notifications | bodas→reservations@, RRHH→info@, frontdesk→escalamiento | ⬜ Al salir al aire |
+
+#### Emails Ka'ana — producción (activar al salir al aire)
+
+| Categoría | Email | Nodo en Notifications |
+| :-- | :-- | :-- |
+| Bodas & Eventos | `reservations@kaanabelize.com` | Email Bodas/Eventos → `sendTo` rama KAA |
+| PR / Colaboraciones | `info@kaanabelize.com` | Email PR → `sendTo` rama KAA |
+| Empleo / RRHH | `info@kaanabelize.com` | Email Empleo → `sendTo` rama KAA |
+| Escalamiento humano | `frontdesk@kaanabelize.com` | Email Escalamiento → `sendTo` rama KAA |
+| Reservas | `reservations@kaanabelize.com` | Email Reserva → `sendTo` rama KAA |
 
 ### ManyChat — arquitectura multi-propiedad
 
@@ -152,10 +168,17 @@ https://reservations.itzanabelize.com/book/accommodations   (KAA: reservations.k
 - Ka'ana ya apunta a iHotelier (`reservations.kaanabelize.com`) en `Property Config`.
 - `Preparar Datos Contacto` persiste `checkin`, `checkout` y `grupo_tipo` en MongoDB `users`.
 
-**🔴 Pendiente (bloqueado por hotel) — pregunta abierta #9:**
-- `RoomType` en el link: falta que IT/booking engine confirme el **nombre exacto del parámetro**
-  y los **códigos por habitación**. El scaffolding ya está en `Parse Agent Output` (`roomCodeMap`
-  por propiedad/grupo_tipo); solo hay que llenar los códigos y descomentar el append de `RoomType`.
+**✅ Ka'ana RoomTypeID — implementado (2026-06-12):**
+- Parámetro confirmado: `RoomTypeID` (TravelClick/iHotelier).
+- Códigos configurados en `Parse Agent Output` (`roomCodeMap`):
+  - romántico → `555466` (One Bedroom Signature Villa, PRV1)
+  - familia → `532468` (Two Bedroom Pool Villa, VL2)
+  - grupo_grande → `555465` (Three Bedroom Signature Villa, PRV3)
+- Deep link Ka'ana usa `/book/dates-of-stay` cuando hay RoomTypeID, `/book/accommodations` cuando no.
+
+**🔴 Pendiente (bloqueado por hotel) — pregunta abierta #9 para Itz'ana:**
+- Itz'ana: falta que IT/booking engine confirme el **nombre exacto del parámetro**
+  y los **códigos por habitación**. El scaffolding ya está en `Parse Agent Output` (`roomCodeMap`).
 
 ### Próxima fase — E-Concierge in-stay
 Ver spec en `docs/E-Concierge Itzana.md`. Agente separado para huéspedes ya hospedados:

@@ -2,15 +2,28 @@
   "nodes": [
     {
       "parameters": {
-        "inputSource": "passthrough"
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "manychat_id"
+            },
+            {
+              "name": "propiedad"
+            },
+            {
+              "name": "entrada_usuario"
+            }
+          ]
+        },
+        "inputSource": "workflowInputs"
       },
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        208,
-        48
+        2672,
+        480
       ],
-      "id": "5dba2c96-88f7-425e-ab70-440ec810c5db",
+      "id": "e7685397-4fd0-4bf7-988d-6695173fdde0",
       "name": "START"
     },
     {
@@ -42,10 +55,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        432,
-        48
+        2896,
+        480
       ],
-      "id": "4c17f10b-9b6d-440d-8478-93b9bea0f4c5",
+      "id": "7a180871-f56e-4f2d-9a8f-acfe91fc3583",
       "name": "Search Context"
     },
     {
@@ -55,10 +68,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1008,
-        48
+        3472,
+        480
       ],
-      "id": "c97bea09-1c8f-4d4c-8bb0-fc0e675174f2",
+      "id": "20c46119-3b31-4a10-8d27-02c4a75012a2",
       "name": "Format Context"
     },
     {
@@ -72,10 +85,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 1.7,
       "position": [
-        1344,
-        48
+        3920,
+        480
       ],
-      "id": "14c872bb-4167-40d4-8baa-99fac635dc73",
+      "id": "8b22043d-8d64-4ca9-95eb-9d391f11bebd",
       "name": "GENERAL AGENT"
     },
     {
@@ -95,10 +108,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1696,
-        48
+        4272,
+        480
       ],
-      "id": "3cfd9e3b-1158-43a6-95ac-a1962a5aeb1a",
+      "id": "3476c8b9-b0d5-4570-aa1e-5c4097a38137",
       "name": "RESPONSE"
     },
     {
@@ -114,17 +127,15 @@
         "metadata_field": "respuesta",
         "vectorIndexName": "itzana_vector_index",
         "prompt": "={{ $('Search Context').item.json.entrada_usuario }}",
-        "options": {
-          "filter": "={{ JSON.stringify({ \"propiedad\": { \"$eq\": $('Search Context').item.json.propiedad } }) }}"
-        }
+        "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.vectorStoreMongoDBAtlas",
       "typeVersion": 1.3,
       "position": [
-        656,
-        48
+        3120,
+        480
       ],
-      "id": "5466cc1e-1371-46f0-b059-83f28e48ef3f",
+      "id": "cead4d67-f057-4011-8bdf-55ffa9783889",
       "name": "Knowledge Base",
       "credentials": {
         "mongoDb": {
@@ -140,10 +151,10 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
       "position": [
-        736,
-        272
+        3200,
+        704
       ],
-      "id": "ca7543c6-0f1c-431a-973c-dc13bfb4b853",
+      "id": "f05a5386-6a72-46c0-b29a-e0e1dadbe401",
       "name": "Embeddings OpenAI",
       "credentials": {
         "openAiApi": {
@@ -162,10 +173,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        1424,
-        272
+        4000,
+        704
       ],
-      "id": "5c664094-ae7e-4c8b-9536-e1ee8cd87164",
+      "id": "4ba6ad95-62f6-4e92-b742-e1e1c18e94d1",
       "name": "OpenRouter Chat Model",
       "credentials": {
         "openRouterApi": {
@@ -215,10 +226,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1120,
-        48
+        3696,
+        480
       ],
-      "id": "5a5b895c-b0a0-4e47-9df5-77fc44c50225",
+      "id": "2dda644b-e171-4765-831c-b27607ded370",
       "name": "Property Config"
     }
   ],
@@ -315,6 +326,8 @@
   "pinData": {},
   "meta": {
     "templateCredsSetupCompleted": true,
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp",
     "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"
   }
 }

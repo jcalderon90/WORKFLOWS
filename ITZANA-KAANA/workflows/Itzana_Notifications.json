@@ -2,7 +2,29 @@
   "nodes": [
     {
       "parameters": {
-        "inputSource": "passthrough"
+        "inputSource": "workflowInputs",
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "categoria"
+            },
+            {
+              "name": "resumen_conversacion"
+            },
+            {
+              "name": "entrada_usuario"
+            },
+            {
+              "name": "nombre"
+            },
+            {
+              "name": "propiedad"
+            },
+            {
+              "name": "manychat_id"
+            }
+          ]
+        }
       },
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
@@ -212,7 +234,7 @@
             {
               "id": "654a4c70-52b5-45e2-864d-f9d1bf35deea",
               "name": "sendTo",
-              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? 'info@kaanabelize.com' : 'jorge.calderon@garooinc.com' }}",
+              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? 'jorge.calderon@garooinc.com' : 'jorge.calderon@garooinc.com' }}",
               "type": "string"
             }
           ]
@@ -247,7 +269,7 @@
             {
               "id": "654a4c70-52b5-45e2-864d-f9d1bf35deea",
               "name": "sendTo",
-              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? 'info@kaanabelize.com' : 'jorge.calderon@garooinc.com' }}",
+              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? 'jorge.calderon@garooinc.com' : 'jorge.calderon@garooinc.com' }}",
               "type": "string"
             }
           ]
@@ -282,7 +304,7 @@
             {
               "id": "654a4c70-52b5-45e2-864d-f9d1bf35deea",
               "name": "sendTo",
-              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? 'info@kaanabelize.com' : 'jorge.calderon@garooinc.com' }}",
+              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? 'jorge.calderon@garooinc.com' : 'jorge.calderon@garooinc.com' }}",
               "type": "string"
             }
           ]
@@ -317,7 +339,7 @@
             {
               "id": "654a4c70-52b5-45e2-864d-f9d1bf35deea",
               "name": "sendTo",
-              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? 'info@kaanabelize.com' : 'jorge.calderon@garooinc.com' }}",
+              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? 'jorge.calderon@garooinc.com' : 'jorge.calderon@garooinc.com' }}",
               "type": "string"
             }
           ]
@@ -352,7 +374,7 @@
             {
               "id": "654a4c70-52b5-45e2-864d-f9d1bf35deea",
               "name": "sendTo",
-              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? 'info@kaanabelize.com' : 'jorge.calderon@garooinc.com' }}",
+              "value": "={{ $('Set Context').first().json.propiedad === 'KAA' ? 'jorge.calderon@garooinc.com' : 'jorge.calderon@garooinc.com' }}",
               "type": "string"
             }
           ]
@@ -392,6 +414,29 @@
           "name": "Soporte Garoo"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "resp-001",
+              "name": "status",
+              "value": "sent",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1148,
+        1584
+      ],
+      "id": "notif-response-001",
+      "name": "RESPONSE"
     }
   ],
   "connections": {
@@ -505,6 +550,17 @@
         [
           {
             "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "RESPONSE",
             "type": "main",
             "index": 0
           }

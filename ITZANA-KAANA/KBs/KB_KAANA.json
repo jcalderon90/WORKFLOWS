@@ -11,49 +11,81 @@
     "id": "kaa_alojamiento_overview",
     "propiedad": "KAA",
     "categoria": "alojamientos",
-    "tags": ["habitaciones", "rooms", "alojamiento", "accommodation", "opciones", "tipos", "villa", "suite", "cuartos", "stay", "suites", "villas"],
+    "tags": ["habitaciones", "rooms", "alojamiento", "accommodation", "opciones", "tipos", "villa", "suite", "cuartos", "stay", "suites", "villas", "signature"],
     "pregunta": "¿Qué tipos de alojamiento tienen? / What accommodation options do you have?",
-    "respuesta": "Ka'ana offers suites and villas surrounded by the tropical jungle:\n\nSuites:\n• Balam Suite — hacienda-style, private entrance, outdoor sitting area overlooking pool or gardens\n• Casita Suite — private garden with outdoor shower, soaking tub, lounge chairs; 400 sq ft living space, private terrace and balcony\n• Master Suite — 700 sq ft, king bed, front and back decks, private plunge pool in the garden, outdoor shower\n\nVillas:\n• 1-Bedroom Private Pool Villa (2 guests) — 1,250 sq ft, romantic, secluded garden pathway, open-concept indoor/outdoor\n• 2-Bedroom Private Pool Villa (4 guests) — 2,500 sq ft, perfect for friends and family, private garden, pool and outdoor dining\n\nPrices vary by date and season. Book: https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms"
+    "respuesta": "Ka'ana offers suites and villas surrounded by the tropical jungle:\n\nSuites:\n• Balam Suite — hacienda-style, private entrance, outdoor sitting area overlooking pool or gardens\n• Casita Suite — private garden with outdoor shower, soaking tub, lounge chairs; 400 sq ft living space\n• Master Suite — 700 sq ft, king bed, private decks, private plunge pool, outdoor shower\n\nPool Villas:\n• 1-Bedroom Private Pool Villa (2 guests) — 1,250 sq ft, secluded garden, open-concept indoor/outdoor\n• 2-Bedroom Private Pool Villa (4 guests) — 2,500 sq ft, private pool, garden dining, outdoor lounge\n\nSignature Villas:\n• Villa Signature Suite - Shared Pool & Garden (2 guests) — elegant 1BR suite, shared pool area\n• One Bedroom Signature Villa (2 guests) — private plunge pool, complete privacy, ideal for honeymooners\n• Two Bedroom Signature Villa (4 guests) — two king bedrooms, private pool, tropical gardens\n• Three Bedroom Signature Villa (6 guests) — most spacious, private pool, perfect for large groups\n\nPrices vary by date and season. Book: https://reservations.kaanabelize.com/book/accommodations"
   },
   {
     "id": "kaa_suite_balam",
     "propiedad": "KAA",
     "categoria": "alojamientos",
-    "tags": ["balam", "suite", "hacienda", "pool view", "garden view", "single occupancy", "double occupancy", "private entrance"],
+    "tags": ["balam", "suite", "hacienda", "pool view", "garden view", "single occupancy", "double occupancy", "private entrance", "BAL"],
     "pregunta": "¿Cómo es la Balam Suite? / Tell me about the Balam Suite",
-    "respuesta": "The Balam Suite is nestled in a hacienda-style home — perfect for guests looking to feel revitalized and ready for jungle adventures. It features a private entrance and a beautiful outdoor sitting area overlooking the pool or tropical gardens. Available in single and double occupancy.\n\nBook: https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms"
+    "respuesta": "The Balam Suite is nestled in a hacienda-style home — perfect for guests looking to feel revitalized and ready for jungle adventures. It features a private entrance and a beautiful outdoor sitting area overlooking the pool or tropical gardens. Available in single and double occupancy.\n\nBook: https://reservations.travelclick.com/115718?RoomTypeID=532464"
   },
   {
     "id": "kaa_suite_casita",
     "propiedad": "KAA",
     "categoria": "alojamientos",
-    "tags": ["casita", "suite", "soaking tub", "outdoor shower", "private garden", "terrace", "balcony", "400 sq ft"],
+    "tags": ["casita", "suite", "soaking tub", "outdoor shower", "private garden", "terrace", "balcony", "400 sq ft", "CAS"],
     "pregunta": "¿Cómo es la Casita Suite? / Tell me about the Casita Suite",
-    "respuesta": "The Casita Suite strikes the perfect balance between privacy and modern luxury. It includes a private garden with outdoor shower, soaking tub, and lounge chairs, plus a spacious 400 sq ft living space with a private outdoor terrace and balcony.\n\nBook: https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms"
+    "respuesta": "The Casita Suite strikes the perfect balance between privacy and modern luxury. It includes a private garden with outdoor shower, soaking tub, and lounge chairs, plus a spacious 400 sq ft living space with a private outdoor terrace and balcony.\n\nBook: https://reservations.travelclick.com/115718?RoomTypeID=532465"
   },
   {
     "id": "kaa_suite_master",
     "propiedad": "KAA",
     "categoria": "alojamientos",
-    "tags": ["master suite", "plunge pool", "king bed", "private deck", "outdoor shower", "700 sq ft", "luxury"],
+    "tags": ["master suite", "plunge pool", "king bed", "private deck", "outdoor shower", "700 sq ft", "luxury", "MAS"],
     "pregunta": "¿Cómo es la Master Suite? / Tell me about the Master Suite",
-    "respuesta": "The Master Suite is a 700 sq ft home suite with locally inspired décor. It features a comfortable king-size bed, individual front and back decks, a private plunge pool in the garden, and a private outdoor shower. Ka'ana's most complete suite for those seeking ultimate comfort.\n\nBook: https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms"
+    "respuesta": "The Master Suite is a 700 sq ft home suite with locally inspired décor. It features a comfortable king-size bed, individual front and back decks, a private plunge pool in the garden, and a private outdoor shower. Ka'ana's most complete suite for those seeking ultimate comfort.\n\nBook: https://reservations.travelclick.com/115718?RoomTypeID=532466"
   },
   {
     "id": "kaa_villa_1br",
     "propiedad": "KAA",
     "categoria": "alojamientos",
-    "tags": ["villa", "1 bedroom", "1 dormitorio", "one bedroom", "pool villa", "romantic", "pareja", "couple", "1250 sq ft", "private pool"],
-    "pregunta": "¿Cómo es la villa de 1 dormitorio? / Tell me about the 1-Bedroom Villa",
-    "respuesta": "The 1-Bedroom Private Pool Villa is perfect for a romantic getaway (capacity: 2 guests). Positioned off a secluded garden pathway, this 1,250 sq ft villa offers unmatched luxury and comfort with a thoughtfully designed open-concept indoor and outdoor space and private pool.\n\nBook: https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms"
+    "tags": ["villa", "1 bedroom", "1 dormitorio", "one bedroom", "pool villa", "romantic", "pareja", "couple", "1250 sq ft", "private pool", "VL1"],
+    "pregunta": "¿Cómo es la villa de 1 dormitorio? / Tell me about the 1-Bedroom Pool Villa",
+    "respuesta": "The 1-Bedroom Private Pool Villa is perfect for a romantic getaway (capacity: 2 guests). Positioned off a secluded garden pathway, this 1,250 sq ft villa offers unmatched luxury and comfort with a thoughtfully designed open-concept indoor and outdoor space and private pool.\n\nBook: https://reservations.travelclick.com/115718?RoomTypeID=532467"
   },
   {
     "id": "kaa_villa_2br",
     "propiedad": "KAA",
     "categoria": "alojamientos",
-    "tags": ["villa", "2 bedrooms", "2 dormitorios", "two bedroom", "pool villa", "family", "familia", "friends", "amigos", "2500 sq ft", "private pool", "4 guests"],
-    "pregunta": "¿Cómo es la villa de 2 dormitorios? / Tell me about the 2-Bedroom Villa",
-    "respuesta": "The 2-Bedroom Private Pool Villa is perfect for friends and family traveling together (capacity: 4 guests). This 2,500 sq ft plush jungle villa features elegantly designed, luxuriously appointed interiors that open to outdoor entertainment, a private pool, garden dining, and an outdoor lounge.\n\nBook: https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms"
+    "tags": ["villa", "2 bedrooms", "2 dormitorios", "two bedroom", "pool villa", "family", "familia", "friends", "amigos", "2500 sq ft", "private pool", "4 guests", "VL2"],
+    "pregunta": "¿Cómo es la villa de 2 dormitorios? / Tell me about the 2-Bedroom Pool Villa",
+    "respuesta": "The 2-Bedroom Private Pool Villa is perfect for friends and family traveling together (capacity: 4 guests). This 2,500 sq ft plush jungle villa features elegantly designed, luxuriously appointed interiors that open to outdoor entertainment, a private pool, garden dining, and an outdoor lounge.\n\nBook: https://reservations.kaanabelize.com/book/dates-of-stay?RoomTypeID=532468"
+  },
+  {
+    "id": "kaa_villa_signature_suite",
+    "propiedad": "KAA",
+    "categoria": "alojamientos",
+    "tags": ["villa signature suite", "signature suite", "shared pool", "jardín compartido", "garden", "PRV1COM", "parejas", "couples", "1 bedroom", "private terrace", "king bed", "accessible", "suite", "villa"],
+    "pregunta": "¿Cómo es la Villa Signature Suite? / Tell me about the Villa Signature Suite",
+    "respuesta": "The Villa Signature Suite is an elegant one-bedroom retreat for couples seeking comfort, privacy, and a connection to nature. Located within the Signature Villa complex, it features a king bedroom, luxurious bathroom, private terrace, and access to a beautifully landscaped shared pool and garden area.\n\nMaximum occupancy: 2 adults.\nBest for: Couples and solo travelers looking for a villa-style experience at a more accessible price point. Unlike the One Bedroom Signature Villa, the outdoor pool and common areas are shared with other suites in the complex.\n\nBook: https://reservations.kaanabelize.com/book/dates-of-stay?RoomTypeID=555467"
+  },
+  {
+    "id": "kaa_villa_signature_1br",
+    "propiedad": "KAA",
+    "categoria": "alojamientos",
+    "tags": ["one bedroom signature villa", "1br signature", "private pool", "plunge pool", "PRV1", "couples", "honeymoon", "luna de miel", "private", "king bedroom", "jardín privado", "privacy", "romantic", "romantico"],
+    "pregunta": "¿Cómo es la One Bedroom Signature Villa? / Tell me about the One Bedroom Signature Villa",
+    "respuesta": "The One Bedroom Signature Villa is a private sanctuary immersed in lush tropical surroundings. Designed for couples and honeymooners, it features a king bedroom, spacious indoor and outdoor living areas, a private garden, and an exclusive plunge pool. The villa offers complete privacy and a seamless indoor-outdoor experience.\n\nMaximum occupancy: 2 adults.\nBest for: Couples, honeymooners, and guests seeking the highest level of privacy. Unlike the Villa Signature Suite, all outdoor spaces — including the pool — are exclusively for you.\n\nBook: https://reservations.travelclick.com/115718?RoomTypeID=555466"
+  },
+  {
+    "id": "kaa_villa_signature_2br",
+    "propiedad": "KAA",
+    "categoria": "alojamientos",
+    "tags": ["two bedroom signature villa", "2br signature", "private pool", "PRV2", "family", "familia", "two couples", "dos parejas", "4 guests", "king bedrooms", "tropical gardens"],
+    "pregunta": "¿Cómo es la Two Bedroom Signature Villa? / Tell me about the Two Bedroom Signature Villa",
+    "respuesta": "The Two Bedroom Signature Villa combines privacy and shared living for families or friends traveling together. It features two king bedrooms, each with its own bathroom, a spacious living area, private terrace, and a private pool surrounded by tropical gardens.\n\nMaximum occupancy: 4 adults.\nBest for: Families, two couples, or small groups seeking a private villa experience with two separate sleeping areas.\n\nBook: https://reservations.kaanabelize.com/book/dates-of-stay?RoomTypeID=555464"
+  },
+  {
+    "id": "kaa_villa_signature_3br",
+    "propiedad": "KAA",
+    "categoria": "alojamientos",
+    "tags": ["three bedroom signature villa", "3br signature", "private pool", "PRV3", "large groups", "grupos grandes", "family", "familia", "retreat", "6 guests", "king bedrooms", "entertainment", "most spacious", "largest villa"],
+    "pregunta": "¿Cómo es la Three Bedroom Signature Villa? / Tell me about the Three Bedroom Signature Villa",
+    "respuesta": "The Three Bedroom Signature Villa is Ka'ana's most spacious and exclusive accommodation. Surrounded by tropical gardens, it features three king bedrooms, expansive indoor and outdoor living spaces, a private pool, and generous areas for gathering and entertaining.\n\nMaximum occupancy: 6 adults.\nBest for: Large families, groups of friends, retreats, and multi-generational travel. This is the largest villa at Ka'ana, offering the most space, privacy, and flexibility.\n\nBook: https://reservations.travelclick.com/115718?RoomTypeID=555465"
   },
   {
     "id": "kaa_restaurante_la_ceiba",
@@ -85,7 +117,7 @@
     "categoria": "bodas_eventos",
     "tags": ["boda", "wedding", "evento", "event", "celebracion", "celebration", "grupo", "group", "privado", "special occasion", "reunión"],
     "pregunta": "¿Hacen bodas o eventos especiales? / Do you host weddings or special events?",
-    "respuesta": "Ka'ana Resort is the perfect backdrop for weddings, celebrations, and private events — surrounded by the tropical jungle with a unique, intimate atmosphere. We offer fine dining in the jungle setting and can create fully custom experiences.\n\nTo share your ideas and get a personalized proposal, contact us: info@kaanabelize.com | +501 824 3350 | www.kaanabelize.com\n\nOur team will be in touch within one business day."
+    "respuesta": "Ka'ana Resort is the perfect backdrop for weddings, celebrations, and private events — surrounded by the tropical jungle with a unique, intimate atmosphere. We offer fine dining in the jungle setting and can create fully custom experiences.\n\nTo share your ideas and get a personalized proposal, contact us: reservations@kaanabelize.com | +501 824 3350 | www.kaanabelize.com\n\nOur team will be in touch within one business day."
   },
   {
     "id": "kaa_amenidades",
@@ -149,7 +181,7 @@
     "categoria": "contacto",
     "tags": ["contact", "contacto", "email", "phone", "telefono", "reservations", "reservaciones", "website", "sitio web", "info"],
     "pregunta": "¿Cómo los contacto? / How can I contact Ka'ana?",
-    "respuesta": "You can reach Ka'ana Resort through:\n\n📧 General & Reservations: info@kaanabelize.com\n📞 Phone: +501 824 3350\n🌐 Website: www.kaanabelize.com\n🔗 Book online: https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms\n\nOur team is available 24 hours at the front desk."
+    "respuesta": "You can reach Ka'ana Resort through:\n\n📧 General & Info: info@kaanabelize.com\n📧 Reservations & Events: reservations@kaanabelize.com\n📞 Phone: +501 824 3350\n🌐 Website: www.kaanabelize.com\n🔗 Book online: https://reservations.kaanabelize.com/book/accommodations\n\nOur team is available 24 hours at the front desk."
   },
   {
     "id": "kaa_empleo",
@@ -165,6 +197,6 @@
     "categoria": "alojamientos",
     "tags": ["reservar", "book", "booking", "reservation", "reservacion", "como reservar", "how to book", "precio", "price", "disponibilidad", "availability"],
     "pregunta": "¿Cómo hago una reservación? / How do I make a reservation?",
-    "respuesta": "You can book your stay at Ka'ana Resort in two ways:\n\n🔗 Book online: https://bookings.travelclick.com/115718?_ga-ft=1aVg8l.0.0.0.0.EZOk7-EiA-4D3-ACB-Fe1iMl1U.0.1&languageid=1#/guestsandrooms\n📞 By phone: +501 824 3350\n\nPrices vary by date and season. For personalized booking assistance, contact info@kaanabelize.com."
+    "respuesta": "You can book your stay at Ka'ana Resort in two ways:\n\n🔗 Book online: https://reservations.kaanabelize.com/book/accommodations\n📞 By phone: +501 824 3350\n\nPrices vary by date and season. For personalized booking assistance, contact reservations@kaanabelize.com."
   }
 ]
