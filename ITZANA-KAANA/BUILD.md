@@ -13,15 +13,15 @@
 
 ---
 
-## Estado general — actualizado 2026-06-12
+## Estado general — actualizado 2026-06-14
 
 ### Itz'ana (Kaan) — Fase 1
 
 | # | Componente | Tipo | Estado |
 | :-- | :-- | :-- | :-- |
-| 1 | `KBs/KB_ITZANA.json` | Archivo de contenido | ✅ Listo — **36 chunks** ⚠️ Faltan 5 room types (ver gaps abajo) |
+| 1 | `KBs/KB_ITZANA.json` | Archivo de contenido | ✅ Listo — **37 chunks** ⚠️ Faltan 5 room types (ver gaps abajo) |
 | 2 | MongoDB Atlas (DB + índice vectorial + credencial) | Infraestructura | ✅ Listo — credencial `HOTELS` (`Msw0gTK8f8b192VX`) |
-| 3 | `workflows/Itzana_Vectorizar_KB.json` | Workflow n8n | ✅ Listo — **36 docs** vectorizados en colección `documents` |
+| 3 | `workflows/Itzana_Vectorizar_KB.json` | Workflow n8n | ✅ Listo — **37 docs** sincronizados desde `KB_ITZANA.json` (2026-06-14) |
 | 4 | `workflows/KB_SEARCH.json` | Workflow n8n (herramienta RAG) | ✅ Multi-propiedad — ID: `rofQe6ZGW3OpFqcb`, renombrado de "ITZ KB_SEARCH" a "KB_SEARCH" |
 | 5 | `workflows/Itzana_Notifications.json` | Workflow n8n (herramienta email) | ✅ Listo — Gmail (Soporte Garoo), HTML dinámico, 5 categorías. Emails de prueba: jorge.calderon@garooinc.com |
 | 6 | `workflows/PRINCIPAL.json` | Workflow n8n (orquestador) | ✅ Multi-propiedad — `Property Config` + `Set Propiedad` (lee `hoteles_propiedad` de ManyChat) + `kb_search` tool dinámico |
@@ -64,7 +64,18 @@
 
 ## RETOMAR AQUI — Siguiente fase
 
-**Estado al 2026-06-12:** Todo el trabajo técnico de n8n está completo y sincronizado. Ambas propiedades listas para pruebas. Bloqueantes restantes son externos (hotel + ManyChat).
+**Estado al 2026-06-15:** Bugs críticos corregidos y validados en producción. RAG funcional (execution 122255). Workflows publicados en n8n. Bloqueantes restantes son externos (hotel + ManyChat).
+
+> Punch list detallado: `docs/PENDIENTES_2026-06-14.md`
+
+### Bugs corregidos en esta sesión (2026-06-15)
+| Bug | Fix |
+| :-- | :-- |
+| `guestMap` ignoraba adultos/niños reales del usuario | `Parse Agent Output` ahora usa `adultos_capturado`/`ninos_capturado` con fallback |
+| KB vectorizer desincronizado (35 chunks hardcoded vs 37 reales) | Sincronizado desde `KB_ITZANA.json`; re-vectorizado limpio en MongoDB |
+| Fechas inferidas en año 2024 | Inyectado `{{ $now }}` en system prompt del agente |
+| `kb_search` devolvía "No prompt specified" | Bypass de `GENERAL AGENT` v1.7 (config inválida); `RESPONSE` devuelve contexto raw directo |
+| Schema mismatch en tool call de kb_search | Campo cambiado a `$fromAI('entrada_usuario')` |
 
 ### Mapeo contra el PRD (requisitos Fase 1)
 

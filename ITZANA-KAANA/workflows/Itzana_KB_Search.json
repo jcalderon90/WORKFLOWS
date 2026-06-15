@@ -77,7 +77,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "={{ $json.entrada_usuario }}",
+        "text": "={{ $('Search Context').first().json.entrada_usuario || $('START').first().json.entrada_usuario }}",
         "options": {
           "systemMessage": "=## KNOWLEDGE BASE — INFORMACIÓN ENCONTRADA ##\n{{ $json.contexto }}\n\n---\n\n# CONCIERGE VIRTUAL — {{ $json.resort_nombre }}\n\n## REGLAS DE ORO\n1. Responde ÚNICAMENTE con información del KNOWLEDGE BASE de arriba.\n2. NUNCA inventes datos. Si no está en el KB, di que el equipo del resort puede ayudar.\n3. Responde en el idioma en que el usuario te habla (español o inglés).\n4. Texto plano. Sin markdown. Máximo 500 caracteres.\n   - Excepción: listas de amenidades/actividades usan bullet • en líneas separadas.\n5. Cuando corresponda, incluye el link exacto del KB (reservas, menús, paquetes).\n6. Si el usuario quiere reservar → link: {{ $json.booking_link }}\n7. Si el usuario pregunta por bodas/eventos → escalar al equipo de eventos (mencionar que le pondremos en contacto).\n8. Si el usuario es de prensa/PR/influencer → escalar a {{ $json.pr_email }}.\n\n## FORMATO DE SALIDA\nResponde ÚNICAMENTE con este JSON en una sola línea:\n{\"response\": \"<texto conversacional>\", \"escalate\": false, \"categoria\": \"info\"}\n\nescalate: true SOLO si el usuario pide hablar con una persona o el tema requiere cotización (bodas, grupos grandes, eventos).\ncategoria: \"info\" | \"reserva\" | \"bodas_eventos\" | \"pr\" | \"empleo\" | \"escalamiento\""
         }
@@ -98,7 +98,7 @@
             {
               "id": "id-resp-001",
               "name": "response",
-              "value": "={{ $json.output }}",
+              "value": "={{ $json.contexto }}",
               "type": "string"
             }
           ]
@@ -126,7 +126,7 @@
         "embedding": "itzana_embedding",
         "metadata_field": "respuesta",
         "vectorIndexName": "itzana_vector_index",
-        "prompt": "={{ $('Search Context').item.json.entrada_usuario }}",
+        "prompt": "={{ $json.entrada_usuario || $('Search Context').first().json.entrada_usuario || $('START').first().json.entrada_usuario }}",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.vectorStoreMongoDBAtlas",
@@ -256,33 +256,22 @@
         ]
       ]
     },
-    "Format Context": {
-      "main": [
-        [
-          {
-            "node": "Property Config",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "GENERAL AGENT": {
-      "main": [
-        [
-          {
-            "node": "RESPONSE",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Knowledge Base": {
       "main": [
         [
           {
             "node": "Format Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Context": {
+      "main": [
+        [
+          {
+            "node": "RESPONSE",
             "type": "main",
             "index": 0
           }
@@ -295,28 +284,6 @@
           {
             "node": "Knowledge Base",
             "type": "ai_embedding",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenRouter Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "GENERAL AGENT",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Property Config": {
-      "main": [
-        [
-          {
-            "node": "GENERAL AGENT",
-            "type": "main",
             "index": 0
           }
         ]

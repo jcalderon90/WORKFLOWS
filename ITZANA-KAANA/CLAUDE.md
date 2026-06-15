@@ -45,7 +45,7 @@ ManyChat → Webhook → PRINCIPAL.json
 
 ### Knowledge Base
 
-- **Source**: `KBs/KB_ITZANA.json` — 31 chunks (alojamientos, restaurantes, actividades, bodas, ubicación, contacto, políticas)
+- **Source**: `KBs/KB_ITZANA.json` — 37 chunks (alojamientos, restaurantes, actividades, bodas_eventos, ubicacion_logistica, contacto, politicas_faq, resort). Ka'ana: `KBs/KB_KAANA.json` (21 chunks, mismo schema con `propiedad: "KAA"`).
 - **Format per chunk**: `{ id, propiedad: "ITZ", categoria, tags, pregunta, respuesta }`
 - **Storage**: MongoDB Atlas, collection `documents`, index `itzana_vector_index` (cosine, 1536 dims)
 - **Filter**: all queries pre-filter by `metadata.propiedad = "ITZ"` (multi-property ready)
@@ -57,11 +57,11 @@ ManyChat → Webhook → PRINCIPAL.json
 | Name | ID | Used for |
 |---|---|---|
 | HOTELS (MongoDB) | `Msw0gTK8f8b192VX` | users, chat_histories, KB vectors (shared cluster) |
-| ITZANA (OpenAI) | `PjPavWO5j0jIFtSG` | Audio transcription, image analysis |
+| Vectorizer Agent - Knowledge Bases (OpenAI) | `LtzIKoi61tZvaeua` | Audio transcription, image analysis, embeddings |
 | ITZANA-KAANA (OpenRouter) | `J9zb84vhqsx182XW` | Main agent LLM |
 | Redis GarooVPS | `8EUkwaZixjCH7szY` | Message batching |
 | ManyChat Garoo | `aEvHbFXnmwofChqs` | Send responses to user |
-| SMTP Itzana | ⚠️ pending | Escalation emails (Notifications workflow) |
+| Soporte Garoo (Gmail OAuth) | `H8Qx7NlrthXmHUiy` | Escalation emails (Notifications workflow) — temporal, all categories route to jorge.calderon@garooinc.com pending Diego/RRHH emails |
 
 ---
 
@@ -100,8 +100,9 @@ See `BUILD.md` for the full spec and current state. Short version:
 **Done**: KB vectorized, all 3 sub-workflows imported in n8n, PRINCIPAL orchestrator complete.
 
 **Pending before production**:
-1. Create SMTP credential in n8n → configure in Itzana_Notifications
-2. Get Mr. Diego's email (bodas/eventos) and HR email (empleo) for Notifications routing
-3. Configure `hotels-agent` webhook in ManyChat flow for Itz'ana
-4. End-to-end test with pinData (Webhook node has Jorge Calderon / "Hola" pinned)
-5. Confirm pet policy with hotel (KB chunk marked ⚠️)
+1. Get Mr. Diego's email (bodas/eventos) and HR email (empleo) → update sendTo in Itzana_Notifications categories
+2. Configure `hotels-agent` webhook in ManyChat flow for Itz'ana with `hoteles_propiedad: "ITZ"`
+3. Enable "Send to ManyChat" HTTP node (verify it isn't disabled)
+4. Get RoomTypeID codes from hotel/TravelClick for Itz'ana deep links (KAA already mapped: 555466/532468/555465)
+5. Fill missing KB chunks: Coral Caye, 4× Marina Villas (NA1B-NA4B), pet policy confirmation
+6. Clean test data from MongoDB before go-live (Jorge Calderon profile, etc.)
