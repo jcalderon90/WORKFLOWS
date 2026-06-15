@@ -511,7 +511,7 @@
             {
               "id": "sp-001",
               "name": "propiedad",
-              "value": "={{ $('PARSE BODY').first().json.propiedad || 'ITZ' }}",
+              "value": "={{ $('PARSE BODY').first().json.current_body.custom_fields.propiedad || 'ITZ' }}",
               "type": "string"
             },
             {
