@@ -13,7 +13,7 @@
 
 ---
 
-## Estado general — actualizado 2026-06-14
+## Estado general — actualizado 2026-06-15
 
 ### Itz'ana (Kaan) — Fase 1
 
@@ -76,6 +76,12 @@
 | Fechas inferidas en año 2024 | Inyectado `{{ $now }}` en system prompt del agente |
 | `kb_search` devolvía "No prompt specified" | Bypass de `GENERAL AGENT` v1.7 (config inválida); `RESPONSE` devuelve contexto raw directo |
 | Schema mismatch en tool call de kb_search | Campo cambiado a `$fromAI('entrada_usuario')` |
+
+### Mejoras de comportamiento (2026-06-15)
+| Comportamiento anterior | Mejora |
+| :-- | :-- |
+| Idioma fijado al primer mensaje; no seguía cambio de idioma del usuario | Kaan ahora responde en el idioma del **último** mensaje y se cambia con el usuario si este cambia de idioma |
+| Deep link con fechas en formato ISO al final ("He registrado tus fechas: 2026-07-14 a 2026-07-20") | Copy natural con fechas y noches ("En este link puedes ver los precios para tu estadía del 14 al 20 de julio (6 noches)") |
 
 ### Mapeo contra el PRD (requisitos Fase 1)
 
