@@ -23,7 +23,7 @@ ManyChat → Webhook → PRINCIPAL.json
                           ↓
                MongoDB find/insert/update user (collection: users)
                           ↓
-               AI Agent "Kaan" (OpenRouter claude-opus-4.5, typeVersion 3.1)
+               AI Agent "Kaan" (OpenRouter openai/gpt-5-mini, typeVersion 3.1)
                  ├── Tool: ITZ KB_SEARCH  → Itzana_KB_Search.json (RAG)
                  └── Tool: ITZ NOTIFICATIONS → Itzana_Notifications.json (email escalation)
                           ↓

@@ -1,1233 +1,18 @@
 {
-  "nodes": [
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "565ffc02-d21f-43f2-9c2b-88a66eb11220",
-              "name": "agent_name",
-              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'Balam' : 'Kaan' }}",
-              "type": "string"
-            },
-            {
-              "id": "ea25bc35-e3c3-4fad-9966-8874489a6625",
-              "name": "resort_nombre",
-              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? \"Ka'ana Resort\" : \"Itz'ana Resort & Residences\" }}",
-              "type": "string"
-            },
-            {
-              "id": "465984c9-decc-4505-90f8-dc94832dfe2e",
-              "name": "ubicacion",
-              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'San Ignacio, Belice (Mile 69 1/4 George Price Highway, Cayo District)' : 'Placencia, Belice (Mile 20 Placencia Road, Stann Creek District)' }}",
-              "type": "string"
-            },
-            {
-              "id": "0b09ab27-23eb-49a4-b6d5-4a772f95a054",
-              "name": "booking_link",
-              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'https://reservations.kaanabelize.com/book/accommodations' : 'https://reservations.itzanabelize.com/book/accommodations' }}",
-              "type": "string"
-            },
-            {
-              "id": "43fdf7f1-18fc-4e2d-b1cb-24b21a758fca",
-              "name": "contacto_email",
-              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'info@kaanabelize.com' : 'concierge@itzanabelize.com' }}",
-              "type": "string"
-            },
-            {
-              "id": "9120263c-cc0e-4fb9-9ae1-920573480d02",
-              "name": "contacto_phone",
-              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? '+501 824 3350' : '+(501) 610-1329' }}",
-              "type": "string"
-            },
-            {
-              "id": "48bf0ec1-7c7d-4e4d-a9d6-9f6db72e5c5f",
-              "name": "rec_romantico",
-              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'Master Suite con plunge pool privado en el jardín' : 'Penthouse con plunge pool privado' }}",
-              "type": "string"
-            },
-            {
-              "id": "6fe43404-fa94-4ff5-9523-732ef58c070d",
-              "name": "rec_familia",
-              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'Villa de 2 dormitorios con piscina privada y jardín tropical' : 'Beach Villa frente al mar Caribe' }}",
-              "type": "string"
-            },
-            {
-              "id": "a555be28-dc11-4ac5-8cbe-f868c0c66fb8",
-              "name": "hotel_id",
-              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? '115718' : '115719' }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        34272,
-        1120
-      ],
-      "id": "eb485000-74d1-4284-be58-624e3bafd4d8",
-      "name": "Property Config"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "collection": "users",
-        "updateKey": "_id",
-        "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(\",\") }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.mongoDb",
-      "typeVersion": 1.2,
-      "position": [
-        35536,
-        1024
-      ],
-      "id": "ae3a3f4d-bdb0-41d1-9c09-c51983cb94d6",
-      "name": "Guardar Contacto",
-      "credentials": {
-        "mongoDb": {
-          "id": "Msw0gTK8f8b192VX",
-          "name": "HOTELS"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "jsCode": "const captured = $json;\nconst userDoc = $('User Data').first().json;\n\nconst update = {};\nif (captured.nombre_capturado)    update.nombre    = captured.nombre_capturado;\nif (captured.email_capturado)     update.email     = captured.email_capturado;\nif (captured.telefono_capturado)  update.telefono  = captured.telefono_capturado;\nif (captured.checkin_capturado)   update.checkin   = captured.checkin_capturado;\nif (captured.checkout_capturado)  update.checkout  = captured.checkout_capturado;\nif (captured.grupo_tipo)          update.grupo_tipo = captured.grupo_tipo;\n\nif (Object.keys(update).length === 0) return [];\n\nconst idStr = JSON.stringify(userDoc._id).replace(/^\"|\"$/g, '');\nreturn [{ json: { _id: idStr, ...update } }];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        35312,
-        1024
-      ],
-      "id": "5256cd32-a6f4-4770-8ff5-6fa8e046190a",
-      "name": "Preparar Datos Contacto"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "36d12256-d1f9-49ba-80d0-a97080e0fe3e",
-              "name": "type",
-              "value": "={{\n   $('Set Propiedad').first().json.canal_ingreso.toLowerCase().includes('instagram')\n     ? 'instagram'\n     : $('Set Propiedad').first().json.canal_ingreso.toLowerCase().includes('messenger')\n       ? 'messenger'\n       : 'whatsapp'\n }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        35312,
-        1216
-      ],
-      "id": "42c983e8-ea5a-4cc2-87ac-12aba943116c",
-      "name": "Parameter Type"
-    },
-    {
-      "parameters": {
-        "description": "=Busca en la base de conocimiento del resort. Úsala para CUALQUIER pregunta sobre el resort: alojamiento, restaurantes, actividades, bodas, ubicación, políticas, precios. Pasa la consulta del usuario como {\"query\": \"<pregunta del usuario>\"}.",
-        "workflowId": {
-          "__rl": true,
-          "value": "rofQe6ZGW3OpFqcb",
-          "mode": "list",
-          "cachedResultUrl": "/workflow/rofQe6ZGW3OpFqcb",
-          "cachedResultName": "KB_SEARCH"
-        },
-        "workflowInputs": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "manychat_id": "={{ $('User Data').first().json.manychat_id }}",
-            "propiedad": "={{ $('User Data').first().json.propiedad }}",
-            "entrada_usuario": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('entrada_usuario', 'User query for KB search — usually the user message verbatim or a refined question', 'string') }}"
-          },
-          "matchingColumns": [
-            "query"
-          ],
-          "schema": [
-            {
-              "id": "manychat_id",
-              "displayName": "manychat_id",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "canBeUsedToMatch": true,
-              "type": "string",
-              "removed": false
-            },
-            {
-              "id": "propiedad",
-              "displayName": "propiedad",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "canBeUsedToMatch": true,
-              "type": "string",
-              "removed": false
-            },
-            {
-              "id": "entrada_usuario",
-              "displayName": "entrada_usuario",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "canBeUsedToMatch": true,
-              "type": "string",
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
-      "typeVersion": 2.2,
-      "position": [
-        34752,
-        1344
-      ],
-      "id": "af83f467-5a0f-4751-95d8-29e1e37596be",
-      "name": "kb_search"
-    },
-    {
-      "parameters": {
-        "jsCode": "const agentOutput = $input.first().json.output || '';\n\nlet parsed;\ntry {\n  const jsonMatch = agentOutput.match(/\\{[\\s\\S]*\\}/);\n  parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : null;\n} catch(e) {\n  parsed = null;\n}\n\nconst checkin   = parsed?.checkin_capturado  || null;\nconst checkout  = parsed?.checkout_capturado || null;\nconst grupoTipo = parsed?.grupo_tipo         || null;\nconst propiedad = $('Set Propiedad').first().json.propiedad;\n\nfunction toBookingDate(dateStr) {\n  if (!dateStr) return null;\n  const m = dateStr.match(/^(\\d{4})-(\\d{2})-(\\d{2})$/);\n  return m ? `${m[2]}/${m[3]}/${m[1]}` : null;\n}\n\nconst dateIn  = toBookingDate(checkin);\nconst dateOut = toBookingDate(checkout);\n\nconst guestMap = {\n  romantico:    { adults: 2, children: 0 },\n  familia:      { adults: 2, children: 1 },\n  grupo_grande: { adults: 4, children: 0 },\n};\nconst fallback = guestMap[grupoTipo] || { adults: 1, children: 0 };\nconst adultsParsed   = Number.isInteger(parsed?.adultos_capturado) ? parsed.adultos_capturado : null;\nconst childrenParsed = Number.isInteger(parsed?.ninos_capturado)   ? parsed.ninos_capturado   : null;\nconst guests = {\n  adults:   adultsParsed   !== null ? adultsParsed   : fallback.adults,\n  children: childrenParsed !== null ? childrenParsed : fallback.children,\n};\n\nconst roomCodeMap = {\n  ITZ: { romantico: null, familia: null, grupo_grande: null },\n  KAA: {\n    romantico:    '555466',\n    familia:      '532468',\n    grupo_grande: '555465',\n  },\n};\nconst roomCode = (roomCodeMap[propiedad] || {})[grupoTipo] || null;\n\nconst hotelId = propiedad === 'KAA' ? '115718' : '115719';\nconst baseUrl = propiedad === 'KAA'\n  ? (roomCode ? 'https://reservations.kaanabelize.com/book/dates-of-stay' : 'https://reservations.kaanabelize.com/book/accommodations')\n  : 'https://reservations.itzanabelize.com/book/accommodations';\nconst utmCampaign = propiedad === 'KAA' ? 'kaana-f1' : 'itzana-f1';\n\nlet deepLink = null;\nif (dateIn && dateOut) {\n  const enc = encodeURIComponent;\n  deepLink = `${baseUrl}?HotelID=${hotelId}&LanguageID=1&Rooms=1&DateIn=${enc(dateIn)}&DateOut=${enc(dateOut)}&Adults=${guests.adults}&Children=${guests.children}`;\n  if (roomCode) deepLink += `&RoomTypeID=${roomCode}`;\n  deepLink += `&utm_source=kaan-chat&utm_medium=manychat&utm_campaign=${utmCampaign}`;\n}\n\nlet responseText = parsed?.response || agentOutput;\nif (deepLink) {\n  responseText = responseText.replace(\n    /https?:\\/\\/(?:reservations\\.(?:itzanabelize|kaanabelize)\\.com\\/book\\/(?:accommodations|dates-of-stay)|bookings\\.travelclick\\.com\\/\\d+)[^\\s]*/g,\n    deepLink\n  );\n}\n\nreturn [{\n  json: {\n    response_text:       responseText,\n    escalate:            parsed?.escalate           || false,\n    categoria:           parsed?.categoria          || 'info',\n    nombre_capturado:    parsed?.nombre_capturado   || null,\n    email_capturado:     parsed?.email_capturado    || null,\n    telefono_capturado:  parsed?.telefono_capturado || null,\n    checkin_capturado:   checkin,\n    checkout_capturado:  checkout,\n    grupo_tipo:          grupoTipo,\n    deep_link:           deepLink,\n    raw_output:          agentOutput\n  }\n}];\n"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        35088,
-        1120
-      ],
-      "id": "a29d9122-4281-4567-8bfe-1785b497a10b",
-      "name": "Parse Agent Output"
-    },
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "={{ $('Set Propiedad').first().json.entrada_usuario }}",
-        "options": {
-          "systemMessage": "=## CONTEXTO TEMPORAL ##\nHoy es {{ $now.toFormat('yyyy-MM-dd') }}. Si el usuario menciona fechas sin año (ej: \"del 20 al 27 de julio\"), asume el próximo año futuro válido — NUNCA uses fechas pasadas.\n\n---\n\n## PRIORIDAD MÁXIMA — SALUDOS PUROS ##\nSi el mensaje del usuario es ÚNICAMENTE un saludo (hola, hi, hello, hey, buenas, good morning, good afternoon, good evening, buenos días, buenas tardes, buenas noches) — NO llames ninguna herramienta. Responde DIRECTAMENTE con este JSON:\n{\"response\": \"Hola, soy {{ $('Property Config').first().json.agent_name }}, tu concierge virtual de {{ $('Property Config').first().json.resort_nombre }}. ¿Es tu primera vez con nosotros, o ya te has hospedado antes?\", \"escalate\": false, \"categoria\": \"info\", \"nombre_capturado\": null, \"email_capturado\": null, \"telefono_capturado\": null, \"checkin_capturado\": null, \"checkout_capturado\": null, \"grupo_tipo\": null}\n\n---\n\n{{ $('User Data').first().json.nombre ? '## USUARIO REGISTRADO ##\\nEste usuario ya nos ha escrito antes. Su nombre es ' + $('User Data').first().json.nombre + '.\\nSalúdalo por su nombre de forma natural al inicio de este mensaje (solo una vez, no repetirlo en cada respuesta).\\n\\n---\\n\\n' : '' }}\n\n## IDENTIDAD ##\nEres {{ $('Property Config').first().json.agent_name }}, el concierge virtual oficial de {{ $('Property Config').first().json.resort_nombre }}, ubicado en {{ $('Property Config').first().json.ubicacion }}. Eres cálido, sofisticado y reflejas el espíritu único de este destino. Nunca te presentes como IA a menos que te lo pregunten directamente.\n\n---\n\n## FLUJO GUIADO ##\nTu objetivo es conducir activamente al usuario hacia una reserva, paso a paso. No esperes a que el usuario te pregunte — tú llevas la conversación.\n\nREGLA GENERAL: Si el usuario ya dio información en su mensaje (fechas, tamaño del grupo, etc.), extráela y salta los pasos que ya están respondidos. No repregunta lo que ya sabes.\n\n### PASO 1 — APERTURA\nSi el mensaje es un saludo puro o una consulta inicial sin más detalle:\nSaluda como {{ $('Property Config').first().json.agent_name }} y pregunta: \"¿Es tu primera vez en {{ $('Property Config').first().json.resort_nombre }}, o ya te has hospedado con nosotros antes?\"\n\n### PASO 2 — RETURNING vs. PRIMERA VEZ\n**Si el usuario dice que ya se ha hospedado:**\nResponde: \"¡Qué bueno saberlo! ¿Cuál email o teléfono tienes registrado con nosotros? Así te damos la bienvenida personalizada.\"\nCuando responda: captura el dato en email_capturado o telefono_capturado. Responde: \"Bienvenido de vuelta, qué gusto tenerte de regreso en {{ $('Property Config').first().json.resort_nombre }}.\" Luego continúa al PASO 3.\nSi el usuario no quiere dar el dato: acepta con amabilidad y continúa al PASO 3.\n\n**Si es primera vez:**\nContinúa directamente al PASO 3.\n\n### PASO 3 — FECHAS\nPregunta: \"¿Más o menos cuándo están pensando venir?\"\nCaptura las fechas en checkin_capturado y checkout_capturado (formato YYYY-MM-DD si puedes inferirlo, o texto libre si no).\nSi el usuario dice \"flexible\" o no tiene fechas, acepta y continúa al PASO 4.\n\n### PASO 4 — TAMAÑO Y COMPOSICIÓN DEL GRUPO\nPregunta: \"¿Cuántos serán? ¿Solo adultos o hay niños en el plan?\"\nCaptura el número de adultos en adultos_capturado (número entero) y el número de niños en ninos_capturado (número entero, 0 si no hay niños).\n\n**Según la respuesta, sigue la rama correspondiente:**\n\n→ **2 adultos, romántico / pareja sin niños** → grupo_tipo: \"romantico\" → PASO 5A\n→ **Adultos con niños / familia** → grupo_tipo: \"familia\" → PASO 5B\n→ **Grupo de 8 o más personas / boda / evento** → grupo_tipo: \"grupo_grande\" → PASO 5C\n\n### PASO 5A — RECOMENDACIÓN ROMÁNTICA\nUsa kb_search para obtener detalles de: {{ $('Property Config').first().json.rec_romantico }}.\nRecomienda esa opción como la ideal para una pareja. Describe brevemente con los datos del KB.\nContinúa al PASO 6.\n\n### PASO 5B — RECOMENDACIÓN FAMILIAR\nUsa kb_search para obtener detalles de: {{ $('Property Config').first().json.rec_familia }}.\nRecomienda esa opción como la ideal para familias. Describe brevemente con los datos del KB.\nContinúa al PASO 6.\n\n### PASO 5C — GRUPOS GRANDES / BODAS / EVENTOS\nResponde: \"¡Qué emocionante! Cuéntame un poco más — ¿qué tipo de ocasión es? ¿Hay empresa u organización detrás del grupo? ¿Y cuál es la mejor forma de contactarte?\"\nCaptura: tipo de evento, empresa si aplica, contacto preferido.\nLlama a handoff con categoria: \"bodas_eventos\" y un resumen del contexto.\nResponde al usuario: \"Nuestro especialista en grupos y eventos te contactará en un día hábil con una propuesta personalizada.\"\nFIN — no continúaes al PASO 6.\n\n### PASO 6 — CAPTURA DE CONTACTO\nSi ya tienes nombre Y (email o teléfono) del usuario → salta al PASO 7.\nSi no: pregunta: \"¿Teléfono o correo, lo que prefieras — para que el equipo pueda darte seguimiento si lo necesitas?\"\nSi el usuario lo da: captura en nombre_capturado / email_capturado / telefono_capturado.\nSi el usuario omite o no quiere: acepta con amabilidad y continúa al PASO 7.\n\n### PASO 7 — DECISIÓN DE BOOKING\nPregunta: \"¿Quieres ver la habitación, hacer la reserva directamente, o prefieres que nuestro equipo te contacte?\"\n\n**Ver la habitación / explorar:** Usa kb_search. Comparte el link de contenido que el KB incluya (galería, página de la habitación). Luego ve al PASO 8.\n**Reservar ahora:** Antes de dar el link, si NO tienes checkin_capturado, pregunta brevemente: ¿Tienes fechas en mente? Así el sistema las pre-llena. Si el usuario insiste o ya dio fechas, comparte el link: {{ $('Property Config').first().json.booking_link }}. Si YA tienes las fechas, redacta el mensaje comunicando que el link YA trae sus fechas precargadas, usando fechas en lenguaje natural con el número de noches — ejemplo: \"En este link puedes ver los precios para tu estadía del 14 al 20 de julio (6 noches): [LINK]. Los precios varían según temporada y tipo de habitación.\" (Si cambia de mes: \"del 28 de julio al 3 de agosto\".) NUNCA repitas las fechas en formato ISO ni con una coletilla tipo \"He registrado tus fechas: 2026-07-14 a 2026-07-20\". IMPORTANTE: al compartir el link, NO menciones una habitación específica a menos que ya hayas recomendado una en esta misma conversación (grupo_tipo establecido). Usa simplemente el link de reservas. Luego ve al PASO 8.\n**Hablar con el equipo:** Llama a handoff con categoria: \"reserva\". Informa al usuario que el equipo de reservaciones lo contactará pronto. Luego ve al PASO 8.\n\n### PASO 8 — ACTIVIDADES (opcional)\nPregunta: \"¿Y mientras estás aquí, te gustaría explorar qué actividades tienen disponibles?\"\n**Sí:** Pregunta: \"¿Qué tipo de plan te llama más? ¿Aventura, relax, o prefieres un itinerario completo?\"\nUsa kb_search según el interés del usuario. Incluye los links de actividades que el KB mencione.\n**No:** Cierra con calidez: \"Perfecto. Si tienes más preguntas antes de tu llegada, aquí estaré. ¡Esperamos verte pronto en {{ $('Property Config').first().json.resort_nombre }}!\"\n\n---\n\n## REGLA KB — SIEMPRE DISPONIBLE ##\nEn CUALQUIER momento del flujo, si el usuario hace una pregunta sobre el resort (habitaciones, restaurantes, actividades, políticas, ubicación, precios, bodas, spa), usa kb_search para responder. Responde con la info del KB y luego retoma el paso del flujo donde estabas.\nNUNCA inventes información sobre el resort. Si el KB no tiene la respuesta, dirige al equipo: {{ $('Property Config').first().json.contacto_email }} o {{ $('Property Config').first().json.contacto_phone }}.\n\n---\n\n## HERRAMIENTAS DISPONIBLES ##\n\n### kb_search\nCuándo usarla: Para responder CUALQUIER pregunta sobre el resort: alojamiento, restaurantes, bares, actividades, excursiones, bodas, eventos, spa, políticas, ubicación, precios, paquetes, contacto. También en los PASOS 5A, 5B y 7 del flujo guiado.\nCómo llamarla: Pasa la pregunta del usuario como query.\nRespuesta: Usa la respuesta del KB tal como viene. Si el KB incluye un link de contenido, inclúyelo tal cual.\n\n### handoff\nCuándo usarla:\n- PASO 5C: grupos grandes, bodas, eventos → categoria: \"bodas_eventos\"\n- PASO 7: usuario quiere hablar con el equipo → categoria: \"reserva\"\n- El usuario pide hablar con una persona del equipo en cualquier momento\n- Consulta de PR, prensa, influencer o colaboración → categoria: \"pr\"\n- Pregunta sobre empleo o vacantes → categoria: \"empleo\"\n- El usuario expresa frustración o urgencia → categoria: \"escalamiento\"\nCómo llamarla: Pasa categoria y resumen_conversacion (2-3 oraciones de contexto).\nDespues de llamarla: Informa al usuario que el equipo lo contactará pronto.\n\n---\n\n## IDIOMA ##\nResponde SIEMPRE en el idioma del ÚLTIMO mensaje del usuario:\n- Si escribe en español → responde en español\n- Si escribe en inglés → responde en inglés\n- Si mezcla en un mismo mensaje → usa el idioma predominante\nSi el usuario cambia de idioma a mitad de la conversación, cámbiate tú también y continúa en el nuevo idioma.\n\n---\n\n## ESTILO DE RESPUESTA ##\n- Texto plano. Sin markdown, sin asteriscos, sin hashtags.\n- Máximo 500 caracteres por mensaje.\n  - Excepción: listas de amenidades o actividades usan bullet • en líneas separadas.\n- Cálido pero profesional.\n- No repitas el nombre del resort en cada mensaje.\n- No uses frases genéricas como \"Claro que sí\" o \"Por supuesto\". Ve directo al punto.\n- Si incluyes un link, ponlo al final del mensaje.\n\n---\n\n## FORMATO DE SALIDA OBLIGATORIO ##\nResponde ÚNICAMENTE con este JSON en una sola línea, sin texto adicional antes ni después:\n\n{\"response\": \"<texto de respuesta al usuario>\", \"escalate\": false, \"categoria\": \"info\", \"nombre_capturado\": null, \"email_capturado\": null, \"telefono_capturado\": null, \"checkin_capturado\": null, \"checkout_capturado\": null, \"grupo_tipo\": null, \"adultos_capturado\": null, \"ninos_capturado\": null}\n\nescalate: true SOLO cuando llames a handoff o cuando el usuario explícitamente pida hablar con alguien.\ncategoria: uno de estos valores exactos:\n- \"info\" — consulta general sobre el resort\n- \"reserva\" — pregunta sobre disponibilidad, precios, reservas\n- \"bodas_eventos\" — bodas, eventos, celebraciones\n- \"pr\" — prensa, influencers, colaboraciones\n- \"empleo\" — trabajo, vacantes\n- \"escalamiento\" — usuario pide humano o situación urgente\n- \"off_topic\" — tema fuera del resort\n\nnombre_capturado: string con el nombre si el usuario lo mencionó en este mensaje, o null.\nemail_capturado: string con el email si el usuario lo mencionó en este mensaje, o null.\ntelefono_capturado: string con el teléfono si el usuario lo mencionó en este mensaje, o null.\ncheckin_capturado: string con la fecha de llegada si el usuario la mencionó (YYYY-MM-DD si inferible, texto libre si no), o null.\ncheckout_capturado: string con la fecha de salida si el usuario la mencionó, o null.\ngrupo_tipo: \"romantico\", \"familia\", o \"grupo_grande\" según corresponda al paso actual, o null si aún no se determinó.\nadultos_capturado: número entero de adultos si el usuario lo mencionó en este mensaje, o null.\nninos_capturado: número entero de niños si el usuario lo mencionó (0 si dijo \"solo adultos\"), o null si no se preguntó aún.\n\n---\n\n## OFF-TOPIC ##\nSi el usuario hace una pregunta que no tiene nada que ver con el resort, viajes a Belice, o la experiencia como huésped: NO respondas la pregunta. Responde con algo como: Solo puedo ayudarte con información sobre {{ $('Property Config').first().json.resort_nombre }}. ¿Hay algo sobre el resort, habitaciones o actividades en lo que pueda ayudarte? Usa categoria: off_topic y escalate: false.\n\n---\n\n## GUARDRAILS ##\n- NUNCA inventes información sobre el resort (precios exactos, disponibilidad específica, políticas no documentadas).\n- NUNCA digas que eres ChatGPT, Claude, o cualquier IA específica.\n- NUNCA compartas información privada de otros huéspedes.\n- NUNCA prometas algo que el KB no confirme (descuentos, upgrades, excepciones a políticas).\n- Si no sabes algo → dirige al equipo: {{ $('Property Config').first().json.contacto_email }} o {{ $('Property Config').first().json.contacto_phone }}"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 3.1,
-      "position": [
-        34624,
-        1120
-      ],
-      "id": "663b7bb2-49d6-4250-b8a4-940c0938f3fa",
-      "name": "AI Agent"
-    },
-    {
-      "parameters": {
-        "description": "=Escala al equipo del hotel. Úsala cuando el usuario pida hablar con una persona, o la consulta sea sobre bodas/eventos, PR/colaboración o empleo. Pasa: {\"categoria\": \"<bodas_eventos|pr|empleo|escalamiento|reserva>\", \"resumen_conversacion\": \"<resumen de 2-3 oraciones de la conversación>\", \"entrada_usuario\": \"<último mensaje del usuario textual>\", \"nombre\": \"<nombre del usuario si se conoce, si no cadena vacía>\", \"propiedad\": \"<propiedad del resort: ITZ o KAA>\"}.",
-        "workflowId": {
-          "__rl": true,
-          "value": "OApztbIN8Jhb4JHz",
-          "mode": "list",
-          "cachedResultUrl": "/workflow/OApztbIN8Jhb4JHz",
-          "cachedResultName": "NOTIFICATIONS"
-        },
-        "workflowInputs": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "categoria": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('categoria', `Escalation category: bodas_eventos, pr, empleo, escalamiento, or reserva`, 'string') }}",
-            "resumen_conversacion": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('resumen_conversacion', `2-3 sentence conversation summary`, 'string') }}",
-            "entrada_usuario": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('entrada_usuario', `Last user message verbatim`, 'string') }}",
-            "nombre": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('nombre', `User name if known, empty string if not`, 'string') }}",
-            "propiedad": "={{ $('Set Propiedad').first().json.propiedad || 'ITZ' }}",
-            "manychat_id": "={{ $('Set Propiedad').first().json.manychat_id }}"
-          },
-          "matchingColumns": [],
-          "schema": [
-            {
-              "id": "categoria",
-              "displayName": "categoria",
-              "required": true,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "resumen_conversacion",
-              "displayName": "resumen_conversacion",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": false,
-              "removed": false
-            },
-            {
-              "id": "entrada_usuario",
-              "displayName": "entrada_usuario",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": false,
-              "removed": false
-            },
-            {
-              "id": "nombre",
-              "displayName": "nombre",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": false,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
-      "typeVersion": 2.2,
-      "position": [
-        34880,
-        1344
-      ],
-      "id": "d251f279-e615-4c6c-afb6-8ce0051f6007",
-      "name": "notifications"
-    },
-    {
-      "parameters": {
-        "sessionIdType": "customKey",
-        "sessionKey": "={{ $('PARSE BODY').first().json.current_body.id }}",
-        "collectionName": "chat_histories",
-        "databaseName": "Database",
-        "contextWindowLength": 30
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
-      "typeVersion": 1.1,
-      "position": [
-        34624,
-        1344
-      ],
-      "id": "d9f1590a-bf45-4eeb-96ae-52b002fc27ac",
-      "name": "MongoDB Chat Memory",
-      "credentials": {
-        "mongoDb": {
-          "id": "Msw0gTK8f8b192VX",
-          "name": "HOTELS"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "model": "openai/gpt-5-mini",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
-      "typeVersion": 1,
-      "position": [
-        34496,
-        1344
-      ],
-      "id": "c1a3cbb5-c99e-4325-8903-97a6d79c1227",
-      "name": "OpenRouter Chat Model",
-      "credentials": {
-        "openRouterApi": {
-          "id": "J9zb84vhqsx182XW",
-          "name": "ITZANA-KAANA"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "e2b99084-0422-4ba4-973e-0fc03b22ba6e",
-              "name": "_id",
-              "value": "={{ $('Find User').first().json._id.$oid }}",
-              "type": "string"
-            },
-            {
-              "id": "9040d88b-dc99-47e3-a6e3-14b8264ae6cb",
-              "name": "manychat_id",
-              "value": "={{ $('PARSE BODY').first().json.current_body.id }}",
-              "type": "string"
-            },
-            {
-              "id": "1fca47c3-3150-4740-a3a3-aaeb55e0bd49",
-              "name": "page_id",
-              "value": "={{ $('PARSE BODY').first().json.current_body.page_id }}",
-              "type": "string"
-            },
-            {
-              "id": "689aa6e6-0e3f-4aba-8834-1b8f675acaf4",
-              "name": "propiedad",
-              "value": "={{ $('Set Propiedad').first().json.propiedad }}",
-              "type": "string"
-            },
-            {
-              "id": "d2233cfa-026f-400c-99a9-7f34bd8d58cc",
-              "name": "last_user_input",
-              "value": "={{ $('Set Propiedad').first().json.entrada_usuario }}",
-              "type": "string"
-            },
-            {
-              "id": "15532baf-1a9a-439a-9af2-bc6354c701e5",
-              "name": "input_channel",
-              "value": "={{ $('Set Propiedad').first().json.canal_ingreso }}",
-              "type": "string"
-            },
-            {
-              "id": "014d3381-ff7e-446b-a7ab-753ca46481ff",
-              "name": "timestamp",
-              "value": "={{ $('PARSE BODY').first().json.timestamp }}",
-              "type": "string"
-            },
-            {
-              "id": "06aad59e-59d6-404b-a8f0-4b0c72f2c1c3",
-              "name": "first_interaction",
-              "value": "={{ $now.toISO() }}",
-              "type": "string"
-            },
-            {
-              "id": "7436bc68-ba4c-4c48-8ac0-bea988b3079d",
-              "name": "last_interaction",
-              "value": "={{ $now.toISO() }}",
-              "type": "string"
-            },
-            {
-              "id": "d424a476-8d63-449f-acc2-09a69f158a8f",
-              "name": "has_reservation",
-              "value": false,
-              "type": "boolean"
-            },
-            {
-              "id": "c10d0b79-3d2d-4c63-b70f-9242d988e501",
-              "name": "datos_completos",
-              "value": false,
-              "type": "boolean"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        33600,
-        1216
-      ],
-      "id": "1d2af276-2ca3-45e6-9901-4cec488125ab",
-      "name": "DATA to UPDATE"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "13f396d4-0c8b-4099-b87a-4f98c96f9af1",
-              "leftValue": "={{ $('Find User').first().json.isEmpty() }}",
-              "rightValue": "",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        33376,
-        1120
-      ],
-      "id": "ae6172ba-3b49-4bac-9510-b1aa0ab4d401",
-      "name": "If USER NOT EXIST"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "9040d88b-dc99-47e3-a6e3-14b8264ae6cb",
-              "name": "manychat_id",
-              "value": "={{ $('PARSE BODY').first().json.current_body.id }}",
-              "type": "string"
-            },
-            {
-              "id": "1fca47c3-3150-4740-a3a3-aaeb55e0bd49",
-              "name": "page_id",
-              "value": "={{ $('PARSE BODY').first().json.current_body.page_id }}",
-              "type": "string"
-            },
-            {
-              "id": "689aa6e6-0e3f-4aba-8834-1b8f675acaf4",
-              "name": "propiedad",
-              "value": "={{ $('Set Propiedad').first().json.propiedad }}",
-              "type": "string"
-            },
-            {
-              "id": "d2233cfa-026f-400c-99a9-7f34bd8d58cc",
-              "name": "last_user_input",
-              "value": "={{ $('Set Propiedad').item.json.entrada_usuario }}",
-              "type": "string"
-            },
-            {
-              "id": "15532baf-1a9a-439a-9af2-bc6354c701e5",
-              "name": "input_channel",
-              "value": "={{ $('Set Propiedad').first().json.canal_ingreso }}",
-              "type": "string"
-            },
-            {
-              "id": "014d3381-ff7e-446b-a7ab-753ca46481ff",
-              "name": "timestamp",
-              "value": "={{ $('PARSE BODY').first().json.timestamp }}",
-              "type": "string"
-            },
-            {
-              "id": "06aad59e-59d6-404b-a8f0-4b0c72f2c1c3",
-              "name": "first_interaction",
-              "value": "={{ $now.toISO() }}",
-              "type": "string"
-            },
-            {
-              "id": "7436bc68-ba4c-4c48-8ac0-bea988b3079d",
-              "name": "last_interaction",
-              "value": "={{ $now.toISO() }}",
-              "type": "string"
-            },
-            {
-              "id": "d424a476-8d63-449f-acc2-09a69f158a8f",
-              "name": "has_reservation",
-              "value": false,
-              "type": "boolean"
-            },
-            {
-              "id": "c10d0b79-3d2d-4c63-b70f-9242d988e501",
-              "name": "datos_completos",
-              "value": false,
-              "type": "boolean"
-            },
-            {
-              "id": "b8e966d8-5d08-45d2-a61f-40da8b8c6690",
-              "name": "nombre",
-              "value": "",
-              "type": "string"
-            },
-            {
-              "id": "072fcfdf-3c65-480a-961c-a92dc5074624",
-              "name": "email",
-              "value": "",
-              "type": "string"
-            },
-            {
-              "id": "f2561825-220c-49ab-ad1b-c98ea75e2d4c",
-              "name": "telefono",
-              "value": "",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        33600,
-        1024
-      ],
-      "id": "e0ac1a20-cd85-4c8c-a5f1-80b01322d695",
-      "name": "DATA to CREATE"
-    },
-    {
-      "parameters": {
-        "collection": "users",
-        "options": {},
-        "query": "={ \n  \"manychat_id\": \"{{ $json.manychat_id }}\"\n}"
-      },
-      "type": "n8n-nodes-base.mongoDb",
-      "typeVersion": 1.2,
-      "position": [
-        33152,
-        1120
-      ],
-      "id": "d6b09276-fc77-467d-9fb5-af12508c8456",
-      "name": "Find User",
-      "alwaysOutputData": true,
-      "executeOnce": false,
-      "credentials": {
-        "mongoDb": {
-          "id": "Msw0gTK8f8b192VX",
-          "name": "HOTELS"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "insert",
-        "collection": "users",
-        "fields": "={{ Object.keys($json).join(\",\") }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.mongoDb",
-      "typeVersion": 1.2,
-      "position": [
-        33824,
-        1024
-      ],
-      "id": "4f0fbe9a-3cd1-42c2-9942-29ecd569ce59",
-      "name": "Insert User",
-      "credentials": {
-        "mongoDb": {
-          "id": "Msw0gTK8f8b192VX",
-          "name": "HOTELS"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "collection": "users",
-        "updateKey": "_id",
-        "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(\",\") }}",
-        "options": {
-          "dateFields": "timestamp"
-        }
-      },
-      "type": "n8n-nodes-base.mongoDb",
-      "typeVersion": 1.2,
-      "position": [
-        33824,
-        1216
-      ],
-      "id": "4a120aa7-e2f3-46ca-9c61-7efee4416d3e",
-      "name": "Update User",
-      "credentials": {
-        "mongoDb": {
-          "id": "Msw0gTK8f8b192VX",
-          "name": "HOTELS"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "mode": "raw",
-        "jsonOutput": "={{ \n  $('Find User').first().json.isNotEmpty()\n  ? $('Find User').first().json\n  : $('Insert User').first().json\n}}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        34048,
-        1120
-      ],
-      "id": "3e5639a0-f8ef-4ec5-b455-51f27dc9131d",
-      "name": "User Data"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.manychat.com/fb/sending/sendContent",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "manyChatApi",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            }
-          ]
-        },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ subscriber_id: $('Set Propiedad').first().json.manychat_id, data: { version: 'v2', content: { type: $('Parameter Type').first().json.type, messages: [{ type: 'text', text: $('Parse Agent Output').first().json.response_text }] } } }) }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        35536,
-        1216
-      ],
-      "id": "cfcb905f-f2c5-48d4-859d-d89f1098717f",
-      "name": "Send to ManyChat",
-      "credentials": {
-        "manyChatApi": {
-          "id": "aEvHbFXnmwofChqs",
-          "name": "ManyChat Garoo"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "sp-001",
-              "name": "propiedad",
-              "value": "={{ $('PARSE BODY').first().json.current_body.custom_fields.propiedad || 'ITZ' }}",
-              "type": "string"
-            },
-            {
-              "id": "sp-002",
-              "name": "manychat_id",
-              "value": "={{ $('PARSE BODY').first().json.current_body.id }}",
-              "type": "string"
-            },
-            {
-              "id": "4b61b5a4-35ba-478d-bf51-69b4a83faa12",
-              "name": "page_id",
-              "value": "={{ $('PARSE BODY').first().json.current_body.page_id }}",
-              "type": "string"
-            },
-            {
-              "id": "sp-003",
-              "name": "entrada_usuario",
-              "value": "={{ $('JOINNING MESSAGE').first().json.message }}",
-              "type": "string"
-            },
-            {
-              "id": "ffb93e3d-90aa-4350-8c08-63772244385f",
-              "name": "canal_ingreso",
-              "value": "={{ $('PARSE BODY').item.json.current_body.custom_fields.canal_ingreso }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        32928,
-        1120
-      ],
-      "id": "ec4b15d1-26a8-443f-907e-1a067c2cd1ff",
-      "name": "Set Propiedad"
-    },
-    {
-      "parameters": {
-        "resource": "image",
-        "operation": "analyze",
-        "modelId": {
-          "__rl": true,
-          "value": "gpt-4o",
-          "mode": "list",
-          "cachedResultName": "GPT-4O"
-        },
-        "text": "Eres un experto en describir imagenes para un chatbot responde lo que ves en la imagen de esta manera. \"El usuario envió una imagen etc...\"",
-        "inputType": "base64",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.8,
-      "position": [
-        30240,
-        1120
-      ],
-      "id": "b23f774f-3b0f-4c39-b5ea-2aa38324b864",
-      "name": "ANALIZA IMAGEN",
-      "credentials": {
-        "openAiApi": {
-          "id": "LtzIKoi61tZvaeua",
-          "name": "Vectorizer Agent - Knowledge Bases"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "hotels-agent",
-        "options": {
-          "allowedOrigins": "*"
-        }
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2.1,
-      "position": [
-        28672,
-        1120
-      ],
-      "id": "13a13fd5-8534-4bce-9305-012e4d41971f",
-      "name": "Webhook",
-      "webhookId": "bbe94977-7886-4071-a874-e370d3b20c97"
-    },
-    {
-      "parameters": {
-        "jsCode": "const current_key = $input.first().json.body.key;\n\nconst current_body = $input.first().json.body;\n\nconst timestamp = new Date().toISOString();\n\nconst start_time = Date.now();\n\nconst result_body = {\n current_body,\n  timestamp\n}\n\nreturn [{\n  key: current_key,\n  body: JSON.stringify(result_body),\n  timestamp,\n  start_time\n}]\n"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        28896,
-        1120
-      ],
-      "id": "62908ed3-71df-4de2-94d6-7b31abf327f8",
-      "name": "Create Body"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "92200249-f6e4-4f84-bd28-bc36de22beb3",
-              "leftValue": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
-              "rightValue": "https://manybot-files",
-              "operator": {
-                "type": "string",
-                "operation": "contains"
-              }
-            },
-            {
-              "id": "b5bd48d1-851e-43bc-a097-e16c0dcca59c",
-              "leftValue": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
-              "rightValue": "https://lookaside.fbsbx.com",
-              "operator": {
-                "type": "string",
-                "operation": "contains"
-              }
-            }
-          ],
-          "combinator": "or"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        29344,
-        1120
-      ],
-      "id": "5eb55646-3a86-46f0-9317-e3679da0b0da",
-      "name": "ES ARCHIVO"
-    },
-    {
-      "parameters": {
-        "url": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        29568,
-        1024
-      ],
-      "id": "b2aa0734-74f8-4bba-b9ff-72fd41b76022",
-      "name": "HTTP Request"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "92200249-f6e4-4f84-bd28-bc36de22beb3",
-              "leftValue": "={{ $('HTTP Request').first().binary.data.mimeType }}",
-              "rightValue": "audio/ogg",
-              "operator": {
-                "type": "string",
-                "operation": "contains"
-              }
-            },
-            {
-              "id": "b5bd48d1-851e-43bc-a097-e16c0dcca59c",
-              "leftValue": "={{ $('HTTP Request').first().binary.data.mimeType }}",
-              "rightValue": "video/mp4",
-              "operator": {
-                "type": "string",
-                "operation": "contains"
-              }
-            }
-          ],
-          "combinator": "or"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        29792,
-        1024
-      ],
-      "id": "8c75541f-f3a5-48a3-9516-7acf2cc5cf8d",
-      "name": "ES AUDIO / IMAGEN"
-    },
-    {
-      "parameters": {
-        "resource": "audio",
-        "operation": "transcribe",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.8,
-      "position": [
-        30240,
-        928
-      ],
-      "id": "1de545fc-629d-4dae-aaaa-d541fcfc89cc",
-      "name": "TRANSCRIBE AUDIO",
-      "credentials": {
-        "openAiApi": {
-          "id": "LtzIKoi61tZvaeua",
-          "name": "Vectorizer Agent - Knowledge Bases"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "numberInputs": 3
-      },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3.2,
-      "position": [
-        30688,
-        1104
-      ],
-      "id": "16999c51-54e7-4b00-b59a-6d628db7a7fd",
-      "name": "Merge"
-    },
-    {
-      "parameters": {
-        "sortFieldsUi": {
-          "sortField": [
-            {
-              "fieldName": "hora_llegada"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.sort",
-      "typeVersion": 1,
-      "position": [
-        30912,
-        1120
-      ],
-      "id": "52e2cf43-26c5-4901-a1a1-89e981dbfb44",
-      "name": "Sort"
-    },
-    {
-      "parameters": {
-        "fieldsToAggregate": {
-          "fieldToAggregate": [
-            {
-              "fieldToAggregate": "mensaje"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.aggregate",
-      "typeVersion": 1,
-      "position": [
-        31136,
-        1120
-      ],
-      "id": "4f953320-7b0c-4d54-8ce6-9be16c3d51f2",
-      "name": "Aggregate"
-    },
-    {
-      "parameters": {
-        "url": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        30016,
-        928
-      ],
-      "id": "9cba1d09-f16c-42e4-b7e4-a7826c998313",
-      "name": "HTTP IF AUDIO"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "ea8c9284-e11f-4e87-a742-4392a692da2a",
-              "name": "mensaje",
-              "value": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
-              "type": "string"
-            },
-            {
-              "id": "1f2fe528-cff0-4713-9dcb-4221b508c597",
-              "name": "hora_llegada",
-              "value": "={{ $('PARSE BODY').first().json.timestamp }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        30464,
-        1312
-      ],
-      "id": "2f1ea944-442a-4391-9b0c-6f41b99e4f4a",
-      "name": "text input"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "ea8c9284-e11f-4e87-a742-4392a692da2a",
-              "name": "mensaje",
-              "value": "={{ $json.content }}",
-              "type": "string"
-            },
-            {
-              "id": "1f2fe528-cff0-4713-9dcb-4221b508c597",
-              "name": "hora_llegada",
-              "value": "={{ $json.timestamp }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        30464,
-        1120
-      ],
-      "id": "225f988d-1e0a-4052-ac36-cbf5a32fab48",
-      "name": "image input"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "ea8c9284-e11f-4e87-a742-4392a692da2a",
-              "name": "mensaje",
-              "value": "={{ $json.text }}",
-              "type": "string"
-            },
-            {
-              "id": "1f2fe528-cff0-4713-9dcb-4221b508c597",
-              "name": "hora_llegada",
-              "value": "={{ $json.timestamp }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        30464,
-        928
-      ],
-      "id": "fb50ca49-ff20-4c76-8cc2-57dac5e8e7cc",
-      "name": "audio input"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "c1c4c388-e572-4502-9cf1-51d28b4d022d",
-              "name": "input",
-              "value": "={{ $json.mensaje.join(\" \") }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        31360,
-        1120
-      ],
-      "id": "f014c68e-741c-42da-a9f7-93b00d056668",
-      "name": "INPUT FINAL"
-    },
-    {
-      "parameters": {
-        "operation": "push",
-        "list": "=hotel:{{ $('PARSE BODY').first().json.current_body.id }}",
-        "messageData": "={{ $json.input }}",
-        "tail": true
-      },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
-      "position": [
-        31584,
-        1120
-      ],
-      "id": "96e89d51-899a-430f-a582-edcc81c50ae0",
-      "name": "SAVE MESSAGE",
-      "credentials": {
-        "redis": {
-          "id": "8EUkwaZixjCH7szY",
-          "name": "Redis GarooVPS"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "key": "=hotel:{{ $('PARSE BODY').first().json.current_body.id }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
-      "position": [
-        32032,
-        1120
-      ],
-      "id": "b7717a17-8956-4c32-ada0-7ca2914801b4",
-      "name": "GET MESSAGE",
-      "credentials": {
-        "redis": {
-          "id": "8EUkwaZixjCH7szY",
-          "name": "Redis GarooVPS"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "amount": 1
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        31808,
-        1120
-      ],
-      "id": "7413b124-2d07-47b5-a22c-a103e7718dd3",
-      "name": "Wait",
-      "webhookId": "50ed2939-b8ec-48f7-8c6b-3bf14c2efc58"
-    },
-    {
-      "parameters": {
-        "operation": "delete",
-        "key": "=hotel:{{ $('PARSE BODY').first().json.current_body.id }}"
-      },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
-      "position": [
-        32704,
-        1120
-      ],
-      "id": "1f90ea8a-c79a-42df-8be6-4d3f2ac1fdce",
-      "name": "DELETE MESSAGES",
-      "credentials": {
-        "redis": {
-          "id": "8EUkwaZixjCH7szY",
-          "name": "Redis GarooVPS"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "5b5ad242-c6c3-4f2a-9b67-edb92fa424be",
-              "leftValue": "={{ $json.propertyName?.last() || \"\" }}",
-              "rightValue": "={{ $('INPUT FINAL').first().json.input }}",
-              "operator": {
-                "type": "string",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.filter",
-      "typeVersion": 2.3,
-      "position": [
-        32256,
-        1120
-      ],
-      "id": "5866a54c-b5c0-4abb-a25c-3357a3a89f45",
-      "name": "Filter1"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "df6dd35d-a8b7-4ecb-8ef8-5a19ed499cfc",
-              "name": "message",
-              "value": "={{ $json.propertyName.join(\", \") }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        32480,
-        1120
-      ],
-      "id": "5d09eca5-de31-4532-92ea-7396af2a0628",
-      "name": "JOINNING MESSAGE"
-    },
-    {
-      "parameters": {
-        "mode": "raw",
-        "jsonOutput": "={{ JSON.parse($('Create Body').first().json.body) }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        29120,
-        1120
-      ],
-      "id": "7e48fcb8-bf37-418c-993d-377b7353222b",
-      "name": "PARSE BODY"
-    }
-  ],
+  "id": "We7Lt1VxU6um9oRF",
+  "name": "ITZ PRINCIPAL AGENT",
+  "active": true,
+  "isArchived": false,
+  "versionId": "5a4df856-7be6-446b-8c64-dc5e3d58321f",
+  "activeVersionId": "5a4df856-7be6-446b-8c64-dc5e3d58321f",
+  "triggerCount": 1,
+  "createdAt": "2026-06-04T02:19:08.466Z",
+  "updatedAt": "2026-06-17T04:05:06.062Z",
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true
+  },
   "connections": {
     "Property Config": {
       "main": [
@@ -1685,11 +470,2800 @@
       ]
     }
   },
-  "pinData": {},
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "565ffc02-d21f-43f2-9c2b-88a66eb11220",
+              "name": "agent_name",
+              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'Balam' : 'Kaan' }}",
+              "type": "string"
+            },
+            {
+              "id": "ea25bc35-e3c3-4fad-9966-8874489a6625",
+              "name": "resort_nombre",
+              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? \"Ka'ana Resort\" : \"Itz'ana Resort & Residences\" }}",
+              "type": "string"
+            },
+            {
+              "id": "465984c9-decc-4505-90f8-dc94832dfe2e",
+              "name": "ubicacion",
+              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'San Ignacio, Belice (Mile 69 1/4 George Price Highway, Cayo District)' : 'Placencia, Belice (Mile 20 Placencia Road, Stann Creek District)' }}",
+              "type": "string"
+            },
+            {
+              "id": "0b09ab27-23eb-49a4-b6d5-4a772f95a054",
+              "name": "booking_link",
+              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'https://reservations.kaanabelize.com/book/accommodations' : 'https://reservations.itzanabelize.com/book/accommodations' }}",
+              "type": "string"
+            },
+            {
+              "id": "43fdf7f1-18fc-4e2d-b1cb-24b21a758fca",
+              "name": "contacto_email",
+              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'info@kaanabelize.com' : 'concierge@itzanabelize.com' }}",
+              "type": "string"
+            },
+            {
+              "id": "9120263c-cc0e-4fb9-9ae1-920573480d02",
+              "name": "contacto_phone",
+              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? '+501 824 3350' : '+(501) 610-1329' }}",
+              "type": "string"
+            },
+            {
+              "id": "48bf0ec1-7c7d-4e4d-a9d6-9f6db72e5c5f",
+              "name": "rec_romantico",
+              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'Master Suite con plunge pool privado en el jardín' : 'Penthouse con plunge pool privado' }}",
+              "type": "string"
+            },
+            {
+              "id": "6fe43404-fa94-4ff5-9523-732ef58c070d",
+              "name": "rec_familia",
+              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'Villa de 2 dormitorios con piscina privada y jardín tropical' : 'Beach Villa frente al mar Caribe' }}",
+              "type": "string"
+            },
+            {
+              "id": "a555be28-dc11-4ac5-8cbe-f868c0c66fb8",
+              "name": "hotel_id",
+              "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? '115718' : '115719' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        36704,
+        608
+      ],
+      "id": "5fc8e2ed-5d1b-42c8-8ae7-699de517ec2e",
+      "name": "Property Config"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "collection": "users",
+        "updateKey": "_id",
+        "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(\",\") }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        37968,
+        512
+      ],
+      "id": "21484648-5a9d-4fb2-bd89-b2bc66fb71e2",
+      "name": "Guardar Contacto"
+    },
+    {
+      "parameters": {
+        "jsCode": "const captured = $json;\nconst userDoc = $('User Data').first().json;\n\nconst update = {};\nif (captured.nombre_capturado)    update.nombre    = captured.nombre_capturado;\nif (captured.email_capturado)     update.email     = captured.email_capturado;\nif (captured.telefono_capturado)  update.telefono  = captured.telefono_capturado;\nif (captured.checkin_capturado)   update.checkin   = captured.checkin_capturado;\nif (captured.checkout_capturado)  update.checkout  = captured.checkout_capturado;\nif (captured.grupo_tipo)          update.grupo_tipo = captured.grupo_tipo;\n\nif (Object.keys(update).length === 0) return [];\n\nconst idStr = JSON.stringify(userDoc._id).replace(/^\"|\"$/g, '');\nreturn [{ json: { _id: idStr, ...update } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        37744,
+        512
+      ],
+      "id": "6f64341c-50d4-4b70-a18c-6fbc684c2e06",
+      "name": "Preparar Datos Contacto"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "36d12256-d1f9-49ba-80d0-a97080e0fe3e",
+              "name": "type",
+              "value": "={{\n   $('Set Propiedad').first().json.canal_ingreso.toLowerCase().includes('instagram')\n     ? 'instagram'\n     : $('Set Propiedad').first().json.canal_ingreso.toLowerCase().includes('messenger')\n       ? 'messenger'\n       : 'whatsapp'\n }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        37744,
+        704
+      ],
+      "id": "8c6e018b-7b55-449e-a84a-2f2d0d48cc16",
+      "name": "Parameter Type"
+    },
+    {
+      "parameters": {
+        "description": "=Busca en la base de conocimiento del resort. Úsala para CUALQUIER pregunta sobre el resort: alojamiento, restaurantes, actividades, bodas, ubicación, políticas, precios. Pasa la consulta del usuario como {\"query\": \"<pregunta del usuario>\"}.",
+        "workflowId": {
+          "__rl": true,
+          "value": "rofQe6ZGW3OpFqcb",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/rofQe6ZGW3OpFqcb",
+          "cachedResultName": "KB_SEARCH"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "manychat_id": "={{ $('User Data').first().json.manychat_id }}",
+            "propiedad": "={{ $('User Data').first().json.propiedad }}",
+            "entrada_usuario": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('entrada_usuario', 'User query for KB search — usually the user message verbatim or a refined question', 'string') }}"
+          },
+          "matchingColumns": [
+            "query"
+          ],
+          "schema": [
+            {
+              "id": "manychat_id",
+              "displayName": "manychat_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "propiedad",
+              "displayName": "propiedad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "entrada_usuario",
+              "displayName": "entrada_usuario",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        37184,
+        832
+      ],
+      "id": "b9737a89-f98b-41bd-a278-89528084e1a2",
+      "name": "kb_search"
+    },
+    {
+      "parameters": {
+        "jsCode": "const agentOutput = $input.first().json.output || '';\n\nlet parsed;\ntry {\n  const jsonMatch = agentOutput.match(/\\{[\\s\\S]*\\}/);\n  parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : null;\n} catch(e) {\n  parsed = null;\n}\n\nconst checkin   = parsed?.checkin_capturado  || null;\nconst checkout  = parsed?.checkout_capturado || null;\nconst grupoTipo = parsed?.grupo_tipo         || null;\nconst propiedad = $('Set Propiedad').first().json.propiedad;\n\nfunction toBookingDate(dateStr) {\n  if (!dateStr) return null;\n  const m = dateStr.match(/^(\\d{4})-(\\d{2})-(\\d{2})$/);\n  return m ? `${m[2]}/${m[3]}/${m[1]}` : null;\n}\n\nconst dateIn  = toBookingDate(checkin);\nconst dateOut = toBookingDate(checkout);\n\nconst guestMap = {\n  romantico:    { adults: 2, children: 0 },\n  familia:      { adults: 2, children: 1 },\n  grupo_grande: { adults: 4, children: 0 },\n};\nconst fallback = guestMap[grupoTipo] || { adults: 1, children: 0 };\nconst adultsParsed   = Number.isInteger(parsed?.adultos_capturado) ? parsed.adultos_capturado : null;\nconst childrenParsed = Number.isInteger(parsed?.ninos_capturado)   ? parsed.ninos_capturado   : null;\nconst guests = {\n  adults:   adultsParsed   !== null ? adultsParsed   : fallback.adults,\n  children: childrenParsed !== null ? childrenParsed : fallback.children,\n};\n\nconst roomCodeMap = {\n  ITZ: { romantico: null, familia: null, grupo_grande: null },\n  KAA: {\n    romantico:    '555466',\n    familia:      '532468',\n    grupo_grande: '555465',\n  },\n};\nconst roomCode = (roomCodeMap[propiedad] || {})[grupoTipo] || null;\n\nconst hotelId = propiedad === 'KAA' ? '115718' : '115719';\nconst baseUrl = propiedad === 'KAA'\n  ? (roomCode ? 'https://reservations.kaanabelize.com/book/dates-of-stay' : 'https://reservations.kaanabelize.com/book/accommodations')\n  : 'https://reservations.itzanabelize.com/book/accommodations';\nconst utmCampaign = propiedad === 'KAA' ? 'kaana-f1' : 'itzana-f1';\n\nlet deepLink = null;\nif (dateIn && dateOut) {\n  const enc = encodeURIComponent;\n  deepLink = `${baseUrl}?HotelID=${hotelId}&LanguageID=1&Rooms=1&DateIn=${enc(dateIn)}&DateOut=${enc(dateOut)}&Adults=${guests.adults}&Children=${guests.children}`;\n  if (roomCode) deepLink += `&RoomTypeID=${roomCode}`;\n  deepLink += `&utm_source=kaan-chat&utm_medium=manychat&utm_campaign=${utmCampaign}`;\n}\n\nlet responseText = parsed?.response || agentOutput;\nif (deepLink) {\n  responseText = responseText.replace(\n    /https?:\\/\\/(?:reservations\\.(?:itzanabelize|kaanabelize)\\.com\\/book\\/(?:accommodations|dates-of-stay)|bookings\\.travelclick\\.com\\/\\d+)[^\\s]*/g,\n    deepLink\n  );\n}\n\nconst categoria = parsed?.categoria || 'info';\nif (categoria === 'empleo') {\n  responseText = 'Gracias por tu interés — nuestro equipo de Recursos Humanos se comunicará contigo pronto.';\n}\n\nreturn [{\n  json: {\n    response_text:       responseText,\n    escalate:            parsed?.escalate           || false,\n    categoria:           categoria,\n    nombre_capturado:    parsed?.nombre_capturado   || null,\n    email_capturado:     parsed?.email_capturado    || null,\n    telefono_capturado:  parsed?.telefono_capturado || null,\n    checkin_capturado:   checkin,\n    checkout_capturado:  checkout,\n    grupo_tipo:          grupoTipo,\n    deep_link:           deepLink,\n    raw_output:          agentOutput\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        37520,
+        608
+      ],
+      "id": "f5bc8983-84fe-4267-aa82-6c234a6777d7",
+      "name": "Parse Agent Output"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Set Propiedad').first().json.entrada_usuario }}",
+        "options": {
+          "systemMessage": "=## CONTEXTO TEMPORAL ##\nHoy es {{ $now.toFormat('yyyy-MM-dd') }}. Fechas sin año → usa el próximo año válido. NUNCA fechas pasadas.\n\n---\n\n## PRIORIDAD MÁXIMA — SALUDOS PUROS ##\nSi el mensaje del usuario es ÚNICAMENTE un saludo (hola, hello, hi, hey, buenas, good morning, good afternoon, good evening, buenos días, buenas tardes, buenas noches) — NO llames ninguna herramienta.\nAplica la sección IDIOMA: responde en el mismo idioma que el saludo del usuario.\n\n---\n\n{{ $('User Data').first().json.nombre ? '## USUARIO REGISTRADO ##\\nEste usuario ya nos ha escrito antes. Su nombre es ' + $('User Data').first().json.nombre + '.\\nSalúdalo por su nombre de forma natural al inicio de este mensaje (solo una vez, no repetirlo en cada respuesta).\\n\\n---\\n\\n' : '' }}\n\n## IDENTIDAD ##\nEres {{ $('Property Config').first().json.agent_name }}, concierge virtual de {{ $('Property Config').first().json.resort_nombre }}, {{ $('Property Config').first().json.ubicacion }}. Cálido y sofisticado. No te presentes como IA salvo que te lo pregunten directamente.\n\n---\n\n## FLUJO GUIADO ##\nConduce activamente al usuario hacia una reserva. Si ya dio info (fechas, grupo), extráela y salta esos pasos.\n\n**P1 — APERTURA:** Saludo o consulta inicial sin detalle → pregunta si es primera vez o ya se ha hospedado.\n\n**P2 — HISTORIAL:**\n- Ya se hospedó → pide email o teléfono para bienvenida personalizada; captura en email_capturado/telefono_capturado. Si no quiere, acepta y sigue.\n- Primera vez → sigue a P3.\n\n**P3 — FECHAS:** Pregunta cuándo piensan venir. Captura checkin_capturado/checkout_capturado (YYYY-MM-DD o texto libre). Si es flexible, acepta y sigue.\n\n**P4 — GRUPO:** Pregunta cuántos serán y si hay niños. Captura adultos_capturado, ninos_capturado.\n- 2 adultos sin niños → grupo_tipo:\"romantico\" → P5A\n- Adultos con niños → grupo_tipo:\"familia\" → P5B\n- 8+ personas / boda / evento → grupo_tipo:\"grupo_grande\" → P5C\n\n**P5A — ROMÁNTICO:** kb_search sobre {{ $('Property Config').first().json.rec_romantico }}. Recomienda brevemente. → P6.\n\n**P5B — FAMILIA:** kb_search sobre {{ $('Property Config').first().json.rec_familia }}. Recomienda brevemente. → P6.\n\n**P5C — GRUPOS/BODAS:** Pregunta tipo de evento, empresa y contacto preferido. Llama handoff categoria:\"bodas_eventos\". Responde: \"Nuestro especialista te contactará en un día hábil.\" FIN.\n\n**P6 — CONTACTO:** Si ya tienes nombre + (email o teléfono) → salta a P7. Si no → pide teléfono o correo (opcional). Captura en nombre_capturado/email_capturado/telefono_capturado. Si no quiere, acepta y sigue.\n\n**P7 — BOOKING:**\n- Ver habitación → kb_search, comparte link de contenido del KB. → P8.\n- Reservar → si tienes fechas: comparte {{ $('Property Config').first().json.booking_link }} mencionando las fechas en lenguaje natural con número de noches (ej: \"del 14 al 20 de julio, 6 noches\"). NUNCA formato ISO. Si no tienes fechas: pregunta primero. NO menciones habitación específica a menos que ya hayas recomendado una en esta conversación. → P8.\n- Hablar con equipo → handoff categoria:\"reserva\". Informa que reservaciones contactará pronto. → P8.\n\n**P8 — ACTIVIDADES (opcional):** Pregunta si quieren explorar actividades. Sí → kb_search según interés. No → cierra con calidez.\n\n---\n\n## REGLA KB ##\nEn cualquier momento del flujo, si el usuario pregunta sobre el resort → usa kb_search y retoma el flujo donde estabas. NUNCA inventes datos del resort. Si el KB no tiene la respuesta → dirige a {{ $('Property Config').first().json.contacto_email }} o {{ $('Property Config').first().json.contacto_phone }}.\n\n---\n\n## HERRAMIENTAS ##\n\n**kb_search:** Para cualquier pregunta sobre el resort (alojamiento, restaurantes, actividades, spa, bodas, políticas, precios, ubicación) y en P5A, P5B, P7. Pasa la pregunta del usuario como query. Usa la respuesta tal como viene; incluye links si el KB los trae.\n\n**handoff:** Llama en: P5C (bodas_eventos), P7 equipo (reserva), PR/prensa (pr), empleo/vacantes (empleo), urgencia/frustración (escalamiento), solicitud explícita de humano. Pasa categoria + resumen_conversacion (2-3 oraciones).\nDespués de llamar handoff:\n- EMPLEO: responde EXACTAMENTE «Gracias por tu interés — nuestro equipo de Recursos Humanos se comunicará contigo pronto.» NO añadas emails, URLs ni información adicional.\n- Resto: informa al usuario que el equipo lo contactará pronto.\n\n---\n\n## IDIOMA ##\nResponde SIEMPRE en el idioma del ÚLTIMO mensaje del usuario:\n- Si escribe en español → responde en español\n- Si escribe en inglés → responde en inglés\n- Si mezcla en un mismo mensaje → usa el idioma predominante\nSi el usuario cambia de idioma a mitad de la conversación, cámbiate tú también y continúa en el nuevo idioma.\n\n---\n\n## ESTILO ##\n- Texto plano. Sin markdown, asteriscos ni hashtags.\n- Máx 500 caracteres. Excepción: listas de amenidades/actividades usan bullet • en líneas separadas.\n- Cálido pero directo. Sin \"Claro que sí\" ni \"Por supuesto\".\n- Links al final del mensaje.\n\n---\n\n## OFF-TOPIC ##\nSi no tiene que ver con el resort, Belice o la experiencia como huésped: no respondas la pregunta. Di: \"Solo puedo ayudarte con información sobre {{ $('Property Config').first().json.resort_nombre }}. ¿En qué más puedo ayudarte?\" Usa categoria:off_topic, escalate:false.\n\n---\n\n## GUARDRAILS ##\n- NUNCA inventes precios, disponibilidad, descuentos, upgrades ni políticas no documentadas.\n- NUNCA uses URLs, emails o teléfonos fuera del KB o este prompt. Contacto autorizado: {{ $('Property Config').first().json.contacto_email }} / {{ $('Property Config').first().json.contacto_phone }}.\n- NUNCA digas que eres ChatGPT, Claude u otra IA. No compartas info de otros huéspedes.\n\n---\n\n## SALIDA OBLIGATORIA ##\nResponde ÚNICAMENTE con este JSON en una línea, sin texto adicional:\n\n{\"response\": \"<texto>\", \"escalate\": false, \"categoria\": \"info\", \"nombre_capturado\": null, \"email_capturado\": null, \"telefono_capturado\": null, \"checkin_capturado\": null, \"checkout_capturado\": null, \"grupo_tipo\": null, \"adultos_capturado\": null, \"ninos_capturado\": null}\n\nescalate:true solo al llamar handoff o si el usuario pide hablar con alguien.\ncategoria: \"info\" | \"reserva\" | \"bodas_eventos\" | \"pr\" | \"empleo\" | \"escalamiento\" | \"off_topic\"\ngrupo_tipo: \"romantico\" | \"familia\" | \"grupo_grande\" | null\nFechas en YYYY-MM-DD si inferible, texto libre si no. Adultos/niños: entero o null.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        37056,
+        608
+      ],
+      "id": "d2e3813e-466d-4111-b96e-1dd1edc4268a",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "description": "=Escala al equipo del hotel. Úsala cuando el usuario pida hablar con una persona, o la consulta sea sobre bodas/eventos, PR/colaboración o empleo. Pasa: {\"categoria\": \"<bodas_eventos|pr|empleo|escalamiento|reserva>\", \"resumen_conversacion\": \"<resumen de 2-3 oraciones de la conversación>\", \"entrada_usuario\": \"<último mensaje del usuario textual>\", \"nombre\": \"<nombre del usuario si se conoce, si no cadena vacía>\", \"propiedad\": \"<propiedad del resort: ITZ o KAA>\"}.",
+        "workflowId": {
+          "__rl": true,
+          "value": "OApztbIN8Jhb4JHz",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/OApztbIN8Jhb4JHz",
+          "cachedResultName": "NOTIFICATIONS"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "categoria": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('categoria', `Escalation category: bodas_eventos, pr, empleo, escalamiento, or reserva`, 'string') }}",
+            "resumen_conversacion": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('resumen_conversacion', `2-3 sentence conversation summary`, 'string') }}",
+            "entrada_usuario": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('entrada_usuario', `Last user message verbatim`, 'string') }}",
+            "nombre": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('nombre', `User name if known, empty string if not`, 'string') }}",
+            "propiedad": "={{ $('Set Propiedad').first().json.propiedad || 'ITZ' }}",
+            "manychat_id": "={{ $('Set Propiedad').first().json.manychat_id }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "categoria",
+              "displayName": "categoria",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "resumen_conversacion",
+              "displayName": "resumen_conversacion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false,
+              "removed": false
+            },
+            {
+              "id": "entrada_usuario",
+              "displayName": "entrada_usuario",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false,
+              "removed": false
+            },
+            {
+              "id": "nombre",
+              "displayName": "nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        37312,
+        832
+      ],
+      "id": "6a21394b-e016-4eff-bd3a-28c8ab604853",
+      "name": "notifications"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('PARSE BODY').first().json.current_body.id }}",
+        "collectionName": "chat_histories",
+        "databaseName": "Database",
+        "contextWindowLength": 30
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+      "typeVersion": 1.1,
+      "position": [
+        37056,
+        832
+      ],
+      "id": "8d73a551-80b4-4435-a049-4970b1257cfb",
+      "name": "MongoDB Chat Memory"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-5-mini",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        36912,
+        832
+      ],
+      "id": "9d4d6878-b8a8-4d78-9e6f-8ed5bb0e31f4",
+      "name": "OpenRouter Chat Model"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e2b99084-0422-4ba4-973e-0fc03b22ba6e",
+              "name": "_id",
+              "value": "={{ $('Find User').first().json._id.$oid }}",
+              "type": "string"
+            },
+            {
+              "id": "9040d88b-dc99-47e3-a6e3-14b8264ae6cb",
+              "name": "manychat_id",
+              "value": "={{ $('PARSE BODY').first().json.current_body.id }}",
+              "type": "string"
+            },
+            {
+              "id": "1fca47c3-3150-4740-a3a3-aaeb55e0bd49",
+              "name": "page_id",
+              "value": "={{ $('PARSE BODY').first().json.current_body.page_id }}",
+              "type": "string"
+            },
+            {
+              "id": "689aa6e6-0e3f-4aba-8834-1b8f675acaf4",
+              "name": "propiedad",
+              "value": "={{ $('Set Propiedad').first().json.propiedad }}",
+              "type": "string"
+            },
+            {
+              "id": "d2233cfa-026f-400c-99a9-7f34bd8d58cc",
+              "name": "last_user_input",
+              "value": "={{ $('Set Propiedad').first().json.entrada_usuario }}",
+              "type": "string"
+            },
+            {
+              "id": "15532baf-1a9a-439a-9af2-bc6354c701e5",
+              "name": "input_channel",
+              "value": "={{ $('Set Propiedad').first().json.canal_ingreso }}",
+              "type": "string"
+            },
+            {
+              "id": "014d3381-ff7e-446b-a7ab-753ca46481ff",
+              "name": "timestamp",
+              "value": "={{ $('PARSE BODY').first().json.timestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "06aad59e-59d6-404b-a8f0-4b0c72f2c1c3",
+              "name": "first_interaction",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "7436bc68-ba4c-4c48-8ac0-bea988b3079d",
+              "name": "last_interaction",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "d424a476-8d63-449f-acc2-09a69f158a8f",
+              "name": "has_reservation",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "id": "c10d0b79-3d2d-4c63-b70f-9242d988e501",
+              "name": "datos_completos",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        36032,
+        704
+      ],
+      "id": "55404acd-f998-41b7-a60d-f3c3ccaf6b9c",
+      "name": "DATA to UPDATE"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "13f396d4-0c8b-4099-b87a-4f98c96f9af1",
+              "leftValue": "={{ $('Find User').first().json.isEmpty() }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        35808,
+        608
+      ],
+      "id": "b605cbc5-f1fd-4fd0-9f67-910b7076fba1",
+      "name": "If USER NOT EXIST"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9040d88b-dc99-47e3-a6e3-14b8264ae6cb",
+              "name": "manychat_id",
+              "value": "={{ $('PARSE BODY').first().json.current_body.id }}",
+              "type": "string"
+            },
+            {
+              "id": "1fca47c3-3150-4740-a3a3-aaeb55e0bd49",
+              "name": "page_id",
+              "value": "={{ $('PARSE BODY').first().json.current_body.page_id }}",
+              "type": "string"
+            },
+            {
+              "id": "689aa6e6-0e3f-4aba-8834-1b8f675acaf4",
+              "name": "propiedad",
+              "value": "={{ $('Set Propiedad').first().json.propiedad }}",
+              "type": "string"
+            },
+            {
+              "id": "d2233cfa-026f-400c-99a9-7f34bd8d58cc",
+              "name": "last_user_input",
+              "value": "={{ $('Set Propiedad').item.json.entrada_usuario }}",
+              "type": "string"
+            },
+            {
+              "id": "15532baf-1a9a-439a-9af2-bc6354c701e5",
+              "name": "input_channel",
+              "value": "={{ $('Set Propiedad').first().json.canal_ingreso }}",
+              "type": "string"
+            },
+            {
+              "id": "014d3381-ff7e-446b-a7ab-753ca46481ff",
+              "name": "timestamp",
+              "value": "={{ $('PARSE BODY').first().json.timestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "06aad59e-59d6-404b-a8f0-4b0c72f2c1c3",
+              "name": "first_interaction",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "7436bc68-ba4c-4c48-8ac0-bea988b3079d",
+              "name": "last_interaction",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "d424a476-8d63-449f-acc2-09a69f158a8f",
+              "name": "has_reservation",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "id": "c10d0b79-3d2d-4c63-b70f-9242d988e501",
+              "name": "datos_completos",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "id": "b8e966d8-5d08-45d2-a61f-40da8b8c6690",
+              "name": "nombre",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "072fcfdf-3c65-480a-961c-a92dc5074624",
+              "name": "email",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "f2561825-220c-49ab-ad1b-c98ea75e2d4c",
+              "name": "telefono",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        36032,
+        512
+      ],
+      "id": "0b85519b-38eb-496e-a7dd-e7cccdcedc78",
+      "name": "DATA to CREATE"
+    },
+    {
+      "parameters": {
+        "collection": "users",
+        "options": {},
+        "query": "={ \n  \"manychat_id\": \"{{ $json.manychat_id }}\"\n}"
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        35584,
+        608
+      ],
+      "id": "d674a329-8859-46c1-b7bf-7002ea68180a",
+      "name": "Find User",
+      "alwaysOutputData": true,
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "collection": "users",
+        "fields": "={{ Object.keys($json).join(\",\") }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        36256,
+        512
+      ],
+      "id": "75ce93fc-3afd-4b36-a1e4-02f85e129da1",
+      "name": "Insert User"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "collection": "users",
+        "updateKey": "_id",
+        "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(\",\") }}",
+        "options": {
+          "dateFields": "timestamp"
+        }
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.2,
+      "position": [
+        36256,
+        704
+      ],
+      "id": "967864c4-0aaf-4bfe-b4bf-e94663395caf",
+      "name": "Update User"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ \n  $('Find User').first().json.isNotEmpty()\n  ? $('Find User').first().json\n  : $('Insert User').first().json\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        36480,
+        608
+      ],
+      "id": "957f45fa-59b7-4d07-b66d-5163f52f32b0",
+      "name": "User Data"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.manychat.com/fb/sending/sendContent",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "manyChatApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ subscriber_id: $('Set Propiedad').first().json.manychat_id, data: { version: 'v2', content: { type: $('Parameter Type').first().json.type, messages: [{ type: 'text', text: $('Parse Agent Output').first().json.response_text }] } } }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        37968,
+        704
+      ],
+      "id": "4cebbe31-506c-452b-8f77-fde439fe23b3",
+      "name": "Send to ManyChat"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "sp-001",
+              "name": "propiedad",
+              "value": "={{ $('PARSE BODY').first().json.current_body.custom_fields.propiedad || 'ITZ' }}",
+              "type": "string"
+            },
+            {
+              "id": "sp-002",
+              "name": "manychat_id",
+              "value": "={{ $('PARSE BODY').first().json.current_body.id }}",
+              "type": "string"
+            },
+            {
+              "id": "4b61b5a4-35ba-478d-bf51-69b4a83faa12",
+              "name": "page_id",
+              "value": "={{ $('PARSE BODY').first().json.current_body.page_id }}",
+              "type": "string"
+            },
+            {
+              "id": "sp-003",
+              "name": "entrada_usuario",
+              "value": "={{ $('JOINNING MESSAGE').first().json.message }}",
+              "type": "string"
+            },
+            {
+              "id": "ffb93e3d-90aa-4350-8c08-63772244385f",
+              "name": "canal_ingreso",
+              "value": "={{ $('PARSE BODY').item.json.current_body.custom_fields.canal_ingreso }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        35360,
+        608
+      ],
+      "id": "b6aa5c2a-b3f8-40df-8eda-2f5592afcb73",
+      "name": "Set Propiedad"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "text": "Eres un experto en describir imagenes para un chatbot responde lo que ves en la imagen de esta manera. \"El usuario envió una imagen etc...\"",
+        "inputType": "base64",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        32672,
+        608
+      ],
+      "id": "4b615d0d-4937-4f31-9090-4ae76713bf07",
+      "name": "ANALIZA IMAGEN"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "hotels-agent",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        31104,
+        608
+      ],
+      "id": "6c8485c4-4ee5-432d-95de-91c31854a921",
+      "name": "Webhook",
+      "webhookId": "bbe94977-7886-4071-a874-e370d3b20c97"
+    },
+    {
+      "parameters": {
+        "jsCode": "const current_key = $input.first().json.body.key;\n\nconst current_body = $input.first().json.body;\n\nconst timestamp = new Date().toISOString();\n\nconst start_time = Date.now();\n\nconst result_body = {\n current_body,\n  timestamp\n}\n\nreturn [{\n  key: current_key,\n  body: JSON.stringify(result_body),\n  timestamp,\n  start_time\n}]\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        31328,
+        608
+      ],
+      "id": "9199c2c1-6c9d-48d8-8d89-90bf6c4cfc1b",
+      "name": "Create Body"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "92200249-f6e4-4f84-bd28-bc36de22beb3",
+              "leftValue": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
+              "rightValue": "https://manybot-files",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "b5bd48d1-851e-43bc-a097-e16c0dcca59c",
+              "leftValue": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
+              "rightValue": "https://lookaside.fbsbx.com",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        31776,
+        608
+      ],
+      "id": "75cc5e39-18f6-4272-9fef-02b7032d91e1",
+      "name": "ES ARCHIVO"
+    },
+    {
+      "parameters": {
+        "url": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32000,
+        512
+      ],
+      "id": "662eb9e5-6a56-4962-917a-514f3ebcc1ce",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "92200249-f6e4-4f84-bd28-bc36de22beb3",
+              "leftValue": "={{ $('HTTP Request').first().binary.data.mimeType }}",
+              "rightValue": "audio/ogg",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "b5bd48d1-851e-43bc-a097-e16c0dcca59c",
+              "leftValue": "={{ $('HTTP Request').first().binary.data.mimeType }}",
+              "rightValue": "video/mp4",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        32224,
+        512
+      ],
+      "id": "92898f97-8c75-4e32-a87b-c3f8ab5d8cec",
+      "name": "ES AUDIO / IMAGEN"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        32672,
+        416
+      ],
+      "id": "f93d8b33-8b9b-4873-bc5e-81e448d14ad8",
+      "name": "TRANSCRIBE AUDIO"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        33120,
+        592
+      ],
+      "id": "24de026e-f392-4db1-b559-75f5e8405881",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "hora_llegada"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        33344,
+        608
+      ],
+      "id": "5dece1d4-ffb1-4e51-b01a-c3e79a4a1b50",
+      "name": "Sort"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "mensaje"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        33568,
+        608
+      ],
+      "id": "af75faf2-fd32-4e13-ad9c-f92af549c5a1",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "url": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32448,
+        416
+      ],
+      "id": "bbf2ff59-115e-4c10-81fb-f16c0b2ca1f8",
+      "name": "HTTP IF AUDIO"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ea8c9284-e11f-4e87-a742-4392a692da2a",
+              "name": "mensaje",
+              "value": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
+              "type": "string"
+            },
+            {
+              "id": "1f2fe528-cff0-4713-9dcb-4221b508c597",
+              "name": "hora_llegada",
+              "value": "={{ $('PARSE BODY').first().json.timestamp }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        32896,
+        800
+      ],
+      "id": "6787322f-9b1b-44c2-b145-dfd7afbc5b76",
+      "name": "text input"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ea8c9284-e11f-4e87-a742-4392a692da2a",
+              "name": "mensaje",
+              "value": "={{ $json.content }}",
+              "type": "string"
+            },
+            {
+              "id": "1f2fe528-cff0-4713-9dcb-4221b508c597",
+              "name": "hora_llegada",
+              "value": "={{ $json.timestamp }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        32896,
+        608
+      ],
+      "id": "712b63ca-293a-4711-85fd-db0ba147306a",
+      "name": "image input"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ea8c9284-e11f-4e87-a742-4392a692da2a",
+              "name": "mensaje",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            },
+            {
+              "id": "1f2fe528-cff0-4713-9dcb-4221b508c597",
+              "name": "hora_llegada",
+              "value": "={{ $json.timestamp }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        32896,
+        416
+      ],
+      "id": "06d416fe-576c-49ac-8deb-7e460f5657ae",
+      "name": "audio input"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c1c4c388-e572-4502-9cf1-51d28b4d022d",
+              "name": "input",
+              "value": "={{ $json.mensaje.join(\" \") }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        33792,
+        608
+      ],
+      "id": "a362ad51-24d1-4634-a593-21b82f29fb64",
+      "name": "INPUT FINAL"
+    },
+    {
+      "parameters": {
+        "operation": "push",
+        "list": "=hotel:{{ $('PARSE BODY').first().json.current_body.id }}",
+        "messageData": "={{ $json.input }}",
+        "tail": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        34016,
+        608
+      ],
+      "id": "2475b767-d2dd-44e4-93c1-3161a201effc",
+      "name": "SAVE MESSAGE"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "key": "=hotel:{{ $('PARSE BODY').first().json.current_body.id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        34464,
+        608
+      ],
+      "id": "fbdd454e-27d0-4797-bbd5-7c4713614ddf",
+      "name": "GET MESSAGE"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        34240,
+        608
+      ],
+      "id": "1b79669c-a6fb-40b6-8a76-40a5317d74ea",
+      "name": "Wait",
+      "webhookId": "50ed2939-b8ec-48f7-8c6b-3bf14c2efc58"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "=hotel:{{ $('PARSE BODY').first().json.current_body.id }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        35136,
+        608
+      ],
+      "id": "fcba52d7-6c2e-4300-b760-14deba5a54ec",
+      "name": "DELETE MESSAGES"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "5b5ad242-c6c3-4f2a-9b67-edb92fa424be",
+              "leftValue": "={{ $json.propertyName?.last() || \"\" }}",
+              "rightValue": "={{ $('INPUT FINAL').first().json.input }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        34688,
+        608
+      ],
+      "id": "548c3caf-1798-4e53-aa57-6e58a82f67a3",
+      "name": "Filter1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "df6dd35d-a8b7-4ecb-8ef8-5a19ed499cfc",
+              "name": "message",
+              "value": "={{ $json.propertyName.join(\", \") }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        34912,
+        608
+      ],
+      "id": "a2aab1fc-ee3a-4dbd-9f8f-534b63b50daf",
+      "name": "JOINNING MESSAGE"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ JSON.parse($('Create Body').first().json.body) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        31552,
+        608
+      ],
+      "id": "54056fb8-71f7-4ef7-aac3-c2347e41e196",
+      "name": "PARSE BODY"
+    }
+  ],
+  "activeVersion": {
+    "nodes": [
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "565ffc02-d21f-43f2-9c2b-88a66eb11220",
+                "name": "agent_name",
+                "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'Balam' : 'Kaan' }}",
+                "type": "string"
+              },
+              {
+                "id": "ea25bc35-e3c3-4fad-9966-8874489a6625",
+                "name": "resort_nombre",
+                "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? \"Ka'ana Resort\" : \"Itz'ana Resort & Residences\" }}",
+                "type": "string"
+              },
+              {
+                "id": "465984c9-decc-4505-90f8-dc94832dfe2e",
+                "name": "ubicacion",
+                "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'San Ignacio, Belice (Mile 69 1/4 George Price Highway, Cayo District)' : 'Placencia, Belice (Mile 20 Placencia Road, Stann Creek District)' }}",
+                "type": "string"
+              },
+              {
+                "id": "0b09ab27-23eb-49a4-b6d5-4a772f95a054",
+                "name": "booking_link",
+                "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'https://reservations.kaanabelize.com/book/accommodations' : 'https://reservations.itzanabelize.com/book/accommodations' }}",
+                "type": "string"
+              },
+              {
+                "id": "43fdf7f1-18fc-4e2d-b1cb-24b21a758fca",
+                "name": "contacto_email",
+                "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'info@kaanabelize.com' : 'concierge@itzanabelize.com' }}",
+                "type": "string"
+              },
+              {
+                "id": "9120263c-cc0e-4fb9-9ae1-920573480d02",
+                "name": "contacto_phone",
+                "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? '+501 824 3350' : '+(501) 610-1329' }}",
+                "type": "string"
+              },
+              {
+                "id": "48bf0ec1-7c7d-4e4d-a9d6-9f6db72e5c5f",
+                "name": "rec_romantico",
+                "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'Master Suite con plunge pool privado en el jardín' : 'Penthouse con plunge pool privado' }}",
+                "type": "string"
+              },
+              {
+                "id": "6fe43404-fa94-4ff5-9523-732ef58c070d",
+                "name": "rec_familia",
+                "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? 'Villa de 2 dormitorios con piscina privada y jardín tropical' : 'Beach Villa frente al mar Caribe' }}",
+                "type": "string"
+              },
+              {
+                "id": "a555be28-dc11-4ac5-8cbe-f868c0c66fb8",
+                "name": "hotel_id",
+                "value": "={{ $('Set Propiedad').first().json.propiedad === 'KAA' ? '115718' : '115719' }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          36704,
+          608
+        ],
+        "id": "5fc8e2ed-5d1b-42c8-8ae7-699de517ec2e",
+        "name": "Property Config"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "collection": "users",
+          "updateKey": "_id",
+          "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(\",\") }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          37968,
+          512
+        ],
+        "id": "21484648-5a9d-4fb2-bd89-b2bc66fb71e2",
+        "name": "Guardar Contacto"
+      },
+      {
+        "parameters": {
+          "jsCode": "const captured = $json;\nconst userDoc = $('User Data').first().json;\n\nconst update = {};\nif (captured.nombre_capturado)    update.nombre    = captured.nombre_capturado;\nif (captured.email_capturado)     update.email     = captured.email_capturado;\nif (captured.telefono_capturado)  update.telefono  = captured.telefono_capturado;\nif (captured.checkin_capturado)   update.checkin   = captured.checkin_capturado;\nif (captured.checkout_capturado)  update.checkout  = captured.checkout_capturado;\nif (captured.grupo_tipo)          update.grupo_tipo = captured.grupo_tipo;\n\nif (Object.keys(update).length === 0) return [];\n\nconst idStr = JSON.stringify(userDoc._id).replace(/^\"|\"$/g, '');\nreturn [{ json: { _id: idStr, ...update } }];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          37744,
+          512
+        ],
+        "id": "6f64341c-50d4-4b70-a18c-6fbc684c2e06",
+        "name": "Preparar Datos Contacto"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "36d12256-d1f9-49ba-80d0-a97080e0fe3e",
+                "name": "type",
+                "value": "={{\n   $('Set Propiedad').first().json.canal_ingreso.toLowerCase().includes('instagram')\n     ? 'instagram'\n     : $('Set Propiedad').first().json.canal_ingreso.toLowerCase().includes('messenger')\n       ? 'messenger'\n       : 'whatsapp'\n }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          37744,
+          704
+        ],
+        "id": "8c6e018b-7b55-449e-a84a-2f2d0d48cc16",
+        "name": "Parameter Type"
+      },
+      {
+        "parameters": {
+          "description": "=Busca en la base de conocimiento del resort. Úsala para CUALQUIER pregunta sobre el resort: alojamiento, restaurantes, actividades, bodas, ubicación, políticas, precios. Pasa la consulta del usuario como {\"query\": \"<pregunta del usuario>\"}.",
+          "workflowId": {
+            "__rl": true,
+            "value": "rofQe6ZGW3OpFqcb",
+            "mode": "list",
+            "cachedResultUrl": "/workflow/rofQe6ZGW3OpFqcb",
+            "cachedResultName": "KB_SEARCH"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "manychat_id": "={{ $('User Data').first().json.manychat_id }}",
+              "propiedad": "={{ $('User Data').first().json.propiedad }}",
+              "entrada_usuario": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('entrada_usuario', 'User query for KB search — usually the user message verbatim or a refined question', 'string') }}"
+            },
+            "matchingColumns": [
+              "query"
+            ],
+            "schema": [
+              {
+                "id": "manychat_id",
+                "displayName": "manychat_id",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "propiedad",
+                "displayName": "propiedad",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "entrada_usuario",
+                "displayName": "entrada_usuario",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "typeVersion": 2.2,
+        "position": [
+          37184,
+          832
+        ],
+        "id": "b9737a89-f98b-41bd-a278-89528084e1a2",
+        "name": "kb_search"
+      },
+      {
+        "parameters": {
+          "jsCode": "const agentOutput = $input.first().json.output || '';\n\nlet parsed;\ntry {\n  const jsonMatch = agentOutput.match(/\\{[\\s\\S]*\\}/);\n  parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : null;\n} catch(e) {\n  parsed = null;\n}\n\nconst checkin   = parsed?.checkin_capturado  || null;\nconst checkout  = parsed?.checkout_capturado || null;\nconst grupoTipo = parsed?.grupo_tipo         || null;\nconst propiedad = $('Set Propiedad').first().json.propiedad;\n\nfunction toBookingDate(dateStr) {\n  if (!dateStr) return null;\n  const m = dateStr.match(/^(\\d{4})-(\\d{2})-(\\d{2})$/);\n  return m ? `${m[2]}/${m[3]}/${m[1]}` : null;\n}\n\nconst dateIn  = toBookingDate(checkin);\nconst dateOut = toBookingDate(checkout);\n\nconst guestMap = {\n  romantico:    { adults: 2, children: 0 },\n  familia:      { adults: 2, children: 1 },\n  grupo_grande: { adults: 4, children: 0 },\n};\nconst fallback = guestMap[grupoTipo] || { adults: 1, children: 0 };\nconst adultsParsed   = Number.isInteger(parsed?.adultos_capturado) ? parsed.adultos_capturado : null;\nconst childrenParsed = Number.isInteger(parsed?.ninos_capturado)   ? parsed.ninos_capturado   : null;\nconst guests = {\n  adults:   adultsParsed   !== null ? adultsParsed   : fallback.adults,\n  children: childrenParsed !== null ? childrenParsed : fallback.children,\n};\n\nconst roomCodeMap = {\n  ITZ: { romantico: null, familia: null, grupo_grande: null },\n  KAA: {\n    romantico:    '555466',\n    familia:      '532468',\n    grupo_grande: '555465',\n  },\n};\nconst roomCode = (roomCodeMap[propiedad] || {})[grupoTipo] || null;\n\nconst hotelId = propiedad === 'KAA' ? '115718' : '115719';\nconst baseUrl = propiedad === 'KAA'\n  ? (roomCode ? 'https://reservations.kaanabelize.com/book/dates-of-stay' : 'https://reservations.kaanabelize.com/book/accommodations')\n  : 'https://reservations.itzanabelize.com/book/accommodations';\nconst utmCampaign = propiedad === 'KAA' ? 'kaana-f1' : 'itzana-f1';\n\nlet deepLink = null;\nif (dateIn && dateOut) {\n  const enc = encodeURIComponent;\n  deepLink = `${baseUrl}?HotelID=${hotelId}&LanguageID=1&Rooms=1&DateIn=${enc(dateIn)}&DateOut=${enc(dateOut)}&Adults=${guests.adults}&Children=${guests.children}`;\n  if (roomCode) deepLink += `&RoomTypeID=${roomCode}`;\n  deepLink += `&utm_source=kaan-chat&utm_medium=manychat&utm_campaign=${utmCampaign}`;\n}\n\nlet responseText = parsed?.response || agentOutput;\nif (deepLink) {\n  responseText = responseText.replace(\n    /https?:\\/\\/(?:reservations\\.(?:itzanabelize|kaanabelize)\\.com\\/book\\/(?:accommodations|dates-of-stay)|bookings\\.travelclick\\.com\\/\\d+)[^\\s]*/g,\n    deepLink\n  );\n}\n\nconst categoria = parsed?.categoria || 'info';\nif (categoria === 'empleo') {\n  responseText = 'Gracias por tu interés — nuestro equipo de Recursos Humanos se comunicará contigo pronto.';\n}\n\nreturn [{\n  json: {\n    response_text:       responseText,\n    escalate:            parsed?.escalate           || false,\n    categoria:           categoria,\n    nombre_capturado:    parsed?.nombre_capturado   || null,\n    email_capturado:     parsed?.email_capturado    || null,\n    telefono_capturado:  parsed?.telefono_capturado || null,\n    checkin_capturado:   checkin,\n    checkout_capturado:  checkout,\n    grupo_tipo:          grupoTipo,\n    deep_link:           deepLink,\n    raw_output:          agentOutput\n  }\n}];\n"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          37520,
+          608
+        ],
+        "id": "f5bc8983-84fe-4267-aa82-6c234a6777d7",
+        "name": "Parse Agent Output"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "={{ $('Set Propiedad').first().json.entrada_usuario }}",
+          "options": {
+            "systemMessage": "=## CONTEXTO TEMPORAL ##\nHoy es {{ $now.toFormat('yyyy-MM-dd') }}. Fechas sin año → usa el próximo año válido. NUNCA fechas pasadas.\n\n---\n\n## PRIORIDAD MÁXIMA — SALUDOS PUROS ##\nSi el mensaje del usuario es ÚNICAMENTE un saludo (hola, hello, hi, hey, buenas, good morning, good afternoon, good evening, buenos días, buenas tardes, buenas noches) — NO llames ninguna herramienta.\nAplica la sección IDIOMA: responde en el mismo idioma que el saludo del usuario.\n\n---\n\n{{ $('User Data').first().json.nombre ? '## USUARIO REGISTRADO ##\\nEste usuario ya nos ha escrito antes. Su nombre es ' + $('User Data').first().json.nombre + '.\\nSalúdalo por su nombre de forma natural al inicio de este mensaje (solo una vez, no repetirlo en cada respuesta).\\n\\n---\\n\\n' : '' }}\n\n## IDENTIDAD ##\nEres {{ $('Property Config').first().json.agent_name }}, concierge virtual de {{ $('Property Config').first().json.resort_nombre }}, {{ $('Property Config').first().json.ubicacion }}. Cálido y sofisticado. No te presentes como IA salvo que te lo pregunten directamente.\n\n---\n\n## FLUJO GUIADO ##\nConduce activamente al usuario hacia una reserva. Si ya dio info (fechas, grupo), extráela y salta esos pasos.\n\n**P1 — APERTURA:** Saludo o consulta inicial sin detalle → pregunta si es primera vez o ya se ha hospedado.\n\n**P2 — HISTORIAL:**\n- Ya se hospedó → pide email o teléfono para bienvenida personalizada; captura en email_capturado/telefono_capturado. Si no quiere, acepta y sigue.\n- Primera vez → sigue a P3.\n\n**P3 — FECHAS:** Pregunta cuándo piensan venir. Captura checkin_capturado/checkout_capturado (YYYY-MM-DD o texto libre). Si es flexible, acepta y sigue.\n\n**P4 — GRUPO:** Pregunta cuántos serán y si hay niños. Captura adultos_capturado, ninos_capturado.\n- 2 adultos sin niños → grupo_tipo:\"romantico\" → P5A\n- Adultos con niños → grupo_tipo:\"familia\" → P5B\n- 8+ personas / boda / evento → grupo_tipo:\"grupo_grande\" → P5C\n\n**P5A — ROMÁNTICO:** kb_search sobre {{ $('Property Config').first().json.rec_romantico }}. Recomienda brevemente. → P6.\n\n**P5B — FAMILIA:** kb_search sobre {{ $('Property Config').first().json.rec_familia }}. Recomienda brevemente. → P6.\n\n**P5C — GRUPOS/BODAS:** Pregunta tipo de evento, empresa y contacto preferido. Llama handoff categoria:\"bodas_eventos\". Responde: \"Nuestro especialista te contactará en un día hábil.\" FIN.\n\n**P6 — CONTACTO:** Si ya tienes nombre + (email o teléfono) → salta a P7. Si no → pide teléfono o correo (opcional). Captura en nombre_capturado/email_capturado/telefono_capturado. Si no quiere, acepta y sigue.\n\n**P7 — BOOKING:**\n- Ver habitación → kb_search, comparte link de contenido del KB. → P8.\n- Reservar → si tienes fechas: comparte {{ $('Property Config').first().json.booking_link }} mencionando las fechas en lenguaje natural con número de noches (ej: \"del 14 al 20 de julio, 6 noches\"). NUNCA formato ISO. Si no tienes fechas: pregunta primero. NO menciones habitación específica a menos que ya hayas recomendado una en esta conversación. → P8.\n- Hablar con equipo → handoff categoria:\"reserva\". Informa que reservaciones contactará pronto. → P8.\n\n**P8 — ACTIVIDADES (opcional):** Pregunta si quieren explorar actividades. Sí → kb_search según interés. No → cierra con calidez.\n\n---\n\n## REGLA KB ##\nEn cualquier momento del flujo, si el usuario pregunta sobre el resort → usa kb_search y retoma el flujo donde estabas. NUNCA inventes datos del resort. Si el KB no tiene la respuesta → dirige a {{ $('Property Config').first().json.contacto_email }} o {{ $('Property Config').first().json.contacto_phone }}.\n\n---\n\n## HERRAMIENTAS ##\n\n**kb_search:** Para cualquier pregunta sobre el resort (alojamiento, restaurantes, actividades, spa, bodas, políticas, precios, ubicación) y en P5A, P5B, P7. Pasa la pregunta del usuario como query. Usa la respuesta tal como viene; incluye links si el KB los trae.\n\n**handoff:** Llama en: P5C (bodas_eventos), P7 equipo (reserva), PR/prensa (pr), empleo/vacantes (empleo), urgencia/frustración (escalamiento), solicitud explícita de humano. Pasa categoria + resumen_conversacion (2-3 oraciones).\nDespués de llamar handoff:\n- EMPLEO: responde EXACTAMENTE «Gracias por tu interés — nuestro equipo de Recursos Humanos se comunicará contigo pronto.» NO añadas emails, URLs ni información adicional.\n- Resto: informa al usuario que el equipo lo contactará pronto.\n\n---\n\n## IDIOMA ##\nResponde SIEMPRE en el idioma del ÚLTIMO mensaje del usuario:\n- Si escribe en español → responde en español\n- Si escribe en inglés → responde en inglés\n- Si mezcla en un mismo mensaje → usa el idioma predominante\nSi el usuario cambia de idioma a mitad de la conversación, cámbiate tú también y continúa en el nuevo idioma.\n\n---\n\n## ESTILO ##\n- Texto plano. Sin markdown, asteriscos ni hashtags.\n- Máx 500 caracteres. Excepción: listas de amenidades/actividades usan bullet • en líneas separadas.\n- Cálido pero directo. Sin \"Claro que sí\" ni \"Por supuesto\".\n- Links al final del mensaje.\n\n---\n\n## OFF-TOPIC ##\nSi no tiene que ver con el resort, Belice o la experiencia como huésped: no respondas la pregunta. Di: \"Solo puedo ayudarte con información sobre {{ $('Property Config').first().json.resort_nombre }}. ¿En qué más puedo ayudarte?\" Usa categoria:off_topic, escalate:false.\n\n---\n\n## GUARDRAILS ##\n- NUNCA inventes precios, disponibilidad, descuentos, upgrades ni políticas no documentadas.\n- NUNCA uses URLs, emails o teléfonos fuera del KB o este prompt. Contacto autorizado: {{ $('Property Config').first().json.contacto_email }} / {{ $('Property Config').first().json.contacto_phone }}.\n- NUNCA digas que eres ChatGPT, Claude u otra IA. No compartas info de otros huéspedes.\n\n---\n\n## SALIDA OBLIGATORIA ##\nResponde ÚNICAMENTE con este JSON en una línea, sin texto adicional:\n\n{\"response\": \"<texto>\", \"escalate\": false, \"categoria\": \"info\", \"nombre_capturado\": null, \"email_capturado\": null, \"telefono_capturado\": null, \"checkin_capturado\": null, \"checkout_capturado\": null, \"grupo_tipo\": null, \"adultos_capturado\": null, \"ninos_capturado\": null}\n\nescalate:true solo al llamar handoff o si el usuario pide hablar con alguien.\ncategoria: \"info\" | \"reserva\" | \"bodas_eventos\" | \"pr\" | \"empleo\" | \"escalamiento\" | \"off_topic\"\ngrupo_tipo: \"romantico\" | \"familia\" | \"grupo_grande\" | null\nFechas en YYYY-MM-DD si inferible, texto libre si no. Adultos/niños: entero o null.\n"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          37056,
+          608
+        ],
+        "id": "d2e3813e-466d-4111-b96e-1dd1edc4268a",
+        "name": "AI Agent"
+      },
+      {
+        "parameters": {
+          "description": "=Escala al equipo del hotel. Úsala cuando el usuario pida hablar con una persona, o la consulta sea sobre bodas/eventos, PR/colaboración o empleo. Pasa: {\"categoria\": \"<bodas_eventos|pr|empleo|escalamiento|reserva>\", \"resumen_conversacion\": \"<resumen de 2-3 oraciones de la conversación>\", \"entrada_usuario\": \"<último mensaje del usuario textual>\", \"nombre\": \"<nombre del usuario si se conoce, si no cadena vacía>\", \"propiedad\": \"<propiedad del resort: ITZ o KAA>\"}.",
+          "workflowId": {
+            "__rl": true,
+            "value": "OApztbIN8Jhb4JHz",
+            "mode": "list",
+            "cachedResultUrl": "/workflow/OApztbIN8Jhb4JHz",
+            "cachedResultName": "NOTIFICATIONS"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "categoria": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('categoria', `Escalation category: bodas_eventos, pr, empleo, escalamiento, or reserva`, 'string') }}",
+              "resumen_conversacion": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('resumen_conversacion', `2-3 sentence conversation summary`, 'string') }}",
+              "entrada_usuario": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('entrada_usuario', `Last user message verbatim`, 'string') }}",
+              "nombre": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('nombre', `User name if known, empty string if not`, 'string') }}",
+              "propiedad": "={{ $('Set Propiedad').first().json.propiedad || 'ITZ' }}",
+              "manychat_id": "={{ $('Set Propiedad').first().json.manychat_id }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "categoria",
+                "displayName": "categoria",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "resumen_conversacion",
+                "displayName": "resumen_conversacion",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": false,
+                "removed": false
+              },
+              {
+                "id": "entrada_usuario",
+                "displayName": "entrada_usuario",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": false,
+                "removed": false
+              },
+              {
+                "id": "nombre",
+                "displayName": "nombre",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "typeVersion": 2.2,
+        "position": [
+          37312,
+          832
+        ],
+        "id": "6a21394b-e016-4eff-bd3a-28c8ab604853",
+        "name": "notifications"
+      },
+      {
+        "parameters": {
+          "sessionIdType": "customKey",
+          "sessionKey": "={{ $('PARSE BODY').first().json.current_body.id }}",
+          "collectionName": "chat_histories",
+          "databaseName": "Database",
+          "contextWindowLength": 30
+        },
+        "type": "@n8n/n8n-nodes-langchain.memoryMongoDbChat",
+        "typeVersion": 1.1,
+        "position": [
+          37056,
+          832
+        ],
+        "id": "8d73a551-80b4-4435-a049-4970b1257cfb",
+        "name": "MongoDB Chat Memory"
+      },
+      {
+        "parameters": {
+          "model": "openai/gpt-5-mini",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+        "typeVersion": 1,
+        "position": [
+          36912,
+          832
+        ],
+        "id": "9d4d6878-b8a8-4d78-9e6f-8ed5bb0e31f4",
+        "name": "OpenRouter Chat Model"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "e2b99084-0422-4ba4-973e-0fc03b22ba6e",
+                "name": "_id",
+                "value": "={{ $('Find User').first().json._id.$oid }}",
+                "type": "string"
+              },
+              {
+                "id": "9040d88b-dc99-47e3-a6e3-14b8264ae6cb",
+                "name": "manychat_id",
+                "value": "={{ $('PARSE BODY').first().json.current_body.id }}",
+                "type": "string"
+              },
+              {
+                "id": "1fca47c3-3150-4740-a3a3-aaeb55e0bd49",
+                "name": "page_id",
+                "value": "={{ $('PARSE BODY').first().json.current_body.page_id }}",
+                "type": "string"
+              },
+              {
+                "id": "689aa6e6-0e3f-4aba-8834-1b8f675acaf4",
+                "name": "propiedad",
+                "value": "={{ $('Set Propiedad').first().json.propiedad }}",
+                "type": "string"
+              },
+              {
+                "id": "d2233cfa-026f-400c-99a9-7f34bd8d58cc",
+                "name": "last_user_input",
+                "value": "={{ $('Set Propiedad').first().json.entrada_usuario }}",
+                "type": "string"
+              },
+              {
+                "id": "15532baf-1a9a-439a-9af2-bc6354c701e5",
+                "name": "input_channel",
+                "value": "={{ $('Set Propiedad').first().json.canal_ingreso }}",
+                "type": "string"
+              },
+              {
+                "id": "014d3381-ff7e-446b-a7ab-753ca46481ff",
+                "name": "timestamp",
+                "value": "={{ $('PARSE BODY').first().json.timestamp }}",
+                "type": "string"
+              },
+              {
+                "id": "06aad59e-59d6-404b-a8f0-4b0c72f2c1c3",
+                "name": "first_interaction",
+                "value": "={{ $now.toISO() }}",
+                "type": "string"
+              },
+              {
+                "id": "7436bc68-ba4c-4c48-8ac0-bea988b3079d",
+                "name": "last_interaction",
+                "value": "={{ $now.toISO() }}",
+                "type": "string"
+              },
+              {
+                "id": "d424a476-8d63-449f-acc2-09a69f158a8f",
+                "name": "has_reservation",
+                "value": false,
+                "type": "boolean"
+              },
+              {
+                "id": "c10d0b79-3d2d-4c63-b70f-9242d988e501",
+                "name": "datos_completos",
+                "value": false,
+                "type": "boolean"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          36032,
+          704
+        ],
+        "id": "55404acd-f998-41b7-a60d-f3c3ccaf6b9c",
+        "name": "DATA to UPDATE"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "13f396d4-0c8b-4099-b87a-4f98c96f9af1",
+                "leftValue": "={{ $('Find User').first().json.isEmpty() }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          35808,
+          608
+        ],
+        "id": "b605cbc5-f1fd-4fd0-9f67-910b7076fba1",
+        "name": "If USER NOT EXIST"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "9040d88b-dc99-47e3-a6e3-14b8264ae6cb",
+                "name": "manychat_id",
+                "value": "={{ $('PARSE BODY').first().json.current_body.id }}",
+                "type": "string"
+              },
+              {
+                "id": "1fca47c3-3150-4740-a3a3-aaeb55e0bd49",
+                "name": "page_id",
+                "value": "={{ $('PARSE BODY').first().json.current_body.page_id }}",
+                "type": "string"
+              },
+              {
+                "id": "689aa6e6-0e3f-4aba-8834-1b8f675acaf4",
+                "name": "propiedad",
+                "value": "={{ $('Set Propiedad').first().json.propiedad }}",
+                "type": "string"
+              },
+              {
+                "id": "d2233cfa-026f-400c-99a9-7f34bd8d58cc",
+                "name": "last_user_input",
+                "value": "={{ $('Set Propiedad').item.json.entrada_usuario }}",
+                "type": "string"
+              },
+              {
+                "id": "15532baf-1a9a-439a-9af2-bc6354c701e5",
+                "name": "input_channel",
+                "value": "={{ $('Set Propiedad').first().json.canal_ingreso }}",
+                "type": "string"
+              },
+              {
+                "id": "014d3381-ff7e-446b-a7ab-753ca46481ff",
+                "name": "timestamp",
+                "value": "={{ $('PARSE BODY').first().json.timestamp }}",
+                "type": "string"
+              },
+              {
+                "id": "06aad59e-59d6-404b-a8f0-4b0c72f2c1c3",
+                "name": "first_interaction",
+                "value": "={{ $now.toISO() }}",
+                "type": "string"
+              },
+              {
+                "id": "7436bc68-ba4c-4c48-8ac0-bea988b3079d",
+                "name": "last_interaction",
+                "value": "={{ $now.toISO() }}",
+                "type": "string"
+              },
+              {
+                "id": "d424a476-8d63-449f-acc2-09a69f158a8f",
+                "name": "has_reservation",
+                "value": false,
+                "type": "boolean"
+              },
+              {
+                "id": "c10d0b79-3d2d-4c63-b70f-9242d988e501",
+                "name": "datos_completos",
+                "value": false,
+                "type": "boolean"
+              },
+              {
+                "id": "b8e966d8-5d08-45d2-a61f-40da8b8c6690",
+                "name": "nombre",
+                "value": "",
+                "type": "string"
+              },
+              {
+                "id": "072fcfdf-3c65-480a-961c-a92dc5074624",
+                "name": "email",
+                "value": "",
+                "type": "string"
+              },
+              {
+                "id": "f2561825-220c-49ab-ad1b-c98ea75e2d4c",
+                "name": "telefono",
+                "value": "",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          36032,
+          512
+        ],
+        "id": "0b85519b-38eb-496e-a7dd-e7cccdcedc78",
+        "name": "DATA to CREATE"
+      },
+      {
+        "parameters": {
+          "collection": "users",
+          "options": {},
+          "query": "={ \n  \"manychat_id\": \"{{ $json.manychat_id }}\"\n}"
+        },
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          35584,
+          608
+        ],
+        "id": "d674a329-8859-46c1-b7bf-7002ea68180a",
+        "name": "Find User",
+        "alwaysOutputData": true,
+        "executeOnce": false
+      },
+      {
+        "parameters": {
+          "operation": "insert",
+          "collection": "users",
+          "fields": "={{ Object.keys($json).join(\",\") }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          36256,
+          512
+        ],
+        "id": "75ce93fc-3afd-4b36-a1e4-02f85e129da1",
+        "name": "Insert User"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "collection": "users",
+          "updateKey": "_id",
+          "fields": "={{ Object.keys($json).filter(k => k !== '_id').join(\",\") }}",
+          "options": {
+            "dateFields": "timestamp"
+          }
+        },
+        "type": "n8n-nodes-base.mongoDb",
+        "typeVersion": 1.2,
+        "position": [
+          36256,
+          704
+        ],
+        "id": "967864c4-0aaf-4bfe-b4bf-e94663395caf",
+        "name": "Update User"
+      },
+      {
+        "parameters": {
+          "mode": "raw",
+          "jsonOutput": "={{ \n  $('Find User').first().json.isNotEmpty()\n  ? $('Find User').first().json\n  : $('Insert User').first().json\n}}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          36480,
+          608
+        ],
+        "id": "957f45fa-59b7-4d07-b66d-5163f52f32b0",
+        "name": "User Data"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.manychat.com/fb/sending/sendContent",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "manyChatApi",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify({ subscriber_id: $('Set Propiedad').first().json.manychat_id, data: { version: 'v2', content: { type: $('Parameter Type').first().json.type, messages: [{ type: 'text', text: $('Parse Agent Output').first().json.response_text }] } } }) }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          37968,
+          704
+        ],
+        "id": "4cebbe31-506c-452b-8f77-fde439fe23b3",
+        "name": "Send to ManyChat"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "sp-001",
+                "name": "propiedad",
+                "value": "={{ $('PARSE BODY').first().json.current_body.custom_fields.propiedad || 'ITZ' }}",
+                "type": "string"
+              },
+              {
+                "id": "sp-002",
+                "name": "manychat_id",
+                "value": "={{ $('PARSE BODY').first().json.current_body.id }}",
+                "type": "string"
+              },
+              {
+                "id": "4b61b5a4-35ba-478d-bf51-69b4a83faa12",
+                "name": "page_id",
+                "value": "={{ $('PARSE BODY').first().json.current_body.page_id }}",
+                "type": "string"
+              },
+              {
+                "id": "sp-003",
+                "name": "entrada_usuario",
+                "value": "={{ $('JOINNING MESSAGE').first().json.message }}",
+                "type": "string"
+              },
+              {
+                "id": "ffb93e3d-90aa-4350-8c08-63772244385f",
+                "name": "canal_ingreso",
+                "value": "={{ $('PARSE BODY').item.json.current_body.custom_fields.canal_ingreso }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          35360,
+          608
+        ],
+        "id": "b6aa5c2a-b3f8-40df-8eda-2f5592afcb73",
+        "name": "Set Propiedad"
+      },
+      {
+        "parameters": {
+          "resource": "image",
+          "operation": "analyze",
+          "modelId": {
+            "__rl": true,
+            "value": "gpt-4o",
+            "mode": "list",
+            "cachedResultName": "GPT-4O"
+          },
+          "text": "Eres un experto en describir imagenes para un chatbot responde lo que ves en la imagen de esta manera. \"El usuario envió una imagen etc...\"",
+          "inputType": "base64",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "typeVersion": 1.8,
+        "position": [
+          32672,
+          608
+        ],
+        "id": "4b615d0d-4937-4f31-9090-4ae76713bf07",
+        "name": "ANALIZA IMAGEN"
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "hotels-agent",
+          "options": {
+            "allowedOrigins": "*"
+          }
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          31104,
+          608
+        ],
+        "id": "6c8485c4-4ee5-432d-95de-91c31854a921",
+        "name": "Webhook",
+        "webhookId": "bbe94977-7886-4071-a874-e370d3b20c97"
+      },
+      {
+        "parameters": {
+          "jsCode": "const current_key = $input.first().json.body.key;\n\nconst current_body = $input.first().json.body;\n\nconst timestamp = new Date().toISOString();\n\nconst start_time = Date.now();\n\nconst result_body = {\n current_body,\n  timestamp\n}\n\nreturn [{\n  key: current_key,\n  body: JSON.stringify(result_body),\n  timestamp,\n  start_time\n}]\n"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          31328,
+          608
+        ],
+        "id": "9199c2c1-6c9d-48d8-8d89-90bf6c4cfc1b",
+        "name": "Create Body"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "92200249-f6e4-4f84-bd28-bc36de22beb3",
+                "leftValue": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
+                "rightValue": "https://manybot-files",
+                "operator": {
+                  "type": "string",
+                  "operation": "contains"
+                }
+              },
+              {
+                "id": "b5bd48d1-851e-43bc-a097-e16c0dcca59c",
+                "leftValue": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
+                "rightValue": "https://lookaside.fbsbx.com",
+                "operator": {
+                  "type": "string",
+                  "operation": "contains"
+                }
+              }
+            ],
+            "combinator": "or"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          31776,
+          608
+        ],
+        "id": "75cc5e39-18f6-4272-9fef-02b7032d91e1",
+        "name": "ES ARCHIVO"
+      },
+      {
+        "parameters": {
+          "url": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          32000,
+          512
+        ],
+        "id": "662eb9e5-6a56-4962-917a-514f3ebcc1ce",
+        "name": "HTTP Request"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "92200249-f6e4-4f84-bd28-bc36de22beb3",
+                "leftValue": "={{ $('HTTP Request').first().binary.data.mimeType }}",
+                "rightValue": "audio/ogg",
+                "operator": {
+                  "type": "string",
+                  "operation": "contains"
+                }
+              },
+              {
+                "id": "b5bd48d1-851e-43bc-a097-e16c0dcca59c",
+                "leftValue": "={{ $('HTTP Request').first().binary.data.mimeType }}",
+                "rightValue": "video/mp4",
+                "operator": {
+                  "type": "string",
+                  "operation": "contains"
+                }
+              }
+            ],
+            "combinator": "or"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          32224,
+          512
+        ],
+        "id": "92898f97-8c75-4e32-a87b-c3f8ab5d8cec",
+        "name": "ES AUDIO / IMAGEN"
+      },
+      {
+        "parameters": {
+          "resource": "audio",
+          "operation": "transcribe",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "typeVersion": 1.8,
+        "position": [
+          32672,
+          416
+        ],
+        "id": "f93d8b33-8b9b-4873-bc5e-81e448d14ad8",
+        "name": "TRANSCRIBE AUDIO"
+      },
+      {
+        "parameters": {
+          "numberInputs": 3
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          33120,
+          592
+        ],
+        "id": "24de026e-f392-4db1-b559-75f5e8405881",
+        "name": "Merge"
+      },
+      {
+        "parameters": {
+          "sortFieldsUi": {
+            "sortField": [
+              {
+                "fieldName": "hora_llegada"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.sort",
+        "typeVersion": 1,
+        "position": [
+          33344,
+          608
+        ],
+        "id": "5dece1d4-ffb1-4e51-b01a-c3e79a4a1b50",
+        "name": "Sort"
+      },
+      {
+        "parameters": {
+          "fieldsToAggregate": {
+            "fieldToAggregate": [
+              {
+                "fieldToAggregate": "mensaje"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          33568,
+          608
+        ],
+        "id": "af75faf2-fd32-4e13-ad9c-f92af549c5a1",
+        "name": "Aggregate"
+      },
+      {
+        "parameters": {
+          "url": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          32448,
+          416
+        ],
+        "id": "bbf2ff59-115e-4c10-81fb-f16c0b2ca1f8",
+        "name": "HTTP IF AUDIO"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "ea8c9284-e11f-4e87-a742-4392a692da2a",
+                "name": "mensaje",
+                "value": "={{ $('PARSE BODY').first().json.current_body.last_input_text }}",
+                "type": "string"
+              },
+              {
+                "id": "1f2fe528-cff0-4713-9dcb-4221b508c597",
+                "name": "hora_llegada",
+                "value": "={{ $('PARSE BODY').first().json.timestamp }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          32896,
+          800
+        ],
+        "id": "6787322f-9b1b-44c2-b145-dfd7afbc5b76",
+        "name": "text input"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "ea8c9284-e11f-4e87-a742-4392a692da2a",
+                "name": "mensaje",
+                "value": "={{ $json.content }}",
+                "type": "string"
+              },
+              {
+                "id": "1f2fe528-cff0-4713-9dcb-4221b508c597",
+                "name": "hora_llegada",
+                "value": "={{ $json.timestamp }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          32896,
+          608
+        ],
+        "id": "712b63ca-293a-4711-85fd-db0ba147306a",
+        "name": "image input"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "ea8c9284-e11f-4e87-a742-4392a692da2a",
+                "name": "mensaje",
+                "value": "={{ $json.text }}",
+                "type": "string"
+              },
+              {
+                "id": "1f2fe528-cff0-4713-9dcb-4221b508c597",
+                "name": "hora_llegada",
+                "value": "={{ $json.timestamp }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          32896,
+          416
+        ],
+        "id": "06d416fe-576c-49ac-8deb-7e460f5657ae",
+        "name": "audio input"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "c1c4c388-e572-4502-9cf1-51d28b4d022d",
+                "name": "input",
+                "value": "={{ $json.mensaje.join(\" \") }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          33792,
+          608
+        ],
+        "id": "a362ad51-24d1-4634-a593-21b82f29fb64",
+        "name": "INPUT FINAL"
+      },
+      {
+        "parameters": {
+          "operation": "push",
+          "list": "=hotel:{{ $('PARSE BODY').first().json.current_body.id }}",
+          "messageData": "={{ $json.input }}",
+          "tail": true
+        },
+        "type": "n8n-nodes-base.redis",
+        "typeVersion": 1,
+        "position": [
+          34016,
+          608
+        ],
+        "id": "2475b767-d2dd-44e4-93c1-3161a201effc",
+        "name": "SAVE MESSAGE"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "key": "=hotel:{{ $('PARSE BODY').first().json.current_body.id }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.redis",
+        "typeVersion": 1,
+        "position": [
+          34464,
+          608
+        ],
+        "id": "fbdd454e-27d0-4797-bbd5-7c4713614ddf",
+        "name": "GET MESSAGE"
+      },
+      {
+        "parameters": {
+          "amount": 1
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          34240,
+          608
+        ],
+        "id": "1b79669c-a6fb-40b6-8a76-40a5317d74ea",
+        "name": "Wait",
+        "webhookId": "50ed2939-b8ec-48f7-8c6b-3bf14c2efc58"
+      },
+      {
+        "parameters": {
+          "operation": "delete",
+          "key": "=hotel:{{ $('PARSE BODY').first().json.current_body.id }}"
+        },
+        "type": "n8n-nodes-base.redis",
+        "typeVersion": 1,
+        "position": [
+          35136,
+          608
+        ],
+        "id": "fcba52d7-6c2e-4300-b760-14deba5a54ec",
+        "name": "DELETE MESSAGES"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "5b5ad242-c6c3-4f2a-9b67-edb92fa424be",
+                "leftValue": "={{ $json.propertyName?.last() || \"\" }}",
+                "rightValue": "={{ $('INPUT FINAL').first().json.input }}",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.filter",
+        "typeVersion": 2.3,
+        "position": [
+          34688,
+          608
+        ],
+        "id": "548c3caf-1798-4e53-aa57-6e58a82f67a3",
+        "name": "Filter1"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "df6dd35d-a8b7-4ecb-8ef8-5a19ed499cfc",
+                "name": "message",
+                "value": "={{ $json.propertyName.join(\", \") }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          34912,
+          608
+        ],
+        "id": "a2aab1fc-ee3a-4dbd-9f8f-534b63b50daf",
+        "name": "JOINNING MESSAGE"
+      },
+      {
+        "parameters": {
+          "mode": "raw",
+          "jsonOutput": "={{ JSON.parse($('Create Body').first().json.body) }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          31552,
+          608
+        ],
+        "id": "54056fb8-71f7-4ef7-aac3-c2347e41e196",
+        "name": "PARSE BODY"
+      }
+    ],
+    "connections": {
+      "Property Config": {
+        "main": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Preparar Datos Contacto": {
+        "main": [
+          [
+            {
+              "node": "Guardar Contacto",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Parameter Type": {
+        "main": [
+          [
+            {
+              "node": "Send to ManyChat",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "kb_search": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Parse Agent Output": {
+        "main": [
+          [
+            {
+              "node": "Preparar Datos Contacto",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Parameter Type",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AI Agent": {
+        "main": [
+          [
+            {
+              "node": "Parse Agent Output",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "notifications": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "MongoDB Chat Memory": {
+        "ai_memory": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OpenRouter Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "DATA to UPDATE": {
+        "main": [
+          [
+            {
+              "node": "Update User",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If USER NOT EXIST": {
+        "main": [
+          [
+            {
+              "node": "DATA to CREATE",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "DATA to UPDATE",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "DATA to CREATE": {
+        "main": [
+          [
+            {
+              "node": "Insert User",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Find User": {
+        "main": [
+          [
+            {
+              "node": "If USER NOT EXIST",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Insert User": {
+        "main": [
+          [
+            {
+              "node": "User Data",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update User": {
+        "main": [
+          [
+            {
+              "node": "User Data",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "User Data": {
+        "main": [
+          [
+            {
+              "node": "Property Config",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set Propiedad": {
+        "main": [
+          [
+            {
+              "node": "Find User",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "ANALIZA IMAGEN": {
+        "main": [
+          [
+            {
+              "node": "image input",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Create Body",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Create Body": {
+        "main": [
+          [
+            {
+              "node": "PARSE BODY",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "ES ARCHIVO": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "text input",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request": {
+        "main": [
+          [
+            {
+              "node": "ES AUDIO / IMAGEN",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "ES AUDIO / IMAGEN": {
+        "main": [
+          [
+            {
+              "node": "HTTP IF AUDIO",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "ANALIZA IMAGEN",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "TRANSCRIBE AUDIO": {
+        "main": [
+          [
+            {
+              "node": "audio input",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge": {
+        "main": [
+          [
+            {
+              "node": "Sort",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Sort": {
+        "main": [
+          [
+            {
+              "node": "Aggregate",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Aggregate": {
+        "main": [
+          [
+            {
+              "node": "INPUT FINAL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP IF AUDIO": {
+        "main": [
+          [
+            {
+              "node": "TRANSCRIBE AUDIO",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "text input": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 2
+            }
+          ]
+        ]
+      },
+      "image input": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "audio input": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "INPUT FINAL": {
+        "main": [
+          [
+            {
+              "node": "SAVE MESSAGE",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "SAVE MESSAGE": {
+        "main": [
+          [
+            {
+              "node": "Wait",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GET MESSAGE": {
+        "main": [
+          [
+            {
+              "node": "Filter1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait": {
+        "main": [
+          [
+            {
+              "node": "GET MESSAGE",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "DELETE MESSAGES": {
+        "main": [
+          [
+            {
+              "node": "Set Propiedad",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Filter1": {
+        "main": [
+          [
+            {
+              "node": "JOINNING MESSAGE",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "JOINNING MESSAGE": {
+        "main": [
+          [
+            {
+              "node": "DELETE MESSAGES",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "PARSE BODY": {
+        "main": [
+          [
+            {
+              "node": "ES ARCHIVO",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "tags": [],
   "meta": {
     "templateCredsSetupCompleted": true,
     "aiBuilderAssisted": true,
-    "builderVariant": "mcp",
-    "instanceId": "d4ab02fb1ef8b6ca2c1c5c1f280ee696b0514d7d92cee5fb0da1784dbe393998"
-  }
+    "builderVariant": "mcp"
+  },
+  "parentFolderId": null,
+  "scopes": [
+    "workflow:create",
+    "workflow:delete",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update",
+    "workflow:updateRedactionSetting"
+  ],
+  "canExecute": true
 }
